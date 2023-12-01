@@ -1,14 +1,14 @@
 {
-  "name": "openadr-3-ts-types",
+  "name": "openadr-3-ts-types-builder",
   "version": "3.0.1",
   "description": "TypeScript types for use with OpenADR v3",
   "main": "index.js",
-  "types": "./dist/openadr-3.d.ts",
   "config": {
-    "openadryaml": "oadr3.0.1.yaml"
+    "openadryaml": "../oadr3.0.1.yaml"
   },
   "scripts": {
-    "build": "npx openapi-client-axios-typegen ${npm_package_config_openadryaml} >dist/openadr-3.d.ts"
+    "build:typegen": "npx openapi-client-axios-typegen ${npm_package_config_openadryaml} >../package/src/openadr-3.d.ts",
+    "build:zod": "npx openapi-to-zod -x ts -i ../oadr3.0.1.yaml -o ../package/src/zod/"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,11 @@
   "devDependencies": {
     "openapi-client-axios-typegen": "^7.4.1",
     "openapicmd": "^2.0.1"
+  },
+  "engines": {
+    "node": "^18 || >=20"
+  },
+  "dependencies": {
+    "openapi-to-zod": "^0.0.5"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "name": "openadr-3-ts-types",
+  "version": "3.0.1",
+  "description": "TypeScript types for use with OpenADR v3",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robogeek/openadr-3-ts-types.git"
+  },
+  "author": "David Herron <david@davidherron.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robogeek/openadr-3-ts-types/issues"
+  },
+  "homepage": "https://github.com/robogeek/openadr-3-ts-types#readme",
+  "keywords": [
+    "OpenADR",
+    "Energy",
+    "Efficiency"
+  ],
+  "dependencies": {
+    "axios": "^1.6.2",
+    "openapi-client-axios": "^7.4.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.2"
+  }
+}

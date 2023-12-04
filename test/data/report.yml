@@ -1,0 +1,187 @@
+
+reports:
+    - ignoreVenNotFound: true
+      programID: '0'
+      eventID: '0'
+      clientName: 'VEN99'
+      reportName: 'Test report #1'
+      payloadDescriptors:
+        - payloadType: 'USAGE'
+      resources:
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+    - ignoreVenNotFound: true
+      programID: '0'
+      eventID: '0'
+      clientName: 'VEN991'
+      reportName: 'Test report #2'
+      payloadDescriptors:
+        - payloadType: 'USAGE'
+      resources:
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+    
+          
+        
+BADreports:
+    - ignoreVenNotFound: true
+      programID: 999
+      eventID: 999
+      clientName: 'VEN99'
+      reportName: 999
+      payloadDescriptors:
+        - payloadType: 'USAGE'
+      resources:
+        - resourceName: 999
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: '000'
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+        - resourceName: 999
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: '000'
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+    - ignoreVenNotFound: true
+      programID: '0'
+      eventID: '0'
+      clientName: ''
+      reportName: 'Test report with zero-length clientName'
+      payloadDescriptors:
+        - payloadType: 'USAGE'
+      resources:
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+
+    - ignoreVenNotFound: true
+      programID: '0'
+      eventID: '0'
+      clientName: '00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333 -- Long clientName'
+      reportName: 'Test report with extra-long clientName'
+      payloadDescriptors:
+        - payloadType: 'USAGE'
+      resources:
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94

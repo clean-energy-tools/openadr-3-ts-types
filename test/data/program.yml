@@ -1,0 +1,84 @@
+
+prog0:
+  - programName: 'TEST-EXAMPLE-1'
+    programLongName: 'TEST Example 1 for ESX service'
+    retailerName: 'TEST-LTP'
+    retailerLongName: 'TEST Long Tail Pipe'
+    programType: 'any'
+    country: 'US'
+    principalSubdivision: 'SD'
+    timeZoneOffset: '-PT8H'
+    intervalPeriod:
+        start: "2023-02-20T00:00:00Z"
+        duration: "P3M"
+        # randomizeStart: "duration for optional randomization for start"
+    # programDescriptions:
+    #    - URL to program
+    bindingEvents: false
+    localPrice: false
+    # If the Report has a payload
+    # payloadDescriptors:
+    #    - payloadType: 'foo'
+
+BADprog:
+  - programName: 99999
+    programLongName: 99999
+    retailerName: 99999
+    retailerLongName: 99999
+    programType: 'any'
+    country: 'ZZZ'
+    principalSubdivision: 'SD'
+    timeZoneOffset: '-07:00'
+    intervalPeriod:
+        start: "2023-02-20T00:00:00Z"
+        duration: "P3M"
+        # randomizeStart: "duration for optional randomization for start"
+    # programDescriptions:
+    #    - URL to program
+    bindingEvents: 'false'
+    localPrice: 'false'
+    # If the Report has a payload
+    # payloadDescriptors:
+    #    - payloadType: 'foo'
+
+  # zero-length programName
+  - programName: ''
+    programLongName: 'TEST Example with zero-length programName'
+    retailerName: 'TEST-LTP'
+    retailerLongName: 'TEST Long Tail Pipe'
+    programType: 'any'
+    country: 'US'
+    principalSubdivision: 'SD'
+    timeZoneOffset: '-PT7H'
+    intervalPeriod:
+        start: "2023-02-20T00:00:00Z"
+        duration: "P3M"
+        # randomizeStart: "duration for optional randomization for start"
+    # programDescriptions:
+    #    - URL to program
+    bindingEvents: false
+    localPrice: false
+    # If the Report has a payload
+    # payloadDescriptors:
+    #    - payloadType: 'foo'
+
+    # extra-long programName
+  - programName: '00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333 -- program name with over 128 characters'
+    programLongName: 'TEST Example  with an extra long programName'
+    retailerName: 'TEST-LTP'
+    retailerLongName: 'TEST Long Tail Pipe'
+    programType: 'any'
+    country: 'US'
+    principalSubdivision: 'SD'
+    timeZoneOffset: '-PT7H'
+    intervalPeriod:
+        start: "2023-02-20T00:00:00Z"
+        duration: "P3M"
+        # randomizeStart: "duration for optional randomization for start"
+    # programDescriptions:
+    #    - URL to program
+    bindingEvents: false
+    localPrice: false
+    # If the Report has a payload
+    # payloadDescriptors:
+    #    - payloadType: 'foo'

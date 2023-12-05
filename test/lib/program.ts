@@ -32,12 +32,36 @@ describe('PROGRAM', function() {
         // console.log(prog0);
         assert.deepEqual(prog0, {
             programName: 'TEST-EXAMPLE-1',
-            programLongName: 'TEST Example 1 for ESX service',
+            programLongName: 'TEST Example 1',
             retailerName: 'TEST-LTP',
             retailerLongName: 'TEST Long Tail Pipe',
             programType: 'any',
             country: 'US',
             principalSubdivision: 'SD',
+            timeZoneOffset: '-PT8H',
+            intervalPeriod: {
+                start: '2023-02-20T00:00:00Z',
+                duration: 'P3M'
+            },
+            programDescriptions: null,
+            bindingEvents: false,
+            localPrice: false,
+            payloadDescriptors: null,
+            targets: null
+        });
+    });
+
+    it('should parse program with default values', function() {
+        const progDefaults: Program = programSchema.parse(data.prog0[1]) as Program;
+        // console.log(prog0);
+        assert.deepEqual(progDefaults, {
+            programName: 'TEST-EXAMPLE-defaults',
+            programLongName: 'TEST Example default values',
+            retailerName: null,
+            retailerLongName: null,
+            programType: null,
+            country: null,
+            principalSubdivision: null,
             timeZoneOffset: '-PT8H',
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',

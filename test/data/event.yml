@@ -1,0 +1,266 @@
+
+events:
+    - programID: '0'
+      eventName: 'First event'
+      priority: 99
+      extraField: With unknown value
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+            - type: GROUP_NAME
+              values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # This is the minimum intervals object to
+      # satisfy the required properties on both
+      # Interval and Payloads/ValuesMap.
+      intervals:
+        - id: 0
+          payloads:
+            - type: EMPTY
+              values: []
+
+eventsDefaults:
+    - programID: '0'
+      eventName: 'Event with defaults'
+      # Defaults to null
+      # priority: 99
+      extraField: With unknown value
+      # Defaults to null
+      # targets:
+      #  - type: GROUP_NAME
+      #    values: [ VEN99 ]
+      # Defaults to null
+      # reportDescriptors:
+      #  - payloadType: USAGE
+      #    readingType: "DIRECT_READ"
+      #    reportingRate: P15M
+      #    targets:
+      #      - type: GROUP_NAME
+      #        values: [ VEN99 ]
+      # Defaults to null
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # This is the minimum intervals object to
+      # satisfy the required properties on both
+      # Interval and Payloads/ValuesMap.
+      intervals:
+        - id: 0
+          payloads:
+            - type: EMPTY
+              values: []
+
+testEvents:
+    - programID: '0'
+      eventName: 'First TEST event'
+      priority: 99
+      targets:
+          - type: GROUP_NAME
+            values: [ VEN99 ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+            - type: GROUP_NAME
+              values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # intervals: 
+
+eventNoTargets:
+    # This tests a condition where there
+    # is no eventName and no targets array
+    - programID: '0'
+      # eventName: 'First TEST event'
+      priority: 99
+      # targets:
+      #     - type: GROUP_NAME
+      #       values: [ VEN99 ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+            - type: GROUP_NAME
+              values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # intervals: 
+
+eventWithName:
+    # This tests a condition where there
+    # is no eventName and no targets array
+    - programID: '0'
+      name: 'Event with Name, not EventName'
+      priority: 99
+      # targets:
+      #     - type: GROUP_NAME
+      #       values: [ VEN99 ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+            - type: GROUP_NAME
+              values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # intervals: 
+
+events4loadControl:
+  - eventName: "LIMITATION loadControlEvent"
+    programID: "44"
+    intervalPeriod:
+      start: "0"
+      duration: "PT4H"
+    payloadDescriptors:
+      - payloadType: "DISPATCH_SETPOINT"
+        units: "KW"
+    intervals:
+      - id: 0
+        payloads:
+          - type: "DISPATCH_SETPOINT"
+            values: [ 0 ]
+  - eventName: "REDUCTION loadControlEvent"
+    programID: "44"
+    intervalPeriod:
+      start: "0"
+      duration: "PT4H"
+    payloadDescriptors:
+      - payloadType: "DISPATCH_SETPOINT_RELATIVE"
+        units: "KW"
+    intervals:
+      - id: 0
+        payloads:
+          - type: "DISPATCH_SETPOINT_RELATIVE"
+            values: [ 20 ]
+
+events4loadControlWithReporting:
+  - eventName: "REDUCTION loadControlEvent"
+    programID: "44"
+    intervalPeriod:
+      start: "0"
+      duration: "PT4H"
+    payloadDescriptors:
+      - payloadType: "DISPATCH_SETPOINT_RELATIVE"
+        units: "KW"
+    intervals:
+      - id: 0
+        payloads:
+          - type: "DISPATCH_SETPOINT_RELATIVE"
+            values: [ 20 ]
+    reportDescriptors:
+      - payloadType: USAGE
+        readingType: "DIRECT_READ"
+        aggregate: false
+        startInterval: -1
+        numIntervals: -1
+        frequency: 1
+        repeat: 1
+        historical: false
+      - payloadType: DEMAND
+        readingType: "DIRECT_READ"
+        aggregate: false
+        startInterval: -1
+        numIntervals: -1
+        frequency: 1
+        repeat: 1
+        historical: false
+
+eventsBadPriority:
+    - programID: '0'
+      eventName: 'Event with bad priority'
+      priority: -1
+      extraField: With unknown value
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+            - type: GROUP_NAME
+              values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # intervals: 
+
+    # NOTE: The code currently allows
+    # priority to be a numerical string.
+    # Hence, this test value is a non-numerical string.
+    # The corresponding test fails because isEvent
+    # accepts a numerical string.
+    - programID: '0'
+      eventName: 'Event with string priority'
+      priority: 'rttyrtytyut99zzlkjzouhnlz'
+      extraField: With unknown value
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+            - type: GROUP_NAME
+              values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # intervals: 
+
+eventsBadValues:
+    - programID: 0
+      eventName: 'Event with bad values'
+      priority: -1
+      targets: bad targets
+      reportDescriptors: bad descriptors
+      payloadDescriptors: bad payload descriptors
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      intervals: bad intervals
+
+
+events4targets:
+    - programID: '0'
+      name: 'First event'
+      priority: 99
+      extraField: With unknown value
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+        - type: EVENT_TARGETS
+          values: [ 'target1', 'target2' ]
+      reportDescriptors:
+        - payloadType: USAGE
+          readingType: "DIRECT_READ"
+          reportingRate: P15M
+          targets:
+          - type: GROUP_NAME
+            values: [ VEN99 ]
+      # payloadDescriptors:
+      intervalPeriod:
+          start: "2023-02-20T00:00:00Z"
+          duration: "P3M"
+      # intervals: 

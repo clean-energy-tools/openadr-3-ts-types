@@ -73,6 +73,43 @@ reports:
                   values:
                     - 94
     
+    - ignoreVenNotFound: true
+      programID: '0'
+      eventID: '0'
+      clientName: 'VEN99'
+      reportName: 'Test report for default values'
+      # Defaults to null
+      # payloadDescriptors:
+      #   - payloadType: 'USAGE'
+      resources:
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
+        - resourceName: '99' # VEN99
+          ignoreVenNotFound: true
+          intervalPeriod:
+            start: "2023-03-11T12:23:15Z"
+            duration: "PT1M"
+          intervals:
+            - id: 0
+              intervalPeriod:
+                start: '2023-03-26T18:30:28.829Z'
+                duration: PT15M
+              payloads:
+                - type: USAGE
+                  values:
+                    - 94
           
         
 BADreports:

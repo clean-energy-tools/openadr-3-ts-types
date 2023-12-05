@@ -26,9 +26,8 @@ describe('REPORT', function() {
         data = doc;
     });
 
-    let report: Report;
     it('should parse report', function() {
-        report = reportSchema.parse(data.reports[0]) as Report;
+        const report: Report = reportSchema.parse(data.reports[0]) as Report;
         assert.deepEqual(report, {
             programID: '0',
             eventID: '0',
@@ -194,6 +193,68 @@ describe('REPORT', function() {
         assert.isOk(didFail);
     });
 
+    it('should parse report with default values', function() {
+        let report2: any = reportSchema.parse(data.reports[2]) as Report;
+        // console.log(report2);
+        assert.deepEqual(report2, {
+            programID: '0',
+            eventID: '0',
+            clientName: 'VEN99',
+            reportName: 'Test report for default values',
+            payloadDescriptors: null,
+            resources: [
+              {
+                resourceName: '99',
+                intervalPeriod: {
+                    start: "2023-03-11T12:23:15Z",
+                    duration: "PT1M"
+                },
+                intervals: [
+                    {
+                        id: 0,
+                        intervalPeriod: {
+                            duration: "PT15M",
+                            start: "2023-03-26T18:30:28.829Z"
+                        },
+                        payloads: [
+                            {
+                              type: "USAGE",
+                              values: [
+                                94
+                              ]
+                            }
+                        ]
+                    }
+                ]
+              },
+              {
+                resourceName: '99',
+                intervalPeriod: {
+                    start: "2023-03-11T12:23:15Z",
+                    duration: "PT1M"
+                },
+                intervals: [
+                    {
+                        id: 0,
+                        intervalPeriod: {
+                            duration: "PT15M",
+                            start: "2023-03-26T18:30:28.829Z"
+                        },
+                        payloads: [
+                            {
+                              type: "USAGE",
+                              values: [
+                                94
+                              ]
+                            }
+                        ]
+                    }
+                ]
+              }
+            ]
+        });
+
+    });
     it('should fail to parse bad report', function() {
         let didFail = false;
         try {

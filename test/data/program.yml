@@ -2,8 +2,8 @@
 prog0:
   - programName: 'TEST-EXAMPLE-1'
     programLongName: 'TEST Example 1'
-    retailerName: 'TEST-LTP'
-    retailerLongName: 'TEST Long Tail Pipe'
+    retailerName: 'TEST-Retailer'
+    retailerLongName: 'TEST Retailer'
     programType: 'any'
     country: 'US'
     principalSubdivision: 'SD'
@@ -23,8 +23,8 @@ prog0:
   - programName: 'TEST-EXAMPLE-defaults'
     programLongName: 'TEST Example default values'
     # These default to null
-    # retailerName: 'TEST-LTP'
-    # retailerLongName: 'TEST Long Tail Pipe'
+    # retailerName: 'TEST-Retailer'
+    # retailerLongName: 'TEST Retailer'
     # programType: 'any'
     # country: 'US'
     # principalSubdivision: 'SD'
@@ -41,6 +41,27 @@ prog0:
     # localPrice: false
     # If the Report has a payload
     # Defaults to null
+    # payloadDescriptors:
+    #    - payloadType: 'foo'
+
+  - programName: 'TEST-EXAMPLE-passthrough'
+    programLongName: 'TEST Example passthrough'
+    extraField: with unknown value
+    retailerName: 'TEST-Retailer'
+    retailerLongName: 'TEST Retailer'
+    programType: 'any'
+    country: 'US'
+    principalSubdivision: 'SD'
+    timeZoneOffset: '-PT8H'
+    intervalPeriod:
+        start: "2023-02-20T00:00:00Z"
+        duration: "P3M"
+        # randomizeStart: "duration for optional randomization for start"
+    # programDescriptions:
+    #    - URL to program
+    bindingEvents: false
+    localPrice: false
+    # If the Report has a payload
     # payloadDescriptors:
     #    - payloadType: 'foo'
 

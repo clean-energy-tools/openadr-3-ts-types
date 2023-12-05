@@ -26,15 +26,14 @@ describe('PROGRAM', function() {
         data = doc;
     });
 
-    let prog0: Program;
     it('should parse prog0', function() {
-        prog0 = programSchema.parse(data.prog0[0]) as Program;
+        const prog0: Program = programSchema.parse(data.prog0[0]) as Program;
         // console.log(prog0);
         assert.deepEqual(prog0, {
             programName: 'TEST-EXAMPLE-1',
             programLongName: 'TEST Example 1',
-            retailerName: 'TEST-LTP',
-            retailerLongName: 'TEST Long Tail Pipe',
+            retailerName: 'TEST-Retailer',
+            retailerLongName: 'TEST Retailer',
             programType: 'any',
             country: 'US',
             principalSubdivision: 'SD',
@@ -49,6 +48,51 @@ describe('PROGRAM', function() {
             payloadDescriptors: null,
             targets: null
         });
+    });
+
+    it('should fail to parse prog0 in strict mode', function() {
+        let didFail = false;
+        try {
+            const prog0: Program = programSchema.strict().parse(data.prog0[2]) as Program;
+        } catch (err) {
+            // console.log(err);
+            didFail = true;
+            assert.deepEqual(err.issues, [{
+                code: 'unrecognized_keys',
+                keys: [
+                    "extraField"
+                ],
+                path: [],
+                message: "Unrecognized key(s) in object: 'extraField'"
+            }]);
+        }
+        assert.isOk(didFail);
+        // console.log(prog0);
+    });
+
+    it('should parse prog0 with extra fields', function() {
+        const prog0: Program = programSchema.passthrough().parse(data.prog0[2]) as Program;
+        // console.log(prog0);
+        assert.deepEqual(prog0, {
+            programName: 'TEST-EXAMPLE-passthrough',
+            programLongName: 'TEST Example passthrough',
+            extraField: 'with unknown value',
+            retailerName: 'TEST-Retailer',
+            retailerLongName: 'TEST Retailer',
+            programType: 'any',
+            country: 'US',
+            principalSubdivision: 'SD',
+            timeZoneOffset: '-PT8H',
+            intervalPeriod: {
+                start: '2023-02-20T00:00:00Z',
+                duration: 'P3M'
+            },
+            programDescriptions: null,
+            bindingEvents: false,
+            localPrice: false,
+            payloadDescriptors: null,
+            targets: null
+        } as any);
     });
 
     it('should parse program with default values', function() {

@@ -13,12 +13,12 @@ export default z
       .string()
       .datetime()
       .describe("datetime in ISO 8601 format")
-      .default("0000-00-00"),
+      .optional(),
     modificationDateTime: z
       .string()
       .datetime()
       .describe("datetime in ISO 8601 format")
-      .default("0000-00-00"),
+      .optional(),
     objectType: z
       .literal("EVENT")
       .describe("Used as discriminator, e.g. notification.object")
@@ -265,10 +265,10 @@ export default z
             currency: z
               .string()
               .describe("Currency of price payload.")
-              .default("USD")
+              .default(null)
               .nullable()
               .describe("Currency of price payload.")
-              .default("USD"),
+              .default(null),
           })
           .describe(
             "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"
@@ -281,16 +281,12 @@ export default z
       .default(null),
     intervalPeriod: z
       .object({
-        start: z
-          .string()
-          .datetime()
-          .describe("datetime in ISO 8601 format")
-          .default("0000-00-00"),
+        start: z.string().datetime().describe("datetime in ISO 8601 format"),
         duration: z
           .string()
           .regex(
             new RegExp(
-              "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+              "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
             )
           )
           .describe("duration in ISO 8601 format")
@@ -299,7 +295,7 @@ export default z
           .string()
           .regex(
             new RegExp(
-              "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+              "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
             )
           )
           .describe("duration in ISO 8601 format")
@@ -324,13 +320,12 @@ export default z
                 start: z
                   .string()
                   .datetime()
-                  .describe("datetime in ISO 8601 format")
-                  .default("0000-00-00"),
+                  .describe("datetime in ISO 8601 format"),
                 duration: z
                   .string()
                   .regex(
                     new RegExp(
-                      "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+                      "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
                     )
                   )
                   .describe("duration in ISO 8601 format")
@@ -339,7 +334,7 @@ export default z
                   .string()
                   .regex(
                     new RegExp(
-                      "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+                      "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
                     )
                   )
                   .describe("duration in ISO 8601 format")

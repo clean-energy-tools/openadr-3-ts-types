@@ -13,12 +13,12 @@ export default z
       .string()
       .datetime()
       .describe("datetime in ISO 8601 format")
-      .default("0000-00-00"),
+      .optional(),
     modificationDateTime: z
       .string()
       .datetime()
       .describe("datetime in ISO 8601 format")
-      .default("0000-00-00"),
+      .optional(),
     objectType: z
       .literal("SUBSCRIPTION")
       .describe("Used as discriminator, e.g. notification.object")

@@ -1,8 +1,8 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
-    createdDateTime: z.ZodDefault<z.ZodString>;
-    modificationDateTime: z.ZodDefault<z.ZodString>;
+    createdDateTime: z.ZodOptional<z.ZodString>;
+    modificationDateTime: z.ZodOptional<z.ZodString>;
     objectType: z.ZodOptional<z.ZodLiteral<"SUBSCRIPTION">>;
     clientName: z.ZodString;
     programID: z.ZodString;
@@ -12,13 +12,13 @@ declare const _default: z.ZodObject<{
         callbackUrl: z.ZodString;
         bearerToken: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodString>>>;
     }, "strip", z.ZodTypeAny, {
-        objects?: ("EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations?: ("GET" | "DELETE" | "POST" | "PUT")[];
+        objects?: ("SUBSCRIPTION" | "PROGRAM" | "EVENT" | "REPORT" | "VEN" | "RESOURCE")[];
+        operations?: ("GET" | "POST" | "PUT" | "DELETE")[];
         callbackUrl?: string;
         bearerToken?: string;
     }, {
-        objects?: ("EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations?: ("GET" | "DELETE" | "POST" | "PUT")[];
+        objects?: ("SUBSCRIPTION" | "PROGRAM" | "EVENT" | "REPORT" | "VEN" | "RESOURCE")[];
+        operations?: ("GET" | "POST" | "PUT" | "DELETE")[];
         callbackUrl?: string;
         bearerToken?: string;
     }>, "many">;
@@ -55,8 +55,8 @@ declare const _default: z.ZodObject<{
     clientName?: string;
     programID?: string;
     objectOperations?: {
-        objects?: ("EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations?: ("GET" | "DELETE" | "POST" | "PUT")[];
+        objects?: ("SUBSCRIPTION" | "PROGRAM" | "EVENT" | "REPORT" | "VEN" | "RESOURCE")[];
+        operations?: ("GET" | "POST" | "PUT" | "DELETE")[];
         callbackUrl?: string;
         bearerToken?: string;
     }[];
@@ -75,8 +75,8 @@ declare const _default: z.ZodObject<{
     clientName?: string;
     programID?: string;
     objectOperations?: {
-        objects?: ("EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations?: ("GET" | "DELETE" | "POST" | "PUT")[];
+        objects?: ("SUBSCRIPTION" | "PROGRAM" | "EVENT" | "REPORT" | "VEN" | "RESOURCE")[];
+        operations?: ("GET" | "POST" | "PUT" | "DELETE")[];
         callbackUrl?: string;
         bearerToken?: string;
     }[];

@@ -1,8 +1,8 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
-    createdDateTime: z.ZodDefault<z.ZodString>;
-    modificationDateTime: z.ZodDefault<z.ZodString>;
+    createdDateTime: z.ZodOptional<z.ZodString>;
+    modificationDateTime: z.ZodOptional<z.ZodString>;
     objectType: z.ZodOptional<z.ZodLiteral<"PROGRAM">>;
     programName: z.ZodString;
     programLongName: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodString>>>;
@@ -13,7 +13,7 @@ declare const _default: z.ZodObject<{
     principalSubdivision: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodString>>>;
     timeZoneOffset: z.ZodDefault<z.ZodString>;
     intervalPeriod: z.ZodOptional<z.ZodObject<{
-        start: z.ZodDefault<z.ZodString>;
+        start: z.ZodString;
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {

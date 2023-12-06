@@ -1,8 +1,8 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
-    createdDateTime: z.ZodDefault<z.ZodString>;
-    modificationDateTime: z.ZodDefault<z.ZodString>;
+    createdDateTime: z.ZodOptional<z.ZodString>;
+    modificationDateTime: z.ZodOptional<z.ZodString>;
     objectType: z.ZodOptional<z.ZodLiteral<"REPORT">>;
     programID: z.ZodString;
     eventID: z.ZodString;
@@ -33,7 +33,7 @@ declare const _default: z.ZodObject<{
     resources: z.ZodArray<z.ZodObject<{
         resourceName: z.ZodString;
         intervalPeriod: z.ZodOptional<z.ZodObject<{
-            start: z.ZodDefault<z.ZodString>;
+            start: z.ZodString;
             duration: z.ZodDefault<z.ZodString>;
             randomizeStart: z.ZodDefault<z.ZodString>;
         }, "strip", z.ZodTypeAny, {
@@ -48,7 +48,7 @@ declare const _default: z.ZodObject<{
         intervals: z.ZodArray<z.ZodObject<{
             id: z.ZodNumber;
             intervalPeriod: z.ZodOptional<z.ZodObject<{
-                start: z.ZodDefault<z.ZodString>;
+                start: z.ZodString;
                 duration: z.ZodDefault<z.ZodString>;
                 randomizeStart: z.ZodDefault<z.ZodString>;
             }, "strip", z.ZodTypeAny, {

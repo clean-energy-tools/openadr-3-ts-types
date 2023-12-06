@@ -1,8 +1,8 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
-    createdDateTime: z.ZodDefault<z.ZodString>;
-    modificationDateTime: z.ZodDefault<z.ZodString>;
+    createdDateTime: z.ZodOptional<z.ZodString>;
+    modificationDateTime: z.ZodOptional<z.ZodString>;
     objectType: z.ZodOptional<z.ZodLiteral<"RESOURCE">>;
     resourceName: z.ZodString;
     venID: z.ZodOptional<z.ZodString>;

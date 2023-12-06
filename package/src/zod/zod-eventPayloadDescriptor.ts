@@ -23,10 +23,10 @@ export default z
     currency: z
       .string()
       .describe("Currency of price payload.")
-      .default("USD")
+      .default(null)
       .nullable()
       .describe("Currency of price payload.")
-      .default("USD"),
+      .default(null),
   })
   .describe(
     "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"

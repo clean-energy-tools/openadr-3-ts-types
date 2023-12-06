@@ -13,12 +13,12 @@ export default z
       .string()
       .datetime()
       .describe("datetime in ISO 8601 format")
-      .default("0000-00-00"),
+      .optional(),
     modificationDateTime: z
       .string()
       .datetime()
       .describe("datetime in ISO 8601 format")
-      .default("0000-00-00"),
+      .optional(),
     objectType: z
       .literal("REPORT")
       .describe("Used as discriminator, e.g. notification.object")
@@ -71,30 +71,30 @@ export default z
               .describe(
                 "Enumerated or private string signifying the type of reading."
               )
-              .default("DIRECT_READ")
+              .default(null)
               .nullable()
               .describe(
                 "Enumerated or private string signifying the type of reading."
               )
-              .default("DIRECT_READ"),
+              .default(null),
             units: z
               .string()
               .describe("Units of measure.")
-              .default("KWH")
+              .default(null)
               .nullable()
               .describe("Units of measure.")
-              .default("KWH"),
+              .default(null),
             accuracy: z
               .number()
               .describe(
                 "A quantification of the accuracy of a set of payload values."
               )
-              .default(0)
+              .default(null)
               .nullable()
               .describe(
                 "A quantification of the accuracy of a set of payload values."
               )
-              .default(0),
+              .default(null),
             confidence: z
               .number()
               .int()
@@ -130,13 +130,12 @@ export default z
                 start: z
                   .string()
                   .datetime()
-                  .describe("datetime in ISO 8601 format")
-                  .default("0000-00-00"),
+                  .describe("datetime in ISO 8601 format"),
                 duration: z
                   .string()
                   .regex(
                     new RegExp(
-                      "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+                      "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
                     )
                   )
                   .describe("duration in ISO 8601 format")
@@ -145,7 +144,7 @@ export default z
                   .string()
                   .regex(
                     new RegExp(
-                      "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+                      "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
                     )
                   )
                   .describe("duration in ISO 8601 format")
@@ -170,13 +169,12 @@ export default z
                         start: z
                           .string()
                           .datetime()
-                          .describe("datetime in ISO 8601 format")
-                          .default("0000-00-00"),
+                          .describe("datetime in ISO 8601 format"),
                         duration: z
                           .string()
                           .regex(
                             new RegExp(
-                              "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+                              "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
                             )
                           )
                           .describe("duration in ISO 8601 format")
@@ -185,7 +183,7 @@ export default z
                           .string()
                           .regex(
                             new RegExp(
-                              "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+                              "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
                             )
                           )
                           .describe("duration in ISO 8601 format")

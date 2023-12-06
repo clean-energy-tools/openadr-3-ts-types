@@ -2,7 +2,7 @@ import { z } from "zod";
 declare const _default: z.ZodObject<{
     id: z.ZodNumber;
     intervalPeriod: z.ZodOptional<z.ZodObject<{
-        start: z.ZodDefault<z.ZodString>;
+        start: z.ZodString;
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {

@@ -16,24 +16,24 @@ export default z
     readingType: z
       .string()
       .describe("Enumerated or private string signifying the type of reading.")
-      .default("DIRECT_READ")
+      .default(null)
       .nullable()
       .describe("Enumerated or private string signifying the type of reading.")
-      .default("DIRECT_READ"),
+      .default(null),
     units: z
       .string()
       .describe("Units of measure.")
-      .default("KWH")
+      .default(null)
       .nullable()
       .describe("Units of measure.")
-      .default("KWH"),
+      .default(null),
     accuracy: z
       .number()
       .describe("A quantification of the accuracy of a set of payload values.")
-      .default(0)
+      .default(null)
       .nullable()
       .describe("A quantification of the accuracy of a set of payload values.")
-      .default(0),
+      .default(null),
     confidence: z
       .number()
       .int()

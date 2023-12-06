@@ -1,8 +1,8 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
-    createdDateTime: z.ZodDefault<z.ZodString>;
-    modificationDateTime: z.ZodDefault<z.ZodString>;
+    createdDateTime: z.ZodOptional<z.ZodString>;
+    modificationDateTime: z.ZodOptional<z.ZodString>;
     objectType: z.ZodOptional<z.ZodLiteral<"VEN">>;
     venName: z.ZodString;
     attributes: z.ZodOptional<z.ZodArray<z.ZodObject<{
@@ -57,8 +57,8 @@ declare const _default: z.ZodObject<{
     }>, "many">>;
     resources: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodArray<z.ZodObject<{
         id: z.ZodOptional<z.ZodString>;
-        createdDateTime: z.ZodDefault<z.ZodString>;
-        modificationDateTime: z.ZodDefault<z.ZodString>;
+        createdDateTime: z.ZodOptional<z.ZodString>;
+        modificationDateTime: z.ZodOptional<z.ZodString>;
         objectType: z.ZodOptional<z.ZodLiteral<"RESOURCE">>;
         resourceName: z.ZodString;
         venID: z.ZodOptional<z.ZodString>;

@@ -30,7 +30,7 @@ declare const _default: z.ZodObject<{
     object: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.ZodEffects<z.ZodAny, any, any>>;
 }, "strip", z.ZodTypeAny, {
     objectType?: "EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
-    operation?: "GET" | "DELETE" | "POST" | "PUT";
+    operation?: "GET" | "POST" | "PUT" | "DELETE";
     targets?: {
         type?: string;
         values?: (string | number | boolean | {
@@ -41,7 +41,7 @@ declare const _default: z.ZodObject<{
     object?: any;
 }, {
     objectType?: "EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
-    operation?: "GET" | "DELETE" | "POST" | "PUT";
+    operation?: "GET" | "POST" | "PUT" | "DELETE";
     targets?: {
         type?: string;
         values?: (string | number | boolean | {

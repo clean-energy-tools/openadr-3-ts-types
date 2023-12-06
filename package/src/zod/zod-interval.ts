@@ -10,16 +10,12 @@ export default z
       ),
     intervalPeriod: z
       .object({
-        start: z
-          .string()
-          .datetime()
-          .describe("datetime in ISO 8601 format")
-          .default("0000-00-00"),
+        start: z.string().datetime().describe("datetime in ISO 8601 format"),
         duration: z
           .string()
           .regex(
             new RegExp(
-              "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+              "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
             )
           )
           .describe("duration in ISO 8601 format")
@@ -28,7 +24,7 @@ export default z
           .string()
           .regex(
             new RegExp(
-              "/^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$/"
+              "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
             )
           )
           .describe("duration in ISO 8601 format")

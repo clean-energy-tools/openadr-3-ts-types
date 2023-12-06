@@ -14,7 +14,6 @@ import {
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
 
-
 describe('INTERVAL PERIOD', function() {
     let data;
     before(async function() {

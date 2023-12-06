@@ -173,33 +173,42 @@ describe('SUBSCRIPTION', function() {
 
             assert.isArray(err.issues);
             assert.equal(err.issues.length, 1);
-            assert.equal(err.issues[0].code, 'invalid_union');
-            // console.log(`Before loop`)
-            for (const error of err.issues[0].unionErrors) {
-                // console.log(util.inspect(error.issues));
-                let issues = error.issues[0];
-                if (issues.expected === 'PROGRAM') {
-                    expectProgram = true;
-                } else if (issues.expected === 'EVENT') {
-                    expectEvent = true;
-                } else if (issues.expected === 'REPORT') {
-                    expectReport = true;
-                } else if (issues.expected === 'SUBSCRIPTION') {
-                    expectSubscription = true;
-                } else if (issues.expected === 'VEN') {
-                    expectVen = true;
-                } else if (issues.expected === 'RESOURCE') {
-                    expectResource = true;
-                } else {
-                    console.log(`unexpected expect ${error[0].expect}`);
+            assert.equal(err.issues[0].code, 'invalid_enum_value');
+            assert.deepEqual(err.issues, [
+                {
+                  received: 'PROGRAMS',
+                  code: 'invalid_enum_value',
+                  options: [ 'PROGRAM', 'EVENT', 'REPORT', 'SUBSCRIPTION', 'VEN', 'RESOURCE' ],
+                  path: [ 'objectOperations', 0, 'objects', 0 ],
+                  message: "Invalid enum value. Expected 'PROGRAM' | 'EVENT' | 'REPORT' | 'SUBSCRIPTION' | 'VEN' | 'RESOURCE', received 'PROGRAMS'"
                 }
-            }
-            assert.isOk(expectProgram);
-            assert.isOk(expectEvent);
-            assert.isOk(expectReport);
-            assert.isOk(expectSubscription);
-            assert.isOk(expectVen);
-            assert.isOk(expectResource);
+            ]);
+            // console.log(`Before loop`, err.issues);
+            // for (const error of err.issues[0].unionErrors) {
+            //     // console.log(util.inspect(error.issues));
+            //     let issues = error.issues[0];
+            //     if (issues.expected === 'PROGRAM') {
+            //         expectProgram = true;
+            //     } else if (issues.expected === 'EVENT') {
+            //         expectEvent = true;
+            //     } else if (issues.expected === 'REPORT') {
+            //         expectReport = true;
+            //     } else if (issues.expected === 'SUBSCRIPTION') {
+            //         expectSubscription = true;
+            //     } else if (issues.expected === 'VEN') {
+            //         expectVen = true;
+            //     } else if (issues.expected === 'RESOURCE') {
+            //         expectResource = true;
+            //     } else {
+            //         console.log(`unexpected expect ${error[0].expect}`);
+            //     }
+            // }
+            // assert.isOk(expectProgram);
+            // assert.isOk(expectEvent);
+            // assert.isOk(expectReport);
+            // assert.isOk(expectSubscription);
+            // assert.isOk(expectVen);
+            // assert.isOk(expectResource);
         }
         assert.isOk(didFail);
     });
@@ -224,29 +233,38 @@ describe('SUBSCRIPTION', function() {
 
             assert.isArray(err.issues);
             assert.equal(err.issues.length, 1);
-            assert.equal(err.issues[0].code, 'invalid_union');
-            // console.log(`Before loop`)
-            for (const error of err.issues[0].unionErrors) {
-                // console.log(util.inspect(error.issues));
-                let issues = error.issues[0];
-                if (issues.expected === 'GET') {
-                    expectGet = true;
-                } else if (issues.expected === 'POST') {
-                    expectPost = true;
-                } else if (issues.expected === 'PUT') {
-                    expectPut = true;
-                } else if (issues.expected === 'DELETE') {
-                    expectDelete = true;
-                } else {
-                    console.log(`Unexpected `, error);
-                    gotUnexpected = true;
+            assert.equal(err.issues[0].code, 'invalid_enum_value');
+            assert.deepEqual(err.issues, [
+                {
+                    received: 'POSTED',
+                    code: 'invalid_enum_value',
+                    options: [ 'GET', 'POST', 'PUT', 'DELETE' ],
+                    path: [ 'objectOperations', 0, 'operations', 0 ],
+                    message: "Invalid enum value. Expected 'GET' | 'POST' | 'PUT' | 'DELETE', received 'POSTED'"
                 }
-            }
-            assert.isOk(expectGet);
-            assert.isOk(expectPost);
-            assert.isOk(expectPut);
-            assert.isOk(expectDelete);
-            assert.isNotOk(gotUnexpected);
+            ])
+            // console.log(`Before loop`, err.issues)
+            // for (const error of err.issues[0].unionErrors) {
+            //     // console.log(util.inspect(error.issues));
+            //     let issues = error.issues[0];
+            //     if (issues.expected === 'GET') {
+            //         expectGet = true;
+            //     } else if (issues.expected === 'POST') {
+            //         expectPost = true;
+            //     } else if (issues.expected === 'PUT') {
+            //         expectPut = true;
+            //     } else if (issues.expected === 'DELETE') {
+            //         expectDelete = true;
+            //     } else {
+            //         console.log(`Unexpected `, error);
+            //         gotUnexpected = true;
+            //     }
+            // }
+            // assert.isOk(expectGet);
+            // assert.isOk(expectPost);
+            // assert.isOk(expectPut);
+            // assert.isOk(expectDelete);
+            // assert.isNotOk(gotUnexpected);
         }
         assert.isOk(didFail);
     });

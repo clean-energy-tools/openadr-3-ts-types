@@ -56,7 +56,8 @@ describe('EVENT', function() {
             payloadDescriptors: null,
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',
-                duration: 'P3M'
+                duration: 'P3M',
+                randomizeStart: "PT0S"
             },
             intervals: [ {
                 id: 0,
@@ -99,7 +100,8 @@ describe('EVENT', function() {
             payloadDescriptors: null,
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',
-                duration: 'P3M'
+                duration: 'P3M',
+                randomizeStart: "PT0S"
             },
             intervals: [ {
                 id: 0,
@@ -144,7 +146,8 @@ describe('EVENT', function() {
             payloadDescriptors: null,
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',
-                duration: 'P3M'
+                duration: 'P3M',
+                randomizeStart: "PT0S"
             },
             intervals: [ {
                 id: 0,

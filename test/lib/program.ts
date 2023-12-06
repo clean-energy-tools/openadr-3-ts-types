@@ -9,10 +9,7 @@ export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
-import {
-    Program, programSchema
-} from '../../package/dist/index.js';
-// from 'openadr-3-ts-types';
+import { Program, programSchema } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 describe('PROGRAM', function() {
@@ -40,7 +37,8 @@ describe('PROGRAM', function() {
             timeZoneOffset: '-PT8H',
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',
-                duration: 'P3M'
+                duration: 'P3M',
+                randomizeStart: "PT0S"
             },
             programDescriptions: null,
             bindingEvents: false,
@@ -85,7 +83,8 @@ describe('PROGRAM', function() {
             timeZoneOffset: '-PT8H',
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',
-                duration: 'P3M'
+                duration: 'P3M',
+                randomizeStart: "PT0S"
             },
             programDescriptions: null,
             bindingEvents: false,
@@ -109,7 +108,8 @@ describe('PROGRAM', function() {
             timeZoneOffset: '-PT8H',
             intervalPeriod: {
                 start: '2023-02-20T00:00:00Z',
-                duration: 'P3M'
+                duration: 'P3M',
+                randomizeStart: "PT0S"
             },
             programDescriptions: null,
             bindingEvents: false,

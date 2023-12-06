@@ -47,14 +47,16 @@ describe('REPORT', function() {
                 resourceName: '99',
                 intervalPeriod: {
                     start: "2023-03-11T12:23:15Z",
-                    duration: "PT1M"
+                    duration: "PT1M",
+                    randomizeStart: "PT0S"
                 },
                 intervals: [
                     {
                         id: 0,
                         intervalPeriod: {
                             duration: "PT15M",
-                            start: "2023-03-26T18:30:28.829Z"
+                            start: "2023-03-26T18:30:28.829Z",
+                            randomizeStart: "PT0S"
                         },
                         payloads: [
                             {
@@ -71,14 +73,16 @@ describe('REPORT', function() {
                 resourceName: '99',
                 intervalPeriod: {
                     start: "2023-03-11T12:23:15Z",
-                    duration: "PT1M"
+                    duration: "PT1M",
+                    randomizeStart: "PT0S"
                 },
                 intervals: [
                     {
                         id: 0,
                         intervalPeriod: {
                             duration: "PT15M",
-                            start: "2023-03-26T18:30:28.829Z"
+                            start: "2023-03-26T18:30:28.829Z",
+                            randomizeStart: "PT0S"
                         },
                         payloads: [
                             {
@@ -124,14 +128,16 @@ describe('REPORT', function() {
                 resourceName: '99',
                 intervalPeriod: {
                     start: "2023-03-11T12:23:15Z",
-                    duration: "PT1M"
+                    duration: "PT1M",
+                    randomizeStart: "PT0S"
                 },
                 intervals: [
                     {
                         id: 0,
                         intervalPeriod: {
                             duration: "PT15M",
-                            start: "2023-03-26T18:30:28.829Z"
+                            start: "2023-03-26T18:30:28.829Z",
+                            randomizeStart: "PT0S"
                         },
                         payloads: [
                             {
@@ -148,14 +154,16 @@ describe('REPORT', function() {
                 resourceName: '99',
                 intervalPeriod: {
                     start: "2023-03-11T12:23:15Z",
-                    duration: "PT1M"
+                    duration: "PT1M",
+                    randomizeStart: "PT0S"
                 },
                 intervals: [
                     {
                         id: 0,
                         intervalPeriod: {
                             duration: "PT15M",
-                            start: "2023-03-26T18:30:28.829Z"
+                            start: "2023-03-26T18:30:28.829Z",
+                            randomizeStart: "PT0S"
                         },
                         payloads: [
                             {
@@ -206,14 +214,16 @@ describe('REPORT', function() {
                 resourceName: '99',
                 intervalPeriod: {
                     start: "2023-03-11T12:23:15Z",
-                    duration: "PT1M"
+                    duration: "PT1M",
+                    randomizeStart: "PT0S"
                 },
                 intervals: [
                     {
                         id: 0,
                         intervalPeriod: {
                             duration: "PT15M",
-                            start: "2023-03-26T18:30:28.829Z"
+                            start: "2023-03-26T18:30:28.829Z",
+                            randomizeStart: "PT0S"
                         },
                         payloads: [
                             {
@@ -230,14 +240,16 @@ describe('REPORT', function() {
                 resourceName: '99',
                 intervalPeriod: {
                     start: "2023-03-11T12:23:15Z",
-                    duration: "PT1M"
+                    duration: "PT1M",
+                    randomizeStart: "PT0S"
                 },
                 intervals: [
                     {
                         id: 0,
                         intervalPeriod: {
                             duration: "PT15M",
-                            start: "2023-03-26T18:30:28.829Z"
+                            start: "2023-03-26T18:30:28.829Z",
+                            randomizeStart: "PT0S"
                         },
                         payloads: [
                             {

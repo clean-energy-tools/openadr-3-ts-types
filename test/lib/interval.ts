@@ -26,13 +26,15 @@ describe('INTERVAL', function() {
     });
 
     it('should parse interval', function() {
+        // console.log(data.intervals[0]);
         const interval: Interval = intervalSchema.parse(data.intervals[0]) as Interval;
         // console.log(interval);
         assert.deepEqual(interval, {
             id: 0,
             intervalPeriod: {
                 start: '2023-03-26T18:30:28.829Z',
-                duration: 'PT15M'
+                duration: 'PT15M',
+                randomizeStart: 'PT0S'
             },
             payloads: [ { type: 'USAGE', values: [94] } ]
           } as any);
@@ -74,12 +76,14 @@ describe('INTERVAL', function() {
             intervalPeriod: {
                 start: '2023-03-26T18:30:28.829Z',
                 duration: 'PT15M',
+                randomizeStart: 'PT0S'
             },
             payloads: [ { type: 'USAGE', values: [94] } ]
           } as any);
     });
 
     it('should parse interval w/ extra data, passthrough, see data', function() {
+        // console.log(data.intervals[3]);
         const interval: Interval = intervalSchema.passthrough().parse(data.intervals[3]) as Interval;
         // console.log(interval);
         assert.deepEqual(interval, {
@@ -88,6 +92,7 @@ describe('INTERVAL', function() {
             intervalPeriod: {
                 start: '2023-03-26T18:30:28.829Z',
                 duration: 'PT15M',
+                randomizeStart: 'PT0S'
             },
             payloads: [ { type: 'USAGE', values: [94] } ]
           } as any);
@@ -117,6 +122,7 @@ describe('INTERVAL', function() {
     it('should fail to parse interval w/ bad data', function() {
         let didFail = false;
         try {
+            // console.log(data.BADintervals[0]);
             const interval: Interval = intervalSchema.parse(data.BADintervals[0]) as Interval;
         } catch (err) {
             didFail = true;

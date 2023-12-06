@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc -w",
-    "test": "npx mocha ./dist/program.js ./dist/report.js",
+    "test": "npx mocha ./dist/program.js ./dist/report.js ./dist/event.js ./dist/subscription.js ./dist/ven.js ./dist/resource.js ./dist/interval.js",
     "monitor": "npx nodemon --watch ./dist  --watch ./data --watch ../package/dist --exec 'npm run test'"
   },
   "keywords": [],

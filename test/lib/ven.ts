@@ -263,7 +263,8 @@ describe('VEN', function() {
                             type: 'MAX_AMPS',
                             values: [ 32 ]
                         }
-                    ]
+                    ],
+                    // extraData: 'in resource 0'
                 },
                 {
                     resourceName: 'evse-third-green-2',

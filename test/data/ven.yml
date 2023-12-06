@@ -71,7 +71,7 @@ vens:
             - |
               { "type": "Point", "coordinates": [ -74.42432, 40.4267 ] }
           # passthrough doesn't affect inside attributes
-          # extraData: 'in attributes'
+          extraData: 'in attributes'
         - type: ESX_TCN_ID
           values: [ 'con-ed-tcn' ]
         - type: ESX_CN_ID

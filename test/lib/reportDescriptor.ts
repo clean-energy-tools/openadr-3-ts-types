@@ -13,7 +13,7 @@ import { ReportDescriptor, reportDescriptorSchema } from '../../package/dist/ind
 import YAML from 'js-yaml';
 
 
-describe('PROGRAM', function() {
+describe('REPORT DESCRIPTOR', function() {
     let data;
     before(async function() {
 

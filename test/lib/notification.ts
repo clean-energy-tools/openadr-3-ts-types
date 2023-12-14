@@ -8,7 +8,7 @@ export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
-import { Notification, notificationSchema } from '../../package/dist/index.js';
+import { Notification, parseNotification } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 describe('NOTIFICATION', function() {
@@ -23,7 +23,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification GET PROGRAM', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[0]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[0]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'PROGRAM',
@@ -43,7 +43,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification POST REPORT', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[1]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[1]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'REPORT',
@@ -87,7 +87,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification PUT EVENT', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[2]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[2]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'EVENT',
@@ -128,7 +128,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification DELETE SUBSCRIPTION', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[3]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[3]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'SUBSCRIPTION',
@@ -151,7 +151,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification GET VEN', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[4]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[4]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'VEN',
@@ -185,7 +185,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification POST RESOURCE', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[5]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[5]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'RESOURCE',
@@ -213,7 +213,7 @@ describe('NOTIFICATION', function() {
     });
 
     it('should parse notification POST RESOURCE w/ missing field', function() {
-        const notification: Notification = notificationSchema.parse(data.notifications[6]) as Notification;
+        const notification: Notification = parseNotification.parse(data.notifications[6]) as Notification;
         // console.log(notification);
         assert.deepEqual(notification, {
             objectType: 'RESOURCE',
@@ -243,7 +243,7 @@ describe('NOTIFICATION', function() {
     it('should fail to parse notification w/ incorrect operation code', function() {
         let didFail = false;
         try {
-            const notification: Notification = notificationSchema.parse(data.BADnotifications[0]) as Notification;
+            const notification: Notification = parseNotification.parse(data.BADnotifications[0]) as Notification;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -263,7 +263,7 @@ describe('NOTIFICATION', function() {
     it('should fail to parse notification w/ missing operation code', function() {
         let didFail = false;
         try {
-            const notification: Notification = notificationSchema.parse(data.BADnotifications[1]) as Notification;
+            const notification: Notification = parseNotification.parse(data.BADnotifications[1]) as Notification;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -283,7 +283,7 @@ describe('NOTIFICATION', function() {
     it('should fail to parse notification w/ incorrect operation type', function() {
         let didFail = false;
         try {
-            const notification: Notification = notificationSchema.parse(data.BADnotifications[2]) as Notification;
+            const notification: Notification = parseNotification.parse(data.BADnotifications[2]) as Notification;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

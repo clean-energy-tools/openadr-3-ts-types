@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    Subscription, subscriptionSchema
+    Subscription, parseSubscription
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -28,7 +28,7 @@ describe('SUBSCRIPTION', function() {
 
 
     it('should parse subscription', function() {
-        const subscription: Subscription = subscriptionSchema.parse(data.subscriptions[0]) as Subscription;
+        const subscription: Subscription = parseSubscription.parse(data.subscriptions[0]) as Subscription;
         // console.log(subscription);
 
         assert.deepEqual(subscription, {
@@ -60,7 +60,7 @@ describe('SUBSCRIPTION', function() {
     });
 
     it('should parse subscription with extra stuff using .passthrough', function() {
-        const subscription: Subscription = subscriptionSchema.passthrough().parse(data.subscriptions[0]) as Subscription;
+        const subscription: Subscription = parseSubscription.passthrough().parse(data.subscriptions[0]) as Subscription;
         // console.log(subscription);
 
         assert.deepEqual(subscription, {
@@ -95,7 +95,7 @@ describe('SUBSCRIPTION', function() {
     it('should FAIL to parse subscription with extra stuff using .strict', function() {
         let didFail = false;
         try {
-            const subscription: Subscription = subscriptionSchema.strict().parse(data.subscriptions[0]) as Subscription;
+            const subscription: Subscription = parseSubscription.strict().parse(data.subscriptions[0]) as Subscription;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -114,7 +114,7 @@ describe('SUBSCRIPTION', function() {
     it('should fail to parse subscription with too-short clientName', function() {
         let didFail = false;
         try {
-            const subscription: Subscription = subscriptionSchema.passthrough().parse(data.subsTooShortTooLong[0]) as Subscription;
+            const subscription: Subscription = parseSubscription.passthrough().parse(data.subsTooShortTooLong[0]) as Subscription;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -136,7 +136,7 @@ describe('SUBSCRIPTION', function() {
     it('should fail to parse subscription with too-long clientName', function() {
         let didFail = false;
         try {
-            const subscription: Subscription = subscriptionSchema.passthrough().parse(data.subsTooShortTooLong[1]) as Subscription;
+            const subscription: Subscription = parseSubscription.passthrough().parse(data.subsTooShortTooLong[1]) as Subscription;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -156,7 +156,7 @@ describe('SUBSCRIPTION', function() {
     it('should fail to parse subscription with bad object types', function() {
         let didFail = false;
         try {
-            const subscription: Subscription = subscriptionSchema.passthrough().parse(data.subsBadObjects[0]) as Subscription;
+            const subscription: Subscription = parseSubscription.passthrough().parse(data.subsBadObjects[0]) as Subscription;
         } catch (err) {
             didFail = true;
             // console.log(util.inspect(err.issues));
@@ -216,7 +216,7 @@ describe('SUBSCRIPTION', function() {
     it('should fail to parse subscription with bad operation types', function() {
         let didFail = false;
         try {
-            const subscription: Subscription = subscriptionSchema.passthrough().parse(data.subsBadOperations[0]) as Subscription;
+            const subscription: Subscription = parseSubscription.passthrough().parse(data.subsBadOperations[0]) as Subscription;
         } catch (err) {
             didFail = true;
             // console.log(util.inspect(err.issues));

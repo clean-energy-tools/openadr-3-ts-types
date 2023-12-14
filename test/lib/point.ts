@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    Point, pointSchema
+    Point, parsePoint
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -28,56 +28,56 @@ describe('POINT', function() {
 
     it('should parse point', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[0]) as Point;
+        const point: Point = parsePoint.parse(data.points[0]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: 1, y: 1 });
     });
 
     it('should parse point w/ negative numbers', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[1]) as Point;
+        const point: Point = parsePoint.parse(data.points[1]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: -1, y: -1 });
     });
 
     it('should parse point w/ floating numbers', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[2]) as Point;
+        const point: Point = parsePoint.parse(data.points[2]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: 1.1, y: 2.2 });
     });
 
     it('should parse point w/ missing x', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[3]) as Point;
+        const point: Point = parsePoint.parse(data.points[3]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: null, y: 3 });
     });
 
     it('should parse point w/ missing y', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[4]) as Point;
+        const point: Point = parsePoint.parse(data.points[4]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: 4, y: null });
     });
 
     it('should parse point w/ both missing', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[5]) as Point;
+        const point: Point = parsePoint.parse(data.points[5]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: null, y: null });
     });
 
     it('should parse point w/ extra data not seen', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.parse(data.points[6]) as Point;
+        const point: Point = parsePoint.parse(data.points[6]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: 1, y: 2 });
     });
 
     it('should parse point w/ extra data seen w/ passthrough', function() {
         // console.log(data.intervals[0]);
-        const point: Point = pointSchema.passthrough().parse(data.points[6]) as Point;
+        const point: Point = parsePoint.passthrough().parse(data.points[6]) as Point;
         // console.log(point);
         assert.deepEqual(point, { x: 1, y: 2, extraData: 'one' } as any);
     });
@@ -86,7 +86,7 @@ describe('POINT', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const point: Point = pointSchema.strict().parse(data.points[6]) as Point;
+            const point: Point = parsePoint.strict().parse(data.points[6]) as Point;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -106,7 +106,7 @@ describe('POINT', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const point: Point = pointSchema.strict().parse(data.points[7]) as Point;
+            const point: Point = parsePoint.strict().parse(data.points[7]) as Point;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

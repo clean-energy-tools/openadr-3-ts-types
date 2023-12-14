@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    Problem, problemSchema
+    Problem, parseProblem
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -28,7 +28,7 @@ describe('PROBLEM', function() {
 
     it('should parse problem', function() {
         // console.log(data.problems[0]);
-        const problem: Problem = problemSchema.parse(data.problems[0]) as Problem;
+        const problem: Problem = parseProblem.parse(data.problems[0]) as Problem;
         // console.log(problem);
         assert.deepEqual(problem, {
             type: 'http://some.where.com',
@@ -43,7 +43,7 @@ describe('PROBLEM', function() {
         // console.log(data.problems[0]);
         let didFail = false;
         try {
-            const problem: Problem = problemSchema.parse(data.BADProblems[0]) as Problem;
+            const problem: Problem = parseProblem.parse(data.BADProblems[0]) as Problem;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -70,7 +70,7 @@ describe('PROBLEM', function() {
         // console.log(data.problems[0]);
         let didFail = false;
         try {
-            const problem: Problem = problemSchema.parse(data.BADProblems[1]) as Problem;
+            const problem: Problem = parseProblem.parse(data.BADProblems[1]) as Problem;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -97,7 +97,7 @@ describe('PROBLEM', function() {
         // console.log(data.problems[0]);
         let didFail = false;
         try {
-            const problem: Problem = problemSchema.parse(data.BADProblems[2]) as Problem;
+            const problem: Problem = parseProblem.parse(data.BADProblems[2]) as Problem;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -120,7 +120,7 @@ describe('PROBLEM', function() {
         // console.log(data.problems[0]);
         let didFail = false;
         try {
-            const problem: Problem = problemSchema.parse(data.BADProblems[3]) as Problem;
+            const problem: Problem = parseProblem.parse(data.BADProblems[3]) as Problem;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

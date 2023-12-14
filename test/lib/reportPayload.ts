@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    ReportPayloadDescriptor, reportPayloadDescriptorSchema
+    ReportPayloadDescriptor, parseReportPayloadDescriptor
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,7 +27,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[0]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[0]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -41,7 +41,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload w/o objectType', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[1]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[1]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -55,7 +55,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload w/o readingType', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[2]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[2]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -69,7 +69,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload w/o units', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[3]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[3]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -83,7 +83,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload w/o accuracy', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[4]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[4]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -97,7 +97,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload w/o confidence', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[5]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[5]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -111,7 +111,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse reportPayload w/o everything', function() {
         // console.log(data.intervals[0]);
-        const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.reportPayloadDescriptors[6]) as ReportPayloadDescriptor;
+        const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[6]) as ReportPayloadDescriptor;
         // console.log(reportPayload);
         assert.deepEqual(reportPayload, {
             objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
@@ -127,7 +127,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.BADreportPayloadDescriptors[0]) as ReportPayloadDescriptor;
+            const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[0]) as ReportPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -150,7 +150,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.BADreportPayloadDescriptors[1]) as ReportPayloadDescriptor;
+            const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[1]) as ReportPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -173,7 +173,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.BADreportPayloadDescriptors[2]) as ReportPayloadDescriptor;
+            const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[2]) as ReportPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -222,7 +222,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.BADreportPayloadDescriptors[3]) as ReportPayloadDescriptor;
+            const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[3]) as ReportPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -245,7 +245,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.BADreportPayloadDescriptors[4]) as ReportPayloadDescriptor;
+            const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[4]) as ReportPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -268,7 +268,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const reportPayload: ReportPayloadDescriptor = reportPayloadDescriptorSchema.parse(data.BADreportPayloadDescriptors[5]) as ReportPayloadDescriptor;
+            const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[5]) as ReportPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

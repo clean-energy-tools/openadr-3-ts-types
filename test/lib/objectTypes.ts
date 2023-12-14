@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    ObjectTypes, objectTypesSchema
+    ObjectTypes, parseObjectTypes
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,42 +27,42 @@ describe('OBJECT TYPES', function() {
 
     it('should parse objectType PROGRAM', function() {
         // console.log(data.intervals[0]);
-        const objectType: ObjectTypes = objectTypesSchema.parse(data.objectTypes[0]) as ObjectTypes;
+        const objectType: ObjectTypes = parseObjectTypes.parse(data.objectTypes[0]) as ObjectTypes;
         // console.log(objectType);
         assert.equal(objectType, 'PROGRAM');
     });
 
     it('should parse objectType EVENT', function() {
         // console.log(data.intervals[0]);
-        const objectType: ObjectTypes = objectTypesSchema.parse(data.objectTypes[1]) as ObjectTypes;
+        const objectType: ObjectTypes = parseObjectTypes.parse(data.objectTypes[1]) as ObjectTypes;
         // console.log(objectType);
         assert.equal(objectType, 'EVENT');
     });
 
     it('should parse objectType REPORT', function() {
         // console.log(data.intervals[0]);
-        const objectType: ObjectTypes = objectTypesSchema.parse(data.objectTypes[2]) as ObjectTypes;
+        const objectType: ObjectTypes = parseObjectTypes.parse(data.objectTypes[2]) as ObjectTypes;
         // console.log(objectType);
         assert.equal(objectType, 'REPORT');
     });
 
     it('should parse objectType SUBSCRIPTION', function() {
         // console.log(data.intervals[0]);
-        const objectType: ObjectTypes = objectTypesSchema.parse(data.objectTypes[3]) as ObjectTypes;
+        const objectType: ObjectTypes = parseObjectTypes.parse(data.objectTypes[3]) as ObjectTypes;
         // console.log(objectType);
         assert.equal(objectType, 'SUBSCRIPTION');
     });
 
     it('should parse objectType VEN', function() {
         // console.log(data.intervals[0]);
-        const objectType: ObjectTypes = objectTypesSchema.parse(data.objectTypes[4]) as ObjectTypes;
+        const objectType: ObjectTypes = parseObjectTypes.parse(data.objectTypes[4]) as ObjectTypes;
         // console.log(objectType);
         assert.equal(objectType, 'VEN');
     });
 
     it('should parse objectType RESOURCE', function() {
         // console.log(data.intervals[0]);
-        const objectType: ObjectTypes = objectTypesSchema.parse(data.objectTypes[5]) as ObjectTypes;
+        const objectType: ObjectTypes = parseObjectTypes.parse(data.objectTypes[5]) as ObjectTypes;
         // console.log(objectType);
         assert.equal(objectType, 'RESOURCE');
     });
@@ -71,7 +71,7 @@ describe('OBJECT TYPES', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectType: ObjectTypes = objectTypesSchema.parse(data.BADobjectTypes[0]) as ObjectTypes;
+            const objectType: ObjectTypes = parseObjectTypes.parse(data.BADobjectTypes[0]) as ObjectTypes;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -92,7 +92,7 @@ describe('OBJECT TYPES', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectType: ObjectTypes = objectTypesSchema.parse(data.BADobjectTypes[1]) as ObjectTypes;
+            const objectType: ObjectTypes = parseObjectTypes.parse(data.BADobjectTypes[1]) as ObjectTypes;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -113,7 +113,7 @@ describe('OBJECT TYPES', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectType: ObjectTypes = objectTypesSchema.parse(data.BADobjectTypes[2]) as ObjectTypes;
+            const objectType: ObjectTypes = parseObjectTypes.parse(data.BADobjectTypes[2]) as ObjectTypes;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

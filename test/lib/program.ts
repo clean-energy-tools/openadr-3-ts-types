@@ -9,7 +9,7 @@ export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
-import { Program, programSchema } from '../../package/dist/index.js';
+import { Program, parseProgram } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 describe('PROGRAM', function() {
@@ -24,7 +24,7 @@ describe('PROGRAM', function() {
     });
 
     it('should parse prog0', function() {
-        const prog0: Program = programSchema.parse(data.prog0[0]) as Program;
+        const prog0: Program = parseProgram.parse(data.prog0[0]) as Program;
         // console.log(prog0);
         assert.deepEqual(prog0, {
             programName: 'TEST-EXAMPLE-1',
@@ -51,7 +51,7 @@ describe('PROGRAM', function() {
     it('should fail to parse prog0 in strict mode', function() {
         let didFail = false;
         try {
-            const prog0: Program = programSchema.strict().parse(data.prog0[2]) as Program;
+            const prog0: Program = parseProgram.strict().parse(data.prog0[2]) as Program;
         } catch (err) {
             // console.log(err);
             didFail = true;
@@ -69,7 +69,7 @@ describe('PROGRAM', function() {
     });
 
     it('should parse prog0 with extra fields', function() {
-        const prog0: Program = programSchema.passthrough().parse(data.prog0[2]) as Program;
+        const prog0: Program = parseProgram.passthrough().parse(data.prog0[2]) as Program;
         // console.log(prog0);
         assert.deepEqual(prog0, {
             programName: 'TEST-EXAMPLE-passthrough',
@@ -95,7 +95,7 @@ describe('PROGRAM', function() {
     });
 
     it('should parse program with default values', function() {
-        const progDefaults: Program = programSchema.parse(data.prog0[1]) as Program;
+        const progDefaults: Program = parseProgram.parse(data.prog0[1]) as Program;
         // console.log(prog0);
         assert.deepEqual(progDefaults, {
             programName: 'TEST-EXAMPLE-defaults',
@@ -123,7 +123,7 @@ describe('PROGRAM', function() {
         let didFail = false;
         try {
             const badprog
-                = programSchema.parse(data.BADprog[0]);
+                = parseProgram.parse(data.BADprog[0]);
         } catch (err) {
             didFail = true;
             assert.deepEqual(err.issues, [
@@ -184,7 +184,7 @@ describe('PROGRAM', function() {
         let didFail = false;
         try {
             const badprog
-                = programSchema.parse(data.BADprog[1]);
+                = parseProgram.parse(data.BADprog[1]);
         } catch (err) {
             didFail = true;
             assert.deepEqual(err.issues, [
@@ -206,7 +206,7 @@ describe('PROGRAM', function() {
         let didFail = false;
         try {
             const badprog
-                = programSchema.parse(data.BADprog[2]);
+                = parseProgram.parse(data.BADprog[2]);
         } catch (err) {
             didFail = true;
             assert.deepEqual(err.issues, [

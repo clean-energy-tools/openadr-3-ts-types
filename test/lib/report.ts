@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    Report, reportSchema
+    Report, parseReport
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -26,7 +26,7 @@ describe('REPORT', function() {
     });
 
     it('should parse report', function() {
-        const report: Report = reportSchema.parse(data.reports[0]) as Report;
+        const report: Report = parseReport.parse(data.reports[0]) as Report;
         assert.deepEqual(report, {
             programID: '0',
             eventID: '0',
@@ -101,7 +101,7 @@ describe('REPORT', function() {
     });
 
     it('should parse report with passthrough', function() {
-        let report2: any = reportSchema.passthrough().parse(data.reports[0]) as Report;
+        let report2: any = parseReport.passthrough().parse(data.reports[0]) as Report;
         // console.log(report2);
         assert.deepEqual(report2, {
             // This field is in the data, and is not
@@ -184,7 +184,7 @@ describe('REPORT', function() {
     it('should fail to parse report with strict', function() {
         let didFail = false;
         try {
-            let report2: any = reportSchema.strict().parse(data.reports[0]) as Report;
+            let report2: any = parseReport.strict().parse(data.reports[0]) as Report;
         } catch (err) {
             // console.log(err);
             didFail = true;
@@ -201,7 +201,7 @@ describe('REPORT', function() {
     });
 
     it('should parse report with default values', function() {
-        let report2: any = reportSchema.parse(data.reports[2]) as Report;
+        let report2: any = parseReport.parse(data.reports[2]) as Report;
         // console.log(report2);
         assert.deepEqual(report2, {
             programID: '0',
@@ -270,7 +270,7 @@ describe('REPORT', function() {
         let didFail = false;
         try {
             const badprog
-                = reportSchema.parse(data.BADreports[0]);
+                = parseReport.parse(data.BADreports[0]);
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -333,7 +333,7 @@ describe('REPORT', function() {
         let didFail = false;
         try {
             const badprog
-                = reportSchema.parse(data.BADreports[1]);
+                = parseReport.parse(data.BADreports[1]);
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -356,7 +356,7 @@ describe('REPORT', function() {
         let didFail = false;
         try {
             const badprog
-                = reportSchema.parse(data.BADreports[2]);
+                = parseReport.parse(data.BADreports[2]);
         } catch (err) {
             didFail = true;
             // console.log(err);

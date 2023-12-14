@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    ObjectID, objectIDSchema
+    ObjectID, parseObjectID
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,28 +27,28 @@ describe('OBJECT ID', function() {
 
     it('should parse objectID 0', function() {
         // console.log(data.intervals[0]);
-        const objectID: ObjectID = objectIDSchema.parse(data.objectIDs[0]) as ObjectID;
+        const objectID: ObjectID = parseObjectID.parse(data.objectIDs[0]) as ObjectID;
         // console.log(objectID);
         assert.equal(objectID, 'aaaaaaaabb');
     });
 
     it('should parse objectID 1', function() {
         // console.log(data.objectIDs[1]);
-        const objectID: ObjectID = objectIDSchema.parse(data.objectIDs[1]) as ObjectID;
+        const objectID: ObjectID = parseObjectID.parse(data.objectIDs[1]) as ObjectID;
         // console.log(objectID);
         assert.equal(objectID, '00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000');
     });
 
     it('should parse objectID 2', function() {
         // console.log(data.intervals[0]);
-        const objectID: ObjectID = objectIDSchema.parse(data.objectIDs[2]) as ObjectID;
+        const objectID: ObjectID = parseObjectID.parse(data.objectIDs[2]) as ObjectID;
         // console.log(objectID);
         assert.equal(objectID, '6538ff045a8d0fc3c4038c26');
     });
 
     it('should parse objectID 3', function() {
         // console.log(data.intervals[0]);
-        const objectID: ObjectID = objectIDSchema.parse(data.objectIDs[3]) as ObjectID;
+        const objectID: ObjectID = parseObjectID.parse(data.objectIDs[3]) as ObjectID;
         // console.log(objectID);
         assert.equal(objectID, 'f782f78c-9526-11ee-b965-ef8f2248395a');
     });
@@ -57,7 +57,7 @@ describe('OBJECT ID', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectID: ObjectID = objectIDSchema.parse(data.BADObjectIDs[0]) as ObjectID;
+            const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[0]) as ObjectID;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -77,7 +77,7 @@ describe('OBJECT ID', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectID: ObjectID = objectIDSchema.parse(data.BADObjectIDs[1]) as ObjectID;
+            const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[1]) as ObjectID;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -100,7 +100,7 @@ describe('OBJECT ID', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectID: ObjectID = objectIDSchema.parse(data.BADObjectIDs[2]) as ObjectID;
+            const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[2]) as ObjectID;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -123,7 +123,7 @@ describe('OBJECT ID', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectID: ObjectID = objectIDSchema.parse(data.BADObjectIDs[3]) as ObjectID;
+            const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[3]) as ObjectID;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -146,7 +146,7 @@ describe('OBJECT ID', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const objectID: ObjectID = objectIDSchema.parse(data.BADObjectIDs[4]) as ObjectID;
+            const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[4]) as ObjectID;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

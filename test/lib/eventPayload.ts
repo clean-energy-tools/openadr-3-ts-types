@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    EventPayloadDescriptor, eventPayloadDescriptorSchema
+    EventPayloadDescriptor, parseEventPayloadDescriptor
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,7 +27,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.parse(data.eventPayloadDescriptors[0]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[0]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -39,7 +39,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload w/o objectType', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.parse(data.eventPayloadDescriptors[1]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[1]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -51,7 +51,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload w/o units', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.parse(data.eventPayloadDescriptors[2]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[2]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -63,7 +63,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload w/o currency', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.parse(data.eventPayloadDescriptors[3]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[3]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -75,7 +75,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload w/o objectType, units, currency', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.parse(data.eventPayloadDescriptors[4]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[4]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -87,7 +87,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload w/ extra data not seen', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -99,7 +99,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
     it('should parse eventPayload w/ extra data seen w/ passthrough', function() {
         // console.log(data.intervals[0]);
-        const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.passthrough().parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
+        const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.passthrough().parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
         // console.log(eventPayload);
         assert.deepEqual(eventPayload, {
             objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
@@ -114,7 +114,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.strict().parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
+            const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.strict().parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -134,7 +134,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.strict().parse(data.BADeventPayloadDescriptors[0]) as EventPayloadDescriptor;
+            const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.strict().parse(data.BADeventPayloadDescriptors[0]) as EventPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -157,7 +157,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const eventPayload: EventPayloadDescriptor = eventPayloadDescriptorSchema.strict().parse(data.BADeventPayloadDescriptors[1]) as EventPayloadDescriptor;
+            const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.strict().parse(data.BADeventPayloadDescriptors[1]) as EventPayloadDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

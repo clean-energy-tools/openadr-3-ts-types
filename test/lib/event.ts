@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    Event, eventSchema
+    Event, parseEvent
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,7 +27,7 @@ describe('EVENT', function() {
     });
 
     it('should parse event', function() {
-        const event: Event = eventSchema.parse(data.events[0]) as Event;
+        const event: Event = parseEvent.parse(data.events[0]) as Event;
         // console.log(event);
         assert.deepEqual(event, {
             programID: '0',
@@ -70,7 +70,7 @@ describe('EVENT', function() {
     });
 
     it('should parse event with extra fields and passthrough', function() {
-        const event: Event = eventSchema.passthrough().parse(data.events[0]) as Event;
+        const event: Event = parseEvent.passthrough().parse(data.events[0]) as Event;
         // console.log(event);
         assert.deepEqual(event, {
             programID: '0',
@@ -116,7 +116,7 @@ describe('EVENT', function() {
     it('should fail to parse event with extra fields and strict', function() {
         let didFail = false;
         try {
-            const event: Event = eventSchema.strict().parse(data.events[0]) as Event;
+            const event: Event = parseEvent.strict().parse(data.events[0]) as Event;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -135,7 +135,7 @@ describe('EVENT', function() {
     });
 
     it('should parse event with default values', function() {
-        const event: Event = eventSchema.parse(data.eventsDefaults[0]) as Event;
+        const event: Event = parseEvent.parse(data.eventsDefaults[0]) as Event;
         // console.log(event);
         assert.deepEqual(event, {
             programID: '0',
@@ -162,7 +162,7 @@ describe('EVENT', function() {
     it('should fail to parse event wtih bad values', function() {
         let didFail = false;
         try {
-            const event: Event = eventSchema.parse(data.eventsBadValues[0]) as Event;
+            const event: Event = parseEvent.parse(data.eventsBadValues[0]) as Event;
         } catch (err) {
             didFail = true;
             // console.log(err);

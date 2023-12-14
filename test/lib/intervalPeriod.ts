@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    IntervalPeriod, intervalPeriodSchema
+    IntervalPeriod, parseIntervalPeriod
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,7 +27,7 @@ describe('INTERVAL PERIOD', function() {
 
     it('should parse intervalPeriod', function() {
         // console.log(data.intervals[0]);
-        const intervalPeriod: IntervalPeriod = intervalPeriodSchema.parse(data.intervalPeriod[0]) as IntervalPeriod;
+        const intervalPeriod: IntervalPeriod = parseIntervalPeriod.parse(data.intervalPeriod[0]) as IntervalPeriod;
         // console.log(intervalPeriod);
         assert.deepEqual(intervalPeriod, {
             start: '2023-03-26T18:30:28.829Z',
@@ -38,7 +38,7 @@ describe('INTERVAL PERIOD', function() {
 
     it('should parse intervalPeriod w/ randomizeStart', function() {
         // console.log(data.intervals[0]);
-        const intervalPeriod: IntervalPeriod = intervalPeriodSchema.parse(data.intervalPeriod[1]) as IntervalPeriod;
+        const intervalPeriod: IntervalPeriod = parseIntervalPeriod.parse(data.intervalPeriod[1]) as IntervalPeriod;
         // console.log(intervalPeriod);
         assert.deepEqual(intervalPeriod, {
             start: '2023-03-26T18:30:28.829Z',
@@ -49,7 +49,7 @@ describe('INTERVAL PERIOD', function() {
 
     it('should parse intervalPeriod w/ negative durations', function() {
         // console.log(data.intervals[0]);
-        const intervalPeriod: IntervalPeriod = intervalPeriodSchema.parse(data.intervalPeriod[2]) as IntervalPeriod;
+        const intervalPeriod: IntervalPeriod = parseIntervalPeriod.parse(data.intervalPeriod[2]) as IntervalPeriod;
         // console.log(intervalPeriod);
         assert.deepEqual(intervalPeriod, {
             start: '2023-03-26T18:30:28.829Z',
@@ -60,7 +60,7 @@ describe('INTERVAL PERIOD', function() {
 
     it('should parse intervalPeriod w/ extra data but not see it', function() {
         // console.log(data.intervals[0]);
-        const intervalPeriod: IntervalPeriod = intervalPeriodSchema.parse(data.intervalPeriod[1]) as IntervalPeriod;
+        const intervalPeriod: IntervalPeriod = parseIntervalPeriod.parse(data.intervalPeriod[1]) as IntervalPeriod;
         // console.log(intervalPeriod);
         assert.deepEqual(intervalPeriod, {
             start: '2023-03-26T18:30:28.829Z',
@@ -71,7 +71,7 @@ describe('INTERVAL PERIOD', function() {
 
     it('should parse intervalPeriod w/ extra data and see it with passthrough', function() {
         // console.log(data.intervals[0]);
-        const intervalPeriod: IntervalPeriod = intervalPeriodSchema.passthrough().parse(data.intervalPeriod[3]) as IntervalPeriod;
+        const intervalPeriod: IntervalPeriod = parseIntervalPeriod.passthrough().parse(data.intervalPeriod[3]) as IntervalPeriod;
         // console.log(intervalPeriod);
         assert.deepEqual(intervalPeriod, {
             start: '2023-03-26T18:30:28.829Z',
@@ -85,7 +85,7 @@ describe('INTERVAL PERIOD', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const intervalPeriod: IntervalPeriod = intervalPeriodSchema.strict().parse(data.intervalPeriod[3]) as IntervalPeriod;
+            const intervalPeriod: IntervalPeriod = parseIntervalPeriod.strict().parse(data.intervalPeriod[3]) as IntervalPeriod;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -105,7 +105,7 @@ describe('INTERVAL PERIOD', function() {
         // console.log(data.intervals[0]);
         let didFail = false;
         try {
-            const intervalPeriod: IntervalPeriod = intervalPeriodSchema.parse(data.BADintervalPeriod[0]) as IntervalPeriod;
+            const intervalPeriod: IntervalPeriod = parseIntervalPeriod.parse(data.BADintervalPeriod[0]) as IntervalPeriod;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

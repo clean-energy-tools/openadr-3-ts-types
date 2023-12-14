@@ -8,9 +8,7 @@ export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
-import {
-    Ven, venSchema
-} from '../../package/dist/index.js';
+import { Ven, parseVen } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
 
@@ -26,7 +24,7 @@ describe('VEN', function() {
     });
 
     it('should parse ven', function() {
-        const ven: Ven = venSchema.parse(data.vens[0]) as Ven;
+        const ven: Ven = parseVen.parse(data.vens[0]) as Ven;
         // console.log(ven);
         assert.deepEqual(ven, {
             venName: 'con-ed-lcn-Liberty-Green',
@@ -56,7 +54,7 @@ describe('VEN', function() {
     });
 
     it('should parse ven with resources', function() {
-        const ven: Ven = venSchema.parse(data.vens[1]) as Ven;
+        const ven: Ven = parseVen.parse(data.vens[1]) as Ven;
         // console.log(ven);
         assert.deepEqual(ven, {
             venName: 'con-ed-lcn-Second-Green',
@@ -137,7 +135,7 @@ describe('VEN', function() {
     });
 
     it('should parse ven with resources and extra data', function() {
-        const ven: Ven = venSchema.parse(data.vens[2]) as Ven;
+        const ven: Ven = parseVen.parse(data.vens[2]) as Ven;
         // console.log(ven);
         assert.deepEqual(ven, {
             venName: 'con-ed-lcn-Third-Green',
@@ -218,7 +216,7 @@ describe('VEN', function() {
     });
 
     it('should parse ven with resources and extra data and passthrough', function() {
-        const ven: Ven = venSchema.passthrough().parse(data.vens[2]) as Ven;
+        const ven: Ven = parseVen.passthrough().parse(data.vens[2]) as Ven;
         // console.log(ven);
         assert.deepEqual(ven, {
             venName: 'con-ed-lcn-Third-Green',
@@ -312,7 +310,7 @@ describe('VEN', function() {
         let didFail = false;
         let ven: Ven;
         try {
-            ven = venSchema.strict().parse(data.vens[2]) as Ven;
+            ven = parseVen.strict().parse(data.vens[2]) as Ven;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -332,7 +330,7 @@ describe('VEN', function() {
         let didFail = false;
         let ven: Ven;
         try {
-            ven = venSchema.parse(data.BADven[0]) as Ven;
+            ven = parseVen.parse(data.BADven[0]) as Ven;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -382,7 +380,7 @@ describe('VEN', function() {
         let didFail = false;
         let ven: Ven;
         try {
-            ven = venSchema.parse(data.BADven[1]) as Ven;
+            ven = parseVen.parse(data.BADven[1]) as Ven;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -407,7 +405,7 @@ describe('VEN', function() {
         let didFail = false;
         let ven: Ven;
         try {
-            ven = venSchema.parse(data.BADven[2]) as Ven;
+            ven = parseVen.parse(data.BADven[2]) as Ven;
         } catch (err) {
             didFail = true;
             // console.log(err);

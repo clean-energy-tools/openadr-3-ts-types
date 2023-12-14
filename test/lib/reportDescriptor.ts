@@ -9,7 +9,7 @@ export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
-import { ReportDescriptor, reportDescriptorSchema } from '../../package/dist/index.js';
+import { ReportDescriptor, parseReportDescriptor } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 
@@ -25,7 +25,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[0]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[0]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -46,7 +46,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing readingType', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[1]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[1]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -67,7 +67,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing units', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[2]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[2]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -88,7 +88,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing targets', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[3]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[3]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -105,7 +105,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing aggregate', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[4]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[4]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -126,7 +126,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing startInterval', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[5]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[5]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -147,7 +147,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing numIntervals', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[6]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[6]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -168,7 +168,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing historical', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[7]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[7]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -189,7 +189,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing frequency', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[8]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[8]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -210,7 +210,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing repeat', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[9]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[9]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -231,7 +231,7 @@ describe('REPORT DESCRIPTOR', function() {
     });
 
     it('should parse reportDescriptor missing many fields', function() {
-        const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.reportDescriptors[10]) as ReportDescriptor;
+        const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.reportDescriptors[10]) as ReportDescriptor;
         // console.log(reportDescriptor);
         assert.deepEqual(reportDescriptor, {
             payloadType: 'USAGE',
@@ -250,7 +250,7 @@ describe('REPORT DESCRIPTOR', function() {
     it('should fail to parse reportDescriptor with short payload type name', function() {
         let didFail = false;
         try {
-            const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.BADreportDescriptors[0]) as ReportDescriptor;
+            const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[0]) as ReportDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -272,7 +272,7 @@ describe('REPORT DESCRIPTOR', function() {
     it('should fail to parse reportDescriptor with long payload type name', function() {
         let didFail = false;
         try {
-            const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.BADreportDescriptors[1]) as ReportDescriptor;
+            const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[1]) as ReportDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -294,7 +294,7 @@ describe('REPORT DESCRIPTOR', function() {
     it('should fail to parse reportDescriptor with missing payload type name', function() {
         let didFail = false;
         try {
-            const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.BADreportDescriptors[2]) as ReportDescriptor;
+            const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[2]) as ReportDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -314,7 +314,7 @@ describe('REPORT DESCRIPTOR', function() {
     it('should fail to parse reportDescriptor with bad values', function() {
         let didFail = false;
         try {
-            const reportDescriptor: ReportDescriptor = reportDescriptorSchema.parse(data.BADreportDescriptors[3]) as ReportDescriptor;
+            const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[3]) as ReportDescriptor;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

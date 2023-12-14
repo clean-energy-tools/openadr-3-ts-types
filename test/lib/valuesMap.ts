@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    ValuesMap, valuesMapSchema
+    ValuesMap, parseValuesMap
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -28,7 +28,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap 0 #1', function() {
         // console.log(data.valuesMap0[0]);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMap0[0]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMap0[0]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'FOO',
@@ -38,7 +38,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap 0 #2', function() {
         // console.log(data.valuesMap0[0]);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMap0[1]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMap0[1]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'Points',
@@ -48,7 +48,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap numbers', function() {
         // console.log(data.valuesMapAllTypes);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapAllTypes[0]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapAllTypes[0]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'numbers',
@@ -58,7 +58,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap integers', function() {
         // console.log(data.valuesMapAllTypes);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapAllTypes[1]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapAllTypes[1]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'integers',
@@ -68,7 +68,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap strings', function() {
         // console.log(data.valuesMapAllTypes);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapAllTypes[2]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapAllTypes[2]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'strings',
@@ -78,7 +78,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap booleans', function() {
         // console.log(data.valuesMapAllTypes);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapAllTypes[3]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapAllTypes[3]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'booleans',
@@ -88,7 +88,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap points', function() {
         // console.log(data.valuesMapAllTypes);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapAllTypes[4]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapAllTypes[4]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'points',
@@ -103,7 +103,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap w/ extra data not seen', function() {
         // console.log(data.valuesMapExtraData);
-        const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapExtraData[0]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapExtraData[0]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'extra1',
@@ -113,7 +113,7 @@ describe('VALUES MAP', function() {
 
     it('should parse valuesMap w/ extra data seen with passthrough', function() {
         // console.log(data.valuesMapExtraData);
-        const valuesMap: ValuesMap = valuesMapSchema.passthrough().parse(data.valuesMapExtraData[0]) as ValuesMap;
+        const valuesMap: ValuesMap = parseValuesMap.passthrough().parse(data.valuesMapExtraData[0]) as ValuesMap;
         // console.log(valuesMap);
         assert.deepEqual(valuesMap, {
             type: 'extra1',
@@ -126,7 +126,7 @@ describe('VALUES MAP', function() {
         // console.log(data.valuesMapExtraData);
         let didFail = false;
         try {
-            const valuesMap: ValuesMap = valuesMapSchema.strict().parse(data.valuesMapExtraData[0]) as ValuesMap;
+            const valuesMap: ValuesMap = parseValuesMap.strict().parse(data.valuesMapExtraData[0]) as ValuesMap;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -146,7 +146,7 @@ describe('VALUES MAP', function() {
         // console.log(data.valuesMapExtraData);
         let didFail = false;
         try {
-            const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapShortType[0]) as ValuesMap;
+            const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapShortType[0]) as ValuesMap;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);
@@ -169,7 +169,7 @@ describe('VALUES MAP', function() {
         // console.log(data.valuesMapExtraData);
         let didFail = false;
         try {
-            const valuesMap: ValuesMap = valuesMapSchema.parse(data.valuesMapLongType[0]) as ValuesMap;
+            const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapLongType[0]) as ValuesMap;
         } catch (err) {
             didFail = true;
             // console.log(err.issues);

@@ -9,7 +9,7 @@ export const __dirname = path.dirname(__filename);
 
 import { promises as fsp } from 'node:fs';
 import {
-    Resource, resourceSchema
+    Resource, parseResource
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
@@ -27,7 +27,7 @@ describe('RESOURCE', function() {
     });
 
     it('should parse resource', function() {
-        const resource: Resource = resourceSchema.parse(data.resources[0]) as Resource;
+        const resource: Resource = parseResource.parse(data.resources[0]) as Resource;
         // console.log(resource);
         assert.deepEqual(resource, {
             resourceName: 'evse-green-1',
@@ -49,7 +49,7 @@ describe('RESOURCE', function() {
     });
 
     it('should parse resource not see extra fields no passthrough', function() {
-        const resource: Resource = resourceSchema.parse(data.resources[1]) as Resource;
+        const resource: Resource = parseResource.parse(data.resources[1]) as Resource;
         // console.log(resource);
         assert.deepEqual(resource, {
             resourceName: 'evse-green-2-extra-data',
@@ -71,7 +71,7 @@ describe('RESOURCE', function() {
     });
 
     it('should parse resource see extra fields passthrough', function() {
-        const resource: Resource = resourceSchema.passthrough().parse(data.resources[1]) as Resource;
+        const resource: Resource = parseResource.passthrough().parse(data.resources[1]) as Resource;
         // console.log(resource);
         assert.deepEqual(resource, {
             resourceName: 'evse-green-2-extra-data',
@@ -96,7 +96,7 @@ describe('RESOURCE', function() {
     it('should fail to parse resource strict', function() {
         let didFail = false;
         try {
-            const resource: Resource = resourceSchema.strict().parse(data.resources[1]) as Resource;
+            const resource: Resource = parseResource.strict().parse(data.resources[1]) as Resource;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -116,7 +116,7 @@ describe('RESOURCE', function() {
     });
 
     it('should parse resource supply default for missing fields', function() {
-        const resource: Resource = resourceSchema.parse(data.resources[2]) as Resource;
+        const resource: Resource = parseResource.parse(data.resources[2]) as Resource;
         // console.log(resource);
         assert.deepEqual(resource, {
             resourceName: 'evse-green-3-missing',
@@ -128,7 +128,7 @@ describe('RESOURCE', function() {
     it('should fail to parse resource with bad values', function() {
         let didFail = false;
         try {
-            const resource: Resource = resourceSchema.parse(data.BADresources[0]) as Resource;
+            const resource: Resource = parseResource.parse(data.BADresources[0]) as Resource;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -168,7 +168,7 @@ describe('RESOURCE', function() {
     it('should fail to parse resourceName too short', function() {
         let didFail = false;
         try {
-            const resource: Resource = resourceSchema.parse(data.BADresources[1]) as Resource;
+            const resource: Resource = parseResource.parse(data.BADresources[1]) as Resource;
         } catch (err) {
             didFail = true;
             // console.log(err);
@@ -193,7 +193,7 @@ describe('RESOURCE', function() {
     it('should fail to parse resourceName extra-long', function() {
         let didFail = false;
         try {
-            const resource: Resource = resourceSchema.parse(data.BADresources[2]) as Resource;
+            const resource: Resource = parseResource.parse(data.BADresources[2]) as Resource;
         } catch (err) {
             didFail = true;
             // console.log(err);

@@ -30,11 +30,11 @@ const event: Event = parseEvent.parse({
 });
 ```
 
-The first use of `OADR3.Event` is to declare the type for `event`.  The second use is to inspect an object, using the `parse` function, and to return the object.
+The type `Event` declares the type for `event`.  This contains all the attributes of the OpenADR Event object.  Every attribute contains the documentation from the OpenADR specification, along with JSDoc annotations showing the allowed values and data types.
 
-The second object is a Zod parser/validator.  The other Zod functions are available for use, in addition to the `parse` function used here.
+The object, `parseEvent`, is the Zod schema for Event.  it is used to validate an object, using the `parse` function, returning the object.  This function has the return type Event.  The other Zod functions are available for use, in addition to the `parse` function used here.
 
-For example, by default Zod strips out any additional data fields.  In some cases it is desirable to keep those fields.  The OpenADR spec explicitly encourages that OpenADR implementations add additional fields if required for a given project.
+For example, by default Zod's `parse` function strips out any additional data fields.  In some cases it is desirable to keep any extra data fields.  The OpenADR spec explicitly encourages that OpenADR implementations add additional fields if required for a given project, for example.  In Zod, the `.passthrough()` function maintains any extra data.
 
 ```js
 const event: Event = parseEvent
@@ -43,19 +43,19 @@ const event: Event = parseEvent
 });
 ```
 
-The Zod `passthrough` function allows additional fields to end up in the validated object.
+Other Zod functions like `.strict()` are available in the same way.
 
 ## Using this in an OpenADR 3 VTN
 
-The OpenADR _Virtual Top Node_ is what the REST world would call a _resource/information server_.  In practice that means it implements an HTTP listener, where the OpenADR endpoints invoke handler functions.
+The OpenADR _Virtual Top Node_ is what the REST world would call a _resource/information server_.  In practice that means it implements an HTTP listener, where the OpenADR endpoints invoke OpenADR handler functions.
 
 This means an HTTP request body will contain JSON requiring validation.  For example, the POST handler on `/events` requests creation of a new Event in the VTN.  The handler function might look like:
 
 ```js
 export async function createEvent(req, res) {
-    let event: OADR3.Event;
+    let event: Event;
     try {
-        event = OADR3.Event
+        event = parseEvent
             .passthrough().parse(req.body);
     } catch (err) {
         // determine correct status code
@@ -74,20 +74,20 @@ The incoming data is parsed and validated.  If that fails, the error is caught, 
 
 ## Using this in an OpenADR VEN
 
-The OpenADR _Virtual End Node_ is a client to the VTN.  Its focus is on making requests of the VTN, and receiving notifications from the VTN.  Therefore, the goal is make an HTTP request to the VTN using prevalidated data.
+The OpenADR _Virtual End Node_ is a client to the VTN.  Its focus is on making requests of the VTN, and receiving notifications from the VTN.  Therefore, the goal is make an HTTP request to the VTN using validated data.
 
 For example, using the `got` package to create a new Event looks like:
 
 ```js
-    const VTNURL = new URL('https://...');
-    VTNURL.pathname = path.join(
-        'path', 'to', 'openadr', 'events');
+const VTNURL = new URL('https://...');
+VTNURL.pathname = path.join(
+    'path', 'to', 'openadr', 'events');
 
-    const ret = await got.post(VTNURL.href, {
-        json: OADR3.Event.passthrough().parse({
-            // event object
-        })
-    });
+const ret = await got.post(VTNURL.href, {
+    json: parseEvent.passthrough().parse({
+        // event object
+    })
+});
 ```
 
 # Implementing private OpenADR extensions

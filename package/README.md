@@ -1,13 +1,5 @@
 # openadr-3-ts-types
-TypeScript validators (Zod) and types for use with OpenADR v3.
-
-The code is derived from the OpenAPI spec for OpenADR v3 using the [`openapi-to-zod
-`](https://www.npmjs.com/package/openapi-to-zod) package.
-
-Each schema object defined by OpenAPI has a name starting with a lower-case letter, such as `event` 
-.  In this package those names are changed to start with an upper-case letter, such as `Event`.
-
-For each schema object, two things are available.  One is a Zod parser/validator whose purpose is validating whether a data object matches the object schema.  The second is a type useful in TypeScript.  Both of these have the same name.
+TypeScript validators (Zod) and type declarations for use with OpenADR v3.  These are derived from the OpenAPI spec for OpenADR v3.  Together they provide data types and data validation for implementing OpenADR v3 applications on the Node.js platform, using TypeScript.
 
 # Installation
 
@@ -18,12 +10,22 @@ bun add openadr-3-ts-types             # bun
 pnpm add openadr-3-ts-types            # pnpm
 ```
 
+# Overview
+
+The package exports two types of objects: type declarations, and Zod schema objects.
+
+The base name for each is the OpenADR schema item as defined in the OpenAPI specification.  Each of these names start with a lower-case letter, such as `event`.
+
+For type names, the base name is changed to start with an upper-case letter, such as `Event`.  This is a normal TypeScript type declaration, and includes JSDoc annotations for extra metadata.
+
+FOr Zod schema objects, the base name is changed to the format `parseTypeName`, such as `parseEvent`.  This is a normal Zod schema object.  The Zod model is to "parse" an unknown object, using the `parseTypeName.parse` function, validating that the fields conform to the specification, producing an object with a known data type.
+
 # USAGE
 
 ```js
-import * as OADR3 from 'openadr-3-ts-types';
+import { Event, parseEvent } from 'openadr-3-ts-types';
 
-const event: OADR3.Event = OADR3.Event.parse({
+const event: Event = parseEvent.parse({
     // OpenADR 3 Event object
 });
 ```
@@ -35,7 +37,7 @@ The second object is a Zod parser/validator.  The other Zod functions are availa
 For example, by default Zod strips out any additional data fields.  In some cases it is desirable to keep those fields.  The OpenADR spec explicitly encourages that OpenADR implementations add additional fields if required for a given project.
 
 ```js
-const event: OADR3.Event = OADR3.Event
+const event: Event = parseEvent
         .passthrough().parse({
     // EXTENDED OpenADR 3 Event object
 });
@@ -123,6 +125,8 @@ You must enable `strict` mode in the TypeScript compiler.  This `tsconfig.json` 
 # Resources
 
 GitHub: https://github.com/robogeek/openadr-3-ts-types
+
+npm Registry: https://npmjs.com/package/openadr-3-ts-types
 
 Zod: https://zod.dev/
 

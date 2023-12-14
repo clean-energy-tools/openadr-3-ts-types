@@ -1,78 +1,89 @@
-import { z } from 'zod';
 
-import DateTime from './zod/zod-dateTime.js';
-export { default as DateTime } from './zod/zod-dateTime.js';
-export type DateTime = z.infer<typeof DateTime>;
+// export * from './types.js';
+// export * from './zod-types.js';
 
-import Duration from './zod/zod-duration.js';
-export { default as Duration } from './zod/zod-duration.js';
-export type Duration = z.infer<typeof Duration>;
+// export * from './codegen/openAdRSchemas.js';
+// export * from './codegen/openAdRSchemas-zod.js';
+export * from './codegen/openadr3ApiComponents.js';
 
-import Event from './zod/zod-event.js';
-export { default as Event } from './zod/zod-event.js';
-export type Event = z.infer<typeof Event>;
+export {
+    DateTime, Duration,
+    Event, EventPayloadDescriptor,
+    Interval, IntervalPeriod,
+    Notification,
+    ObjectID, ObjectTypes,
+    Point, Problem, Program,
+    Report, ReportDescriptor, ReportPayloadDescriptor, Resource,
+    Subscription,
+    ValuesMap, Ven
+} from './codegen/openADRSchemas.js';
 
-import EventPayloadDescriptor from './zod/zod-eventPayloadDescriptor.js';
-export { default as EventPayloadDescriptor } from './zod/zod-eventPayloadDescriptor.js';
-export type EventPayloadDescriptor = z.infer<typeof EventPayloadDescriptor>;
+export { default as parseDateTime } from './zod/zod-dateTime.js';
+export { default as parseDuration } from './zod/zod-duration.js';
+export { default as parseEvent } from './zod/zod-event.js';
+export { default as parseEventPayloadDescriptor } from './zod/zod-eventPayloadDescriptor.js';
+export { default as parseInterval } from './zod/zod-interval.js';
+export { default as parseIntervalPeriod } from './zod/zod-intervalPeriod.js';
+export { default as parseNotification } from './zod/zod-notification.js';
+export { default as parseObjectID } from './zod/zod-objectID.js';
+export { default as parseObjectTypes } from './zod/zod-objectTypes.js';
+export { default as parsePoint } from './zod/zod-point.js';
+export { default as parseProblem } from './zod/zod-problem.js';
+export { default as parseProgram } from './zod/zod-program.js';
+export { default as parseReport } from './zod/zod-report.js';
+export { default as parseReportDescriptor } from './zod/zod-reportDescriptor.js';
+export { default as parseReportPayloadDescriptor } from './zod/zod-reportPayloadDescriptor.js';
+export { default as parseResource } from './zod/zod-resource.js';
+export { default as parseSubscription } from './zod/zod-subscription.js';
+export { default as parseValuesMap } from './zod/zod-valuesMap.js';
+export { default as parseVen } from './zod/zod-ven.js';
 
-import Interval from './zod/zod-interval.js';
-export { default as Interval } from './zod/zod-interval.js';
-export type Interval = z.infer<typeof Interval>;
+// These linex are for inspecting the type as understood by Zod.
+// Uncomment the lines, fixing up a declaration for the type
+// you want to inspect.  Then, in Visual Studio Code, hover the
+// mouse over the `zodTypeName` variable, and a popup appears
+// showing the type.
 
-import IntervalPeriod from './zod/zod-intervalPeriod.js';
-export { default as IntervalPeriod } from './zod/zod-intervalPeriod.js';
-export type IntervalPeriod = z.infer<typeof IntervalPeriod>;
+// import { z } from 'zod';
 
-import Notification from './zod/zod-notification.js';
-export { default as Notification } from './zod/zod-notification.js';
-export type Notification = z.infer<typeof Notification>;
+// import { default as parseEvent } from './zod/zod-event.js';
+// type zodEvent = z.infer<typeof parseEvent>;
 
-import ObjectID from './zod/zod-objectID.js';
-export { default as ObjectID } from './zod/zod-objectID.js';
-export type ObjectID = z.infer<typeof ObjectID>;
+// This section supports using './codegen/openADRSchemas-zod.js'
+// as the source for Zod schema's.  That file can be generated
+// using `ts-to-zod` from  './codegen/openADRSchemas.js'.
+//
+// In that case each schema object has the name `typeNameSchema`
+// but we want to export `parseTypeName` instead.
+//
+// The fatal problem with these schema's is that default values
+// for nested Zod schema's are not properly handled. 
 
-import ObjectTypes from './zod/zod-objectTypes.js';
-export { default as ObjectTypes } from './zod/zod-objectTypes.js';
-export type ObjectTypes = z.infer<typeof ObjectTypes>;
+// export {
+//     dateTimeSchema as parseDateTime,
+//     durationSchema as parseDuration,
+//     eventSchema as parseEvent,
+//     eventPayloadDescriptorSchema as parseEventPayloadDescriptor,
 
-import Point from './zod/zod-point.js';
-export { default as Point } from './zod/zod-point.js';
-export type Point = z.infer<typeof Point>;
+//     intervalPeriodSchema as parseIntervalPeriod,
+//     intervalSchema as parseInterval,
 
-import Problem from './zod/zod-problem.js';
-export { default as Problem } from './zod/zod-problem.js';
-export type Problem = z.infer<typeof Problem>;
+//     notificationSchema as parseNotification,
 
-import Program from './zod/zod-program.js';
-export { default as Program } from './zod/zod-program.js';
-export type Program = z.infer<typeof Program>;
+//     objectIDSchema as parseObjectID,
+//     objectTypesSchema as parseObjectTypes,
 
-import Report from './zod/zod-report.js';
-export { default as Report } from './zod/zod-report.js';
-export type Report = z.infer<typeof Report>;
+//     pointSchema as parsePoint,
+//     problemSchema as parseProblem,
+//     programSchema as parseProgram,
 
-import ReportDescriptor from './zod/zod-reportDescriptor.js';
-export { default as ReportDescriptor } from './zod/zod-reportDescriptor.js';
-export type ReportDescriptor = z.infer<typeof ReportDescriptor>;
+//     reportDescriptorSchema as parseReportDescriptor,
+//     reportSchema as parseReport,
+//     reportPayloadDescriptorSchema as parseReportPayloadDescriptor,
+//     resourceSchema as parseResource,
 
-import ReportPayloadDescriptor from './zod/zod-reportPayloadDescriptor.js';
-export { default as ReportPayloadDescriptor } from './zod/zod-reportPayloadDescriptor.js';
-export type ReportPayloadDescriptor = z.infer<typeof ReportPayloadDescriptor>;
-
-import Resource from './zod/zod-resource.js';
-export { default as Resource } from './zod/zod-resource.js';
-export type Resource = z.infer<typeof Resource>;
-
-import Subscription from './zod/zod-subscription.js';
-export { default as Subscription } from './zod/zod-subscription.js';
-export type Subscription = z.infer<typeof Subscription>;
-
-import ValuesMap from './zod/zod-valuesMap.js';
-export { default as ValuesMap } from './zod/zod-valuesMap.js';
-export type ValuesMap = z.infer<typeof ValuesMap>;
-
-import Ven from './zod/zod-ven.js';
-export { default as Ven } from './zod/zod-ven.js';
-export type Ven = z.infer<typeof Ven>;
-
+//     subscriptionSchema as parseSubscription,
+    
+//     valuesMapSchema as parseValuesMap,
+//     venSchema as parseVen
+// } from './codegen/openADRSchemas-zod.js';

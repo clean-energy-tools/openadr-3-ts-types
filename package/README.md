@@ -16,11 +16,11 @@ pnpm add openadr-3-ts-types            # pnpm
 
 The package exports two types of objects: type declarations, and Zod schema objects.
 
-The base name for each is the OpenADR schema item as defined in the OpenAPI specification.  Each of these names start with a lower-case letter, such as `event`.
+_Naming Scheme_ -- The OpenADR schema items are defined with names, such as `event`, `interval`, or `program`, all of which start with a lower case letter.  The names for type declarations starts with an upper-case character, using the CamelCase pattern, with names like `Event`, `IntervalPeriod`, and `EventPayloadDescriptor`.  The names for Zod schema objects are the type name, prefixed with `parse`, such as `parseEvent`, `parseIntervalPeriod`, and `parseEventPayloadDescriptor`.
 
-For type names, the base name is changed to start with an upper-case letter, such as `Event`.  This is a normal TypeScript type declaration, and includes JSDoc annotations for extra metadata.
+The type declaration is a normal TypeScript type declaration, and include JSDoc annotations for extra metadata.
 
-FOr Zod schema objects, the base name is changed to the format `parseTypeName`, such as `parseEvent`.  This is a normal Zod schema object.  The Zod model is to "parse" an unknown object, using the `parseTypeName.parse` function, validating that the fields conform to the specification, producing an object with a known data type.
+The Zod schema objects are as described in the Zod documentation.  They are ready to be used with the [Zod schema methods](https://zod.dev/?id=schema-methods).
 
 # USAGE
 

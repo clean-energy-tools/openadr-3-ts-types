@@ -10,7 +10,7 @@ export const __dirname = path.dirname(__filename);
 import { promises as fsp } from 'node:fs';
 import {
     DateTime, parseDateTime, Duration, parseDuration
-} from '../../package/dist/index-ts-to-zod.js';
+} from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
 

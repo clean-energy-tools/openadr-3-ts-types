@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "npx tsc -w"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/node": "^20.10.1",
     "openadr-3-ts-types": "file:..",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "zod": "^3.22.4"
   }
 }

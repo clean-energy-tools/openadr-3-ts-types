@@ -1,4 +1,5 @@
 
+import { z } from 'zod';
 
 import * as path from 'path';
 import * as url from 'url';
@@ -8,20 +9,23 @@ export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 import {
-    OpenAPIClientAxios,
-    
-} from 'openapi-client-axios';
+    Event, parseEvent, Interval
+} from '../../package/dist/index.js';
 
-import {
-    Components, Paths
-} from '../../dist/openadr-3.js';
+const event: Event = parseEvent.parse({
+    programID: '00',
+    eventName: 'Test event',
+    intervals: [
+        {
+            id: 0,
+            payloads: [
+                {
+                    type: 'PAYLOAD',
+                    values: [ 'Hello, World!' ]
+                }
+            ]
+        } // as Interval
+    ]
+} as Event);
 
-const api = new OpenAPIClientAxios({ definition: '../../oadr3.0.1.yaml' });
-
-api.init();
-
-import { Client as OpenADRClient } from '../../dist/openadr-3.js';
-
-type Event = Components.Schemas.Event;
-
-import { default as EventZod } from './zod/zod-event.js';
+console.log(event);

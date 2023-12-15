@@ -10,6 +10,7 @@
         "moduleResolution": "NodeNext",
         "outDir": "./dist",
         "allowJs": true,
+        "strict": true,
         "resolveJsonModule": true,
         "declaration": true,
         "declarationMap": true,

@@ -13,7 +13,7 @@ import { Ven, parseVen } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 describe('VEN', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -311,7 +311,7 @@ describe('VEN', function() {
         let ven: Ven;
         try {
             ven = parseVen.strict().parse(data.vens[2]) as Ven;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [{
@@ -331,7 +331,7 @@ describe('VEN', function() {
         let ven: Ven;
         try {
             ven = parseVen.parse(data.BADven[0]) as Ven;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -381,7 +381,7 @@ describe('VEN', function() {
         let ven: Ven;
         try {
             ven = parseVen.parse(data.BADven[1]) as Ven;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -406,7 +406,7 @@ describe('VEN', function() {
         let ven: Ven;
         try {
             ven = parseVen.parse(data.BADven[2]) as Ven;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [

@@ -16,7 +16,7 @@ import YAML from 'js-yaml';
 
 
 describe('RESOURCE', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -97,7 +97,7 @@ describe('RESOURCE', function() {
         let didFail = false;
         try {
             const resource: Resource = parseResource.strict().parse(data.resources[1]) as Resource;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -129,7 +129,7 @@ describe('RESOURCE', function() {
         let didFail = false;
         try {
             const resource: Resource = parseResource.parse(data.BADresources[0]) as Resource;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -169,7 +169,7 @@ describe('RESOURCE', function() {
         let didFail = false;
         try {
             const resource: Resource = parseResource.parse(data.BADresources[1]) as Resource;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -194,7 +194,7 @@ describe('RESOURCE', function() {
         let didFail = false;
         try {
             const resource: Resource = parseResource.parse(data.BADresources[2]) as Resource;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [

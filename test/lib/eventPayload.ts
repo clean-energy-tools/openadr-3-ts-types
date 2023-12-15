@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('EVENT PAYLOAD DESCRIPTOR', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -115,7 +115,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.strict().parse(data.eventPayloadDescriptors[5]) as EventPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -135,7 +135,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.strict().parse(data.BADeventPayloadDescriptors[0]) as EventPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -158,7 +158,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.strict().parse(data.BADeventPayloadDescriptors[1]) as EventPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

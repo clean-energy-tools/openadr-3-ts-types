@@ -13,7 +13,7 @@ import { Program, parseProgram } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 describe('PROGRAM', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -52,7 +52,7 @@ describe('PROGRAM', function() {
         let didFail = false;
         try {
             const prog0: Program = parseProgram.strict().parse(data.prog0[2]) as Program;
-        } catch (err) {
+        } catch (err: any) {
             // console.log(err);
             didFail = true;
             assert.deepEqual(err.issues, [{
@@ -124,7 +124,7 @@ describe('PROGRAM', function() {
         try {
             const badprog
                 = parseProgram.parse(data.BADprog[0]);
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             assert.deepEqual(err.issues, [
                 {
@@ -185,7 +185,7 @@ describe('PROGRAM', function() {
         try {
             const badprog
                 = parseProgram.parse(data.BADprog[1]);
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             assert.deepEqual(err.issues, [
                 {
@@ -207,7 +207,7 @@ describe('PROGRAM', function() {
         try {
             const badprog
                 = parseProgram.parse(data.BADprog[2]);
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             assert.deepEqual(err.issues, [
                 {

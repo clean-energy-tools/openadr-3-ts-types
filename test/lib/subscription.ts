@@ -16,7 +16,7 @@ import YAML from 'js-yaml';
 
 describe('SUBSCRIPTION', function() {
 
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -96,7 +96,7 @@ describe('SUBSCRIPTION', function() {
         let didFail = false;
         try {
             const subscription: Subscription = parseSubscription.strict().parse(data.subscriptions[0]) as Subscription;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [{
@@ -115,7 +115,7 @@ describe('SUBSCRIPTION', function() {
         let didFail = false;
         try {
             const subscription: Subscription = parseSubscription.passthrough().parse(data.subsTooShortTooLong[0]) as Subscription;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [{
@@ -137,7 +137,7 @@ describe('SUBSCRIPTION', function() {
         let didFail = false;
         try {
             const subscription: Subscription = parseSubscription.passthrough().parse(data.subsTooShortTooLong[1]) as Subscription;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [{
@@ -157,7 +157,7 @@ describe('SUBSCRIPTION', function() {
         let didFail = false;
         try {
             const subscription: Subscription = parseSubscription.passthrough().parse(data.subsBadObjects[0]) as Subscription;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(util.inspect(err.issues));
             // for (const error of err.issues[0].unionErrors) {
@@ -217,7 +217,7 @@ describe('SUBSCRIPTION', function() {
         let didFail = false;
         try {
             const subscription: Subscription = parseSubscription.passthrough().parse(data.subsBadOperations[0]) as Subscription;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(util.inspect(err.issues));
             // for (const error of err.issues[0].unionErrors) {

@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('DATE TIME DURATION', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(

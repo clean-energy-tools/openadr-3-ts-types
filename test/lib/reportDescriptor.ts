@@ -14,7 +14,7 @@ import YAML from 'js-yaml';
 
 
 describe('REPORT DESCRIPTOR', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -251,7 +251,7 @@ describe('REPORT DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[0]) as ReportDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -273,7 +273,7 @@ describe('REPORT DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[1]) as ReportDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -295,7 +295,7 @@ describe('REPORT DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[2]) as ReportDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -315,7 +315,7 @@ describe('REPORT DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportDescriptor: ReportDescriptor = parseReportDescriptor.parse(data.BADreportDescriptors[3]) as ReportDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

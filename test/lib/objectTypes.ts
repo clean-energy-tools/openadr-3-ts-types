@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('OBJECT TYPES', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -72,7 +72,7 @@ describe('OBJECT TYPES', function() {
         let didFail = false;
         try {
             const objectType: ObjectTypes = parseObjectTypes.parse(data.BADobjectTypes[0]) as ObjectTypes;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -93,7 +93,7 @@ describe('OBJECT TYPES', function() {
         let didFail = false;
         try {
             const objectType: ObjectTypes = parseObjectTypes.parse(data.BADobjectTypes[1]) as ObjectTypes;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -114,7 +114,7 @@ describe('OBJECT TYPES', function() {
         let didFail = false;
         try {
             const objectType: ObjectTypes = parseObjectTypes.parse(data.BADobjectTypes[2]) as ObjectTypes;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

@@ -16,7 +16,7 @@ import YAML from 'js-yaml';
 
 
 describe('POINT', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -87,7 +87,7 @@ describe('POINT', function() {
         let didFail = false;
         try {
             const point: Point = parsePoint.strict().parse(data.points[6]) as Point;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -107,7 +107,7 @@ describe('POINT', function() {
         let didFail = false;
         try {
             const point: Point = parsePoint.strict().parse(data.points[7]) as Point;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

@@ -12,7 +12,7 @@ import { Notification, parseNotification } from '../../package/dist/index.js';
 import YAML from 'js-yaml';
 
 describe('NOTIFICATION', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -244,7 +244,7 @@ describe('NOTIFICATION', function() {
         let didFail = false;
         try {
             const notification: Notification = parseNotification.parse(data.BADnotifications[0]) as Notification;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -264,7 +264,7 @@ describe('NOTIFICATION', function() {
         let didFail = false;
         try {
             const notification: Notification = parseNotification.parse(data.BADnotifications[1]) as Notification;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -284,7 +284,7 @@ describe('NOTIFICATION', function() {
         let didFail = false;
         try {
             const notification: Notification = parseNotification.parse(data.BADnotifications[2]) as Notification;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             // console.log(err.issues[1].unionErrors);

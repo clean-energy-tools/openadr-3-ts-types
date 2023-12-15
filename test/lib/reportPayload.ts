@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('REPORT PAYLOAD DESCRIPTOR', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -128,7 +128,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[0]) as ReportPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -151,7 +151,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[1]) as ReportPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -174,7 +174,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[2]) as ReportPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -223,7 +223,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[3]) as ReportPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -246,7 +246,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[4]) as ReportPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -269,7 +269,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
         let didFail = false;
         try {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.BADreportPayloadDescriptors[5]) as ReportPayloadDescriptor;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

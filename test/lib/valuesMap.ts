@@ -16,7 +16,7 @@ import YAML from 'js-yaml';
 
 
 describe('VALUES MAP', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -127,7 +127,7 @@ describe('VALUES MAP', function() {
         let didFail = false;
         try {
             const valuesMap: ValuesMap = parseValuesMap.strict().parse(data.valuesMapExtraData[0]) as ValuesMap;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -147,7 +147,7 @@ describe('VALUES MAP', function() {
         let didFail = false;
         try {
             const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapShortType[0]) as ValuesMap;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -170,7 +170,7 @@ describe('VALUES MAP', function() {
         let didFail = false;
         try {
             const valuesMap: ValuesMap = parseValuesMap.parse(data.valuesMapLongType[0]) as ValuesMap;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

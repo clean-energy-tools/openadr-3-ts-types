@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('INTERVAL', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -102,7 +102,7 @@ describe('INTERVAL', function() {
         let didFail = false;
         try {
             const interval: Interval = parseInterval.strict().parse(data.intervals[3]) as Interval;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -124,7 +124,7 @@ describe('INTERVAL', function() {
         try {
             // console.log(data.BADintervals[0]);
             const interval: Interval = parseInterval.parse(data.BADintervals[0]) as Interval;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [

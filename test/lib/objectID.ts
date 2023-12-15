@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('OBJECT ID', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -58,7 +58,7 @@ describe('OBJECT ID', function() {
         let didFail = false;
         try {
             const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[0]) as ObjectID;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -78,7 +78,7 @@ describe('OBJECT ID', function() {
         let didFail = false;
         try {
             const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[1]) as ObjectID;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -101,7 +101,7 @@ describe('OBJECT ID', function() {
         let didFail = false;
         try {
             const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[2]) as ObjectID;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -124,7 +124,7 @@ describe('OBJECT ID', function() {
         let didFail = false;
         try {
             const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[3]) as ObjectID;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [
@@ -147,7 +147,7 @@ describe('OBJECT ID', function() {
         let didFail = false;
         try {
             const objectID: ObjectID = parseObjectID.parse(data.BADObjectIDs[4]) as ObjectID;
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err.issues);
             assert.deepEqual(err.issues, [

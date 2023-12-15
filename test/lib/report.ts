@@ -15,7 +15,7 @@ import {
 import YAML from 'js-yaml';
 
 describe('REPORT', function() {
-    let data;
+    let data: any;
     before(async function() {
 
         const file = await fsp.readFile(
@@ -185,7 +185,7 @@ describe('REPORT', function() {
         let didFail = false;
         try {
             let report2: any = parseReport.strict().parse(data.reports[0]) as Report;
-        } catch (err) {
+        } catch (err: any) {
             // console.log(err);
             didFail = true;
             assert.deepEqual(err.issues, [
@@ -271,7 +271,7 @@ describe('REPORT', function() {
         try {
             const badprog
                 = parseReport.parse(data.BADreports[0]);
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -334,7 +334,7 @@ describe('REPORT', function() {
         try {
             const badprog
                 = parseReport.parse(data.BADreports[1]);
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [
@@ -357,7 +357,7 @@ describe('REPORT', function() {
         try {
             const badprog
                 = parseReport.parse(data.BADreports[2]);
-        } catch (err) {
+        } catch (err: any) {
             didFail = true;
             // console.log(err);
             assert.deepEqual(err.issues, [

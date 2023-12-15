@@ -1,33 +1,33 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     payloadType: z.ZodString;
-    readingType: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodString>>>;
-    units: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodString>>>;
-    targets: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodArray<z.ZodObject<{
+    readingType: z.ZodDefault<z.ZodNullable<z.ZodString>>;
+    units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
+    targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodNumber>>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodNumber>>>;
+            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
         }, "strip", z.ZodTypeAny, {
-            x?: number;
-            y?: number;
+            x: number | null;
+            y: number | null;
         }, {
-            x?: number;
-            y?: number;
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x: number | null;
+            y: number | null;
         })[];
+        type: string;
     }, {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         })[];
-    }>, "many">>>>;
+        type: string;
+    }>, "many">>>;
     aggregate: z.ZodDefault<z.ZodBoolean>;
     startInterval: z.ZodDefault<z.ZodNumber>;
     numIntervals: z.ZodDefault<z.ZodNumber>;
@@ -35,39 +35,39 @@ declare const _default: z.ZodObject<{
     frequency: z.ZodDefault<z.ZodNumber>;
     repeat: z.ZodDefault<z.ZodNumber>;
 }, "strip", z.ZodTypeAny, {
-    payloadType?: string;
-    readingType?: string;
-    units?: string;
-    targets?: {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+    repeat: number;
+    targets: {
+        values: (string | number | boolean | {
+            x: number | null;
+            y: number | null;
         })[];
-    }[];
-    aggregate?: boolean;
-    startInterval?: number;
-    numIntervals?: number;
-    historical?: boolean;
-    frequency?: number;
-    repeat?: number;
+        type: string;
+    }[] | null;
+    payloadType: string;
+    readingType: string | null;
+    units: string | null;
+    aggregate: boolean;
+    startInterval: number;
+    numIntervals: number;
+    historical: boolean;
+    frequency: number;
 }, {
-    payloadType?: string;
-    readingType?: string;
-    units?: string;
+    payloadType: string;
+    readingType?: string | null | undefined;
+    units?: string | null | undefined;
     targets?: {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         })[];
-    }[];
-    aggregate?: boolean;
-    startInterval?: number;
-    numIntervals?: number;
-    historical?: boolean;
-    frequency?: number;
-    repeat?: number;
+        type: string;
+    }[] | null | undefined;
+    aggregate?: boolean | undefined;
+    startInterval?: number | undefined;
+    numIntervals?: number | undefined;
+    historical?: boolean | undefined;
+    frequency?: number | undefined;
+    repeat?: number | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-reportDescriptor.d.ts.map

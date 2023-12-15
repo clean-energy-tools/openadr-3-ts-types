@@ -6,17 +6,17 @@ declare const _default: z.ZodObject<{
     detail: z.ZodOptional<z.ZodString>;
     instance: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
-    type?: string;
-    title?: string;
-    status?: number;
-    detail?: string;
-    instance?: string;
+    type: string;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
 }, {
-    type?: string;
-    title?: string;
-    status?: number;
-    detail?: string;
-    instance?: string;
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-problem.d.ts.map

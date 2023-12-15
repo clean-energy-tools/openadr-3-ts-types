@@ -4,13 +4,13 @@ declare const _default: z.ZodObject<{
     duration: z.ZodDefault<z.ZodString>;
     randomizeStart: z.ZodDefault<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
-    start?: string;
-    duration?: string;
-    randomizeStart?: string;
+    start: string;
+    duration: string;
+    randomizeStart: string;
 }, {
-    start?: string;
-    duration?: string;
-    randomizeStart?: string;
+    start: string;
+    duration?: string | undefined;
+    randomizeStart?: string | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-intervalPeriod.d.ts.map

@@ -2,53 +2,53 @@ import { z } from "zod";
 declare const _default: z.ZodObject<{
     objectType: z.ZodEnum<["PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE"]>;
     operation: z.ZodEnum<["GET", "POST", "PUT", "DELETE"]>;
-    targets: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodArray<z.ZodObject<{
+    targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodNumber>>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodNumber>>>;
+            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
         }, "strip", z.ZodTypeAny, {
-            x?: number;
-            y?: number;
+            x: number | null;
+            y: number | null;
         }, {
-            x?: number;
-            y?: number;
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x: number | null;
+            y: number | null;
         })[];
+        type: string;
     }, {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         })[];
-    }>, "many">>>>;
+        type: string;
+    }>, "many">>>;
     object: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.ZodEffects<z.ZodAny, any, any>>;
 }, "strip", z.ZodTypeAny, {
-    objectType?: "EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
-    operation?: "GET" | "POST" | "PUT" | "DELETE";
-    targets?: {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+    objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
+    targets: {
+        values: (string | number | boolean | {
+            x: number | null;
+            y: number | null;
         })[];
-    }[];
+        type: string;
+    }[] | null;
+    operation: "GET" | "POST" | "PUT" | "DELETE";
     object?: any;
 }, {
-    objectType?: "EVENT" | "PROGRAM" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
-    operation?: "GET" | "POST" | "PUT" | "DELETE";
+    objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
+    operation: "GET" | "POST" | "PUT" | "DELETE";
     targets?: {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         })[];
-    }[];
+        type: string;
+    }[] | null | undefined;
     object?: any;
 }>;
 export default _default;

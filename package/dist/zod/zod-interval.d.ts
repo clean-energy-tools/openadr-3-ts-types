@@ -6,67 +6,67 @@ declare const _default: z.ZodObject<{
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {
-        start?: string;
-        duration?: string;
-        randomizeStart?: string;
+        start: string;
+        duration: string;
+        randomizeStart: string;
     }, {
-        start?: string;
-        duration?: string;
-        randomizeStart?: string;
+        start: string;
+        duration?: string | undefined;
+        randomizeStart?: string | undefined;
     }>>;
     payloads: z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodNumber>>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodDefault<z.ZodNumber>>>;
+            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
         }, "strip", z.ZodTypeAny, {
-            x?: number;
-            y?: number;
+            x: number | null;
+            y: number | null;
         }, {
-            x?: number;
-            y?: number;
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x: number | null;
+            y: number | null;
         })[];
+        type: string;
     }, {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+        values: (string | number | boolean | {
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
-    id?: number;
-    intervalPeriod?: {
-        start?: string;
-        duration?: string;
-        randomizeStart?: string;
-    };
-    payloads?: {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+    id: number;
+    payloads: {
+        values: (string | number | boolean | {
+            x: number | null;
+            y: number | null;
         })[];
+        type: string;
     }[];
+    intervalPeriod?: {
+        start: string;
+        duration: string;
+        randomizeStart: string;
+    } | undefined;
 }, {
-    id?: number;
-    intervalPeriod?: {
-        start?: string;
-        duration?: string;
-        randomizeStart?: string;
-    };
-    payloads?: {
-        type?: string;
-        values?: (string | number | boolean | {
-            x?: number;
-            y?: number;
+    id: number;
+    payloads: {
+        values: (string | number | boolean | {
+            x?: number | null | undefined;
+            y?: number | null | undefined;
         })[];
+        type: string;
     }[];
+    intervalPeriod?: {
+        start: string;
+        duration?: string | undefined;
+        randomizeStart?: string | undefined;
+    } | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-interval.d.ts.map

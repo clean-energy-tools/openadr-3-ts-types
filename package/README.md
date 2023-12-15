@@ -1,10 +1,12 @@
 # openadr-3-ts-types
-TypeScript validators (Zod) and type declarations for use with OpenADR v3.  These are derived from the OpenAPI spec for OpenADR v3.  Together they provide data types and data validation for implementing OpenADR v3 applications on the Node.js platform, using TypeScript.
+
+This package contains OpenADR v3 validation schema's (Zod) and type declarations, implemented in TypeScript, for use on Node.js.  These facilitate implementation of OpenADR applications with pretested data types and data validation, derived from the OpenAPI spec for OpenADR v3.  The types include all metadata (as JSDoc tags) defined in the specification, the data validation ensures all values fit the constraints defined in the specification, and all default values are filled in as necessary.
 
 # Installation
 
-```
+```shell
 npm install openadr-3-ts-types --save  # npm
+# The following are untested
 yarn add openadr-3-ts-types            # yarn
 bun add openadr-3-ts-types             # bun
 pnpm add openadr-3-ts-types            # pnpm

@@ -16,14 +16,14 @@ export default z
     units: z
       .string()
       .describe("Units of measure.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("Units of measure.")
       .default(null),
     currency: z
       .string()
       .describe("Currency of price payload.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("Currency of price payload.")
       .default(null),

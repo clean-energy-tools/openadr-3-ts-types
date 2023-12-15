@@ -70,7 +70,7 @@ export default z
               .describe(
                 "User provided token.\nTo avoid custom integrations, callback endpoints\nshould accept the provided bearer token to authenticate VTN requests.\n"
               )
-              .default(null)
+              // .default(null)
               .nullable()
               .describe(
                 "User provided token.\nTo avoid custom integrations, callback endpoints\nshould accept the provided bearer token to authenticate VTN requests.\n"
@@ -103,14 +103,14 @@ export default z
                       x: z
                         .number()
                         .describe("A value on an x axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on an x axis.")
                         .default(null),
                       y: z
                         .number()
                         .describe("A value on a y axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on a y axis.")
                         .default(null),
@@ -131,7 +131,7 @@ export default z
       .describe(
         "A list of valuesMap objects. Used by server to filter callbacks."
       )
-      .default(null)
+      // .default(null)
       .nullable()
       .describe(
         "A list of valuesMap objects. Used by server to filter callbacks."

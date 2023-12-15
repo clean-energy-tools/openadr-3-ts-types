@@ -53,14 +53,14 @@ export default z
                       x: z
                         .number()
                         .describe("A value on an x axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on an x axis.")
                         .default(null),
                       y: z
                         .number()
                         .describe("A value on a y axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on a y axis.")
                         .default(null),
@@ -103,14 +103,14 @@ export default z
                       x: z
                         .number()
                         .describe("A value on an x axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on an x axis.")
                         .default(null),
                       y: z
                         .number()
                         .describe("A value on a y axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on a y axis.")
                         .default(null),
@@ -192,14 +192,14 @@ export default z
                               x: z
                                 .number()
                                 .describe("A value on an x axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on an x axis.")
                                 .default(null),
                               y: z
                                 .number()
                                 .describe("A value on a y axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on a y axis.")
                                 .default(null),
@@ -242,14 +242,14 @@ export default z
                               x: z
                                 .number()
                                 .describe("A value on an x axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on an x axis.")
                                 .default(null),
                               y: z
                                 .number()
                                 .describe("A value on a y axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on a y axis.")
                                 .default(null),
@@ -279,7 +279,7 @@ export default z
       .describe(
         "A list of resource objects representing end-devices or systems."
       )
-      .default(null)
+      // .default(null)
       .nullable()
       .describe(
         "A list of resource objects representing end-devices or systems."

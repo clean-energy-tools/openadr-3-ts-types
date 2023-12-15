@@ -16,21 +16,21 @@ export default z
     readingType: z
       .string()
       .describe("Enumerated or private string signifying the type of reading.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("Enumerated or private string signifying the type of reading.")
       .default(null),
     units: z
       .string()
       .describe("Units of measure.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("Units of measure.")
       .default(null),
     accuracy: z
       .number()
       .describe("A quantification of the accuracy of a set of payload values.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("A quantification of the accuracy of a set of payload values.")
       .default(null),

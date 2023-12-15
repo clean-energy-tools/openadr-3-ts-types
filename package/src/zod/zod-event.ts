@@ -32,7 +32,7 @@ export default z
     eventName: z
       .string()
       .describe("User defined string for use in debugging or User Interface.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("User defined string for use in debugging or User Interface.")
       .default(null),
@@ -43,7 +43,7 @@ export default z
       .describe(
         "Relative priority of event. A lower number is a higher priority."
       )
-      .default(null)
+      // .default(null)
       .nullable()
       .describe(
         "Relative priority of event. A lower number is a higher priority."
@@ -72,14 +72,14 @@ export default z
                       x: z
                         .number()
                         .describe("A value on an x axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on an x axis.")
                         .default(null),
                       y: z
                         .number()
                         .describe("A value on a y axis.")
-                        .default(null)
+                        // .default(null)
                         .nullable()
                         .describe("A value on a y axis.")
                         .default(null),
@@ -98,7 +98,7 @@ export default z
           )
       )
       .describe("A list of valuesMap objects.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("A list of valuesMap objects.")
       .default(null),
@@ -118,7 +118,7 @@ export default z
               .describe(
                 "Enumerated or private string signifying the type of reading."
               )
-              .default(null)
+              // .default(null)
               .nullable()
               .describe(
                 "Enumerated or private string signifying the type of reading."
@@ -127,7 +127,7 @@ export default z
             units: z
               .string()
               .describe("Units of measure.")
-              .default(null)
+              // .default(null)
               .nullable()
               .describe("Units of measure.")
               .default(null),
@@ -154,14 +154,14 @@ export default z
                               x: z
                                 .number()
                                 .describe("A value on an x axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on an x axis.")
                                 .default(null),
                               y: z
                                 .number()
                                 .describe("A value on a y axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on a y axis.")
                                 .default(null),
@@ -180,8 +180,8 @@ export default z
                   )
               )
               .describe("A list of valuesMap objects.")
-              .default(null)
               .nullable()
+              .default(null)
               .describe("A list of valuesMap objects.")
               .default(null),
             aggregate: z
@@ -232,8 +232,8 @@ export default z
       .describe(
         "A list of reportDescriptor objects. Used to request reports from VEN."
       )
-      .default(null)
       .nullable()
+      .default(null)
       .describe(
         "A list of reportDescriptor objects. Used to request reports from VEN."
       )
@@ -258,14 +258,14 @@ export default z
             units: z
               .string()
               .describe("Units of measure.")
-              .default(null)
+              // .default(null)
               .nullable()
               .describe("Units of measure.")
               .default(null),
             currency: z
               .string()
               .describe("Currency of price payload.")
-              .default(null)
+              // .default(null)
               .nullable()
               .describe("Currency of price payload.")
               .default(null),
@@ -275,7 +275,7 @@ export default z
           )
       )
       .describe("A list of payloadDescriptor objects.")
-      .default(null)
+      // .default(null)
       .nullable()
       .describe("A list of payloadDescriptor objects.")
       .default(null),
@@ -367,14 +367,14 @@ export default z
                               x: z
                                 .number()
                                 .describe("A value on an x axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on an x axis.")
                                 .default(null),
                               y: z
                                 .number()
                                 .describe("A value on a y axis.")
-                                .default(null)
+                                // .default(null)
                                 .nullable()
                                 .describe("A value on a y axis.")
                                 .default(null),

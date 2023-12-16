@@ -4,11 +4,19 @@
   "description": "TypeScript types for use with OpenADR v3",
   "main": "index.js",
   "config": {
-    "openadryaml": "../oadr3.0.1.yaml"
+    "openadryaml": "../oadr3.0.1.yaml",
+    "zodoutput": "../package/zod/",
+    "zodoutput_dev": "./zod/",
+    "joioutput": "../package/src/joi/oadr3.ts",
+    "joioutput_dev": "./oadr3.ts"
   },
   "scripts": {
-    "build:typegen": "npx openapi-client-axios-typegen ${npm_package_config_openadryaml} >../package/src/openadr-3.d.ts",
-    "build:zod": "npx openapi-to-zod -x ts -i ../oadr3.0.1.yaml -o ../package/src/zod/"
+    "build": "npm-run-all build:zod build:joi build:codegen build:codegen-schemas",
+    "build:zod": "npx openapi-to-zod -x ts -i ${npm_package_config_openadryaml} -o ${npm_package_config_zodoutput}",
+    "build:joi": "npx openapi-to-joi ${npm_package_config_openadryaml} -o ${npm_package_config_joioutput}",
+    "build:codegen": "npx openapi-codegen gen openADR",
+    "build:codegen-schemas": "cp ./codegen-build/openAdRSchemas.ts ../package/src/codegen/openADRSchemas.ts",
+    "build:typegen": "npx openapi-client-axios-typegen ${npm_package_config_openadryaml} >../package/src/openadr-3.d.ts"
   },
   "repository": {
     "type": "git",
@@ -26,13 +34,21 @@
   },
   "homepage": "https://github.com/robogeek/openadr-3-ts-types#readme",
   "devDependencies": {
+    "dtsgenerator": "^3.19.1",
     "openapi-client-axios-typegen": "^7.4.1",
+    "openapi-typescript-codegen": "^0.25.0",
     "openapicmd": "^2.0.1"
   },
   "engines": {
     "node": "^18 || >=20"
   },
   "dependencies": {
-    "openapi-to-zod": "^0.0.5"
+    "@malditogeek/openapi-to-joi": "^2.0.1",
+    "@openapi-codegen/cli": "^2.0.0",
+    "@openapi-codegen/typescript": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "openapi-to-zod": "^0.0.5",
+    "openapi-typescript": "^6.7.2",
+    "ts-to-zod": "^3.4.1"
   }
 }

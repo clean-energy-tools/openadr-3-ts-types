@@ -20,17 +20,17 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
-        type: string;
     }>, "many">>>;
     reportDescriptors: z.ZodDefault<z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         payloadType: z.ZodString;
@@ -49,17 +49,17 @@ declare const _default: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
+            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-            type: string;
         }, {
+            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
-            type: string;
         }>, "many">>>>;
         aggregate: z.ZodDefault<z.ZodBoolean>;
         startInterval: z.ZodDefault<z.ZodNumber>;
@@ -70,11 +70,11 @@ declare const _default: z.ZodObject<{
     }, "strip", z.ZodTypeAny, {
         repeat: number;
         targets: {
+            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-            type: string;
         }[] | null;
         payloadType: string;
         readingType: string | null;
@@ -89,11 +89,11 @@ declare const _default: z.ZodObject<{
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         targets?: {
+            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
-            type: string;
         }[] | null | undefined;
         aggregate?: boolean | undefined;
         startInterval?: number | undefined;
@@ -159,26 +159,26 @@ declare const _default: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
+            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-            type: string;
         }, {
+            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
-            type: string;
         }>, "many">;
     }, "strip", z.ZodTypeAny, {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
             start: string;
@@ -188,11 +188,11 @@ declare const _default: z.ZodObject<{
     }, {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
             start: string;
@@ -205,20 +205,20 @@ declare const _default: z.ZodObject<{
     eventName: string | null;
     priority: number | null;
     targets: {
+        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-        type: string;
     }[] | null;
     reportDescriptors: {
         repeat: number;
         targets: {
+            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-            type: string;
         }[] | null;
         payloadType: string;
         readingType: string | null;
@@ -238,11 +238,11 @@ declare const _default: z.ZodObject<{
     intervals: {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
             start: string;
@@ -264,11 +264,11 @@ declare const _default: z.ZodObject<{
     intervals: {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
             start: string;
@@ -283,22 +283,22 @@ declare const _default: z.ZodObject<{
     eventName?: string | null | undefined;
     priority?: number | null | undefined;
     targets?: {
+        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
-        type: string;
     }[] | null | undefined;
     reportDescriptors?: {
         payloadType: string;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         targets?: {
+            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
-            type: string;
         }[] | null | undefined;
         aggregate?: boolean | undefined;
         startInterval?: number | undefined;

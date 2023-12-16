@@ -78,25 +78,25 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
-        type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     targets: {
+        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-        type: string;
     }[] | null;
     payloadDescriptors: ({
         objectType: string;
@@ -166,11 +166,11 @@ declare const _default: z.ZodObject<{
         confidence?: number | undefined;
     })[] | null | undefined;
     targets?: {
+        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
-        type: string;
     }[] | null | undefined;
 }>;
 export default _default;

@@ -27,26 +27,26 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
-        type: string;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
     id: number;
     payloads: {
+        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-        type: string;
     }[];
     intervalPeriod?: {
         start: string;
@@ -56,11 +56,11 @@ declare const _default: z.ZodObject<{
 }, {
     id: number;
     payloads: {
+        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
-        type: string;
     }[];
     intervalPeriod?: {
         start: string;

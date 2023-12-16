@@ -11,7 +11,7 @@ export default defineConfig({
       relativePath: "../oadr3.0.1.yaml",
       source: "file",
     },
-    outputDir: "./foo",
+    outputDir: "./codegen-build",
     to: async (context) => {
       const { schemasFiles } = await generateSchemaTypes(context, {
         filenamePrefix: "openADR",

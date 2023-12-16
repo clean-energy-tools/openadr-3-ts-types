@@ -1,14 +1,64 @@
-# Build scripts for openadr-3-ts-types package
+# Build scripts for the `openadr-3-ts-types` package
 
-The package `openadr-3-ts-types` contains TypeScript files which are automatically built from the OpenADR specification.  That specification is a YAML file available through the OpenADR Alliance.  The specification itself is available under the Apache 2 license.
+The package `openadr-3-ts-types` contains JavaScript and TypeScript files which are automatically built from the OpenADR v3 specification.  That specification is a YAML file available through the [OpenADR Alliance](https://www.openadr.org/).  The specification itself is available under the Apache 2 license.
+
+OpenADR is a trademark of the OpenADR alliance.
 
 The intent of this package is providing type declarations and data validation functions corresponding to the OpenADR 3 schema.
 
-The scripts are kept in this directory so they are not part of the distributed package.
+The scripts in this directory build the source code which is in the `../package` directory.
 
-In `../package` is the distributed package.
+The build process is:
+
+```shell
+$ npm run build
+$ npm run build:zod
+$ npm run build:joi
+$ npm run build:codegen
+```
+
+The `build:xyzzy` scripts handle building each part of `../package/src`.  The `build` script runs all three in turn.
+
+In `package.json`, the `config` section contains variables listing the pathname for the OpenADR source file, and output directories for each output:
+
+```json
+  "config": {
+    "openadryaml": "../oadr3.0.1.yaml",
+    "zodoutput": "../package/zod/",
+    "zodoutput_dev": "./zod/",
+    "joioutput": "../package/src/joi/oadr3.ts",
+    "joioutput_dev": "./oadr3.ts"
+  },
+```
+
+For development one can easily change the output by changing the variables.  It is meant that `zodoutput` and `joioutput` can be renamed with `_save` on the end, and that the `_dev` variables be renamed to `zodoutput` and `joioutput`.  Hence, during development one can change the output locations without overwriting existing code in `../package`.
+
+The output for Zod and Joi code lands directly into the correct places in `../package/src`.
+
+The `build:codegen` step uses `@openapi-codegen/cli` to build TypeScript classes for OpenADR data types.  The configuration file `openadr-codegen.config.ts` controls what to generate and influences the filenames.  The generated files are are `./codegen-build/openadr3ApiComponents.ts`, `./codegen-build/openadr3ApiFetcher.ts`, and `./codegen-build/openAdRSchemas.ts`.  Processing these files require some manual intervention and is not automated.
+
+The latter is the type declarations for OpenADR schema objects, and it is directly copied to `../package/src/codegen`, while correcting the file name to `openADRSchemas.ts`.
+
+In `openadr3ApiComponents.ts` are type declarations for the API methods, as well as functions comprising an OpenADR client.  This file can be directly copied to `../package/src/codegen`, but the functions for the client API are commented out.  As a result, `openadr3ApiFetcher.ts` is not copied to `../package/src/codegen`.
+
+# Generating an equivalent package for an extended version of OpenADR
+
+Your application may wish to extend OpenADR with additional objects, API methods, or fields on the schema objects.  You should therefore generate a package like `openadr-3-ts-types` supporting your extended version of OpenADR.
+
+The steps to follow are:
+
+* Clone the `openadr-3-ts-types` GitHub repository.
+* In `../package/package.json`, change the `name` field and other fields appropriately to your OpenADR extension.
+* Download the OpenADR specification from `openadr.org`.
+* Modify the OpenAPI YAML specification as needed for your application.
+* Use the `build:xyzzy` scripts in `builder/package.json` to generate code for your package.  The value for `openadryaml` should change to point to your extended specification file.
+* Modify the tests in `../test/lib` to match the changes you've made.
+* Make sure the README's in your cloned repository explain that the package is derived from `openadr-3-ts-types`, and what are the differences.  In other words, give credit (and a link) to this project, while clearly saying that it is different, why it is different, and that it has a different name.
+* Package and distribute the resulting package.
 
 # Reviewing technologies for autogenerating TypeScript code from OpenAPI achema's
+
+While creating this package, I evaluated a big range of tools for processing OpenAPI specifications into code for TypeScript programming.
 
 The goal of the build scripts is to auto-generate TypeScript type declarations, and corresponding data validation using Zod. 
 

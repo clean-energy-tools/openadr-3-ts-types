@@ -1,9 +1,6 @@
 
-// export * from './types.js';
-// export * from './zod-types.js';
+///////////  Data types for OpenADR 3
 
-// export * from './codegen/openAdRSchemas.js';
-// export * from './codegen/openAdRSchemas-zod.js';
 export * from './codegen/openadr3ApiComponents.js';
 
 export {
@@ -17,6 +14,8 @@ export {
     Subscription,
     ValuesMap, Ven
 } from './codegen/openADRSchemas.js';
+
+///////////  Zod validators for OpenADR 3
 
 export { default as parseDateTime } from './zod/zod-dateTime.js';
 export { default as parseDuration } from './zod/zod-duration.js';
@@ -37,6 +36,39 @@ export { default as parseResource } from './zod/zod-resource.js';
 export { default as parseSubscription } from './zod/zod-subscription.js';
 export { default as parseValuesMap } from './zod/zod-valuesMap.js';
 export { default as parseVen } from './zod/zod-ven.js';
+
+///////////  Joi schema validators for OpenADR 3
+
+import { schemas } from './joi/oadr3.js';
+
+export const joiDateTime = schemas.components.dateTime;
+export const joiDuration = schemas.components.duration;
+
+export const joiEvent = schemas.components.event;
+export const joiEventPayloadDescriptor = schemas.components.eventPayloadDescriptor;
+
+export const joiInterval = schemas.components.interval;
+export const joiIntervalPeriod = schemas.components.intervalPeriod;
+
+export const joiNotification = schemas.components.notification;
+
+export const joiObjectID = schemas.components.objectID;
+export const joiObjectTypes = schemas.components.objectTypes;
+
+export const joiPoint = schemas.components.point;
+export const joiProblem = schemas.components.problem;
+export const joiProgram = schemas.components.program;
+
+export const joiReport = schemas.components.report;
+export const joiReportDescriptor = schemas.components.reportDescriptor;
+export const joiReportPayloadDescriptor = schemas.components.reportPayloadDescriptor;
+export const joiResource = schemas.components.resource;
+
+export const joiSubscription = schemas.components.subscription;
+
+export const joiValuesMap = schemas.components.valuesMap;
+export const joiVen = schemas.components.ven;
+
 
 // These linex are for inspecting the type as understood by Zod.
 // Uncomment the lines, fixing up a declaration for the type

@@ -81,7 +81,9 @@ testEvents:
 
 eventNoTargets:
     # This tests a condition where there
-    # is no eventName and no targets array
+    # is no eventName, no targets array,
+    # and no intervals.  Of those, the
+    # intervals array is actually required.
     - programID: '0'
       # eventName: 'First TEST event'
       priority: 99
@@ -99,7 +101,11 @@ eventNoTargets:
       intervalPeriod:
           start: "2023-02-20T00:00:00Z"
           duration: "P3M"
-      # intervals: 
+      # intervals:
+      #   - id: 0
+      #     payloads:
+      #       - type: EMPTY
+      #         values: []
 
 eventWithName:
     # This tests a condition where there
@@ -202,7 +208,11 @@ eventsBadPriority:
       intervalPeriod:
           start: "2023-02-20T00:00:00Z"
           duration: "P3M"
-      # intervals: 
+      intervals:
+      - id: 0
+        payloads:
+          - type: "DISPATCH_SETPOINT_RELATIVE"
+            values: [ 20 ]
 
     # NOTE: The code currently allows
     # priority to be a numerical string.

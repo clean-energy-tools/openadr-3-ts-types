@@ -648,7 +648,6 @@ export type ObjectTypes =
  *
  * @format date-time
  * @example "2023-06-15T09:30:00.000Z"
- * @default "0000-00-00"
  */
 export type DateTime = string;
 

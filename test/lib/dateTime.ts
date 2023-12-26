@@ -74,9 +74,158 @@ describe('DATE TIME DURATION', function() {
 
     describe('JOI', function() {
 
-        it('should parse dateTime', function() {
+        it('should parse dateTime 0', function() {
             // console.log(data.dateTimes[0]);
             Joi.assert(data.dateTimes[0], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[0] /*, { convert: false } */);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(typeof result.error === 'undefined');
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should parse dateTime 1', function() {
+            // console.log(data.dateTimes[0]);
+            Joi.assert(data.dateTimes[1], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[1] /*, { convert: false } */);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(typeof result.error === 'undefined');
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should parse dateTime 2', function() {
+            // console.log(data.dateTimes[0]);
+            Joi.assert(data.dateTimes[2], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[2] /*, { convert: false } */);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(typeof result.error === 'undefined');
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should not parse dateTime 3', function() {
+            // console.log(data.dateTimes[3]);
+            // Joi.assert(data.dateTimes[3], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[3]);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(result.error);
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should not parse dateTime 4', function() {
+            // console.log(data.dateTimes[4]);
+            // Joi.assert(data.dateTimes[4], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[4] /*, { convert: false } */);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(result.error);
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+
+        it('should not parse dateTime 5', function() {
+            // console.log(data.dateTimes[5]);
+            // Joi.assert(data.dateTimes[5], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[5]);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(result.error);
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should not parse dateTime 6', function() {
+            // console.log(data.dateTimes[6]);
+            // Joi.assert(data.dateTimes[6], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[6] /*, { convert: false } */);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(result.error);
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should not parse dateTime 7', function() {
+            // console.log(data.dateTimes[7]);
+            // Joi.assert(data.dateTimes[7], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[7]);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(result.error);
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
+        });
+
+        it('should not parse dateTime 8', function() {
+            // console.log(data.dateTimes[8]);
+            // Joi.assert(data.dateTimes[8], joiDateTime);
+            const result = joiDateTime.validate(data.dateTimes[8]);
+            if (result.error) {
+                // console.log(result.error);
+            }
+            // See: https://github.com/savotije/openapi-to-joi/issues/4
+            // console.log(result.value);
+            // console.log(typeof result.value);
+            // console.log(result.value instanceof Date);
+            assert.isOk(result.error);
+            assert.isOk(!(typeof result.value === 'object'));
+            assert.isOk(typeof result.value === 'string');
+            assert.isOk(!(result.value instanceof Date));
         });
 
         // it('should parse dateTime', function() {

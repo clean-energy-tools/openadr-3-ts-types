@@ -15,27 +15,27 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>;
     object: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.ZodEffects<z.ZodAny, any, any>>;
 }, "strip", z.ZodTypeAny, {
     objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     operation: "GET" | "POST" | "PUT" | "DELETE";
     object?: any;
@@ -43,11 +43,11 @@ declare const _default: z.ZodObject<{
     objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     operation: "GET" | "POST" | "PUT" | "DELETE";
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
     object?: any;
 }>;

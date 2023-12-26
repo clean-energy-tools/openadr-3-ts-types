@@ -12,17 +12,17 @@ declare const _default: z.ZodObject<{
         y?: number | null | undefined;
     }>]>, "many">;
 }, "strip", z.ZodTypeAny, {
-    type: string;
     values: (string | number | boolean | {
         x: number | null;
         y: number | null;
     })[];
-}, {
     type: string;
+}, {
     values: (string | number | boolean | {
         x?: number | null | undefined;
         y?: number | null | undefined;
     })[];
+    type: string;
 }>;
 export default _default;
 //# sourceMappingURL=zod-valuesMap.d.ts.map

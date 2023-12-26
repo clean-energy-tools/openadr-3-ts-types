@@ -16,17 +16,17 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>;
     aggregate: z.ZodDefault<z.ZodBoolean>;
     startInterval: z.ZodDefault<z.ZodNumber>;
@@ -37,11 +37,11 @@ declare const _default: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     repeat: number;
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     payloadType: string;
     readingType: string | null;
@@ -56,11 +56,11 @@ declare const _default: z.ZodObject<{
     readingType?: string | null | undefined;
     units?: string | null | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
     aggregate?: boolean | undefined;
     startInterval?: number | undefined;

@@ -1,20 +1,3 @@
 import { z } from "zod";
-export default z
-    .object({
-    x: z
-        .number()
-        .describe("A value on an x axis.")
-        // .default(null)
-        .nullable()
-        .describe("A value on an x axis.")
-        .default(null),
-    y: z
-        .number()
-        .describe("A value on a y axis.")
-        // .default(null)
-        .nullable()
-        .describe("A value on a y axis.")
-        .default(null),
-})
-    .describe("A pair of floats typically used as a point on a 2 dimensional grid.");
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiem9kLXBvaW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL3pvZC96b2QtcG9pbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLENBQUMsRUFBRSxNQUFNLEtBQUssQ0FBQztBQUV4QixlQUFlLENBQUM7S0FDYixNQUFNLENBQUM7SUFDTixDQUFDLEVBQUUsQ0FBQztTQUNELE1BQU0sRUFBRTtTQUNSLFFBQVEsQ0FBQyx1QkFBdUIsQ0FBQztRQUNsQyxpQkFBaUI7U0FDaEIsUUFBUSxFQUFFO1NBQ1YsUUFBUSxDQUFDLHVCQUF1QixDQUFDO1NBQ2pDLE9BQU8sQ0FBQyxJQUFJLENBQUM7SUFDaEIsQ0FBQyxFQUFFLENBQUM7U0FDRCxNQUFNLEVBQUU7U0FDUixRQUFRLENBQUMsc0JBQXNCLENBQUM7UUFDakMsaUJBQWlCO1NBQ2hCLFFBQVEsRUFBRTtTQUNWLFFBQVEsQ0FBQyxzQkFBc0IsQ0FBQztTQUNoQyxPQUFPLENBQUMsSUFBSSxDQUFDO0NBQ2pCLENBQUM7S0FDRCxRQUFRLENBQ1AscUVBQXFFLENBQ3RFLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB6IH0gZnJvbSBcInpvZFwiO1xuXG5leHBvcnQgZGVmYXVsdCB6XG4gIC5vYmplY3Qoe1xuICAgIHg6IHpcbiAgICAgIC5udW1iZXIoKVxuICAgICAgLmRlc2NyaWJlKFwiQSB2YWx1ZSBvbiBhbiB4IGF4aXMuXCIpXG4gICAgICAvLyAuZGVmYXVsdChudWxsKVxuICAgICAgLm51bGxhYmxlKClcbiAgICAgIC5kZXNjcmliZShcIkEgdmFsdWUgb24gYW4geCBheGlzLlwiKVxuICAgICAgLmRlZmF1bHQobnVsbCksXG4gICAgeTogelxuICAgICAgLm51bWJlcigpXG4gICAgICAuZGVzY3JpYmUoXCJBIHZhbHVlIG9uIGEgeSBheGlzLlwiKVxuICAgICAgLy8gLmRlZmF1bHQobnVsbClcbiAgICAgIC5udWxsYWJsZSgpXG4gICAgICAuZGVzY3JpYmUoXCJBIHZhbHVlIG9uIGEgeSBheGlzLlwiKVxuICAgICAgLmRlZmF1bHQobnVsbCksXG4gIH0pXG4gIC5kZXNjcmliZShcbiAgICBcIkEgcGFpciBvZiBmbG9hdHMgdHlwaWNhbGx5IHVzZWQgYXMgYSBwb2ludCBvbiBhIDIgZGltZW5zaW9uYWwgZ3JpZC5cIlxuICApO1xuIl19
+export default z.object({ "x": z.number().nullable().describe("A value on an x axis.").default(null), "y": z.number().nullable().describe("A value on a y axis.").default(null) }).describe("A pair of floats typically used as a point on a 2 dimensional grid.");
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiem9kLXBvaW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL3pvZC96b2QtcG9pbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLENBQUMsRUFBRSxNQUFNLEtBQUssQ0FBQztBQUV4QixlQUFlLENBQUMsQ0FBQyxNQUFNLENBQUMsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxzQkFBc0IsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsUUFBUSxDQUFDLHFFQUFxRSxDQUFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB6IH0gZnJvbSBcInpvZFwiO1xuXG5leHBvcnQgZGVmYXVsdCB6Lm9iamVjdCh7IFwieFwiOiB6Lm51bWJlcigpLm51bGxhYmxlKCkuZGVzY3JpYmUoXCJBIHZhbHVlIG9uIGFuIHggYXhpcy5cIikuZGVmYXVsdChudWxsKSwgXCJ5XCI6IHoubnVtYmVyKCkubnVsbGFibGUoKS5kZXNjcmliZShcIkEgdmFsdWUgb24gYSB5IGF4aXMuXCIpLmRlZmF1bHQobnVsbCkgfSkuZGVzY3JpYmUoXCJBIHBhaXIgb2YgZmxvYXRzIHR5cGljYWxseSB1c2VkIGFzIGEgcG9pbnQgb24gYSAyIGRpbWVuc2lvbmFsIGdyaWQuXCIpO1xuIl19

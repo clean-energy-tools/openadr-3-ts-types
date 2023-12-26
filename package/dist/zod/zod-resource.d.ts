@@ -19,17 +19,17 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>;
     targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
@@ -44,17 +44,17 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>;
 }, "strip", z.ZodTypeAny, {
     resourceName: string;
@@ -64,18 +64,18 @@ declare const _default: z.ZodObject<{
     objectType?: "RESOURCE" | undefined;
     venID?: string | undefined;
     attributes?: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | undefined;
 }, {
     resourceName: string;
@@ -85,18 +85,18 @@ declare const _default: z.ZodObject<{
     objectType?: "RESOURCE" | undefined;
     venID?: string | undefined;
     attributes?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | undefined;
 }>;
 export default _default;

@@ -34,10 +34,10 @@ declare const _default: z.ZodObject<{
         units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     }, "strip", z.ZodTypeAny, {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }, {
         payloadType: string;
         objectType?: string | undefined;
@@ -78,31 +78,31 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     payloadDescriptors: ({
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     } | {
         objectType: string;
         payloadType: string;
@@ -166,11 +166,11 @@ declare const _default: z.ZodObject<{
         confidence?: number | undefined;
     })[] | null | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
 }>;
 export default _default;

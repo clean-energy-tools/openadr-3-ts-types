@@ -35,26 +35,26 @@ declare const _default: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     programID: string;
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     clientName: string;
     objectOperations: {
@@ -81,11 +81,11 @@ declare const _default: z.ZodObject<{
     modificationDateTime?: string | undefined;
     objectType?: "SUBSCRIPTION" | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
 }>;
 export default _default;

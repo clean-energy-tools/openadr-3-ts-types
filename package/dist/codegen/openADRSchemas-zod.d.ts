@@ -32,10 +32,10 @@ export declare const eventPayloadDescriptorSchema: z.ZodObject<{
     units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
 }, "strip", z.ZodTypeAny, {
+    currency: string | null;
     objectType: string;
     payloadType: string;
     units: string | null;
-    currency: string | null;
 }, {
     payloadType: string;
     objectType?: string | undefined;
@@ -96,17 +96,17 @@ export declare const valuesMapSchema: z.ZodObject<{
         y?: number | null | undefined;
     }>]>, "many">;
 }, "strip", z.ZodTypeAny, {
-    type: string;
     values: (string | number | boolean | {
         x: number | null;
         y: number | null;
     })[];
-}, {
     type: string;
+}, {
     values: (string | number | boolean | {
         x?: number | null | undefined;
         y?: number | null | undefined;
     })[];
+    type: string;
 }>;
 export declare const resourceSchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
@@ -128,17 +128,17 @@ export declare const resourceSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>;
     targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
@@ -153,17 +153,17 @@ export declare const resourceSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>;
 }, "strip", z.ZodTypeAny, {
     resourceName: string;
@@ -173,18 +173,18 @@ export declare const resourceSchema: z.ZodObject<{
     objectType?: "RESOURCE" | undefined;
     venID?: string | undefined;
     attributes?: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | undefined;
 }, {
     resourceName: string;
@@ -194,18 +194,18 @@ export declare const resourceSchema: z.ZodObject<{
     objectType?: "RESOURCE" | undefined;
     venID?: string | undefined;
     attributes?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | undefined;
 }>;
 export declare const reportDescriptorSchema: z.ZodObject<{
@@ -225,17 +225,17 @@ export declare const reportDescriptorSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>>;
     aggregate: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
     startInterval: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
@@ -246,11 +246,11 @@ export declare const reportDescriptorSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     repeat: number;
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     payloadType: string;
     readingType: string | null;
@@ -265,11 +265,11 @@ export declare const reportDescriptorSchema: z.ZodObject<{
     readingType?: string | null | undefined;
     units?: string | null | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
     aggregate?: boolean | undefined;
     startInterval?: number | undefined;
@@ -319,10 +319,10 @@ export declare const programSchema: z.ZodObject<{
         units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     }, "strip", z.ZodTypeAny, {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }, {
         payloadType: string;
         objectType?: string | undefined;
@@ -363,31 +363,31 @@ export declare const programSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>>;
 }, "strip", z.ZodTypeAny, {
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     payloadDescriptors: ({
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     } | {
         objectType: string;
         payloadType: string;
@@ -455,11 +455,11 @@ export declare const programSchema: z.ZodObject<{
         confidence?: number | undefined;
     })[] | null | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
 }>;
 export declare const intervalSchema: z.ZodObject<{
@@ -490,26 +490,26 @@ export declare const intervalSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
     id: number;
     payloads: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[];
     intervalPeriod?: {
         start: string;
@@ -519,11 +519,11 @@ export declare const intervalSchema: z.ZodObject<{
 }, {
     id: number;
     payloads: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[];
     intervalPeriod?: {
         start?: string | undefined;
@@ -552,17 +552,17 @@ export declare const eventSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>>;
     reportDescriptors: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodArray<z.ZodObject<{
         payloadType: z.ZodString;
@@ -581,17 +581,17 @@ export declare const eventSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>>>;
         aggregate: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
         startInterval: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
@@ -602,11 +602,11 @@ export declare const eventSchema: z.ZodObject<{
     }, "strip", z.ZodTypeAny, {
         repeat: number;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         payloadType: string;
         readingType: string | null;
@@ -621,11 +621,11 @@ export declare const eventSchema: z.ZodObject<{
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
         aggregate?: boolean | undefined;
         startInterval?: number | undefined;
@@ -640,10 +640,10 @@ export declare const eventSchema: z.ZodObject<{
         units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     }, "strip", z.ZodTypeAny, {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }, {
         payloadType: string;
         objectType?: string | undefined;
@@ -691,26 +691,26 @@ export declare const eventSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">;
     }, "strip", z.ZodTypeAny, {
         id: number;
         payloads: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[];
         intervalPeriod?: {
             start: string;
@@ -720,11 +720,11 @@ export declare const eventSchema: z.ZodObject<{
     }, {
         id: number;
         payloads: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[];
         intervalPeriod?: {
             start?: string | undefined;
@@ -737,20 +737,20 @@ export declare const eventSchema: z.ZodObject<{
     eventName: string | null;
     priority: number | null;
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     reportDescriptors: {
         repeat: number;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         payloadType: string;
         readingType: string | null;
@@ -762,19 +762,19 @@ export declare const eventSchema: z.ZodObject<{
         frequency: number;
     }[] | null;
     payloadDescriptors: {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }[] | null;
     intervals: {
         id: number;
         payloads: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[];
         intervalPeriod?: {
             start: string;
@@ -796,11 +796,11 @@ export declare const eventSchema: z.ZodObject<{
     intervals: {
         id: number;
         payloads: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[];
         intervalPeriod?: {
             start?: string | undefined;
@@ -815,22 +815,22 @@ export declare const eventSchema: z.ZodObject<{
     eventName?: string | null | undefined;
     priority?: number | null | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
     reportDescriptors?: {
         payloadType: string;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
         aggregate?: boolean | undefined;
         startInterval?: number | undefined;
@@ -887,26 +887,26 @@ export declare const subscriptionSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>>;
 }, "strip", z.ZodTypeAny, {
     programID: string;
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     clientName: string;
     objectOperations: {
@@ -933,11 +933,11 @@ export declare const subscriptionSchema: z.ZodObject<{
     modificationDateTime?: string | undefined;
     objectType?: "SUBSCRIPTION" | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
 }>;
 export declare const venSchema: z.ZodObject<{
@@ -959,17 +959,17 @@ export declare const venSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>;
     targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
@@ -984,17 +984,17 @@ export declare const venSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>;
     resources: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodArray<z.ZodObject<{
         id: z.ZodOptional<z.ZodString>;
@@ -1016,17 +1016,17 @@ export declare const venSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>;
         targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
             type: z.ZodString;
@@ -1041,17 +1041,17 @@ export declare const venSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>;
     }, "strip", z.ZodTypeAny, {
         resourceName: string;
@@ -1061,18 +1061,18 @@ export declare const venSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     }, {
         resourceName: string;
@@ -1082,18 +1082,18 @@ export declare const venSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
     }>, "many">>>>;
 }, "strip", z.ZodTypeAny, {
@@ -1105,18 +1105,18 @@ export declare const venSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     }[] | null;
     venName: string;
@@ -1125,18 +1125,18 @@ export declare const venSchema: z.ZodObject<{
     modificationDateTime?: string | undefined;
     objectType?: "VEN" | undefined;
     attributes?: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | undefined;
 }, {
     venName: string;
@@ -1145,18 +1145,18 @@ export declare const venSchema: z.ZodObject<{
     modificationDateTime?: string | undefined;
     objectType?: "VEN" | undefined;
     attributes?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | undefined;
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | undefined;
     resources?: {
         resourceName: string;
@@ -1166,18 +1166,18 @@ export declare const venSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
     }[] | null | undefined;
 }>;
@@ -1255,26 +1255,26 @@ export declare const reportSchema: z.ZodObject<{
                     y?: number | null | undefined;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
-            }, {
                 type: string;
+            }, {
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }>, "many">;
         }, "strip", z.ZodTypeAny, {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -1284,11 +1284,11 @@ export declare const reportSchema: z.ZodObject<{
         }, {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -1300,11 +1300,11 @@ export declare const reportSchema: z.ZodObject<{
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -1322,11 +1322,11 @@ export declare const reportSchema: z.ZodObject<{
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -1358,11 +1358,11 @@ export declare const reportSchema: z.ZodObject<{
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -1389,11 +1389,11 @@ export declare const reportSchema: z.ZodObject<{
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -1438,17 +1438,17 @@ export declare const notificationSchema: z.ZodObject<{
             y?: number | null | undefined;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
-    }, {
         type: string;
+    }, {
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }>, "many">>>>;
     object: z.ZodUnion<[z.ZodObject<{
         id: z.ZodOptional<z.ZodString>;
@@ -1491,10 +1491,10 @@ export declare const notificationSchema: z.ZodObject<{
             units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
             currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         }, "strip", z.ZodTypeAny, {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }, {
             payloadType: string;
             objectType?: string | undefined;
@@ -1535,31 +1535,31 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>>>;
     }, "strip", z.ZodTypeAny, {
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         payloadDescriptors: ({
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         } | {
             objectType: string;
             payloadType: string;
@@ -1627,11 +1627,11 @@ export declare const notificationSchema: z.ZodObject<{
             confidence?: number | undefined;
         })[] | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
     }>, z.ZodObject<{
         id: z.ZodOptional<z.ZodString>;
@@ -1707,26 +1707,26 @@ export declare const notificationSchema: z.ZodObject<{
                         y?: number | null | undefined;
                     }>]>, "many">;
                 }, "strip", z.ZodTypeAny, {
-                    type: string;
                     values: (string | number | boolean | {
                         x: number | null;
                         y: number | null;
                     })[];
-                }, {
                     type: string;
+                }, {
                     values: (string | number | boolean | {
                         x?: number | null | undefined;
                         y?: number | null | undefined;
                     })[];
+                    type: string;
                 }>, "many">;
             }, "strip", z.ZodTypeAny, {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x: number | null;
                         y: number | null;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start: string;
@@ -1736,11 +1736,11 @@ export declare const notificationSchema: z.ZodObject<{
             }, {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x?: number | null | undefined;
                         y?: number | null | undefined;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start?: string | undefined;
@@ -1752,11 +1752,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x: number | null;
                         y: number | null;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start: string;
@@ -1774,11 +1774,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x?: number | null | undefined;
                         y?: number | null | undefined;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start?: string | undefined;
@@ -1810,11 +1810,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x: number | null;
                         y: number | null;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start: string;
@@ -1841,11 +1841,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x?: number | null | undefined;
                         y?: number | null | undefined;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start?: string | undefined;
@@ -1894,17 +1894,17 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>>>;
         reportDescriptors: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodArray<z.ZodObject<{
             payloadType: z.ZodString;
@@ -1923,17 +1923,17 @@ export declare const notificationSchema: z.ZodObject<{
                     y?: number | null | undefined;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
-            }, {
                 type: string;
+            }, {
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }>, "many">>>>;
             aggregate: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
             startInterval: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
@@ -1944,11 +1944,11 @@ export declare const notificationSchema: z.ZodObject<{
         }, "strip", z.ZodTypeAny, {
             repeat: number;
             targets: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | null;
             payloadType: string;
             readingType: string | null;
@@ -1963,11 +1963,11 @@ export declare const notificationSchema: z.ZodObject<{
             readingType?: string | null | undefined;
             units?: string | null | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | null | undefined;
             aggregate?: boolean | undefined;
             startInterval?: number | undefined;
@@ -1982,10 +1982,10 @@ export declare const notificationSchema: z.ZodObject<{
             units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
             currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         }, "strip", z.ZodTypeAny, {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }, {
             payloadType: string;
             objectType?: string | undefined;
@@ -2033,26 +2033,26 @@ export declare const notificationSchema: z.ZodObject<{
                     y?: number | null | undefined;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
-            }, {
                 type: string;
+            }, {
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }>, "many">;
         }, "strip", z.ZodTypeAny, {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -2062,11 +2062,11 @@ export declare const notificationSchema: z.ZodObject<{
         }, {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -2079,20 +2079,20 @@ export declare const notificationSchema: z.ZodObject<{
         eventName: string | null;
         priority: number | null;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         reportDescriptors: {
             repeat: number;
             targets: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | null;
             payloadType: string;
             readingType: string | null;
@@ -2104,19 +2104,19 @@ export declare const notificationSchema: z.ZodObject<{
             frequency: number;
         }[] | null;
         payloadDescriptors: {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }[] | null;
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -2138,11 +2138,11 @@ export declare const notificationSchema: z.ZodObject<{
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -2157,22 +2157,22 @@ export declare const notificationSchema: z.ZodObject<{
         eventName?: string | null | undefined;
         priority?: number | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
         reportDescriptors?: {
             payloadType: string;
             readingType?: string | null | undefined;
             units?: string | null | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | null | undefined;
             aggregate?: boolean | undefined;
             startInterval?: number | undefined;
@@ -2228,26 +2228,26 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>>>;
     }, "strip", z.ZodTypeAny, {
         programID: string;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         clientName: string;
         objectOperations: {
@@ -2274,11 +2274,11 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "SUBSCRIPTION" | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
     }>, z.ZodObject<{
         id: z.ZodOptional<z.ZodString>;
@@ -2299,17 +2299,17 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>;
         targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
             type: z.ZodString;
@@ -2324,17 +2324,17 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>;
         resources: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodArray<z.ZodObject<{
             id: z.ZodOptional<z.ZodString>;
@@ -2356,17 +2356,17 @@ export declare const notificationSchema: z.ZodObject<{
                     y?: number | null | undefined;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
-            }, {
                 type: string;
+            }, {
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }>, "many">>;
             targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
                 type: z.ZodString;
@@ -2381,17 +2381,17 @@ export declare const notificationSchema: z.ZodObject<{
                     y?: number | null | undefined;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
-            }, {
                 type: string;
+            }, {
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }>, "many">>;
         }, "strip", z.ZodTypeAny, {
             resourceName: string;
@@ -2401,18 +2401,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
         }, {
             resourceName: string;
@@ -2422,18 +2422,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
         }>, "many">>>>;
     }, "strip", z.ZodTypeAny, {
@@ -2445,18 +2445,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
         }[] | null;
         venName: string;
@@ -2465,18 +2465,18 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "VEN" | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     }, {
         venName: string;
@@ -2485,18 +2485,18 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "VEN" | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         resources?: {
             resourceName: string;
@@ -2506,18 +2506,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
         }[] | null | undefined;
     }>, z.ZodObject<{
@@ -2540,17 +2540,17 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>;
         targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
             type: z.ZodString;
@@ -2565,17 +2565,17 @@ export declare const notificationSchema: z.ZodObject<{
                 y?: number | null | undefined;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
-        }, {
             type: string;
+        }, {
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }>, "many">>;
     }, "strip", z.ZodTypeAny, {
         resourceName: string;
@@ -2585,18 +2585,18 @@ export declare const notificationSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     }, {
         resourceName: string;
@@ -2606,18 +2606,18 @@ export declare const notificationSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
     }>]>;
 }, "strip", z.ZodTypeAny, {
@@ -2629,32 +2629,32 @@ export declare const notificationSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     } | {
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         payloadDescriptors: ({
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         } | {
             objectType: string;
             payloadType: string;
@@ -2690,20 +2690,20 @@ export declare const notificationSchema: z.ZodObject<{
         eventName: string | null;
         priority: number | null;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         reportDescriptors: {
             repeat: number;
             targets: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | null;
             payloadType: string;
             readingType: string | null;
@@ -2715,19 +2715,19 @@ export declare const notificationSchema: z.ZodObject<{
             frequency: number;
         }[] | null;
         payloadDescriptors: {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }[] | null;
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -2747,11 +2747,11 @@ export declare const notificationSchema: z.ZodObject<{
     } | {
         programID: string;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         clientName: string;
         objectOperations: {
@@ -2773,18 +2773,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
         }[] | null;
         venName: string;
@@ -2793,18 +2793,18 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "VEN" | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     } | {
         programID: string;
@@ -2823,11 +2823,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x: number | null;
                         y: number | null;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start: string;
@@ -2854,32 +2854,32 @@ export declare const notificationSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     } | {
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         payloadDescriptors: ({
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         } | {
             objectType: string;
             payloadType: string;
@@ -2915,20 +2915,20 @@ export declare const notificationSchema: z.ZodObject<{
         eventName: string | null;
         priority: number | null;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         reportDescriptors: {
             repeat: number;
             targets: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | null;
             payloadType: string;
             readingType: string | null;
@@ -2940,19 +2940,19 @@ export declare const notificationSchema: z.ZodObject<{
             frequency: number;
         }[] | null;
         payloadDescriptors: {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }[] | null;
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start: string;
@@ -2972,11 +2972,11 @@ export declare const notificationSchema: z.ZodObject<{
     } | {
         programID: string;
         targets: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | null;
         clientName: string;
         objectOperations: {
@@ -2998,18 +2998,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x: number | null;
                     y: number | null;
                 })[];
+                type: string;
             }[] | undefined;
         }[] | null;
         venName: string;
@@ -3018,18 +3018,18 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "VEN" | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x: number | null;
                 y: number | null;
             })[];
+            type: string;
         }[] | undefined;
     } | {
         programID: string;
@@ -3048,11 +3048,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x: number | null;
                         y: number | null;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start: string;
@@ -3074,11 +3074,11 @@ export declare const notificationSchema: z.ZodObject<{
     } | undefined);
     objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     targets: {
-        type: string;
         values: (string | number | boolean | {
             x: number | null;
             y: number | null;
         })[];
+        type: string;
     }[] | null;
     operation: "GET" | "POST" | "PUT" | "DELETE";
 }, {
@@ -3090,18 +3090,18 @@ export declare const notificationSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
     } | {
         programName: string;
@@ -3140,22 +3140,22 @@ export declare const notificationSchema: z.ZodObject<{
             confidence?: number | undefined;
         })[] | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
     } | {
         programID: string;
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -3170,22 +3170,22 @@ export declare const notificationSchema: z.ZodObject<{
         eventName?: string | null | undefined;
         priority?: number | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
         reportDescriptors?: {
             payloadType: string;
             readingType?: string | null | undefined;
             units?: string | null | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | null | undefined;
             aggregate?: boolean | undefined;
             startInterval?: number | undefined;
@@ -3219,11 +3219,11 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "SUBSCRIPTION" | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
     } | {
         venName: string;
@@ -3232,18 +3232,18 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "VEN" | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         resources?: {
             resourceName: string;
@@ -3253,18 +3253,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
         }[] | null | undefined;
     } | {
@@ -3275,11 +3275,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x?: number | null | undefined;
                         y?: number | null | undefined;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start?: string | undefined;
@@ -3315,18 +3315,18 @@ export declare const notificationSchema: z.ZodObject<{
         objectType?: "RESOURCE" | undefined;
         venID?: string | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
     } | {
         programName: string;
@@ -3365,22 +3365,22 @@ export declare const notificationSchema: z.ZodObject<{
             confidence?: number | undefined;
         })[] | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
     } | {
         programID: string;
         intervals: {
             id: number;
             payloads: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[];
             intervalPeriod?: {
                 start?: string | undefined;
@@ -3395,22 +3395,22 @@ export declare const notificationSchema: z.ZodObject<{
         eventName?: string | null | undefined;
         priority?: number | null | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
         reportDescriptors?: {
             payloadType: string;
             readingType?: string | null | undefined;
             units?: string | null | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | null | undefined;
             aggregate?: boolean | undefined;
             startInterval?: number | undefined;
@@ -3444,11 +3444,11 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "SUBSCRIPTION" | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | null | undefined;
     } | {
         venName: string;
@@ -3457,18 +3457,18 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "VEN" | undefined;
         attributes?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         targets?: {
-            type: string;
             values: (string | number | boolean | {
                 x?: number | null | undefined;
                 y?: number | null | undefined;
             })[];
+            type: string;
         }[] | undefined;
         resources?: {
             resourceName: string;
@@ -3478,18 +3478,18 @@ export declare const notificationSchema: z.ZodObject<{
             objectType?: "RESOURCE" | undefined;
             venID?: string | undefined;
             attributes?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
             targets?: {
-                type: string;
                 values: (string | number | boolean | {
                     x?: number | null | undefined;
                     y?: number | null | undefined;
                 })[];
+                type: string;
             }[] | undefined;
         }[] | null | undefined;
     } | {
@@ -3500,11 +3500,11 @@ export declare const notificationSchema: z.ZodObject<{
             intervals: {
                 id: number;
                 payloads: {
-                    type: string;
                     values: (string | number | boolean | {
                         x?: number | null | undefined;
                         y?: number | null | undefined;
                     })[];
+                    type: string;
                 }[];
                 intervalPeriod?: {
                     start?: string | undefined;
@@ -3536,11 +3536,11 @@ export declare const notificationSchema: z.ZodObject<{
     objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     operation: "GET" | "POST" | "PUT" | "DELETE";
     targets?: {
-        type: string;
         values: (string | number | boolean | {
             x?: number | null | undefined;
             y?: number | null | undefined;
         })[];
+        type: string;
     }[] | null | undefined;
 }>;
 //# sourceMappingURL=openADRSchemas-zod.d.ts.map

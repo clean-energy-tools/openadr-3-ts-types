@@ -9,12 +9,13 @@ The use of the name OpenADR is in reference to the OpenADR trademark.
 # Installation
 
 ```shell
-npm install openadr-3-ts-types --save  # npm
-# The following are untested
-yarn add openadr-3-ts-types            # yarn
-bun add openadr-3-ts-types             # bun
-pnpm add openadr-3-ts-types            # pnpm
+npm install \
+        openadr-3-ts-types \
+        zod joi \
+        --save
 ```
+
+This package does not directly depend on Zod or Joi, your application must do so.  It should be sufficient to install Zod or Joi, and to not install both.
 
 # Overview
 

@@ -41,7 +41,7 @@ export { default as parseVen } from './zod/zod-ven.js';
 
 import { schemas } from './joi/oadr3.js';
 
-export const joiDateTime = schemas.components.dateTime;
+export const joiDateTime = schemas.components.dateTime; //.prefs({ convert: false });
 export const joiDuration = schemas.components.duration;
 
 export const joiEvent = schemas.components.event;
@@ -70,7 +70,7 @@ export const joiValuesMap = schemas.components.valuesMap;
 export const joiVen = schemas.components.ven;
 
 
-// These linex are for inspecting the type as understood by Zod.
+// These lines are for inspecting the type as understood by Zod.
 // Uncomment the lines, fixing up a declaration for the type
 // you want to inspect.  Then, in Visual Studio Code, hover the
 // mouse over the `zodTypeName` variable, and a popup appears

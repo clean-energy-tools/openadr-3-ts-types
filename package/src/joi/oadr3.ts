@@ -1,6 +1,37 @@
-/* eslint-disable */
-/* prettier-ignore */
-import Joi from "joi"
+import _Joi, { Extension } from "joi";
+import {
+    isoDate, isoDateTime, isoTime, isoYearMonth
+} from 'joi-iso-datestring';
+
+// The treatment for the first .extend comes from:
+//   https://stackoverflow.com/questions/67132969/typescript-joi-date-validation
+// By default the compiler insisted it had to be:
+//
+//   const Joi = _Joi.extend(isoDate(_Joi))
+//        .extend(isoDateTime)
+//        .extend(isoTime)
+//        .extend(isoYearMonth);
+//
+// Calling `isoDate(_Joi)` was done to avoid this error:
+//
+// src/joi/oadr3.ts:8:25 - error TS2345: Argument of type '(joi: Root) => Extension | ExtensionFactory' is not assignable to parameter of type 'Extension | ExtensionFactory'.
+//  Type '(joi: Root) => Extension | ExtensionFactory' is not assignable to type 'ExtensionFactory'.
+//    Type 'Extension | ExtensionFactory' is not assignable to type 'Extension'.
+//      Type 'ExtensionFactory' is not assignable to type 'Extension'.
+//
+// 8 const Joi = _Joi.extend(isoDate)
+//                           ~~~~~~~
+//
+// Having to call isoDate did not make sense.  None of the documentation
+// said anything like this.  The examples show simply listing
+// the Joi extension.
+//
+// The following casts it to be what it is, a Joi Extension.
+
+const Joi = _Joi.extend(isoDate as unknown as Extension)
+                .extend(isoDateTime)
+                .extend(isoTime)
+                .extend(isoYearMonth);
 
 export const schemas = {
   parameters: {
@@ -130,8 +161,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.date().description(
+      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.isoDateTime().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -182,7 +213,7 @@ export const schemas = {
         )
         .min(0),
       intervalPeriod: Joi.object({
-        start: Joi.date().description("datetime in ISO 8601 format").required(),
+        start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -205,7 +236,7 @@ export const schemas = {
         .description(
           "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
         )
-        .unknown(),
+        /* .unknown() */,
       programDescriptions: Joi.array()
         .allow(null)
         .default(null)
@@ -216,7 +247,7 @@ export const schemas = {
               .description("A human or machine readable program description")
               .required()
               .uri({}),
-          }).unknown()
+          })/* .unknown() */
         ),
       bindingEvents: Joi.boolean()
         .default(false)
@@ -261,7 +292,7 @@ export const schemas = {
                 .description(
                   "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"
                 )
-                .unknown(),
+                /* .unknown() */,
               Joi.object({
                 objectType: Joi.string()
                   .allow("")
@@ -307,7 +338,7 @@ export const schemas = {
                 .description(
                   "Contextual information used to interpret report payload values.\nE.g. a USAGE payload simply contains a usage value, an\nassociated descriptor provides necessary context such as units and data quality.\n"
                 )
-                .unknown()
+                /* .unknown() */
             )
         ),
       targets: Joi.array()
@@ -351,26 +382,26 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
     })
       .description("Provides program specific metadata from VTN to VEN.")
-      .unknown(),
+      /* .unknown() */,
     report: Joi.object({
       id: Joi.string()
         .description("URL safe VTN assigned object ID.")
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.date().description(
+      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.isoDateTime().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -453,7 +484,7 @@ export const schemas = {
             .description(
               "Contextual information used to interpret report payload values.\nE.g. a USAGE payload simply contains a usage value, an\nassociated descriptor provides necessary context such as units and data quality.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
       resources: Joi.array()
         .description(
@@ -470,7 +501,7 @@ export const schemas = {
               .max(128)
               .min(1),
             intervalPeriod: Joi.object({
-              start: Joi.date()
+              start: Joi.isoDateTime()
                 .description("datetime in ISO 8601 format")
                 .required(),
               duration: Joi.string()
@@ -495,7 +526,7 @@ export const schemas = {
               .description(
                 "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
               )
-              .unknown(),
+              /* .unknown() */,
             intervals: Joi.array()
               .description("A list of interval objects.")
               .required()
@@ -508,7 +539,7 @@ export const schemas = {
                     .required()
                     .integer(),
                   intervalPeriod: Joi.object({
-                    start: Joi.date()
+                    start: Joi.isoDateTime()
                       .description("datetime in ISO 8601 format")
                       .required(),
                     duration: Joi.string()
@@ -533,7 +564,7 @@ export const schemas = {
                     .description(
                       "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
                     )
-                    .unknown(),
+                    /* .unknown() */,
                   payloads: Joi.array()
                     .description("A list of valuesMap objects.")
                     .required()
@@ -574,36 +605,36 @@ export const schemas = {
                                   .description(
                                     "A pair of floats typically used as a point on a 2 dimensional grid."
                                   )
-                                  .unknown()
+                                  /* .unknown() */
                               )
                           ),
                       })
                         .description(
                           "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                         )
-                        .unknown()
+                        /* .unknown() */
                     ),
                 })
                   .description(
                     "An object defining a temporal window and a list of valuesMaps.\nif intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.\n"
                   )
-                  .unknown()
+                  /* .unknown() */
               ),
           })
             .description("Report data associated with a resource.")
-            .unknown()
+            /* .unknown() */
         ),
     })
       .description("report object.")
-      .unknown(),
+      /* .unknown() */,
     event: Joi.object({
       id: Joi.string()
         .description("URL safe VTN assigned object ID.")
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.date().description(
+      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.isoDateTime().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -672,14 +703,14 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      // /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            // /* .unknown() */
         ),
       reportDescriptors: Joi.array()
         .allow(null)
@@ -749,14 +780,14 @@ export const schemas = {
                             .description(
                               "A pair of floats typically used as a point on a 2 dimensional grid."
                             )
-                            .unknown()
+                            // /* .unknown() */
                         )
                     ),
                 })
                   .description(
                     "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                   )
-                  .unknown()
+                  // /* .unknown() */
               ),
             aggregate: Joi.boolean()
               .default(false)
@@ -796,7 +827,7 @@ export const schemas = {
             .description(
               "An object that may be used to request a report from a VEN.\nSee OpenADR REST User Guide for detailed description of how configure a report request.\n"
             )
-            .unknown()
+            // /* .unknown() */
         ),
       payloadDescriptors: Joi.array()
         .allow(null)
@@ -832,10 +863,10 @@ export const schemas = {
             .description(
               "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"
             )
-            .unknown()
+            // /* .unknown() */
         ),
       intervalPeriod: Joi.object({
-        start: Joi.date().description("datetime in ISO 8601 format").required(),
+        start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -857,8 +888,8 @@ export const schemas = {
       })
         .description(
           "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
-        )
-        .unknown(),
+        ),
+        // /* .unknown() */,
       intervals: Joi.array()
         .description("A list of interval objects.")
         .required()
@@ -871,7 +902,7 @@ export const schemas = {
               .required()
               .integer(),
             intervalPeriod: Joi.object({
-              start: Joi.date()
+              start: Joi.isoDateTime()
                 .description("datetime in ISO 8601 format")
                 .required(),
               duration: Joi.string()
@@ -895,8 +926,8 @@ export const schemas = {
             })
               .description(
                 "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
-              )
-              .unknown(),
+              ),
+              // /* .unknown() */,
             payloads: Joi.array()
               .description("A list of valuesMap objects.")
               .required()
@@ -937,34 +968,37 @@ export const schemas = {
                             .description(
                               "A pair of floats typically used as a point on a 2 dimensional grid."
                             )
-                            .unknown()
+                            // /* .unknown() */
                         )
                     ),
                 })
                   .description(
                     "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                   )
-                  .unknown()
+                  // /* .unknown() */
               ),
           })
             .description(
               "An object defining a temporal window and a list of valuesMaps.\nif intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.\n"
             )
-            .unknown()
+            // /* .unknown() */
         ),
     })
       .description(
         "Event object to communicate a Demand Response request to VEN.\nIf intervalPeriod is present, sets start time and duration of intervals.\n"
       )
-      .unknown(),
+      .prefs({
+        allowUnknown: false
+      }),
+      // /* .unknown() */,
     subscription: Joi.object({
       id: Joi.string()
         .description("URL safe VTN assigned object ID.")
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.date().description(
+      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.isoDateTime().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -1027,7 +1061,7 @@ export const schemas = {
               .min(0),
           })
             .description("object type, operations, and callbackUrl.")
-            .unknown()
+            /* .unknown() */
         ),
       targets: Joi.array()
         .allow(null)
@@ -1072,28 +1106,28 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
     })
       .description(
         "An object created by a client to receive notification of operations on objects.\nClients may subscribe to be notified when a type of object is created,\nupdated, or deleted.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     ven: Joi.object({
       id: Joi.string()
         .description("URL safe VTN assigned object ID.")
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.date().description(
+      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.isoDateTime().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -1146,14 +1180,14 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
       targets: Joi.array()
         .description("A list of valuesMap objects describing target criteria.")
@@ -1194,14 +1228,14 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
       resources: Joi.array()
         .allow(null)
@@ -1216,10 +1250,10 @@ export const schemas = {
               .pattern(/^[a-zA-Z0-9_-]*$/, {})
               .max(128)
               .min(1),
-            createdDateTime: Joi.date().description(
+            createdDateTime: Joi.isoDateTime().description(
               "datetime in ISO 8601 format"
             ),
-            modificationDateTime: Joi.date().description(
+            modificationDateTime: Joi.isoDateTime().description(
               "datetime in ISO 8601 format"
             ),
             objectType: Joi.string()
@@ -1277,14 +1311,14 @@ export const schemas = {
                             .description(
                               "A pair of floats typically used as a point on a 2 dimensional grid."
                             )
-                            .unknown()
+                            /* .unknown() */
                         )
                     ),
                 })
                   .description(
                     "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                   )
-                  .unknown()
+                  /* .unknown() */
               ),
             targets: Joi.array()
               .description(
@@ -1327,32 +1361,32 @@ export const schemas = {
                             .description(
                               "A pair of floats typically used as a point on a 2 dimensional grid."
                             )
-                            .unknown()
+                            /* .unknown() */
                         )
                     ),
                 })
                   .description(
                     "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                   )
-                  .unknown()
+                  /* .unknown() */
               ),
           })
             .description(
               "A resource is an energy device or system subject to control by a VEN.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
     })
       .description("Ven represents a client with the ven role.")
-      .unknown(),
+      /* .unknown() */,
     resource: Joi.object({
       id: Joi.string()
         .description("URL safe VTN assigned object ID.")
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.date().description(
+      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.isoDateTime().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -1410,14 +1444,14 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
       targets: Joi.array()
         .description("A list of valuesMap objects describing target criteria.")
@@ -1458,20 +1492,20 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
     })
       .description(
         "A resource is an energy device or system subject to control by a VEN.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     interval: Joi.object({
       id: Joi.number()
         .description(
@@ -1480,7 +1514,7 @@ export const schemas = {
         .required()
         .integer(),
       intervalPeriod: Joi.object({
-        start: Joi.date().description("datetime in ISO 8601 format").required(),
+        start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -1503,7 +1537,7 @@ export const schemas = {
         .description(
           "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
         )
-        .unknown(),
+        /* .unknown() */,
       payloads: Joi.array()
         .description("A list of valuesMap objects.")
         .required()
@@ -1544,22 +1578,22 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
     })
       .description(
         "An object defining a temporal window and a list of valuesMaps.\nif intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     intervalPeriod: Joi.object({
-      start: Joi.date().description("datetime in ISO 8601 format").required(),
+      start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
       duration: Joi.string()
         .allow("")
         .default("PT0S")
@@ -1582,7 +1616,7 @@ export const schemas = {
       .description(
         "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     valuesMap: Joi.object({
       type: Joi.string()
         .description(
@@ -1619,14 +1653,14 @@ export const schemas = {
                 .description(
                   "A pair of floats typically used as a point on a 2 dimensional grid."
                 )
-                .unknown()
+                /* .unknown() */
             )
         ),
     })
       .description(
         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     point: Joi.object({
       x: Joi.number()
         .allow(null)
@@ -1642,7 +1676,7 @@ export const schemas = {
       .description(
         "A pair of floats typically used as a point on a 2 dimensional grid."
       )
-      .unknown(),
+      /* .unknown() */,
     eventPayloadDescriptor: Joi.object({
       objectType: Joi.string()
         .allow("")
@@ -1670,7 +1704,7 @@ export const schemas = {
       .description(
         "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     reportPayloadDescriptor: Joi.object({
       objectType: Joi.string()
         .allow("")
@@ -1714,7 +1748,7 @@ export const schemas = {
       .description(
         "Contextual information used to interpret report payload values.\nE.g. a USAGE payload simply contains a usage value, an\nassociated descriptor provides necessary context such as units and data quality.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     reportDescriptor: Joi.object({
       payloadType: Joi.string()
         .description(
@@ -1776,14 +1810,14 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
       aggregate: Joi.boolean()
         .default(false)
@@ -1823,7 +1857,7 @@ export const schemas = {
       .description(
         "An object that may be used to request a report from a VEN.\nSee OpenADR REST User Guide for detailed description of how configure a report request.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     objectID: Joi.string()
       .description("URL safe VTN assigned object ID.")
       .pattern(/^[a-zA-Z0-9_-]*$/, {})
@@ -1883,21 +1917,21 @@ export const schemas = {
                       .description(
                         "A pair of floats typically used as a point on a 2 dimensional grid."
                       )
-                      .unknown()
+                      /* .unknown() */
                   )
               ),
           })
             .description(
               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
             )
-            .unknown()
+            /* .unknown() */
         ),
       object: Joi.alternatives()
         .match("all")
         .try(
           Joi.object({})
             .description("the object that is the subject of the notification.")
-            .unknown(),
+            /* .unknown() */,
           Joi.alternatives()
             .match("one")
             .try(
@@ -1907,10 +1941,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.date().description(
+                createdDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.date().description(
+                modificationDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -1968,7 +2002,7 @@ export const schemas = {
                   )
                   .min(0),
                 intervalPeriod: Joi.object({
-                  start: Joi.date()
+                  start: Joi.isoDateTime()
                     .description("datetime in ISO 8601 format")
                     .required(),
                   duration: Joi.string()
@@ -1993,7 +2027,7 @@ export const schemas = {
                   .description(
                     "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
                   )
-                  .unknown(),
+                  /* .unknown() */,
                 programDescriptions: Joi.array()
                   .allow(null)
                   .default(null)
@@ -2006,7 +2040,7 @@ export const schemas = {
                         )
                         .required()
                         .uri({}),
-                    }).unknown()
+                    })/* .unknown() */
                   ),
                 bindingEvents: Joi.boolean()
                   .default(false)
@@ -2053,7 +2087,7 @@ export const schemas = {
                           .description(
                             "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"
                           )
-                          .unknown(),
+                          /* .unknown() */,
                         Joi.object({
                           objectType: Joi.string()
                             .allow("")
@@ -2099,7 +2133,7 @@ export const schemas = {
                           .description(
                             "Contextual information used to interpret report payload values.\nE.g. a USAGE payload simply contains a usage value, an\nassociated descriptor provides necessary context such as units and data quality.\n"
                           )
-                          .unknown()
+                          /* .unknown() */
                       )
                   ),
                 targets: Joi.array()
@@ -2143,30 +2177,30 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
               })
                 .description(
                   "Provides program specific metadata from VTN to VEN."
                 )
-                .unknown(),
+                /* .unknown() */,
               Joi.object({
                 id: Joi.string()
                   .description("URL safe VTN assigned object ID.")
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.date().description(
+                createdDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.date().description(
+                modificationDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2251,7 +2285,7 @@ export const schemas = {
                       .description(
                         "Contextual information used to interpret report payload values.\nE.g. a USAGE payload simply contains a usage value, an\nassociated descriptor provides necessary context such as units and data quality.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 resources: Joi.array()
                   .description(
@@ -2268,7 +2302,7 @@ export const schemas = {
                         .max(128)
                         .min(1),
                       intervalPeriod: Joi.object({
-                        start: Joi.date()
+                        start: Joi.isoDateTime()
                           .description("datetime in ISO 8601 format")
                           .required(),
                         duration: Joi.string()
@@ -2293,7 +2327,7 @@ export const schemas = {
                         .description(
                           "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
                         )
-                        .unknown(),
+                        /* .unknown() */,
                       intervals: Joi.array()
                         .description("A list of interval objects.")
                         .required()
@@ -2306,7 +2340,7 @@ export const schemas = {
                               .required()
                               .integer(),
                             intervalPeriod: Joi.object({
-                              start: Joi.date()
+                              start: Joi.isoDateTime()
                                 .description("datetime in ISO 8601 format")
                                 .required(),
                               duration: Joi.string()
@@ -2331,7 +2365,7 @@ export const schemas = {
                               .description(
                                 "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
                               )
-                              .unknown(),
+                              /* .unknown() */,
                             payloads: Joi.array()
                               .description("A list of valuesMap objects.")
                               .required()
@@ -2376,38 +2410,38 @@ export const schemas = {
                                             .description(
                                               "A pair of floats typically used as a point on a 2 dimensional grid."
                                             )
-                                            .unknown()
+                                            /* .unknown() */
                                         )
                                     ),
                                 })
                                   .description(
                                     "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                                   )
-                                  .unknown()
+                                  /* .unknown() */
                               ),
                           })
                             .description(
                               "An object defining a temporal window and a list of valuesMaps.\nif intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.\n"
                             )
-                            .unknown()
+                            /* .unknown() */
                         ),
                     })
                       .description("Report data associated with a resource.")
-                      .unknown()
+                      /* .unknown() */
                   ),
               })
                 .description("report object.")
-                .unknown(),
+                /* .unknown() */,
               Joi.object({
                 id: Joi.string()
                   .description("URL safe VTN assigned object ID.")
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.date().description(
+                createdDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.date().description(
+                modificationDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2478,14 +2512,14 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 reportDescriptors: Joi.array()
                   .allow(null)
@@ -2555,14 +2589,14 @@ export const schemas = {
                                       .description(
                                         "A pair of floats typically used as a point on a 2 dimensional grid."
                                       )
-                                      .unknown()
+                                      /* .unknown() */
                                   )
                               ),
                           })
                             .description(
                               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                             )
-                            .unknown()
+                            /* .unknown() */
                         ),
                       aggregate: Joi.boolean()
                         .default(false)
@@ -2602,7 +2636,7 @@ export const schemas = {
                       .description(
                         "An object that may be used to request a report from a VEN.\nSee OpenADR REST User Guide for detailed description of how configure a report request.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 payloadDescriptors: Joi.array()
                   .allow(null)
@@ -2638,10 +2672,10 @@ export const schemas = {
                       .description(
                         "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 intervalPeriod: Joi.object({
-                  start: Joi.date()
+                  start: Joi.isoDateTime()
                     .description("datetime in ISO 8601 format")
                     .required(),
                   duration: Joi.string()
@@ -2666,7 +2700,7 @@ export const schemas = {
                   .description(
                     "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
                   )
-                  .unknown(),
+                  /* .unknown() */,
                 intervals: Joi.array()
                   .description("A list of interval objects.")
                   .required()
@@ -2679,7 +2713,7 @@ export const schemas = {
                         .required()
                         .integer(),
                       intervalPeriod: Joi.object({
-                        start: Joi.date()
+                        start: Joi.isoDateTime()
                           .description("datetime in ISO 8601 format")
                           .required(),
                         duration: Joi.string()
@@ -2704,7 +2738,7 @@ export const schemas = {
                         .description(
                           "Defines temporal aspects of intervals.\nA duration of default null indicates infinity.\nA randomizeStart of default null indicates no randomization.\n"
                         )
-                        .unknown(),
+                        /* .unknown() */,
                       payloads: Joi.array()
                         .description("A list of valuesMap objects.")
                         .required()
@@ -2745,36 +2779,36 @@ export const schemas = {
                                       .description(
                                         "A pair of floats typically used as a point on a 2 dimensional grid."
                                       )
-                                      .unknown()
+                                      /* .unknown() */
                                   )
                               ),
                           })
                             .description(
                               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                             )
-                            .unknown()
+                            /* .unknown() */
                         ),
                     })
                       .description(
                         "An object defining a temporal window and a list of valuesMaps.\nif intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
               })
                 .description(
                   "Event object to communicate a Demand Response request to VEN.\nIf intervalPeriod is present, sets start time and duration of intervals.\n"
                 )
-                .unknown(),
+                /* .unknown() */,
               Joi.object({
                 id: Joi.string()
                   .description("URL safe VTN assigned object ID.")
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.date().description(
+                createdDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.date().description(
+                modificationDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2843,7 +2877,7 @@ export const schemas = {
                         .min(0),
                     })
                       .description("object type, operations, and callbackUrl.")
-                      .unknown()
+                      /* .unknown() */
                   ),
                 targets: Joi.array()
                   .allow(null)
@@ -2888,30 +2922,30 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
               })
                 .description(
                   "An object created by a client to receive notification of operations on objects.\nClients may subscribe to be notified when a type of object is created,\nupdated, or deleted.\n"
                 )
-                .unknown(),
+                /* .unknown() */,
               Joi.object({
                 id: Joi.string()
                   .description("URL safe VTN assigned object ID.")
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.date().description(
+                createdDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.date().description(
+                modificationDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2968,14 +3002,14 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 targets: Joi.array()
                   .description(
@@ -3018,14 +3052,14 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 resources: Joi.array()
                   .allow(null)
@@ -3040,10 +3074,10 @@ export const schemas = {
                         .pattern(/^[a-zA-Z0-9_-]*$/, {})
                         .max(128)
                         .min(1),
-                      createdDateTime: Joi.date().description(
+                      createdDateTime: Joi.isoDateTime().description(
                         "datetime in ISO 8601 format"
                       ),
-                      modificationDateTime: Joi.date().description(
+                      modificationDateTime: Joi.isoDateTime().description(
                         "datetime in ISO 8601 format"
                       ),
                       objectType: Joi.string()
@@ -3105,14 +3139,14 @@ export const schemas = {
                                       .description(
                                         "A pair of floats typically used as a point on a 2 dimensional grid."
                                       )
-                                      .unknown()
+                                      /* .unknown() */
                                   )
                               ),
                           })
                             .description(
                               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                             )
-                            .unknown()
+                            /* .unknown() */
                         ),
                       targets: Joi.array()
                         .description(
@@ -3155,34 +3189,34 @@ export const schemas = {
                                       .description(
                                         "A pair of floats typically used as a point on a 2 dimensional grid."
                                       )
-                                      .unknown()
+                                      /* .unknown() */
                                   )
                               ),
                           })
                             .description(
                               "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                             )
-                            .unknown()
+                            /* .unknown() */
                         ),
                     })
                       .description(
                         "A resource is an energy device or system subject to control by a VEN.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
               })
                 .description("Ven represents a client with the ven role.")
-                .unknown(),
+                /* .unknown() */,
               Joi.object({
                 id: Joi.string()
                   .description("URL safe VTN assigned object ID.")
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.date().description(
+                createdDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.date().description(
+                modificationDateTime: Joi.isoDateTime().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -3244,14 +3278,14 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
                 targets: Joi.array()
                   .description(
@@ -3294,20 +3328,20 @@ export const schemas = {
                                 .description(
                                   "A pair of floats typically used as a point on a 2 dimensional grid."
                                 )
-                                .unknown()
+                                /* .unknown() */
                             )
                         ),
                     })
                       .description(
                         "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value.\n"
                       )
-                      .unknown()
+                      /* .unknown() */
                   ),
               })
                 .description(
                   "A resource is an energy device or system subject to control by a VEN.\n"
                 )
-                .unknown()
+                /* .unknown() */
             )
         )
         .required(),
@@ -3315,12 +3349,12 @@ export const schemas = {
       .description(
         "VTN generated object included in request to subscription callbackUrl.\n"
       )
-      .unknown(),
+      /* .unknown() */,
     objectTypes: Joi.string()
       .allow("PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE")
       .description("Types of objects addressable through API.")
       .only(),
-    dateTime: Joi.date().description("datetime in ISO 8601 format"),
+    dateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
     duration: Joi.string()
       .allow("")
       .default("PT0S")
@@ -3365,6 +3399,6 @@ export const schemas = {
       .description(
         "reusable error response. From https://opensource.zalando.com/problem/schema.yaml.\n"
       )
-      .unknown(),
+      /* .unknown() */,
   },
 };

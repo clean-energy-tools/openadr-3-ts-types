@@ -1,69 +1,68 @@
-import Joi from "joi";
 export declare const schemas: {
     parameters: {
         searchAllPrograms: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
         searchAllReports: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
         searchAllEvents: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
         searchSubscriptions: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
         searchVens: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
         searchVenResources: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
         fetchToken: {
-            path: Joi.ObjectSchema<any>;
-            query: Joi.ObjectSchema<any>;
-            header: Joi.ObjectSchema<any>;
-            cookie: Joi.ObjectSchema<any>;
+            path: any;
+            query: any;
+            header: any;
+            cookie: any;
         };
     };
     components: {
-        program: Joi.ObjectSchema<any>;
-        report: Joi.ObjectSchema<any>;
-        event: Joi.ObjectSchema<any>;
-        subscription: Joi.ObjectSchema<any>;
-        ven: Joi.ObjectSchema<any>;
-        resource: Joi.ObjectSchema<any>;
-        interval: Joi.ObjectSchema<any>;
-        intervalPeriod: Joi.ObjectSchema<any>;
-        valuesMap: Joi.ObjectSchema<any>;
-        point: Joi.ObjectSchema<any>;
-        eventPayloadDescriptor: Joi.ObjectSchema<any>;
-        reportPayloadDescriptor: Joi.ObjectSchema<any>;
-        reportDescriptor: Joi.ObjectSchema<any>;
-        objectID: Joi.StringSchema<string>;
-        notification: Joi.ObjectSchema<any>;
-        objectTypes: Joi.StringSchema<string>;
-        dateTime: Joi.DateSchema<Date>;
-        duration: Joi.StringSchema<string>;
-        problem: Joi.ObjectSchema<any>;
+        program: any;
+        report: any;
+        event: any;
+        subscription: any;
+        ven: any;
+        resource: any;
+        interval: any;
+        intervalPeriod: any;
+        valuesMap: any;
+        point: any;
+        eventPayloadDescriptor: any;
+        reportPayloadDescriptor: any;
+        reportDescriptor: any;
+        objectID: any;
+        notification: any;
+        objectTypes: any;
+        dateTime: any;
+        duration: any;
+        problem: any;
     };
 };
 //# sourceMappingURL=oadr3.d.ts.map

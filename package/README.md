@@ -178,7 +178,12 @@ The Joi `validate` function does not throw exceptions.  Instead, it returns an o
 
 The `error` object is a Joi _ValidationError_ object and contains a lot of useful information.
 
-As of this writing, the Joi schema's have not been tested.  They are automatically generated from the OpenADR specification and should be correct.  Knock on wood.
+As of this writing, the Joi schema's have been tested. but issues have been found.  They are automatically generated from the OpenADR specification and one expected better results.
+
+Known issues are:
+
+1. The `stripUnknown` option is not stripping unknown fields.
+2. The `allowUnknoown` option is not erroring when there are unknown fields.
 
 # Implementing private OpenADR extensions
 

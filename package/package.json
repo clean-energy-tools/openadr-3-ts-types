@@ -24,11 +24,12 @@
     "Efficiency"
   ],
   "dependencies": {
-    "joi": "^17.11.0",
-    "zod": "^3.22.4"
+    "joi-iso-datestring": "github:robogeek/joi-iso-datestring"
   },
   "devDependencies": {
     "@types/node": "^20.10.4",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "joi": "^17.11.0",
+    "zod": "^3.22.4"
   }
 }

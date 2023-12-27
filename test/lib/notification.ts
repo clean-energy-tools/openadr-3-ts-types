@@ -723,7 +723,7 @@ describe('NOTIFICATION', function() {
         it('should fail to parse notification w/ incorrect operation code', function() {
 
             const result = joiNotification.validate(data.BADnotifications[0]);
-            console.log(result.value);
+            // console.log(result.value);
 
             if (result.error) {
                 // console.log(result.error);

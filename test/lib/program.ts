@@ -266,8 +266,69 @@ describe('PROGRAM', function() {
             });
         });
 
-        it('should parse prog0 with extra fields', function() {
-            const result = joiProgram.validate(data.prog0[2]);
+        it('should fail to parse prog0 with extra fields stripUnknown false allowUnknown false', function() {
+            const result = joiProgram
+                    .validate(data.prog0[2], {
+                        allowUnknown: false,
+                        stripUnknown: false
+                    });
+
+            // console.log(result.value);
+
+            if (result.error) {
+                // console.log(result.error);
+            }
+            assert.isOk(typeof result.error !== 'undefined');
+            assert.isOk(typeof result.value === 'object');
+
+            assert.equal(result.error.message,
+                '"extraField" is not allowed');
+
+        });
+
+        it('should parse prog0 with extra fields using stripUnknown', function() {
+            const result = joiProgram
+                    .validate(data.prog0[2], {
+                        stripUnknown: true
+                    });
+
+            // console.log(result.value);
+
+            if (result.error) {
+                // console.log(result.error);
+            }
+            assert.isOk(typeof result.error === 'undefined');
+            assert.isOk(typeof result.value === 'object');
+
+            // console.log(result.value);
+            assert.deepEqual(result.value, {
+                programName: 'TEST-EXAMPLE-passthrough',
+                programLongName: 'TEST Example passthrough',
+                // extraField: 'with unknown value',
+                retailerName: 'TEST-Retailer',
+                retailerLongName: 'TEST Retailer',
+                programType: 'any',
+                country: 'US',
+                principalSubdivision: 'SD',
+                timeZoneOffset: '-PT8H',
+                intervalPeriod: {
+                    start: '2023-02-20T00:00:00Z',
+                    duration: 'P3M',
+                    randomizeStart: "PT0S"
+                },
+                programDescriptions: null,
+                bindingEvents: false,
+                localPrice: false,
+                payloadDescriptors: null,
+                targets: null
+            });
+        });
+
+        it('should parse prog0 with extra fields seen w/o stripUnknown', function() {
+            const result = joiProgram
+                    .validate(data.prog0[2], {
+                        allowUnknown: true
+                    });
 
             // console.log(result.value);
 

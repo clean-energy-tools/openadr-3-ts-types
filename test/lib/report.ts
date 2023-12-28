@@ -382,7 +382,9 @@ describe('REPORT', function() {
       describe('JOI', function() {
 
         it('should parse report w/ extra fields passthrough', function() {
-          const result = joiReport.validate(data.reports[0]);
+          const result = joiReport.validate(data.reports[0], {
+            allowUnknown: true
+          });
 
           // console.log(result.value);
 
@@ -470,7 +472,9 @@ describe('REPORT', function() {
       });
 
       it('should parse report with default values', function() {
-        const result = joiReport.validate(data.reports[2]);
+        const result = joiReport.validate(data.reports[2], {
+          allowUnknown: true
+        });
 
         // console.log(result.value);
 

@@ -91,10 +91,12 @@ describe('DATE TIME DURATION', function() {
             assert.isOk(!(result.value instanceof Date));
         });
 
+        // This, 1999-12-31, is actually a Date
         it('should parse dateTime 1', function() {
             // console.log(data.dateTimes[0]);
-            Joi.assert(data.dateTimes[1], joiDateTime);
-            const result = joiDateTime.validate(data.dateTimes[1] /*, { convert: false } */);
+            // Joi.assert(data.dateTimes[1], joiDateTime);
+            const result = joiDateTime
+                    .validate(data.dateTimes[1]);
             if (result.error) {
                 // console.log(result.error);
             }
@@ -102,16 +104,20 @@ describe('DATE TIME DURATION', function() {
             // console.log(result.value);
             // console.log(typeof result.value);
             // console.log(result.value instanceof Date);
-            assert.isOk(typeof result.error === 'undefined');
+            assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(!(typeof result.value === 'object'));
             assert.isOk(typeof result.value === 'string');
             assert.isOk(!(result.value instanceof Date));
+            assert.equal(result.error.message,
+                '`1999-12-31` is not a valid ISO DateTime string');
         });
 
+        // This, 1111-12, is actually a YearMonth
         it('should parse dateTime 2', function() {
             // console.log(data.dateTimes[0]);
-            Joi.assert(data.dateTimes[2], joiDateTime);
-            const result = joiDateTime.validate(data.dateTimes[2] /*, { convert: false } */);
+            // Joi.assert(data.dateTimes[2], joiDateTime);
+            const result = joiDateTime
+                .validate(data.dateTimes[2]);
             if (result.error) {
                 // console.log(result.error);
             }
@@ -119,10 +125,12 @@ describe('DATE TIME DURATION', function() {
             // console.log(result.value);
             // console.log(typeof result.value);
             // console.log(result.value instanceof Date);
-            assert.isOk(typeof result.error === 'undefined');
+            assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(!(typeof result.value === 'object'));
             assert.isOk(typeof result.value === 'string');
             assert.isOk(!(result.value instanceof Date));
+            assert.equal(result.error.message,
+                '`1111-12` is not a valid ISO DateTime string');
         });
 
         it('should not parse dateTime 3', function() {

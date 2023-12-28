@@ -251,8 +251,11 @@ describe('RESOURCE', function() {
             } as any);
         });
 
-        it('should parse resource see extra fields passthrough', function() {
-            const result = joiResource.validate(data.resources[1]);
+        it('should parse resource see extra fields allowUnknown', function() {
+            const result = joiResource
+                .validate(data.resources[1], {
+                    allowUnknown: true
+                });
 
             // console.log(result.value);
 

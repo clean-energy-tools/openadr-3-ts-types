@@ -326,9 +326,12 @@ describe('VALUES MAP', function() {
             });
         });
 
-        it('should parse valuesMap w/ extra data seen', function() {
+        it('should parse valuesMap w/ extra data seen with allowUnknown', function() {
             // console.log(data.valuesMap0[0]);
-            const result = joiValuesMap.validate(data.valuesMapExtraData[0]);
+            const result = joiValuesMap
+                .validate(data.valuesMapExtraData[0], {
+                    allowUnknown: true
+                });
             
             // console.log(result.value);
 

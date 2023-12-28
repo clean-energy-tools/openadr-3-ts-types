@@ -225,9 +225,12 @@ describe('INTERVAL', function() {
             } as any);
         });
 
-        it('should parse interval w/ extra data, passthrough, see data', function() {
+        it('should parse interval w/ extra data, allowUnknown, see data', function() {
             // console.log(data.intervals[0]);
-            const result = joiInterval.validate(data.intervals[3]);
+            const result = joiInterval
+                .validate(data.intervals[3], {
+                    allowUnknown: true
+                });
             // console.log(result.value);
 
             if (result.error) {

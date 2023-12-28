@@ -142,7 +142,7 @@ describe('NOTIFICATION', function() {
                 object: {
                 clientName: '9990',
                 programID: '0',
-                whichTypes: 'EVENT',
+                // whichTypes: 'EVENT',
                 objectType: 'SUBSCRIPTION',
                 objectOperations: [
                     {
@@ -505,7 +505,10 @@ describe('NOTIFICATION', function() {
         });
 
         it('should parse notification POST REPORT', function() {
-            const result = joiNotification.validate(data.notifications[1]);
+            const result = joiNotification
+                .validate(data.notifications[1], {
+                    allowUnknown: true
+                });
             // console.log(result.value);
 
             if (result.error) {
@@ -569,11 +572,14 @@ describe('NOTIFICATION', function() {
 
         it('should parse notification DELETE SUBSCRIPTION', function() {
 
-            const result = joiNotification.validate(data.notifications[3]);
-            // console.log(result.value);
+            const result = joiNotification
+                .validate(data.notifications[3], {
+                    allowUnknown: true
+                });
+            console.log(result.value);
 
             if (result.error) {
-                // console.log(result.error);
+                console.log(result.error);
             }
             assert.isOk(typeof result.error === 'undefined');
             assert.isOk(typeof result.value === 'object');
@@ -585,7 +591,7 @@ describe('NOTIFICATION', function() {
                 object: {
                     clientName: '9990',
                     programID: '0',
-                    whichTypes: 'EVENT',
+                    // whichTypes: 'EVENT',
                     objectType: 'SUBSCRIPTION',
                     targets: null,
                     objectOperations: [
@@ -646,10 +652,11 @@ describe('NOTIFICATION', function() {
         it('should parse notification POST RESOURCE', function() {
 
             const result = joiNotification.validate(data.notifications[5]);
-            // console.log(result.value);
+            console.log(result.value);
 
             if (result.error) {
-                // console.log(result.error);
+                console.log(result.error);
+                console.log(result.error.details[0]);
             }
             assert.isOk(typeof result.error === 'undefined');
             assert.isOk(typeof result.value === 'object');
@@ -693,6 +700,8 @@ describe('NOTIFICATION', function() {
             }
             assert.isOk(typeof result.error === 'undefined');
             assert.isOk(typeof result.value === 'object');
+            // assert.equal(result.error.message,
+            //     '"object" does not match all of the required types');
 
             assert.deepEqual(result.value, {
                 objectType: 'RESOURCE',

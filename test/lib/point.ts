@@ -246,7 +246,9 @@ describe('POINT', function() {
 
         it('should parse point w/ extra data seen w/ passthrough', function() {
             // console.log(data.intervals[0]);
-            const result = joiPoint.validate(data.points[6]);
+            const result = joiPoint.validate(data.points[6], {
+                allowUnknown: true
+            });
 
             // console.log(result.value);
 

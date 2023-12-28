@@ -286,7 +286,9 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
         it('should parse eventPayload 5', function() {
             // console.log(data.intervals[5]);
             const result = joiEventPayloadDescriptor
-                .validate(data.eventPayloadDescriptors[5]);
+                .validate(data.eventPayloadDescriptors[5], {
+                    allowUnknown: true
+                });
 
             if (result.error) {
                 console.log(result.error);

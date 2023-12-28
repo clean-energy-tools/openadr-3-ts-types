@@ -275,8 +275,11 @@ describe('SUBSCRIPTION', function() {
 
     describe('JOI', function() {
 
-        it('should parse subscription with extra stuff', function() {
-            const result = joiSubscription.validate(data.subscriptions[0]);
+        it('should parse subscription with extra stuff with allowUnknown', function() {
+            const result = joiSubscription
+                .validate(data.subscriptions[0], {
+                    allowUnknown: true
+                });
             // console.log(result.value);
 
             if (result.error) {

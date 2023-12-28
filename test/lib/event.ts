@@ -247,7 +247,7 @@ describe('EVENT', function() {
 
             const options = {
                 // abortEarly: false,
-                // allowUnknown: false,
+                allowUnknown: true,
                 // stripUnknown: true,
                 // stripUnknown: {
                 //     arrays: true,
@@ -376,7 +376,8 @@ describe('EVENT', function() {
                 // console.log(result.error);
             }
             assert.isOk(typeof result.error !== 'undefined', 'no error');
-            assert.equal(result.error.message, '"intervals" is required');
+            assert.equal(result.error.message,
+                '"reportDescriptors[0].reportingRate" is not allowed');
         });
 
         it('should fail to parse event with bad priority', function() {

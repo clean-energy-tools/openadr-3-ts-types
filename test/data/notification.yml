@@ -82,7 +82,7 @@ notifications:
     object:
       clientName: '9990'
       programID: '0'
-      whichTypes: 'EVENT'
+      # whichTypes: 'EVENT'
       objectType: SUBSCRIPTION
       objectOperations:
         - objects: [ 'EVENT' ]

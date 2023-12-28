@@ -561,8 +561,10 @@ describe('VEN', function() {
             });
         });
 
-        it('should parse ven with resources and extra data', function() {
-            const result = joiVen.validate(data.vens[2]);
+        it('should parse ven with resources and extra data with allowUnknown', function() {
+            const result = joiVen.validate(data.vens[2], {
+                allowUnknown: true
+            });
             
             // console.log(result.value);
 

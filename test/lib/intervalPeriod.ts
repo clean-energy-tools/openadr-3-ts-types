@@ -195,9 +195,12 @@ describe('INTERVAL PERIOD', function() {
             });
         });
 
-        it('should parse intervalPeriod w/ extra data and see it with passthrough', function() {
+        it('should parse intervalPeriod w/ extra data and see it with allowUnknown', function() {
             // console.log(data.intervals[0]);
-            const result = joiIntervalPeriod.validate(data.intervalPeriod[3]);
+            const result = joiIntervalPeriod
+                .validate(data.intervalPeriod[3], {
+                    allowUnknown: true
+                });
             // console.log(result.value);
 
             if (result.error) {

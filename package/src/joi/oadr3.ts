@@ -986,10 +986,7 @@ export const schemas = {
     })
       .description(
         "Event object to communicate a Demand Response request to VEN.\nIf intervalPeriod is present, sets start time and duration of intervals.\n"
-      )
-      .prefs({
-        allowUnknown: false
-      }),
+      ),
       // /* .unknown() */,
     subscription: Joi.object({
       id: Joi.string()
@@ -1927,12 +1924,12 @@ export const schemas = {
             /* .unknown() */
         ),
       object: Joi.alternatives()
-        .match("all")
+        /* .match("all")
         .try(
           Joi.object({})
             .description("the object that is the subject of the notification.")
-            /* .unknown() */,
-          Joi.alternatives()
+            /* .unknown() * /,
+          Joi.alternatives() */
             .match("one")
             .try(
               Joi.object({
@@ -3343,7 +3340,7 @@ export const schemas = {
                 )
                 /* .unknown() */
             )
-        )
+        //)
         .required(),
     })
       .description(

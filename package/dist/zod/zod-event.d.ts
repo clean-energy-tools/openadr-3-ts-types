@@ -108,10 +108,10 @@ declare const _default: z.ZodObject<{
         units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     }, "strip", z.ZodTypeAny, {
-        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
+        currency: string | null;
     }, {
         payloadType: string;
         objectType?: string | undefined;
@@ -230,10 +230,10 @@ declare const _default: z.ZodObject<{
         frequency: number;
     }[] | null;
     payloadDescriptors: {
-        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
+        currency: string | null;
     }[] | null;
     intervals: {
         id: number;

@@ -327,7 +327,7 @@ describe('SUBSCRIPTION', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"clientName" is not allowed to be empty');
 
             assert.deepEqual(result.value, {
@@ -370,7 +370,7 @@ describe('SUBSCRIPTION', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"clientName" length must be less than or equal to 128 characters long');
 
             assert.deepEqual(result.value, {
@@ -413,7 +413,7 @@ describe('SUBSCRIPTION', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"objectOperations[0].objects[0]" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
 
         });
@@ -428,7 +428,7 @@ describe('SUBSCRIPTION', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"objectOperations[0].operations[0]" must be one of [GET, POST, PUT, DELETE]');
 
         });

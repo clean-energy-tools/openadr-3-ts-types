@@ -44,28 +44,28 @@ describe('DATE TIME DURATION', function() {
         // });
 
         it('should parse duration 0', function() {
-            // console.log(data.dateTimes[0]);
+            // console.log(data.durations[0]);
             const dateTime: Duration = parseDuration.parse(data.durations[0]) as Duration;
             // console.log(dateTime);
             assert.deepEqual(dateTime, "P1Y2M3DT1H20M10S" as any);
         });
 
         it('should parse duration 1', function() {
-            // console.log(data.dateTimes[0]);
+            // console.log(data.durations[1]);
             const dateTime: Duration = parseDuration.parse(data.durations[1]) as Duration;
             // console.log(dateTime);
             assert.deepEqual(dateTime, "P2M3DT1H20M10S" as any);
         });
 
         it('should parse duration 2', function() {
-            // console.log(data.dateTimes[0]);
+            // console.log(data.durations[2]);
             const dateTime: Duration = parseDuration.parse(data.durations[2]) as Duration;
             // console.log(dateTime);
             assert.deepEqual(dateTime, "-P1Y2M3DT1H20M10S" as any);
         });
 
         it('should parse duration 3', function() {
-            // console.log(data.dateTimes[0]);
+            // console.log(data.durations[3]);
             const dateTime: Duration = parseDuration.parse(data.durations[3]) as Duration;
             // console.log(dateTime);
             assert.deepEqual(dateTime, "-P2M3DT1H20M10S" as any);
@@ -108,7 +108,7 @@ describe('DATE TIME DURATION', function() {
             assert.isOk(!(typeof result.value === 'object'));
             assert.isOk(typeof result.value === 'string');
             assert.isOk(!(result.value instanceof Date));
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '`1999-12-31` is not a valid ISO DateTime string');
         });
 
@@ -129,7 +129,7 @@ describe('DATE TIME DURATION', function() {
             assert.isOk(!(typeof result.value === 'object'));
             assert.isOk(typeof result.value === 'string');
             assert.isOk(!(result.value instanceof Date));
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '`1111-12` is not a valid ISO DateTime string');
         });
 

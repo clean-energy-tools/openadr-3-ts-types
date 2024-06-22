@@ -376,7 +376,7 @@ describe('EVENT', function() {
                 // console.log(result.error);
             }
             assert.isOk(typeof result.error !== 'undefined', 'no error');
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"reportDescriptors[0].reportingRate" is not allowed');
         });
 
@@ -403,7 +403,7 @@ describe('EVENT', function() {
                 // console.log(result.error);
             }
             assert.isOk(typeof result.error !== 'undefined', 'no error');
-            assert.equal(result.error.message, '"priority" must be greater than or equal to 0');
+            assert.equal(result?.error?.message, '"priority" must be greater than or equal to 0');
         });
 
         // it('should fail to parse event wtih bad values', function() {

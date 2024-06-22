@@ -740,7 +740,7 @@ describe('NOTIFICATION', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"operation" must be one of [GET, POST, PUT, DELETE]');
         });
     });

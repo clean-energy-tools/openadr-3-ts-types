@@ -321,7 +321,7 @@ describe('RESOURCE', function() {
                 targets: "bad targets"
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"id" must be a string');
         });
 
@@ -336,7 +336,7 @@ describe('RESOURCE', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"resourceName" is not allowed to be empty');
         });
 
@@ -351,7 +351,7 @@ describe('RESOURCE', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"resourceName" length must be less than or equal to 128 characters long');
         });
 

@@ -246,7 +246,7 @@ describe('OBJECT TYPES', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
+            assert.equal(result?.error?.message, '"value" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
         });
 
         it('should fail to parse bad objectType', function() {
@@ -262,7 +262,7 @@ describe('OBJECT TYPES', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
+            assert.equal(result?.error?.message, '"value" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
         });
 
         it('should fail to parse bad objectType', function() {
@@ -278,7 +278,7 @@ describe('OBJECT TYPES', function() {
             assert.isOk(typeof result.value === 'number');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
+            assert.equal(result?.error?.message, '"value" must be one of [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]');
         });
 
     });

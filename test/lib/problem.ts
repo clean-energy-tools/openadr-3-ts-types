@@ -179,7 +179,7 @@ describe('PROBLEM', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"type" must be a valid uri');
         });
 
@@ -195,7 +195,7 @@ describe('PROBLEM', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"instance" must be a valid uri');
         });
 
@@ -211,7 +211,7 @@ describe('PROBLEM', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"status" must be greater than or equal to 100');
         });
 
@@ -227,7 +227,7 @@ describe('PROBLEM', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"status" must be less than or equal to 600');
         });
 

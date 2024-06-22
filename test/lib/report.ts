@@ -562,7 +562,7 @@ describe('REPORT', function() {
         assert.isOk(typeof result.error !== 'undefined');
         assert.isOk(typeof result.value === 'object');
 
-        assert.equal(result.error.message,
+        assert.equal(result?.error?.message,
             '"programID" must be a string');
       });
 
@@ -577,7 +577,7 @@ describe('REPORT', function() {
         assert.isOk(typeof result.error !== 'undefined');
         assert.isOk(typeof result.value === 'object');
 
-        assert.equal(result.error.message,
+        assert.equal(result?.error?.message,
             '"clientName" is not allowed to be empty');
       });
 
@@ -592,7 +592,7 @@ describe('REPORT', function() {
         assert.isOk(typeof result.error !== 'undefined');
         assert.isOk(typeof result.value === 'object');
 
-        assert.equal(result.error.message,
+        assert.equal(result?.error?.message,
             '"clientName" length must be less than or equal to 128 characters long');
       });
 

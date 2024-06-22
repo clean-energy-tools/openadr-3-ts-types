@@ -227,7 +227,7 @@ describe('INTERVAL PERIOD', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message, '`26 March 2023, 18:30:28.829` is not a valid ISO DateTime string');
+            assert.equal(result?.error?.message, '`26 March 2023, 18:30:28.829` is not a valid ISO DateTime string');
         });
     });
 

@@ -316,7 +316,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
             }
             assert.isOk(result.error);
             assert.isOk(typeof result.value === 'object');
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" is not allowed to be empty')
 
         });
@@ -331,7 +331,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
             }
             assert.isOk(result.error);
             assert.isOk(typeof result.value === 'object');
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" length must be less than or equal to 128 characters long')
 
         });

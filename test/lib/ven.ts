@@ -668,7 +668,7 @@ describe('VEN', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"id" must be a string');
         });
 
@@ -683,7 +683,7 @@ describe('VEN', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"venName" is not allowed to be empty');
         });
 
@@ -698,7 +698,7 @@ describe('VEN', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"venName" length must be less than or equal to 128 characters long');
         });
 

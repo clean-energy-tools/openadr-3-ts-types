@@ -729,7 +729,7 @@ describe('REPORT DESCRIPTOR', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" is not allowed to be empty');
         });
 
@@ -744,7 +744,7 @@ describe('REPORT DESCRIPTOR', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" length must be less than or equal to 128 characters long');
         });
 
@@ -759,7 +759,7 @@ describe('REPORT DESCRIPTOR', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" is required');
         });
 
@@ -774,7 +774,7 @@ describe('REPORT DESCRIPTOR', function() {
             assert.isOk(typeof result.error !== 'undefined');
             assert.isOk(typeof result.value === 'object');
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"readingType" must be a string');
         });
 

@@ -255,7 +255,7 @@ describe('OBJECT ID', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" with value "@#(*^*^&%)" fails to match the required pattern: /^[a-zA-Z0-9_-]*$/');
+            assert.equal(result?.error?.message, '"value" with value "@#(*^*^&%)" fails to match the required pattern: /^[a-zA-Z0-9_-]*$/');
         });
 
         it('should parse BAD objectID 1', function() {
@@ -271,7 +271,7 @@ describe('OBJECT ID', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" is not allowed to be empty');
+            assert.equal(result?.error?.message, '"value" is not allowed to be empty');
         });
 
         it('should parse BAD objectID 2', function() {
@@ -287,7 +287,7 @@ describe('OBJECT ID', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" length must be less than or equal to 128 characters long');
+            assert.equal(result?.error?.message, '"value" length must be less than or equal to 128 characters long');
         });
 
         it('should parse BAD objectID 3', function() {
@@ -303,7 +303,7 @@ describe('OBJECT ID', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" length must be less than or equal to 128 characters long');
+            assert.equal(result?.error?.message, '"value" length must be less than or equal to 128 characters long');
         });
 
         it('should parse BAD objectID 4', function() {
@@ -319,7 +319,7 @@ describe('OBJECT ID', function() {
             assert.isOk(typeof result.value === 'string');
 
             // console.log(result.value);
-            assert.equal(result.error.message, '"value" with value "0a0a0a0a0a0a0a0a0a0a,1b1b1b1b1b1b1b1b1b1b.2c2c2c2c2c2c2c2c2c,3d3d3d3d3d3d3d3d3d3d,4e4e4e4e4e4e4e4e4e4e,5f5f5f5f5f5f5f5f5f5f,6g6g6g6g6g6g6g6g6g6g,7h7h7h7h7h7h7h7h7h7h,8i8i8i8i8i8i8i8i8i8i,9j9j9j9j9j9j9j9j9j9j,0k0k0k0k0k0k0k0k0k0k,1l1l1l1l1l1l1l1l1l1l,2m2m2m2m2m2m2m2m2m2m,3n3n3n3n3n3n3n3n3n3n," fails to match the required pattern: /^[a-zA-Z0-9_-]*$/');
+            assert.equal(result?.error?.message, '"value" with value "0a0a0a0a0a0a0a0a0a0a,1b1b1b1b1b1b1b1b1b1b.2c2c2c2c2c2c2c2c2c,3d3d3d3d3d3d3d3d3d3d,4e4e4e4e4e4e4e4e4e4e,5f5f5f5f5f5f5f5f5f5f,6g6g6g6g6g6g6g6g6g6g,7h7h7h7h7h7h7h7h7h7h,8i8i8i8i8i8i8i8i8i8i,9j9j9j9j9j9j9j9j9j9j,0k0k0k0k0k0k0k0k0k0k,1l1l1l1l1l1l1l1l1l1l,2m2m2m2m2m2m2m2m2m2m,3n3n3n3n3n3n3n3n3n3n," fails to match the required pattern: /^[a-zA-Z0-9_-]*$/');
         });
 
     });

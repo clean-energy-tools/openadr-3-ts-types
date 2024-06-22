@@ -467,7 +467,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 confidence: -1
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"confidence" must be greater than or equal to 0');
         });
 
@@ -492,7 +492,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 confidence: 500
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"confidence" must be less than or equal to 100');
         });
 
@@ -517,7 +517,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 confidence: 'five hundred'
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" must be a string');
         });
 
@@ -542,7 +542,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 confidence: 1
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" is not allowed to be empty');
         });
 
@@ -567,7 +567,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 confidence: 1
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" length must be less than or equal to 128 characters long');
         });
 
@@ -591,7 +591,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 confidence: 1
             } as any);
 
-            assert.equal(result.error.message,
+            assert.equal(result?.error?.message,
                 '"payloadType" is required');
         });
 

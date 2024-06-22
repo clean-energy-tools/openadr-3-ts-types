@@ -11,7 +11,7 @@ export type Program = {
     createdDateTime?: DateTime;
     modificationDateTime?: DateTime;
     /**
-     * Used as discriminator, e.g. notification.object
+     * Used as discriminator
      */
     objectType?: "PROGRAM";
     /**
@@ -84,16 +84,16 @@ export type Program = {
      * True if events are fixed once transmitted.
      *
      * @example false
-     * @default false
+     * @default null
      */
-    bindingEvents?: boolean;
+    bindingEvents?: boolean | null;
     /**
      * True if events have been adapted from a grid event.
      *
      * @example false
-     * @default false
+     * @default null
      */
-    localPrice?: boolean;
+    localPrice?: boolean | null;
     /**
      * A list of payloadDescriptors.
      *
@@ -115,13 +115,13 @@ export type Report = {
     createdDateTime?: DateTime;
     modificationDateTime?: DateTime;
     /**
-     * Used as discriminator, e.g. notification.object
+     * Used as discriminator
      */
     objectType?: "REPORT";
     programID: ObjectID;
     eventID: ObjectID;
     /**
-     * User generated identifier; may be VEN ID provisioned during program enrollment.
+     * User generated identifier; may be VEN ID provisioned out-of-band.
      *
      * @minLength 1
      * @maxLength 128
@@ -162,14 +162,14 @@ export type Report = {
 };
 /**
  * Event object to communicate a Demand Response request to VEN.
- * If intervalPeriod is present, sets start time and duration of intervals.
+ * If intervalPeriod is present, sets default start time and duration of intervals.
  */
 export type Event = {
     id?: ObjectID;
     createdDateTime?: DateTime;
     modificationDateTime?: DateTime;
     /**
-     * Used as discriminator, e.g. notification.object
+     * Used as discriminator
      */
     objectType?: "EVENT";
     programID: ObjectID;
@@ -222,11 +222,11 @@ export type Subscription = {
     createdDateTime?: DateTime;
     modificationDateTime?: DateTime;
     /**
-     * Used as discriminator, e.g. notification.object
+     * Used as discriminator.
      */
     objectType?: "SUBSCRIPTION";
     /**
-     * User generated identifier, may be VEN identifier provisioned during program enrollment.
+     * User generated identifier, may be VEN identifier provisioned out-of-band.
      *
      * @minLength 1
      * @maxLength 128
@@ -278,11 +278,12 @@ export type Ven = {
     createdDateTime?: DateTime;
     modificationDateTime?: DateTime;
     /**
-     * Used as discriminator, e.g. notification.object.
+     * Used as discriminator.
      */
     objectType?: "VEN";
     /**
-     * User generated identifier, may be VEN identifier provisioned during program enrollment.
+     * User generated identifier, may be VEN identifier provisioned out-of-band.
+     * venName is expected to be unqiue within the scope of a VTN
      *
      * @minLength 1
      * @maxLength 128
@@ -291,12 +292,16 @@ export type Ven = {
     venName: string;
     /**
      * A list of valuesMap objects describing attributes.
+     *
+     * @default null
      */
-    attributes?: ValuesMap[];
+    attributes?: ValuesMap[] | null;
     /**
      * A list of valuesMap objects describing target criteria.
+     *
+     * @default null
      */
-    targets?: ValuesMap[];
+    targets?: ValuesMap[] | null;
     /**
      * A list of resource objects representing end-devices or systems.
      *
@@ -312,11 +317,12 @@ export type Resource = {
     createdDateTime?: DateTime;
     modificationDateTime?: DateTime;
     /**
-     * Used as discriminator, e.g. notification.object
+     * Used as discriminator.
      */
     objectType?: "RESOURCE";
     /**
      * User generated identifier, resource may be configured with identifier out-of-band.
+     * resourceName is expected to be unique within the scope of the associated VEN.
      *
      * @minLength 1
      * @maxLength 128
@@ -326,12 +332,16 @@ export type Resource = {
     venID?: ObjectID;
     /**
      * A list of valuesMap objects describing attributes.
+     *
+     * @default null
      */
-    attributes?: ValuesMap[];
+    attributes?: ValuesMap[] | null;
     /**
      * A list of valuesMap objects describing target criteria.
+     *
+     * @default null
      */
-    targets?: ValuesMap[];
+    targets?: ValuesMap[] | null;
 };
 /**
  * An object defining a temporal window and a list of valuesMaps.
@@ -353,7 +363,7 @@ export type Interval = {
 };
 /**
  * Defines temporal aspects of intervals.
- * A duration of default null indicates infinity.
+ * A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
  * A randomizeStart of default null indicates no randomization.
  */
 export type IntervalPeriod = {
@@ -391,17 +401,15 @@ export type Point = {
      *
      * @format float
      * @example 1
-     * @default null
      */
-    x: number | null;
+    x: number;
     /**
      * A value on a y axis.
      *
      * @format float
      * @example 2
-     * @default null
      */
-    y: number | null;
+    y: number;
 };
 /**
  * Contextual information used to interpret event valuesMap values.
@@ -410,11 +418,9 @@ export type Point = {
  */
 export type EventPayloadDescriptor = {
     /**
-     * Used as discriminator, e.g. program.payloadDescriptors
-     *
-     * @default EVENT_PAYLOAD_DESCRIPTOR
+     * Used as discriminator.
      */
-    objectType?: string;
+    objectType?: "EVENT_PAYLOAD_DESCRIPTOR";
     /**
      * Enumerated or private string signifying the nature of values.
      *
@@ -445,11 +451,9 @@ export type EventPayloadDescriptor = {
  */
 export type ReportPayloadDescriptor = {
     /**
-     * Used as discriminator, e.g. program.payloadDescriptors
-     *
-     * @default REPORT_PAYLOAD_DESCRIPTOR
+     * Used as discriminator.
      */
-    objectType?: string;
+    objectType?: "REPORT_PAYLOAD_DESCRIPTOR";
     /**
      * Enumerated or private string signifying the nature of values.
      *
@@ -487,13 +491,12 @@ export type ReportPayloadDescriptor = {
      * @minimum 0
      * @maximum 100
      * @example 100
-     * @default 100
+     * @default null
      */
-    confidence?: number;
+    confidence?: number | null;
 };
 /**
  * An object that may be used to request a report from a VEN.
- * See OpenADR REST User Guide for detailed description of how configure a report request.
  */
 export type ReportDescriptor = {
     /**
@@ -599,17 +602,17 @@ export type Notification = {
      */
     operation: "GET" | "POST" | "PUT" | "DELETE";
     /**
-     * A list of valuesMap objects.
-     *
-     * @default null
-     */
-    targets?: ValuesMap[] | null;
-    /**
      * the object that is the subject of the notification.
      *
      * @example {}
      */
     object: Program | Report | Event | Subscription | Ven | Resource;
+    /**
+     * A list of valuesMap objects.
+     *
+     * @default null
+     */
+    targets?: ValuesMap[] | null;
 };
 /**
  * Types of objects addressable through API.
@@ -632,6 +635,86 @@ export type DateTime = string;
  * @default PT0S
  */
 export type Duration = string;
+/**
+ * Body of POST request to /auth/token.
+ */
+export type ClientCredentialRequest = {
+    /**
+     * OAuth2 grant type, must be 'client_credentials'
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example client_credentials
+     */
+    grant_type?: "client_credentials";
+    /**
+     * client ID to exchange for bearer token.
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example ven_client_99
+     */
+    clientID: string;
+    /**
+     * client secret to exchange for bearer token.
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example ven_secret_99
+     */
+    clientSecret: string;
+    /**
+     * application defined scope.
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example read_all
+     */
+    scope?: string;
+};
+/**
+ * Body response from /auth/token.
+ */
+export type ClientCredentialResponse = {
+    /**
+     * access token povided by Authorization service
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
+     */
+    access_token: string;
+    /**
+     * token type, must be Bearer.
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example Bearer
+     */
+    token_type?: "Bearer";
+    /**
+     * expiration period in seconds.
+     *
+     * @example 3600
+     */
+    expires_in?: number;
+    /**
+     * refresh token povided by Authorization service
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk
+     */
+    refresh_token?: string;
+    /**
+     * application defined scope.
+     *
+     * @minLength 1
+     * @maxLength 128
+     * @example read_all
+     */
+    scope?: string;
+};
 /**
  * reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
  */

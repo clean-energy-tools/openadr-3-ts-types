@@ -6,25 +6,25 @@ declare const _default: z.ZodObject<{
     targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            x: z.ZodNumber;
+            y: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         }, {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }, {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }>, "many">>>;
@@ -38,8 +38,8 @@ declare const _default: z.ZodObject<{
     repeat: number;
     targets: {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null;
@@ -57,8 +57,8 @@ declare const _default: z.ZodObject<{
     units?: string | null | undefined;
     targets?: {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null | undefined;

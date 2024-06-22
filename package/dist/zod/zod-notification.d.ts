@@ -2,38 +2,38 @@ import { z } from "zod";
 declare const _default: z.ZodObject<{
     objectType: z.ZodEnum<["PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE"]>;
     operation: z.ZodEnum<["GET", "POST", "PUT", "DELETE"]>;
+    object: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.ZodEffects<z.ZodAny, any, any>>;
     targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            x: z.ZodNumber;
+            y: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         }, {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }, {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }>, "many">>>;
-    object: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.ZodEffects<z.ZodAny, any, any>>;
 }, "strip", z.ZodTypeAny, {
     objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     targets: {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null;
@@ -42,14 +42,14 @@ declare const _default: z.ZodObject<{
 }, {
     objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     operation: "GET" | "POST" | "PUT" | "DELETE";
+    object?: any;
     targets?: {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null | undefined;
-    object?: any;
 }>;
 export default _default;
 //# sourceMappingURL=zod-notification.d.ts.map

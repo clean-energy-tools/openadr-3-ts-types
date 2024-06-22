@@ -26,90 +26,90 @@ declare const _default: z.ZodObject<{
         randomizeStart?: string | undefined;
     }>>;
     programDescriptions: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodAny, "many">>>;
-    bindingEvents: z.ZodDefault<z.ZodBoolean>;
-    localPrice: z.ZodDefault<z.ZodBoolean>;
+    bindingEvents: z.ZodDefault<z.ZodNullable<z.ZodBoolean>>;
+    localPrice: z.ZodDefault<z.ZodNullable<z.ZodBoolean>>;
     payloadDescriptors: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodUnion<[z.ZodObject<{
-        objectType: z.ZodDefault<z.ZodString>;
+        objectType: z.ZodOptional<z.ZodLiteral<"EVENT_PAYLOAD_DESCRIPTOR">>;
         payloadType: z.ZodString;
         units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     }, "strip", z.ZodTypeAny, {
-        objectType: string;
+        currency: string | null;
         payloadType: string;
         units: string | null;
-        currency: string | null;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
         units?: string | null | undefined;
         currency?: string | null | undefined;
     }>, z.ZodObject<{
-        objectType: z.ZodDefault<z.ZodString>;
+        objectType: z.ZodOptional<z.ZodLiteral<"REPORT_PAYLOAD_DESCRIPTOR">>;
         payloadType: z.ZodString;
         readingType: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         accuracy: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-        confidence: z.ZodDefault<z.ZodNumber>;
+        confidence: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
     }, "strip", z.ZodTypeAny, {
-        objectType: string;
         payloadType: string;
         readingType: string | null;
         units: string | null;
         accuracy: number | null;
-        confidence: number;
+        confidence: number | null;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         accuracy?: number | null | undefined;
-        confidence?: number | undefined;
+        confidence?: number | null | undefined;
     }>]>, "many">>>;
     targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            x: z.ZodNumber;
+            y: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         }, {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }, {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     targets: {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null;
     payloadDescriptors: ({
-        objectType: string;
+        currency: string | null;
         payloadType: string;
         units: string | null;
-        currency: string | null;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     } | {
-        objectType: string;
         payloadType: string;
         readingType: string | null;
         units: string | null;
         accuracy: number | null;
-        confidence: number;
+        confidence: number | null;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
     })[] | null;
     programName: string;
     programLongName: string | null;
@@ -120,8 +120,8 @@ declare const _default: z.ZodObject<{
     principalSubdivision: string | null;
     timeZoneOffset: string;
     programDescriptions: any[] | null;
-    bindingEvents: boolean;
-    localPrice: boolean;
+    bindingEvents: boolean | null;
+    localPrice: boolean | null;
     id?: string | undefined;
     createdDateTime?: string | undefined;
     modificationDateTime?: string | undefined;
@@ -150,25 +150,25 @@ declare const _default: z.ZodObject<{
         randomizeStart?: string | undefined;
     } | undefined;
     programDescriptions?: any[] | null | undefined;
-    bindingEvents?: boolean | undefined;
-    localPrice?: boolean | undefined;
+    bindingEvents?: boolean | null | undefined;
+    localPrice?: boolean | null | undefined;
     payloadDescriptors?: ({
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
         units?: string | null | undefined;
         currency?: string | null | undefined;
     } | {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         accuracy?: number | null | undefined;
-        confidence?: number | undefined;
+        confidence?: number | null | undefined;
     })[] | null | undefined;
     targets?: {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null | undefined;

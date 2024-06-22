@@ -6,77 +6,77 @@ declare const _default: z.ZodObject<{
     objectType: z.ZodOptional<z.ZodLiteral<"RESOURCE">>;
     resourceName: z.ZodString;
     venID: z.ZodOptional<z.ZodString>;
-    attributes: z.ZodOptional<z.ZodArray<z.ZodObject<{
+    attributes: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            x: z.ZodNumber;
+            y: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         }, {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }, {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
-    }>, "many">>;
-    targets: z.ZodOptional<z.ZodArray<z.ZodObject<{
+    }>, "many">>>;
+    targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            x: z.ZodNumber;
+            y: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         }, {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }, {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
-    }>, "many">>;
+    }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
+    targets: {
+        values: (string | number | boolean | {
+            x: number;
+            y: number;
+        })[];
+        type: string;
+    }[] | null;
     resourceName: string;
+    attributes: {
+        values: (string | number | boolean | {
+            x: number;
+            y: number;
+        })[];
+        type: string;
+    }[] | null;
     id?: string | undefined;
     createdDateTime?: string | undefined;
     modificationDateTime?: string | undefined;
     objectType?: "RESOURCE" | undefined;
     venID?: string | undefined;
-    attributes?: {
-        values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
-        })[];
-        type: string;
-    }[] | undefined;
-    targets?: {
-        values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
-        })[];
-        type: string;
-    }[] | undefined;
 }, {
     resourceName: string;
     id?: string | undefined;
@@ -86,18 +86,18 @@ declare const _default: z.ZodObject<{
     venID?: string | undefined;
     attributes?: {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
-    }[] | undefined;
+    }[] | null | undefined;
     targets?: {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
-    }[] | undefined;
+    }[] | null | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-resource.d.ts.map

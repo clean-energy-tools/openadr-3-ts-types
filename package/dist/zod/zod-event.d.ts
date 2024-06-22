@@ -10,25 +10,25 @@ declare const _default: z.ZodObject<{
     targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
         values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-            x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-            y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+            x: z.ZodNumber;
+            y: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         }, {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }, {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }>, "many">>>;
@@ -39,25 +39,25 @@ declare const _default: z.ZodObject<{
         targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
             type: z.ZodString;
             values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-                x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-                y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+                x: z.ZodNumber;
+                y: z.ZodNumber;
             }, "strip", z.ZodTypeAny, {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             }, {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
             values: (string | number | boolean | {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             })[];
             type: string;
         }, {
             values: (string | number | boolean | {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             })[];
             type: string;
         }>, "many">>>;
@@ -71,8 +71,8 @@ declare const _default: z.ZodObject<{
         repeat: number;
         targets: {
             values: (string | number | boolean | {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[] | null;
@@ -90,8 +90,8 @@ declare const _default: z.ZodObject<{
         units?: string | null | undefined;
         targets?: {
             values: (string | number | boolean | {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[] | null | undefined;
@@ -103,18 +103,18 @@ declare const _default: z.ZodObject<{
         repeat?: number | undefined;
     }>, "many">>>;
     payloadDescriptors: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
-        objectType: z.ZodDefault<z.ZodString>;
+        objectType: z.ZodOptional<z.ZodLiteral<"EVENT_PAYLOAD_DESCRIPTOR">>;
         payloadType: z.ZodString;
         units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     }, "strip", z.ZodTypeAny, {
-        objectType: string;
+        currency: string | null;
         payloadType: string;
         units: string | null;
-        currency: string | null;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
         units?: string | null | undefined;
         currency?: string | null | undefined;
     }>, "many">>>;
@@ -149,25 +149,25 @@ declare const _default: z.ZodObject<{
         payloads: z.ZodArray<z.ZodObject<{
             type: z.ZodString;
             values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-                x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-                y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+                x: z.ZodNumber;
+                y: z.ZodNumber;
             }, "strip", z.ZodTypeAny, {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             }, {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
             values: (string | number | boolean | {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             })[];
             type: string;
         }, {
             values: (string | number | boolean | {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             })[];
             type: string;
         }>, "many">;
@@ -175,8 +175,8 @@ declare const _default: z.ZodObject<{
         id: number;
         payloads: {
             values: (string | number | boolean | {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[];
@@ -189,8 +189,8 @@ declare const _default: z.ZodObject<{
         id: number;
         payloads: {
             values: (string | number | boolean | {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[];
@@ -206,8 +206,8 @@ declare const _default: z.ZodObject<{
     priority: number | null;
     targets: {
         values: (string | number | boolean | {
-            x: number | null;
-            y: number | null;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null;
@@ -215,8 +215,8 @@ declare const _default: z.ZodObject<{
         repeat: number;
         targets: {
             values: (string | number | boolean | {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[] | null;
@@ -230,17 +230,17 @@ declare const _default: z.ZodObject<{
         frequency: number;
     }[] | null;
     payloadDescriptors: {
-        objectType: string;
+        currency: string | null;
         payloadType: string;
         units: string | null;
-        currency: string | null;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }[] | null;
     intervals: {
         id: number;
         payloads: {
             values: (string | number | boolean | {
-                x: number | null;
-                y: number | null;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[];
@@ -265,8 +265,8 @@ declare const _default: z.ZodObject<{
         id: number;
         payloads: {
             values: (string | number | boolean | {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[];
@@ -284,8 +284,8 @@ declare const _default: z.ZodObject<{
     priority?: number | null | undefined;
     targets?: {
         values: (string | number | boolean | {
-            x?: number | null | undefined;
-            y?: number | null | undefined;
+            x: number;
+            y: number;
         })[];
         type: string;
     }[] | null | undefined;
@@ -295,8 +295,8 @@ declare const _default: z.ZodObject<{
         units?: string | null | undefined;
         targets?: {
             values: (string | number | boolean | {
-                x?: number | null | undefined;
-                y?: number | null | undefined;
+                x: number;
+                y: number;
             })[];
             type: string;
         }[] | null | undefined;
@@ -309,7 +309,7 @@ declare const _default: z.ZodObject<{
     }[] | null | undefined;
     payloadDescriptors?: {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
         units?: string | null | undefined;
         currency?: string | null | undefined;
     }[] | null | undefined;

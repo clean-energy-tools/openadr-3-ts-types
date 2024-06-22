@@ -9,26 +9,26 @@ declare const _default: z.ZodObject<{
     clientName: z.ZodString;
     reportName: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     payloadDescriptors: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
-        objectType: z.ZodDefault<z.ZodString>;
+        objectType: z.ZodOptional<z.ZodLiteral<"REPORT_PAYLOAD_DESCRIPTOR">>;
         payloadType: z.ZodString;
         readingType: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         units: z.ZodDefault<z.ZodNullable<z.ZodString>>;
         accuracy: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-        confidence: z.ZodDefault<z.ZodNumber>;
+        confidence: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
     }, "strip", z.ZodTypeAny, {
-        objectType: string;
         payloadType: string;
         readingType: string | null;
         units: string | null;
         accuracy: number | null;
-        confidence: number;
+        confidence: number | null;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         accuracy?: number | null | undefined;
-        confidence?: number | undefined;
+        confidence?: number | null | undefined;
     }>, "many">>>;
     resources: z.ZodArray<z.ZodObject<{
         resourceName: z.ZodString;
@@ -63,25 +63,25 @@ declare const _default: z.ZodObject<{
             payloads: z.ZodArray<z.ZodObject<{
                 type: z.ZodString;
                 values: z.ZodArray<z.ZodUnion<[z.ZodNumber, z.ZodNumber, z.ZodString, z.ZodBoolean, z.ZodObject<{
-                    x: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
-                    y: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
+                    x: z.ZodNumber;
+                    y: z.ZodNumber;
                 }, "strip", z.ZodTypeAny, {
-                    x: number | null;
-                    y: number | null;
+                    x: number;
+                    y: number;
                 }, {
-                    x?: number | null | undefined;
-                    y?: number | null | undefined;
+                    x: number;
+                    y: number;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
                 values: (string | number | boolean | {
-                    x: number | null;
-                    y: number | null;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }, {
                 values: (string | number | boolean | {
-                    x?: number | null | undefined;
-                    y?: number | null | undefined;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }>, "many">;
@@ -89,8 +89,8 @@ declare const _default: z.ZodObject<{
             id: number;
             payloads: {
                 values: (string | number | boolean | {
-                    x: number | null;
-                    y: number | null;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }[];
@@ -103,8 +103,8 @@ declare const _default: z.ZodObject<{
             id: number;
             payloads: {
                 values: (string | number | boolean | {
-                    x?: number | null | undefined;
-                    y?: number | null | undefined;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }[];
@@ -119,8 +119,8 @@ declare const _default: z.ZodObject<{
             id: number;
             payloads: {
                 values: (string | number | boolean | {
-                    x: number | null;
-                    y: number | null;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }[];
@@ -141,8 +141,8 @@ declare const _default: z.ZodObject<{
             id: number;
             payloads: {
                 values: (string | number | boolean | {
-                    x?: number | null | undefined;
-                    y?: number | null | undefined;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }[];
@@ -162,12 +162,12 @@ declare const _default: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     programID: string;
     payloadDescriptors: {
-        objectType: string;
         payloadType: string;
         readingType: string | null;
         units: string | null;
         accuracy: number | null;
-        confidence: number;
+        confidence: number | null;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
     }[] | null;
     eventID: string;
     clientName: string;
@@ -177,8 +177,8 @@ declare const _default: z.ZodObject<{
             id: number;
             payloads: {
                 values: (string | number | boolean | {
-                    x: number | null;
-                    y: number | null;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }[];
@@ -208,8 +208,8 @@ declare const _default: z.ZodObject<{
             id: number;
             payloads: {
                 values: (string | number | boolean | {
-                    x?: number | null | undefined;
-                    y?: number | null | undefined;
+                    x: number;
+                    y: number;
                 })[];
                 type: string;
             }[];
@@ -233,11 +233,11 @@ declare const _default: z.ZodObject<{
     reportName?: string | null | undefined;
     payloadDescriptors?: {
         payloadType: string;
-        objectType?: string | undefined;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
         accuracy?: number | null | undefined;
-        confidence?: number | undefined;
+        confidence?: number | null | undefined;
     }[] | null | undefined;
 }>;
 export default _default;

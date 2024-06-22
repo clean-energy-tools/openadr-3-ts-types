@@ -36,12 +36,6 @@ export declare const schemas: {
             header: any;
             cookie: any;
         };
-        fetchToken: {
-            path: any;
-            query: any;
-            header: any;
-            cookie: any;
-        };
     };
     components: {
         program: any;
@@ -62,6 +56,8 @@ export declare const schemas: {
         objectTypes: any;
         dateTime: any;
         duration: any;
+        clientCredentialRequest: any;
+        clientCredentialResponse: any;
         problem: any;
     };
 };

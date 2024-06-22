@@ -32,10 +32,10 @@ export declare const eventPayloadDescriptorSchema: z.ZodObject<{
     units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
 }, "strip", z.ZodTypeAny, {
+    currency: string | null;
     objectType: string;
     payloadType: string;
     units: string | null;
-    currency: string | null;
 }, {
     payloadType: string;
     objectType?: string | undefined;
@@ -319,10 +319,10 @@ export declare const programSchema: z.ZodObject<{
         units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     }, "strip", z.ZodTypeAny, {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }, {
         payloadType: string;
         objectType?: string | undefined;
@@ -384,10 +384,10 @@ export declare const programSchema: z.ZodObject<{
         type: string;
     }[] | null;
     payloadDescriptors: ({
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     } | {
         objectType: string;
         payloadType: string;
@@ -640,10 +640,10 @@ export declare const eventSchema: z.ZodObject<{
         units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     }, "strip", z.ZodTypeAny, {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }, {
         payloadType: string;
         objectType?: string | undefined;
@@ -762,10 +762,10 @@ export declare const eventSchema: z.ZodObject<{
         frequency: number;
     }[] | null;
     payloadDescriptors: {
+        currency: string | null;
         objectType: string;
         payloadType: string;
         units: string | null;
-        currency: string | null;
     }[] | null;
     intervals: {
         id: number;
@@ -1491,10 +1491,10 @@ export declare const notificationSchema: z.ZodObject<{
             units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
             currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         }, "strip", z.ZodTypeAny, {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }, {
             payloadType: string;
             objectType?: string | undefined;
@@ -1556,10 +1556,10 @@ export declare const notificationSchema: z.ZodObject<{
             type: string;
         }[] | null;
         payloadDescriptors: ({
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         } | {
             objectType: string;
             payloadType: string;
@@ -1982,10 +1982,10 @@ export declare const notificationSchema: z.ZodObject<{
             units: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
             currency: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         }, "strip", z.ZodTypeAny, {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }, {
             payloadType: string;
             objectType?: string | undefined;
@@ -2104,10 +2104,10 @@ export declare const notificationSchema: z.ZodObject<{
             frequency: number;
         }[] | null;
         payloadDescriptors: {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }[] | null;
         intervals: {
             id: number;
@@ -2651,10 +2651,10 @@ export declare const notificationSchema: z.ZodObject<{
             type: string;
         }[] | null;
         payloadDescriptors: ({
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         } | {
             objectType: string;
             payloadType: string;
@@ -2715,10 +2715,10 @@ export declare const notificationSchema: z.ZodObject<{
             frequency: number;
         }[] | null;
         payloadDescriptors: {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }[] | null;
         intervals: {
             id: number;
@@ -2876,10 +2876,10 @@ export declare const notificationSchema: z.ZodObject<{
             type: string;
         }[] | null;
         payloadDescriptors: ({
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         } | {
             objectType: string;
             payloadType: string;
@@ -2940,10 +2940,10 @@ export declare const notificationSchema: z.ZodObject<{
             frequency: number;
         }[] | null;
         payloadDescriptors: {
+            currency: string | null;
             objectType: string;
             payloadType: string;
             units: string | null;
-            currency: string | null;
         }[] | null;
         intervals: {
             id: number;

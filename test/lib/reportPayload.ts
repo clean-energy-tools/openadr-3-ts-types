@@ -47,7 +47,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[1]) as ReportPayloadDescriptor;
             // console.log(reportPayload);
             assert.deepEqual(reportPayload, {
-                objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'USAGE',
                 readingType: 'DIRECT_READ',
                 units: 'KWH',
@@ -108,7 +108,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 readingType: 'DIRECT_READ',
                 units: 'KWH',
                 accuracy: 0.5,
-                confidence: 100
+                confidence: null
             } as any);
         });
 
@@ -117,12 +117,12 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
             const reportPayload: ReportPayloadDescriptor = parseReportPayloadDescriptor.parse(data.reportPayloadDescriptors[6]) as ReportPayloadDescriptor;
             // console.log(reportPayload);
             assert.deepEqual(reportPayload, {
-                objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'USAGE',
                 readingType: null,
                 units: null,
                 accuracy: null,
-                confidence: 100
+                confidence: null
             } as any);
         });
 
@@ -327,7 +327,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
             assert.isOk(typeof result.value === 'object');
 
             assert.deepEqual(result.value, {
-                objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'USAGE',
                 readingType: 'DIRECT_READ',
                 units: 'KWH',
@@ -420,7 +420,7 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
                 readingType: 'DIRECT_READ',
                 units: 'KWH',
                 accuracy: 0.5,
-                confidence: 100
+                confidence: null
             } as any);
         });
 
@@ -437,12 +437,12 @@ describe('REPORT PAYLOAD DESCRIPTOR', function() {
             assert.isOk(typeof result.value === 'object');
 
             assert.deepEqual(result.value, {
-                objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'USAGE',
                 readingType: null,
                 units: null,
                 accuracy: null,
-                confidence: 100
+                confidence: null
             } as any);
         });
 

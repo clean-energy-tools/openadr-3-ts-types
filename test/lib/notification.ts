@@ -485,9 +485,9 @@ describe('NOTIFICATION', function() {
                     programName: 'PROGRAM Object',
                     programLongName: 'Program Object',
                     timeZoneOffset: '-PT8H',
-                    bindingEvents: false,
+                    bindingEvents: null,
                     country: null,
-                    localPrice: false,
+                    localPrice: null,
                     payloadDescriptors: null,
                     principalSubdivision: null,
                     programDescriptions: null,
@@ -522,49 +522,50 @@ describe('NOTIFICATION', function() {
                 operation: 'POST',
                 targets: [ { type: 'GROUP_NAME', values: [ 'VEN99' ] } ],
                 object: {
-                objectType: 'REPORT',
-                ignoreVenNotFound: true,
-                programID: '0',
-                eventID: '0',
-                clientName: 'VEN99',
-                reportName: 'Test report #1',
-                payloadDescriptors: [
-                    {
-                        payloadType: 'USAGE',
-                        accuracy: null,
-                        confidence: 100,
-                        objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
-                        readingType: null,
-                        units: null
-                    }
-                ],
-                resources: [
-                    {
-                        resourceName: '99',
-                        ignoreVenNotFound: true,
-                        intervalPeriod: {
-                            start: "2023-03-11T12:23:15Z",
-                            duration: "PT1M",
-                            randomizeStart: "PT0S"
-                        },
-                        intervals: [
-                            {
-                                id: 0,
-                                intervalPeriod: {
-                                    start: '2023-03-26T18:30:28.829Z',
-                                    duration: 'PT15M',
-                                    randomizeStart: "PT0S"
-                                },
-                                payloads: [
-                                    {
-                                        type: 'USAGE',
-                                        values: [ 94 ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+                    objectType: 'REPORT',
+                    ignoreVenNotFound: true,
+                    programID: '0',
+                    eventID: '0',
+                    clientName: 'VEN99',
+                    reportName: 'Test report #1',
+                    payloadDescriptors: [
+                        {
+                            payloadType: 'USAGE',
+                            accuracy: null,
+                            confidence: null,
+                            // This is not automatically filled in
+                            // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                            readingType: null,
+                            units: null
+                        }
+                    ],
+                    resources: [
+                        {
+                            resourceName: '99',
+                            ignoreVenNotFound: true,
+                            intervalPeriod: {
+                                start: "2023-03-11T12:23:15Z",
+                                duration: "PT1M",
+                                randomizeStart: "PT0S"
+                            },
+                            intervals: [
+                                {
+                                    id: 0,
+                                    intervalPeriod: {
+                                        start: '2023-03-26T18:30:28.829Z',
+                                        duration: 'PT15M',
+                                        randomizeStart: "PT0S"
+                                    },
+                                    payloads: [
+                                        {
+                                            type: 'USAGE',
+                                            values: [ 94 ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             } as any);
         });
@@ -576,10 +577,10 @@ describe('NOTIFICATION', function() {
                 .validate(data.notifications[3], {
                     allowUnknown: true
                 });
-            console.log(result.value);
+            // console.log(result.value);
 
             if (result.error) {
-                console.log(result.error);
+                // console.log(result.error);
             }
             assert.isOk(typeof result.error === 'undefined');
             assert.isOk(typeof result.value === 'object');
@@ -622,29 +623,30 @@ describe('NOTIFICATION', function() {
                 operation: 'GET',
                 targets: [ { type: 'GROUP_NAME', values: [ 'VEN99' ] } ],
                 object: {
-                objectType: 'VEN',
-                venName: 'con-ed-lcn-Liberty-Green',
-                resources: null,
-                attributes: [
-                    {
-                        type: 'GEO_LOCATION',
-                        values: [
-                            '{ "type": "Point", "coordinates": [ -74.01432, 40.7167 ] }\n'
-                        ]
-                    },
-                    {
-                        type: 'ESX_TCN_ID',
-                        values: [ 'con-ed-tcn' ]
-                    },
-                    {
-                        type: 'ESX_CN_ID',
-                        values: [ 'con-ed-BATTERY-PARK-CITY' ]
-                    },
-                    {
-                        type: 'ESX_LONG_NAME',
-                        values: [ 'Liberty Green' ]
-                    }
-                ]
+                    objectType: 'VEN',
+                    venName: 'con-ed-lcn-Liberty-Green',
+                    resources: null,
+                    targets: null,
+                    attributes: [
+                        {
+                            type: 'GEO_LOCATION',
+                            values: [
+                                '{ "type": "Point", "coordinates": [ -74.01432, 40.7167 ] }\n'
+                            ]
+                        },
+                        {
+                            type: 'ESX_TCN_ID',
+                            values: [ 'con-ed-tcn' ]
+                        },
+                        {
+                            type: 'ESX_CN_ID',
+                            values: [ 'con-ed-BATTERY-PARK-CITY' ]
+                        },
+                        {
+                            type: 'ESX_LONG_NAME',
+                            values: [ 'Liberty Green' ]
+                        }
+                    ]
                 }
             });
         });
@@ -652,11 +654,11 @@ describe('NOTIFICATION', function() {
         it('should parse notification POST RESOURCE', function() {
 
             const result = joiNotification.validate(data.notifications[5]);
-            console.log(result.value);
+            // console.log(result.value);
 
             if (result.error) {
-                console.log(result.error);
-                console.log(result.error.details[0]);
+                // console.log(result.error);
+                // console.log(result.error.details[0]);
             }
             assert.isOk(typeof result.error === 'undefined');
             assert.isOk(typeof result.value === 'object');
@@ -672,6 +674,7 @@ describe('NOTIFICATION', function() {
                 object: {
                     objectType: 'RESOURCE',
                     resourceName: 'evse-green-1',
+                    targets: null,
                     attributes: [
                         {
                             type: 'DESCRIPTION',
@@ -710,6 +713,7 @@ describe('NOTIFICATION', function() {
                 object: {
                     objectType: 'RESOURCE',
                     resourceName: 'evse-green-1',
+                    targets: null,
                     attributes: [
                         {
                             type: 'DESCRIPTION',

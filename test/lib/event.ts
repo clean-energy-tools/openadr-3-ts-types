@@ -377,7 +377,7 @@ describe('EVENT', function() {
             }
             assert.isOk(typeof result.error !== 'undefined', 'no error');
             assert.equal(result?.error?.message,
-                '"reportDescriptors[0].reportingRate" is not allowed');
+                '"intervals" is required');
         });
 
         it('should fail to parse event with bad priority', function() {

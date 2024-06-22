@@ -45,7 +45,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
             const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[1]) as EventPayloadDescriptor;
             // console.log(eventPayload);
             assert.deepEqual(eventPayload, {
-                objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'PRICE',
                 units: 'KWH',
                 currency: 'USD'
@@ -81,7 +81,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
             const eventPayload: EventPayloadDescriptor = parseEventPayloadDescriptor.parse(data.eventPayloadDescriptors[4]) as EventPayloadDescriptor;
             // console.log(eventPayload);
             assert.deepEqual(eventPayload, {
-                objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'PRICE',
                 units: null,
                 currency: null
@@ -216,7 +216,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
             // console.log(result.value);
             assert.deepEqual(result.value, {
-                objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'PRICE',
                 units: 'KWH',
                 currency: 'USD'
@@ -276,7 +276,7 @@ describe('EVENT PAYLOAD DESCRIPTOR', function() {
 
             // console.log(result.value);
             assert.deepEqual(result.value, {
-                objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
+                // objectType: 'EVENT_PAYLOAD_DESCRIPTOR',
                 payloadType: 'PRICE',
                 units: null,
                 currency: null

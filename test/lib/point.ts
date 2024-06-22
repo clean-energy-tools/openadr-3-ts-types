@@ -13,6 +13,7 @@ import {
 } from '../../package/dist/index.js';
 // from 'openadr-3-ts-types';
 import YAML from 'js-yaml';
+// import { ZodError } from 'zod';
 
 
 describe('POINT', function() {
@@ -29,48 +30,105 @@ describe('POINT', function() {
     describe('ZOD', function() {
 
         it('should parse point', function() {
-            // console.log(data.intervals[0]);
+            // console.log(data.points[0]);
             const point: Point = parsePoint.parse(data.points[0]) as Point;
             // console.log(point);
             assert.deepEqual(point, { x: 1, y: 1 });
         });
 
         it('should parse point w/ negative numbers', function() {
-            // console.log(data.intervals[0]);
+            // console.log(data.points[1]);
             const point: Point = parsePoint.parse(data.points[1]) as Point;
             // console.log(point);
             assert.deepEqual(point, { x: -1, y: -1 });
         });
 
         it('should parse point w/ floating numbers', function() {
-            // console.log(data.intervals[0]);
+            // console.log(data.points[2]);
             const point: Point = parsePoint.parse(data.points[2]) as Point;
             // console.log(point);
             assert.deepEqual(point, { x: 1.1, y: 2.2 });
         });
 
         it('should parse point w/ missing x', function() {
-            console.log(data.intervals[0]);
-            const point: Point = parsePoint.parse(data.points[3]) as Point;
-            console.log(point);
-            // This should fail
-            // assert.deepEqual(point, { x: null, y: 3 });
+            // console.log(data.points[3]);
+            let error: any;
+            let point: Point;
+            try {
+                point = parsePoint.parse(data.points[3]) as Point;
+            } catch (err: any) {
+                error = err;
+                // console.error(err);
+            }
+            assert.isOk(error instanceof Error);
+            assert.deepEqual(error.issues, [
+                {
+                    "code": "invalid_type",
+                    "expected": "number",
+                    "received": "undefined",
+                    "path": [
+                      "x"
+                    ],
+                    "message": "Required"
+                }
+            ]);
         });
 
         it('should parse point w/ missing y', function() {
-            console.log(data.intervals[0]);
-            const point: Point = parsePoint.parse(data.points[4]) as Point;
-            console.log(point);
-            // This should fail
-            // assert.deepEqual(point, { x: 4, y: null });
+            // console.log(data.points[4]);
+            let error: any;
+            let point: Point;
+            try {
+                point = parsePoint.parse(data.points[4]) as Point;
+            } catch (err: any) {
+                error = err;
+                // console.error(err);
+            }
+            assert.isOk(error instanceof Error);
+            assert.deepEqual(error.issues, [
+                {
+                    "code": "invalid_type",
+                    "expected": "number",
+                    "received": "undefined",
+                    "path": [
+                      "y"
+                    ],
+                    "message": "Required"
+                }
+            ]);
         });
 
         it('should parse point w/ both missing', function() {
-            console.log(data.intervals[0]);
-            const point: Point = parsePoint.parse(data.points[5]) as Point;
-            console.log(point);
-            // This should fail
-            // assert.deepEqual(point, { x: null, y: null });
+            // console.log(data.points[5]);
+            let error: any;
+            let point: Point;
+            try {
+                point = parsePoint.parse(data.points[5]) as Point;
+            } catch (err: any) {
+                error = err;
+                // console.error(err);
+            }
+            assert.isOk(error instanceof Error);
+            assert.deepEqual(error.issues, [
+                {
+                  "code": "invalid_type",
+                  "expected": "number",
+                  "received": "undefined",
+                  "path": [
+                    "x"
+                  ],
+                  "message": "Required"
+                },
+                {
+                  "code": "invalid_type",
+                  "expected": "number",
+                  "received": "undefined",
+                  "path": [
+                    "y"
+                  ],
+                  "message": "Required"
+                }
+            ]);
         });
 
         it('should parse point w/ extra data not seen', function() {

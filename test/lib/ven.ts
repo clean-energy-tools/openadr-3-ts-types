@@ -32,6 +32,7 @@ describe('VEN', function() {
             // console.log(ven);
             assert.deepEqual(ven, {
                 venName: 'con-ed-lcn-Liberty-Green',
+                targets: null,
                 attributes: [
                     { 
                         type: 'GEO_LOCATION',
@@ -62,6 +63,7 @@ describe('VEN', function() {
             // console.log(ven);
             assert.deepEqual(ven, {
                 venName: 'con-ed-lcn-Second-Green',
+                targets: null,
                 attributes: [
                     { 
                         type: 'GEO_LOCATION',
@@ -85,6 +87,7 @@ describe('VEN', function() {
                 resources: [
                     {
                         resourceName: 'evse-second-green-1',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -102,6 +105,7 @@ describe('VEN', function() {
                     },
                     {
                         resourceName: 'evse-second-green-2',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -119,6 +123,7 @@ describe('VEN', function() {
                     },
                     {
                         resourceName: 'evse-second-green-3',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -143,6 +148,7 @@ describe('VEN', function() {
             // console.log(ven);
             assert.deepEqual(ven, {
                 venName: 'con-ed-lcn-Third-Green',
+                targets: null,
                 attributes: [
                     { 
                         type: 'GEO_LOCATION',
@@ -166,6 +172,7 @@ describe('VEN', function() {
                 resources: [
                     {
                         resourceName: 'evse-third-green-1',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -183,6 +190,7 @@ describe('VEN', function() {
                     },
                     {
                         resourceName: 'evse-third-green-2',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -200,6 +208,7 @@ describe('VEN', function() {
                     },
                     {
                         resourceName: 'evse-third-green-3',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -225,6 +234,7 @@ describe('VEN', function() {
             assert.deepEqual(ven, {
                 venName: 'con-ed-lcn-Third-Green',
                 extraData: 'something completely different',
+                targets: null,
                 attributes: [
                     { 
                         type: 'GEO_LOCATION',
@@ -252,6 +262,7 @@ describe('VEN', function() {
                         resourceName: 'evse-third-green-1',
                         // .passthrough doesn't seem to affect resources
                         // extraData: 'something completely different 1',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -272,6 +283,7 @@ describe('VEN', function() {
                         resourceName: 'evse-third-green-2',
                         // .passthrough doesn't seem to affect resources
                         // extraData: 'something completely different 2',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -291,6 +303,7 @@ describe('VEN', function() {
                         resourceName: 'evse-third-green-3',
                         // .passthrough doesn't seem to affect resources
                         // extraData: 'something completely different 3',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -447,6 +460,7 @@ describe('VEN', function() {
 
             assert.deepEqual(result.value, {
                 venName: 'con-ed-lcn-Liberty-Green',
+                targets: null,
                 attributes: [
                     { 
                         type: 'GEO_LOCATION',
@@ -485,6 +499,7 @@ describe('VEN', function() {
 
             assert.deepEqual(result.value, {
                 venName: 'con-ed-lcn-Second-Green',
+                targets: null,
                 attributes: [
                     { 
                         type: 'GEO_LOCATION',
@@ -508,6 +523,7 @@ describe('VEN', function() {
                 resources: [
                     {
                         resourceName: 'evse-second-green-1',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -525,6 +541,7 @@ describe('VEN', function() {
                     },
                     {
                         resourceName: 'evse-second-green-2',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -542,6 +559,7 @@ describe('VEN', function() {
                     },
                     {
                         resourceName: 'evse-second-green-3',
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -577,6 +595,7 @@ describe('VEN', function() {
             assert.deepEqual(result.value, {
                 venName: 'con-ed-lcn-Third-Green',
                 extraData: "something completely different",
+                targets: null,
                 attributes: [
                     {
                         extraData: "in attributes",
@@ -602,6 +621,7 @@ describe('VEN', function() {
                     {
                         resourceName: 'evse-third-green-1',
                         extraData: "something completely different 1",
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -620,6 +640,7 @@ describe('VEN', function() {
                     {
                         resourceName: 'evse-third-green-2',
                         extraData: "something completely different 2",
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',
@@ -638,6 +659,7 @@ describe('VEN', function() {
                     {
                         resourceName: 'evse-third-green-3',
                         extraData: "something completely different 3",
+                        targets: null,
                         attributes: [
                             {
                                 type: 'DESCRIPTION',

@@ -36,12 +36,12 @@ describe('REPORT', function() {
                 reportName: 'Test report #1',
                 payloadDescriptors: [
                   {
-                    objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                    // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                     payloadType: 'USAGE',
                     readingType: null,
                     units: null,
                     accuracy: null,
-                    confidence: 100
+                    confidence: null
                   }
                 ],
                 resources: [
@@ -117,12 +117,12 @@ describe('REPORT', function() {
                 reportName: 'Test report #1',
                 payloadDescriptors: [
                   {
-                    objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                    // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                     payloadType: 'USAGE',
                     readingType: null,
                     units: null,
                     accuracy: null,
-                    confidence: 100
+                    confidence: null
                   }
                 ],
                 resources: [
@@ -403,12 +403,12 @@ describe('REPORT', function() {
               ignoreVenNotFound: true,
               payloadDescriptors: [
                 {
-                  objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
+                  // objectType: 'REPORT_PAYLOAD_DESCRIPTOR',
                   payloadType: 'USAGE',
                   readingType: null,
                   units: null,
                   accuracy: null,
-                  confidence: 100
+                  confidence: null
                 }
               ],
               resources: [

@@ -46,7 +46,8 @@ describe('RESOURCE', function() {
                         type: 'MAX_AMPS',
                         values: [ 32 ]
                     }
-                ]
+                ],
+                targets: null
             } as any);
         });
 
@@ -68,7 +69,8 @@ describe('RESOURCE', function() {
                         type: 'MAX_AMPS',
                         values: [ 208 ]
                     }
-                ]
+                ],
+                targets: null
             } as any);
         });
 
@@ -91,7 +93,8 @@ describe('RESOURCE', function() {
                         type: 'MAX_AMPS',
                         values: [ 208 ]
                     }
-                ]
+                ],
+                targets: null
             } as any);
         });
 
@@ -122,8 +125,8 @@ describe('RESOURCE', function() {
             // console.log(resource);
             assert.deepEqual(resource, {
                 resourceName: 'evse-green-3-missing',
-                // In this case, neither attributes nor targets
-                // have a default value
+                attributes: null,
+                targets: null
             } as any);
         });
 
@@ -247,7 +250,8 @@ describe('RESOURCE', function() {
                         type: 'MAX_AMPS',
                         values: [ 32 ]
                     }
-                ]
+                ],
+                targets: null
             } as any);
         });
 
@@ -281,7 +285,8 @@ describe('RESOURCE', function() {
                         type: 'MAX_AMPS',
                         values: [ 208 ]
                     }
-                ]
+                ],
+                targets: null
             } as any);
         });
 
@@ -298,8 +303,8 @@ describe('RESOURCE', function() {
 
             assert.deepEqual(result.value, {
                 resourceName: 'evse-green-3-missing',
-                // In this case, neither attributes nor targets
-                // have a default value
+                attributes: null,
+                targets: null
             } as any);
         });
 

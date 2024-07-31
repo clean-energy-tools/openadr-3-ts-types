@@ -1,35 +1,4 @@
-import _Joi from "joi";
-import { Extension, ExtensionFactory } from "joi";
-import { isoDate, isoDateTime, isoTime, isoYearMonth } from 'joi-iso-datestring';
-// The treatment for the first .extend comes from:
-//   https://stackoverflow.com/questions/67132969/typescript-joi-date-validation
-// By default the compiler insisted it had to be:
-//
-//   const Joi = _Joi.extend(isoDate(_Joi))
-//        .extend(isoDateTime)
-//        .extend(isoTime)
-//        .extend(isoYearMonth);
-//
-// Calling `isoDate(_Joi)` was done to avoid this error:
-//
-// src/joi/oadr3.ts:8:25 - error TS2345: Argument of type '(joi: Root) => Extension | ExtensionFactory' is not assignable to parameter of type 'Extension | ExtensionFactory'.
-//  Type '(joi: Root) => Extension | ExtensionFactory' is not assignable to type 'ExtensionFactory'.
-//    Type 'Extension | ExtensionFactory' is not assignable to type 'Extension'.
-//      Type 'ExtensionFactory' is not assignable to type 'Extension'.
-//
-// 8 const Joi = _Joi.extend(isoDate)
-//                           ~~~~~~~
-//
-// Having to call isoDate did not make sense.  None of the documentation
-// said anything like this.  The examples show simply listing
-// the Joi extension.
-//
-// The following casts it to be what it is, a Joi Extension.
-const Joi = _Joi.extend(isoDate as ExtensionFactory)
-    .extend(isoDateTime)
-    .extend(isoTime)
-    .extend(isoYearMonth);
-
+import Joi from "joi";
 
 export const schemas = {
   parameters: {
@@ -158,8 +127,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.isoDateTime().description(
+      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.date().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -210,7 +179,7 @@ export const schemas = {
         )
         .min(0),
       intervalPeriod: Joi.object({
-        start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
+        start: Joi.date().description("datetime in ISO 8601 format").required(),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -390,8 +359,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.isoDateTime().description(
+      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.date().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -489,7 +458,7 @@ export const schemas = {
               .max(128)
               .min(1),
             intervalPeriod: Joi.object({
-              start: Joi.isoDateTime()
+              start: Joi.date()
                 .description("datetime in ISO 8601 format")
                 .required(),
               duration: Joi.string()
@@ -527,7 +496,7 @@ export const schemas = {
                     .required()
                     .integer(),
                   intervalPeriod: Joi.object({
-                    start: Joi.isoDateTime()
+                    start: Joi.date()
                       .description("datetime in ISO 8601 format")
                       .required(),
                     duration: Joi.string()
@@ -617,8 +586,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.isoDateTime().description(
+      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.date().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -839,7 +808,7 @@ export const schemas = {
             .unknown()
         ),
       intervalPeriod: Joi.object({
-        start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
+        start: Joi.date().description("datetime in ISO 8601 format").required(),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -875,7 +844,7 @@ export const schemas = {
               .required()
               .integer(),
             intervalPeriod: Joi.object({
-              start: Joi.isoDateTime()
+              start: Joi.date()
                 .description("datetime in ISO 8601 format")
                 .required(),
               duration: Joi.string()
@@ -963,8 +932,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.isoDateTime().description(
+      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.date().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -1088,8 +1057,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.isoDateTime().description(
+      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.date().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -1098,7 +1067,7 @@ export const schemas = {
         .only(),
       venName: Joi.string()
         .description(
-          "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unqiue within the scope of a VTN\n"
+          "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unique within the scope of a VTN\n"
         )
         .required()
         .max(128)
@@ -1208,10 +1177,10 @@ export const schemas = {
               .pattern(/^[a-zA-Z0-9_-]*$/, {})
               .max(128)
               .min(1),
-            createdDateTime: Joi.isoDateTime().description(
+            createdDateTime: Joi.date().description(
               "datetime in ISO 8601 format"
             ),
-            modificationDateTime: Joi.isoDateTime().description(
+            modificationDateTime: Joi.date().description(
               "datetime in ISO 8601 format"
             ),
             objectType: Joi.string()
@@ -1339,8 +1308,8 @@ export const schemas = {
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
-      createdDateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
-      modificationDateTime: Joi.isoDateTime().description(
+      createdDateTime: Joi.date().description("datetime in ISO 8601 format"),
+      modificationDateTime: Joi.date().description(
         "datetime in ISO 8601 format"
       ),
       objectType: Joi.string()
@@ -1464,7 +1433,7 @@ export const schemas = {
         .required()
         .integer(),
       intervalPeriod: Joi.object({
-        start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
+        start: Joi.date().description("datetime in ISO 8601 format").required(),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -1539,7 +1508,7 @@ export const schemas = {
       )
       .unknown(),
     intervalPeriod: Joi.object({
-      start: Joi.isoDateTime().description("datetime in ISO 8601 format").required(),
+      start: Joi.date().description("datetime in ISO 8601 format").required(),
       duration: Joi.string()
         .allow("")
         .default("PT0S")
@@ -1816,10 +1785,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.isoDateTime().description(
+                createdDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.isoDateTime().description(
+                modificationDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -1875,7 +1844,7 @@ export const schemas = {
                   )
                   .min(0),
                 intervalPeriod: Joi.object({
-                  start: Joi.isoDateTime()
+                  start: Joi.date()
                     .description("datetime in ISO 8601 format")
                     .required(),
                   duration: Joi.string()
@@ -2063,10 +2032,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.isoDateTime().description(
+                createdDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.isoDateTime().description(
+                modificationDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2164,7 +2133,7 @@ export const schemas = {
                         .max(128)
                         .min(1),
                       intervalPeriod: Joi.object({
-                        start: Joi.isoDateTime()
+                        start: Joi.date()
                           .description("datetime in ISO 8601 format")
                           .required(),
                         duration: Joi.string()
@@ -2202,7 +2171,7 @@ export const schemas = {
                               .required()
                               .integer(),
                             intervalPeriod: Joi.object({
-                              start: Joi.isoDateTime()
+                              start: Joi.date()
                                 .description("datetime in ISO 8601 format")
                                 .required(),
                               duration: Joi.string()
@@ -2296,10 +2265,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.isoDateTime().description(
+                createdDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.isoDateTime().description(
+                modificationDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2520,7 +2489,7 @@ export const schemas = {
                       .unknown()
                   ),
                 intervalPeriod: Joi.object({
-                  start: Joi.isoDateTime()
+                  start: Joi.date()
                     .description("datetime in ISO 8601 format")
                     .required(),
                   duration: Joi.string()
@@ -2558,7 +2527,7 @@ export const schemas = {
                         .required()
                         .integer(),
                       intervalPeriod: Joi.object({
-                        start: Joi.isoDateTime()
+                        start: Joi.date()
                           .description("datetime in ISO 8601 format")
                           .required(),
                         duration: Joi.string()
@@ -2646,10 +2615,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.isoDateTime().description(
+                createdDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.isoDateTime().description(
+                modificationDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2777,10 +2746,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.isoDateTime().description(
+                createdDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.isoDateTime().description(
+                modificationDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -2789,7 +2758,7 @@ export const schemas = {
                   .only(),
                 venName: Joi.string()
                   .description(
-                    "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unqiue within the scope of a VTN\n"
+                    "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unique within the scope of a VTN\n"
                   )
                   .required()
                   .max(128)
@@ -2903,10 +2872,10 @@ export const schemas = {
                         .pattern(/^[a-zA-Z0-9_-]*$/, {})
                         .max(128)
                         .min(1),
-                      createdDateTime: Joi.isoDateTime().description(
+                      createdDateTime: Joi.date().description(
                         "datetime in ISO 8601 format"
                       ),
-                      modificationDateTime: Joi.isoDateTime().description(
+                      modificationDateTime: Joi.date().description(
                         "datetime in ISO 8601 format"
                       ),
                       objectType: Joi.string()
@@ -3036,10 +3005,10 @@ export const schemas = {
                   .pattern(/^[a-zA-Z0-9_-]*$/, {})
                   .max(128)
                   .min(1),
-                createdDateTime: Joi.isoDateTime().description(
+                createdDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
-                modificationDateTime: Joi.isoDateTime().description(
+                modificationDateTime: Joi.date().description(
                   "datetime in ISO 8601 format"
                 ),
                 objectType: Joi.string()
@@ -3217,7 +3186,7 @@ export const schemas = {
       .allow("PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE")
       .description("Types of objects addressable through API.")
       .only(),
-    dateTime: Joi.isoDateTime().description("datetime in ISO 8601 format"),
+    dateTime: Joi.date().description("datetime in ISO 8601 format"),
     duration: Joi.string()
       .allow("")
       .default("PT0S")
@@ -3231,47 +3200,82 @@ export const schemas = {
       grant_type: Joi.string()
         .allow("client_credentials")
         .description("OAuth2 grant type, must be 'client_credentials'")
-        .only(),
-      clientID: Joi.string()
+        .only()
+        .required(),
+      client_id: Joi.string()
         .description("client ID to exchange for bearer token.")
         .required()
-        .max(128)
+        .max(4096)
         .min(1),
-      clientSecret: Joi.string()
+      client_secret: Joi.string()
         .description("client secret to exchange for bearer token.")
         .required()
-        .max(128)
+        .max(4096)
         .min(1),
       scope: Joi.string()
         .description("application defined scope.")
-        .max(128)
+        .max(4096)
         .min(1),
     })
-      .description("Body of POST request to /auth/token.\n")
+      .description(
+        "Body of POST request to /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749\n"
+      )
       .unknown(),
     clientCredentialResponse: Joi.object({
       access_token: Joi.string()
         .description("access token povided by Authorization service")
         .required()
-        .max(128)
+        .max(4096)
         .min(1),
       token_type: Joi.string()
         .allow("Bearer")
         .description("token type, must be Bearer.")
-        .only(),
+        .only()
+        .required(),
       expires_in: Joi.number()
         .description("expiration period in seconds.")
         .integer(),
       refresh_token: Joi.string()
         .description("refresh token povided by Authorization service")
-        .max(128)
+        .max(4096)
         .min(1),
       scope: Joi.string()
         .description("application defined scope.")
-        .max(128)
+        .max(4096)
         .min(1),
     })
-      .description("Body response from /auth/token.\n")
+      .description(
+        "Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749\n"
+      )
+      .unknown(),
+    authError: Joi.object({
+      error: Joi.string()
+        .allow(
+          "invalid_request",
+          "invalid_client",
+          "invalid_grant",
+          "invalid_scope",
+          "unauthorized_client",
+          "unsupported_grant_type"
+        )
+        .description(
+          "As described in rfc6749 | invalid_request – The request is missing a parameter so the server can’t proceed with the request. This may also be returned if the request includes an unsupported parameter or repeats a parameter. invalid_client – Client authentication failed, such as if the request contains an invalid client ID or secret. Send an HTTP 401 response in this case. invalid_grant – The authorization code (or user’s password for the password grant type) is invalid or expired. This is also the error you would return if the redirect URL given in the authorization grant does not match the URL provided in this access token request. invalid_scope – For access token requests that include a scope (password or client_credentials grants), this error indicates an invalid scope value in the request. unauthorized_client – This client is not authorized to use the requested grant type. For example, if you restrict which applications can use the Implicit grant, you would return this error for the other apps. unsupported_grant_type – If a grant type is requested that the authorization server doesn’t recognize, use this code. Note that unknown grant types also use this specific error code rather than using the invalid_request above."
+        )
+        .only()
+        .required(),
+      error_description: Joi.string()
+        .allow("")
+        .description(
+          "Should be a sentence or two at most describing the circumstance of the error"
+        )
+        .min(0),
+      error_uri: Joi.string()
+        .description("Optional reference to more detailed error description")
+        .uri({}),
+    })
+      .description(
+        "error reponse on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749"
+      )
       .unknown(),
     problem: Joi.object({
       type: Joi.string()

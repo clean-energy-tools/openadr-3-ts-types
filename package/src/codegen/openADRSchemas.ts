@@ -291,7 +291,7 @@ export type Ven = {
   objectType?: "VEN";
   /**
    * User generated identifier, may be VEN identifier provisioned out-of-band.
-   * venName is expected to be unqiue within the scope of a VTN
+   * venName is expected to be unique within the scope of a VTN
    *
    * @minLength 1
    * @maxLength 128
@@ -664,63 +664,59 @@ export type DateTime = string;
 export type Duration = string;
 
 /**
- * Body of POST request to /auth/token.
+ * Body of POST request to /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
  */
 export type ClientCredentialRequest = {
   /**
    * OAuth2 grant type, must be 'client_credentials'
    *
-   * @minLength 1
-   * @maxLength 128
    * @example client_credentials
    */
-  grant_type?: "client_credentials";
+  grant_type: "client_credentials";
   /**
    * client ID to exchange for bearer token.
    *
    * @minLength 1
-   * @maxLength 128
+   * @maxLength 4096
    * @example ven_client_99
    */
-  clientID: string;
+  client_id: string;
   /**
    * client secret to exchange for bearer token.
    *
    * @minLength 1
-   * @maxLength 128
+   * @maxLength 4096
    * @example ven_secret_99
    */
-  clientSecret: string;
+  client_secret: string;
   /**
    * application defined scope.
    *
    * @minLength 1
-   * @maxLength 128
+   * @maxLength 4096
    * @example read_all
    */
   scope?: string;
 };
 
 /**
- * Body response from /auth/token.
+ * Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
  */
 export type ClientCredentialResponse = {
   /**
    * access token povided by Authorization service
    *
    * @minLength 1
-   * @maxLength 128
+   * @maxLength 4096
    * @example MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
    */
   access_token: string;
   /**
    * token type, must be Bearer.
    *
-   * @minLength 1
-   * @maxLength 128
    * @example Bearer
    */
-  token_type?: "Bearer";
+  token_type: "Bearer";
   /**
    * expiration period in seconds.
    *
@@ -731,7 +727,7 @@ export type ClientCredentialResponse = {
    * refresh token povided by Authorization service
    *
    * @minLength 1
-   * @maxLength 128
+   * @maxLength 4096
    * @example IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk
    */
   refresh_token?: string;
@@ -739,10 +735,41 @@ export type ClientCredentialResponse = {
    * application defined scope.
    *
    * @minLength 1
-   * @maxLength 128
+   * @maxLength 4096
    * @example read_all
    */
   scope?: string;
+};
+
+/**
+ * error reponse on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749
+ */
+export type AuthError = {
+  /**
+   * As described in rfc6749 | invalid_request – The request is missing a parameter so the server can’t proceed with the request. This may also be returned if the request includes an unsupported parameter or repeats a parameter. invalid_client – Client authentication failed, such as if the request contains an invalid client ID or secret. Send an HTTP 401 response in this case. invalid_grant – The authorization code (or user’s password for the password grant type) is invalid or expired. This is also the error you would return if the redirect URL given in the authorization grant does not match the URL provided in this access token request. invalid_scope – For access token requests that include a scope (password or client_credentials grants), this error indicates an invalid scope value in the request. unauthorized_client – This client is not authorized to use the requested grant type. For example, if you restrict which applications can use the Implicit grant, you would return this error for the other apps. unsupported_grant_type – If a grant type is requested that the authorization server doesn’t recognize, use this code. Note that unknown grant types also use this specific error code rather than using the invalid_request above.
+   *
+   * @example invalid_request
+   */
+  error:
+    | "invalid_request"
+    | "invalid_client"
+    | "invalid_grant"
+    | "invalid_scope"
+    | "unauthorized_client"
+    | "unsupported_grant_type";
+  /**
+   * Should be a sentence or two at most describing the circumstance of the error
+   *
+   * @example Request was missing the 'client_id' parameter.
+   */
+  error_description?: string;
+  /**
+   * Optional reference to more detailed error description
+   *
+   * @format uri
+   * @example See the full API docs at https://authorization-server.com/docs/access_toke
+   */
+  error_uri?: string;
 };
 
 /**

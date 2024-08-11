@@ -3213,9 +3213,10 @@ export const schemas = {
         .max(4096)
         .min(1),
       scope: Joi.string()
+        .allow("")
         .description("application defined scope.")
         .max(4096)
-        .min(1),
+        .min(0),
     })
       .description(
         "Body of POST request to /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749\n"
@@ -3240,9 +3241,10 @@ export const schemas = {
         .max(4096)
         .min(1),
       scope: Joi.string()
+        .allow("")
         .description("application defined scope.")
         .max(4096)
-        .min(1),
+        .min(0),
     })
       .description(
         "Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749\n"

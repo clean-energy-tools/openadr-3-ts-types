@@ -692,7 +692,7 @@ export type ClientCredentialRequest = {
   /**
    * application defined scope.
    *
-   * @minLength 1
+   * @minLength 0
    * @maxLength 4096
    * @example read_all
    */
@@ -734,7 +734,7 @@ export type ClientCredentialResponse = {
   /**
    * application defined scope.
    *
-   * @minLength 1
+   * @minLength 0
    * @maxLength 4096
    * @example read_all
    */

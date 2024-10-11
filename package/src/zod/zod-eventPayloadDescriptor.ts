@@ -1,3 +1,0 @@
-import { z } from "zod";
-
-export default z.object({ "objectType": z.literal("EVENT_PAYLOAD_DESCRIPTOR").describe("Used as discriminator.").optional(), "payloadType": z.string().min(1).max(128).describe("Enumerated or private string signifying the nature of values."), "units": z.string().nullable().describe("Units of measure.").default(null), "currency": z.string().nullable().describe("Currency of price payload.").default(null) }).describe("Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency.\n");

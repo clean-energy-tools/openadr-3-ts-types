@@ -1,0 +1,57 @@
+# Build scripts for the `openadr-3-ts-types` package
+
+The package `openadr-3-ts-types` contains JavaScript and TypeScript files which are automatically built from the OpenADR v3 specification.  That specification is a YAML file available through the [OpenADR Alliance](https://www.openadr.org/).  The specification itself is available under the Apache 2 license.
+
+OpenADR is a trademark of the OpenADR alliance.
+
+The intent in this directory is evaluation of tools from which we can generate type declarations and data validation functions, in TypeScript for Node.js, corresponding to the OpenADR 3 schema.
+
+To do that we've evaluated several tools, linked here:
+
+* [`openapi-to-zod`](./README-openapi-to-zod.md)
+* [`openapi-typescript`](./README-openapi-typescript.md)
+* [`openapi-client-axios-typegen`](./README-typegen.md)
+* [`ts-to-zod`](./README-ts-to-zod.md)
+* [`openapi2jsonschema`](./README-openapi2jsonschema.md)
+* [`openapi-schema-to-json-schema`](./README-openapi-schema-to-json-schema.md)
+* [`openapi-ts`](./README-openapi-ts.md)
+
+
+For all these tools you will find build scripts written using `zx`, and a `package.json` containing a `scripts` section that supports running the build scripts.  The scripts demonstrate usage of each tool.
+
+Some of the build scripts generate the source code used in the `../package` directory.
+
+Each build script is used for evaluation.  The scripts with successful useful output will copy their outputs into the `../package` directory.  All scripts save their outputs into a subdirectory of this directory.
+
+The file `common.js` is meant to contain common definitions used by the build scripts.
+
+# Process for building the `../package` directory
+
+Producing the typescript types package was not well documented and apparently a work in progress.  It's been a few months since I last looked at this.  Here's my best guess about the process by looking at the scripts and the state of the `../package/src` directory.
+
+1. CODEGEN: Run `build-codegen.js`, or `build:codegen`, which goes ahead and copies a build file into `../package/src/codegen/openADRSchemas.ts`.  Presumably `openadr3ApiComponents.ts` must be modified before copying it.
+1. JOI: Run `build-openapi-to-joi.js`, or `build:joi`, which produces `openapi-to-joi/oadr3.js`.  If happy, copy to `../package/src/joi`
+1. OPENAPI-TYPESCRIPT: Run `build-openapi-typescript.js` which in turn runs the `openapi-typescript` tool, which copies a file to `../package/src/openapi-typescript/types.ts`
+1. TYPECONV: Run `build-typeconv.js` but I'm not sure what to do next, and whether this directory is useful
+1. ZOD: Run `build-openapi-to-zod.js` or `build-openapi-to-zod.js`.  It appears there was an experiment underway to evaluate the effect of `nullable`.  In any case, this produces a directory that is copied directly to `../package/src/zod`.
+
+Once those things are built the `../package/src/index.ts` file will reference everything.
+
+For 3.1 there are some new objects to accomodate
+
+After that the test directory must be updated
+
+# Generating an equivalent package for an extended version of OpenADR
+
+Your application may wish to extend OpenADR with additional objects, API methods, or fields on the schema objects.  You should therefore generate a package like `openadr-3-ts-types` supporting your extended version of OpenADR.
+
+The steps to follow are:
+
+* Clone the `openadr-3-ts-types` GitHub repository.
+* In `../package/package.json`, change the `name` field and other fields appropriately to your OpenADR extension.
+* Download the OpenADR specification from `openadr.org`.
+* Modify the OpenAPI YAML specification as needed for your application.
+* Use the `build:xyzzy` scripts in `builder/package.json` to generate code for your package.  The value for `openadryaml` should change to point to your extended specification file.
+* Modify the tests in `../test/lib` to match the changes you've made.
+* Make sure the README's in your cloned repository explain that the package is derived from `openadr-3-ts-types`, and what are the differences.  In other words, give credit (and a link) to this project, while clearly saying that it is different, why it is different, and that it has a different name.
+* Package and distribute the resulting package.

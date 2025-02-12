@@ -29,7 +29,9 @@ openapi2jsonschema
 # openapi-schema-to-json-schema
 openapi-schema-to-json-schema
 
-oadr3.ts
+# openapi-ts
 openapi-ts
+
+oadr3.ts
 zod
 

@@ -8,8 +8,12 @@ The intent in this directory is evaluation of tools from which we can generate t
 
 To do that we've evaluated several tools, linked here:
 
-* [`@openapi-codegen`](./README-codegen.md)
-* [`openapi-to-zod`](./README-openapi-to-zod.md)
+Package        | Discussion
+---------------|-------------------
+[`@openapi-codegen`](./README-codegen.md) | Excellent type declarations for schema objects.  The Fetchers API will require overhaul to put to use.
+[`openapi-to-zod`](./README-openapi-to-zod.md) | Good quality Zod validation objects, but there are picky problems in the implementation.
+
+
 * [`openapi-typescript`](./README-openapi-typescript.md)
 * [`openapi-client-axios-typegen`](./README-typegen.md)
 * [`ts-to-zod`](./README-ts-to-zod.md)

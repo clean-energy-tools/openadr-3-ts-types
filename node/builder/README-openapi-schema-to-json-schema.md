@@ -7,7 +7,7 @@ USAGE:
 
 ```shell
 $ npm install @openapitools/openapi-generator-cli --save
-$ npx "@openapi-contrib/openapi-schema-to-json-schema" --input ../oadr3.0.1.yaml --output schema
+$ npx "@openapi-contrib/openapi-schema-to-json-schema" --input ../oadr3.0.1.yaml --output ./openapi-schema-to-json-schema
 ```
 
 Unfortunately this tool does not support YAML-formatted OpenAPI specifications.  WTF?

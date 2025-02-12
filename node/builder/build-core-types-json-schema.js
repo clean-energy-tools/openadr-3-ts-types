@@ -1,4 +1,6 @@
 
+// Run using: npx zx build-core-types-json-schema.js
+
 import { promises as fsp } from 'node:fs';
 
 import { spec } from './common.js';

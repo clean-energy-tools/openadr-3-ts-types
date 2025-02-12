@@ -19,8 +19,11 @@ typegen
 # ts-to-zod
 ts-to-zod
 
-oadr3.ts
+# typeconv
 typeconv
+typeconv-3.1
+
+oadr3.ts
 openapi2jsonschema
 openapi-schema-to-json-schema
 openapi-ts

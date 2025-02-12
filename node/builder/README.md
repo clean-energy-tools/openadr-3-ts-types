@@ -12,9 +12,8 @@ Package        | Discussion
 ---------------|-------------------
 [`@openapi-codegen`](./README-codegen.md) | Excellent type declarations for schema objects.  The Fetchers API will require overhaul to put to use.
 [`openapi-to-zod`](./README-openapi-to-zod.md) | Good quality Zod validation objects, but there are picky problems in the implementation.
-
-
-* [`openapi-typescript`](./README-openapi-typescript.md)
+[`openapi-typescript`](./README-openapi-typescript.md) | Produces nested objects containing type definitions. It is comprehensive but is difficult to use with other tools.
+ 
 * [`openapi-client-axios-typegen`](./README-typegen.md)
 * [`ts-to-zod`](./README-ts-to-zod.md)
 * [`openapi2jsonschema`](./README-openapi2jsonschema.md)

@@ -1,0 +1,18 @@
+node_modules
+package-lock.json
+
+# @openapi-codegen/cli
+codegen-build
+openapi-codegen-2025-02-12
+
+oadr3.ts
+typegen
+typeconv
+openapi2jsonschema
+openapi-schema-to-json-schema
+openapi-to-zod
+openapi-ts
+openapi-typescript
+ts-to-zod
+zod
+

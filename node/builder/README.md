@@ -8,6 +8,7 @@ The intent in this directory is evaluation of tools from which we can generate t
 
 To do that we've evaluated several tools, linked here:
 
+* [`@openapi-codegen`](./README-codegen.md)
 * [`openapi-to-zod`](./README-openapi-to-zod.md)
 * [`openapi-typescript`](./README-openapi-typescript.md)
 * [`openapi-client-axios-typegen`](./README-typegen.md)

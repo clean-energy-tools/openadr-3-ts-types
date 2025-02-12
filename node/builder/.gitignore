@@ -23,8 +23,10 @@ ts-to-zod
 typeconv
 typeconv-3.1
 
-oadr3.ts
+# openapi2jsonschema
 openapi2jsonschema
+
+oadr3.ts
 openapi-schema-to-json-schema
 openapi-ts
 zod

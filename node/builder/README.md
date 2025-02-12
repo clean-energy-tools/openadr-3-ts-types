@@ -24,7 +24,7 @@ Package        | Discussion
 ['oas-validator'](./build-oas-validator.js) | This should be a good tool for validating an OpenAPI spec. But, it fails.
 [`openapi-json-schema`](./build-openapi-json.js) | Minimal OpenAPI - JSON Schema conversion.  Not useful.
 [`build-openapi-to-js-schema.js`](./build-openapi-to-js-schema.js) | Generates objects that they say are schemas that in some cases can be used with AJV.
-
+[`OpenAPITools/openapi-generator`](./build-openapiGenerator.js) | Massive set of Java tools for working with OpenAPI specs.  But, it was too difficult to get it to do anything useful.
 
 
 For all these tools you will find build scripts written using `zx`, and a `package.json` containing a `scripts` section that supports running the build scripts.  The scripts demonstrate usage of each tool.

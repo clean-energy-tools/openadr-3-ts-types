@@ -3,6 +3,10 @@
 
 This is a Node.js tool for converting OpenAPI to JSON Schema
 
+See: [`build-openapi-generator.js`](./build-openapi-generator.js)
+
+See: [`build-openapi-schema-to-json-schema.js`](./build-openapi-schema-to-json-schema.js)
+
 USAGE:
 
 ```shell

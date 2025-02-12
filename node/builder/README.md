@@ -20,6 +20,7 @@ Package        | Discussion
 [`openapi2jsonschema`](./README-openapi2jsonschema.md) | Python tool for converting OpenAPI schema entries into JSON schema. Not certain how useful the result is for actual tools.
 [`openapi-schema-to-json-schema`](./README-openapi-schema-to-json-schema.md) | Node.js tool for converting schemas in OpenAPI to JSON Schema - supposedly - several problems
 [`openapi-ts`](./README-openapi-ts.md) | It looks like a highly capable tool for generating complete SDKs etc. But in practice it seems very incomplete.
+['oas-validator'](./build-oas-validator.js) | This should be a good tool for validating an OpenAPI spec. But, it fails.
 
 For all these tools you will find build scripts written using `zx`, and a `package.json` containing a `scripts` section that supports running the build scripts.  The scripts demonstrate usage of each tool.
 

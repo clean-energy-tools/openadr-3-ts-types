@@ -1,12 +1,20 @@
 # openadr-3-ts-types
 
-This repository handles building the package, `openadr-3-ts-types`.  The package is a collection of type declarations and data validation useful for writing programs in TypeScript which interact with OpenADR v3 services.
+The intent for this repository is to serve the OpenADR v3 community with packages data types and data validation for several programming languages.
+
+Pre-built data types, and pre-built data validation functions, should make it easier for folks to write OpenADR v3 applications.  
+
+It is intended, for each programming language of interest, to:
+
+* Auto-generate data types and data validation functions from the concrete OpenADR specifications (OpenAPI and JSON Schema)
+* Publish the data types and validation functions as packages in the corresponding package distribution system for each platform
 
 The directories contain:
 
-* [`builder`](./builder) -- is a package of build scripts for generating the code in the `package` directory.
-* [`package`](./package) -- is the package which is published to the npm repository.
+* Node.js
+    * [`builder`](./node/builder/README.md) -- is a collection of build scripts exploring different tools for the Node.js/TypeScript ecosystem
+    * [`package`](./node/package/README.md) -- is the package which is published to the npm repository.
+    * ['test`](./node/test/README.md) -- Tests
 * [`example`](./example) -- contains example code demonstrating how this package is used.
-* ['test`](./test) -- Tests
 
 

@@ -15,7 +15,7 @@ $ npm install @openapi-codegen/cli \
 See [`build-codegen.js`](./build-codegen.js)
 
 ```shell
-$ npx openapi-codegen gen OADR -c codegen-openadr.config.ts
+$ npx openapi-codegen gen oadr3 -c openapi-codegen.config.ts
 ```
 
 The configuration file can be generated this way:
@@ -110,6 +110,8 @@ export type ResourceRequest = {
 };
 ```
 
+# API functions
+
 In `oadr3Components.ts` we have declarations for the API functions.  This is essence a REST API Client library.
 
 API parameters are nicely declared, like so:
@@ -196,7 +198,28 @@ For use on Node.js this function must be rewritten.  In fact, that's what is rec
 
 > If your Open API spec contains a configured server, then the base URL for all requests will default to that server's URL. If no such configuration exists, you'll need to specify the base URL value.
 
+# Discussion of the API functions
 
+The API function implementation looked gnarly which put me off from using them.  However, after some study ...
 
+Now I'm certain that it's best to not use them.
 
+Codegen generates `<prefix>Components.ts` with function defintions corresponding to the `operationId`'s in the OpenAPI specification.  Along with that are type definitions for parameters and responses.
 
+Refer to `searchAllPrograms` shown above.  All of these are well defined and are decent-looking code.
+
+However, the first problem I have with this is that it's a collection of functions.  This is great if your client is to connect with one-and-only-one server.  What if you need to connect to multiple servers from one client application?
+
+It's better for the API functions to be part of a Class.  Each class instance would contain administrative data such as access URLs, access tokens, and keep track of things like provisioning OAuth2 tokens.  These things must be managed on a per-connection basis.
+
+**First Problem** -- Because OpenAPI Codegen generates a collection of functions - how do we manage multiple connections and per-connection data?
+
+Look closely and you see the API function simply calls `oadr3Fetch` along with a bunch of data passed as generics or as parameters.
+
+Going into that function, I was able to fairly easily adapt the algorithm for generating OAuth2 Client Credential Flow tokens.  I haven't tested it, but the code looks correct (knock on wood).
+
+But the real difficulty will be introducing data validation.  The `oadr3Fetch` function does not have the right knowledge to validate the data.  Instead that should be done in the function which calls this.. but, how?
+
+In `oadr3Fetch` we might check the `url` and `method` and from that have hard-coded knowledge of what data should be in `pathParams` or `queryParams` or `body`, and how to validate that data.  But, we'd have to do this for every operation, which will become very gnarly snd unmaintainable, very quickly.
+
+**Second Problem** -- It's impractical to integrate data validation.

@@ -11,6 +11,8 @@ try {
 
 // When we're happy with the generated files, copy them into the package sources.
 
-// await $`cp ./codegen-build/oadrSchemas.ts ../package/src/codegen/openADRSchemas.ts`;
+await $`cp ./openapi-codegen-2025-02-12/oadr3Schemas.ts ./openapi-codegen-2025-02-12/oadr3Components.ts ../package/src/codegen/`;
+
+console.log('Make sure to edit oadr3Components.ts to remove Fetcher functions');
 
 

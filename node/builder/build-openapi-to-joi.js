@@ -7,12 +7,15 @@
 
 import { spec } from './common.js';
 
-await $`mkdir -p ./openapi-to-joi-3.1`;
+const outDir = './openapi-to-joi-3.1';
+const pkgDir = '../package/src/joi/';
+
+await $`mkdir -p ${outDir}`;
 
 try {
-    await $`npx openapi-to-joi ${spec} -o ./openapi-to-joi-3.1/oadr3.js`;
+    await $`npx openapi-to-joi ${spec} -o ${outDir}/oadr3.ts`;
 } catch (err) {
     console.log(`FAIL ${err.exitCode} ${err.stderr}`);
 }
 
-
+await $`cp ${outDir}/oadr3.ts ${pkgDir}`

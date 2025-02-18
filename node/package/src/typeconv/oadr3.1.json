@@ -1,0 +1,1653 @@
+{
+  "definitions": {
+    "program": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "programName": {
+          "type": "string",
+          "description": "Short name to uniquely identify program."
+        },
+        "programLongName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Long name of program for human readability."
+            },
+            {
+              "type": "null",
+              "description": "Long name of program for human readability."
+            }
+          ]
+        },
+        "retailerName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Short name of energy retailer providing the program."
+            },
+            {
+              "type": "null",
+              "description": "Short name of energy retailer providing the program."
+            }
+          ]
+        },
+        "retailerLongName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Long name of energy retailer for human readability."
+            },
+            {
+              "type": "null",
+              "description": "Long name of energy retailer for human readability."
+            }
+          ]
+        },
+        "programType": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "A program defined categorization."
+            },
+            {
+              "type": "null",
+              "description": "A program defined categorization."
+            }
+          ]
+        },
+        "country": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Alpha-2 code per ISO 3166-1."
+            },
+            {
+              "type": "null",
+              "description": "Alpha-2 code per ISO 3166-1."
+            }
+          ]
+        },
+        "principalSubdivision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Coding per ISO 3166-2. E.g. state in US."
+            },
+            {
+              "type": "null",
+              "description": "Coding per ISO 3166-2. E.g. state in US."
+            }
+          ]
+        },
+        "intervalPeriod": {
+          "$ref": "#/definitions/intervalPeriod"
+        },
+        "programDescriptions": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {},
+              "description": "A list of programDescriptions"
+            },
+            {
+              "type": "null",
+              "description": "A list of programDescriptions"
+            }
+          ]
+        },
+        "bindingEvents": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "description": "True if events are fixed once transmitted."
+            },
+            {
+              "type": "null",
+              "description": "True if events are fixed once transmitted."
+            }
+          ]
+        },
+        "localPrice": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "description": "True if events have been adapted from a grid event."
+            },
+            {
+              "type": "null",
+              "description": "True if events have been adapted from a grid event."
+            }
+          ]
+        },
+        "payloadDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/eventPayloadDescriptor"
+                  },
+                  {
+                    "$ref": "#/definitions/reportPayloadDescriptor"
+                  }
+                ]
+              },
+              "description": "A list of payloadDescriptors."
+            },
+            {
+              "type": "null",
+              "description": "A list of payloadDescriptors."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects."
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType",
+        "programName"
+      ],
+      "description": "Server provided representation of program\nmetadata common to all addressable objects. Values provided by VTN on object creation.\nClient provided description of program"
+    },
+    "programRequest": {
+      "type": "object",
+      "properties": {
+        "programName": {
+          "type": "string",
+          "description": "Short name to uniquely identify program."
+        },
+        "programLongName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Long name of program for human readability."
+            },
+            {
+              "type": "null",
+              "description": "Long name of program for human readability."
+            }
+          ]
+        },
+        "retailerName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Short name of energy retailer providing the program."
+            },
+            {
+              "type": "null",
+              "description": "Short name of energy retailer providing the program."
+            }
+          ]
+        },
+        "retailerLongName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Long name of energy retailer for human readability."
+            },
+            {
+              "type": "null",
+              "description": "Long name of energy retailer for human readability."
+            }
+          ]
+        },
+        "programType": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "A program defined categorization."
+            },
+            {
+              "type": "null",
+              "description": "A program defined categorization."
+            }
+          ]
+        },
+        "country": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Alpha-2 code per ISO 3166-1."
+            },
+            {
+              "type": "null",
+              "description": "Alpha-2 code per ISO 3166-1."
+            }
+          ]
+        },
+        "principalSubdivision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Coding per ISO 3166-2. E.g. state in US."
+            },
+            {
+              "type": "null",
+              "description": "Coding per ISO 3166-2. E.g. state in US."
+            }
+          ]
+        },
+        "intervalPeriod": {
+          "$ref": "#/definitions/intervalPeriod"
+        },
+        "programDescriptions": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {},
+              "description": "A list of programDescriptions"
+            },
+            {
+              "type": "null",
+              "description": "A list of programDescriptions"
+            }
+          ]
+        },
+        "bindingEvents": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "description": "True if events are fixed once transmitted."
+            },
+            {
+              "type": "null",
+              "description": "True if events are fixed once transmitted."
+            }
+          ]
+        },
+        "localPrice": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "description": "True if events have been adapted from a grid event."
+            },
+            {
+              "type": "null",
+              "description": "True if events have been adapted from a grid event."
+            }
+          ]
+        },
+        "payloadDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/eventPayloadDescriptor"
+                  },
+                  {
+                    "$ref": "#/definitions/reportPayloadDescriptor"
+                  }
+                ]
+              },
+              "description": "A list of payloadDescriptors."
+            },
+            {
+              "type": "null",
+              "description": "A list of payloadDescriptors."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects."
+            }
+          ]
+        }
+      },
+      "required": [
+        "programName"
+      ],
+      "description": "Client provided description of program"
+    },
+    "report": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "eventID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "clientName": {
+          "type": "string",
+          "description": "User generated identifier; may be VEN ID provisioned out-of-band."
+        },
+        "reportName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "User defined string for use in debugging or User Interface."
+            },
+            {
+              "type": "null",
+              "description": "User defined string for use in debugging or User Interface."
+            }
+          ]
+        },
+        "payloadDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reportPayloadDescriptor"
+              },
+              "description": "A list of reportPayloadDescriptors."
+            },
+            {
+              "type": "null",
+              "description": "A list of reportPayloadDescriptors."
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resourceName": {
+                "type": "string",
+                "description": "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
+              },
+              "intervalPeriod": {
+                "$ref": "#/definitions/intervalPeriod"
+              },
+              "intervals": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/interval"
+                },
+                "description": "A list of interval objects."
+              }
+            },
+            "required": [
+              "resourceName",
+              "intervals"
+            ],
+            "description": "Report data associated with a resource."
+          },
+          "description": "A list of objects containing report data for a set of resources."
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType",
+        "eventID",
+        "clientName",
+        "resources"
+      ],
+      "description": "Server provided representation of report\nmetadata common to all addressable objects. Values provided by VTN on object creation.\nreport object."
+    },
+    "reportRequest": {
+      "type": "object",
+      "properties": {
+        "eventID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "clientName": {
+          "type": "string",
+          "description": "User generated identifier; may be VEN ID provisioned out-of-band."
+        },
+        "reportName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "User defined string for use in debugging or User Interface."
+            },
+            {
+              "type": "null",
+              "description": "User defined string for use in debugging or User Interface."
+            }
+          ]
+        },
+        "payloadDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reportPayloadDescriptor"
+              },
+              "description": "A list of reportPayloadDescriptors."
+            },
+            {
+              "type": "null",
+              "description": "A list of reportPayloadDescriptors."
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resourceName": {
+                "type": "string",
+                "description": "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
+              },
+              "intervalPeriod": {
+                "$ref": "#/definitions/intervalPeriod"
+              },
+              "intervals": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/interval"
+                },
+                "description": "A list of interval objects."
+              }
+            },
+            "required": [
+              "resourceName",
+              "intervals"
+            ],
+            "description": "Report data associated with a resource."
+          },
+          "description": "A list of objects containing report data for a set of resources."
+        }
+      },
+      "required": [
+        "eventID",
+        "clientName",
+        "resources"
+      ],
+      "description": "report object."
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "programID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "eventName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "User defined string for use in debugging or User Interface."
+            },
+            {
+              "type": "null",
+              "description": "User defined string for use in debugging or User Interface."
+            }
+          ]
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "description": "Relative priority of event. A lower number is a higher priority."
+            },
+            {
+              "type": "null",
+              "description": "Relative priority of event. A lower number is a higher priority."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects."
+            }
+          ]
+        },
+        "reportDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reportDescriptor"
+              },
+              "description": "A list of reportDescriptor objects. Used to request reports from VEN."
+            },
+            {
+              "type": "null",
+              "description": "A list of reportDescriptor objects. Used to request reports from VEN."
+            }
+          ]
+        },
+        "payloadDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/eventPayloadDescriptor"
+              },
+              "description": "A list of payloadDescriptor objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of payloadDescriptor objects."
+            }
+          ]
+        },
+        "intervalPeriod": {
+          "$ref": "#/definitions/intervalPeriod"
+        },
+        "intervals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/interval"
+          },
+          "description": "A list of interval objects."
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType",
+        "programID",
+        "intervals"
+      ],
+      "description": "Server provided representation of event\nmetadata common to all addressable objects. Values provided by VTN on object creation.\nEvent object to communicate a Demand Response request to VEN.\nIf intervalPeriod is present, sets default start time and duration of intervals."
+    },
+    "eventRequest": {
+      "type": "object",
+      "properties": {
+        "programID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "eventName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "User defined string for use in debugging or User Interface."
+            },
+            {
+              "type": "null",
+              "description": "User defined string for use in debugging or User Interface."
+            }
+          ]
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "description": "Relative priority of event. A lower number is a higher priority."
+            },
+            {
+              "type": "null",
+              "description": "Relative priority of event. A lower number is a higher priority."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects."
+            }
+          ]
+        },
+        "reportDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reportDescriptor"
+              },
+              "description": "A list of reportDescriptor objects. Used to request reports from VEN."
+            },
+            {
+              "type": "null",
+              "description": "A list of reportDescriptor objects. Used to request reports from VEN."
+            }
+          ]
+        },
+        "payloadDescriptors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/eventPayloadDescriptor"
+              },
+              "description": "A list of payloadDescriptor objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of payloadDescriptor objects."
+            }
+          ]
+        },
+        "intervalPeriod": {
+          "$ref": "#/definitions/intervalPeriod"
+        },
+        "intervals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/interval"
+          },
+          "description": "A list of interval objects."
+        }
+      },
+      "required": [
+        "programID",
+        "intervals"
+      ],
+      "description": "Event object to communicate a Demand Response request to VEN.\nIf intervalPeriod is present, sets default start time and duration of intervals."
+    },
+    "subscription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "clientName": {
+          "type": "string",
+          "description": "User generated identifier, may be VEN identifier provisioned out-of-band."
+        },
+        "programID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "objectOperations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objects": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/objectTypes"
+                },
+                "description": "list of objects to subscribe to."
+              },
+              "operations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "READ",
+                    "CREATE",
+                    "UPDATE",
+                    "DELETE"
+                  ],
+                  "description": "object operation to subscribe to."
+                },
+                "description": "list of operations to subscribe to."
+              },
+              "callbackUrl": {
+                "type": "string",
+                "description": "User provided webhook URL."
+              },
+              "bearerToken": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "description": "User provided token.\nTo avoid custom integrations, callback endpoints\nshould accept the provided bearer token to authenticate VTN requests."
+                  },
+                  {
+                    "type": "null",
+                    "description": "User provided token.\nTo avoid custom integrations, callback endpoints\nshould accept the provided bearer token to authenticate VTN requests."
+                  }
+                ]
+              }
+            },
+            "required": [
+              "objects",
+              "operations",
+              "callbackUrl"
+            ],
+            "description": "object type, operations, and callbackUrl."
+          },
+          "description": "list of objects and operations to subscribe to."
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects. Used by server to filter callbacks."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects. Used by server to filter callbacks."
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType",
+        "clientName",
+        "programID",
+        "objectOperations"
+      ],
+      "description": "Server provided representation of subscription\nmetadata common to all addressable objects. Values provided by VTN on object creation.\nAn object created by a client to receive notification of operations on objects.\nClients may subscribe to be notified when a type of object is created,\nupdated, or deleted."
+    },
+    "subscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "clientName": {
+          "type": "string",
+          "description": "User generated identifier, may be VEN identifier provisioned out-of-band."
+        },
+        "programID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "objectOperations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objects": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/objectTypes"
+                },
+                "description": "list of objects to subscribe to."
+              },
+              "operations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "READ",
+                    "CREATE",
+                    "UPDATE",
+                    "DELETE"
+                  ],
+                  "description": "object operation to subscribe to."
+                },
+                "description": "list of operations to subscribe to."
+              },
+              "callbackUrl": {
+                "type": "string",
+                "description": "User provided webhook URL."
+              },
+              "bearerToken": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "description": "User provided token.\nTo avoid custom integrations, callback endpoints\nshould accept the provided bearer token to authenticate VTN requests."
+                  },
+                  {
+                    "type": "null",
+                    "description": "User provided token.\nTo avoid custom integrations, callback endpoints\nshould accept the provided bearer token to authenticate VTN requests."
+                  }
+                ]
+              }
+            },
+            "required": [
+              "objects",
+              "operations",
+              "callbackUrl"
+            ],
+            "description": "object type, operations, and callbackUrl."
+          },
+          "description": "list of objects and operations to subscribe to."
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects. Used by server to filter callbacks."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects. Used by server to filter callbacks."
+            }
+          ]
+        }
+      },
+      "required": [
+        "clientName",
+        "programID",
+        "objectOperations"
+      ],
+      "description": "An object created by a client to receive notification of operations on objects.\nClients may subscribe to be notified when a type of object is created,\nupdated, or deleted."
+    },
+    "ven": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "venName": {
+          "type": "string",
+          "description": "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unique within the scope of a VTN"
+        },
+        "attributes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing attributes."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing attributes."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing target criteria."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing target criteria."
+            }
+          ]
+        },
+        "resources": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/resource"
+              },
+              "description": "A list of resource objects representing end-devices or systems."
+            },
+            {
+              "type": "null",
+              "description": "A list of resource objects representing end-devices or systems."
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType",
+        "venName"
+      ],
+      "description": "Server provided representation of ven\nmetadata common to all addressable objects. Values provided by VTN on object creation.\nVen represents a client with the ven role."
+    },
+    "venRequest": {
+      "type": "object",
+      "properties": {
+        "venName": {
+          "type": "string",
+          "description": "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unique within the scope of a VTN"
+        },
+        "attributes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing attributes."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing attributes."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing target criteria."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing target criteria."
+            }
+          ]
+        },
+        "resources": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/resource"
+              },
+              "description": "A list of resource objects representing end-devices or systems."
+            },
+            {
+              "type": "null",
+              "description": "A list of resource objects representing end-devices or systems."
+            }
+          ]
+        }
+      },
+      "required": [
+        "venName"
+      ],
+      "description": "Ven represents a client with the ven role."
+    },
+    "resource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN."
+        },
+        "venID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "attributes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing attributes."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing attributes."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing target criteria."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing target criteria."
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType",
+        "resourceName"
+      ],
+      "description": "Server provided representation of resource\nmetadata common to all addressable objects. Values provided by VTN on object creation.\nA resource is an energy device or system subject to control by a VEN."
+    },
+    "resourceRequest": {
+      "type": "object",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN."
+        },
+        "venID": {
+          "$ref": "#/definitions/objectID"
+        },
+        "attributes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing attributes."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing attributes."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects describing target criteria."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects describing target criteria."
+            }
+          ]
+        }
+      },
+      "required": [
+        "resourceName"
+      ],
+      "description": "A resource is an energy device or system subject to control by a VEN."
+    },
+    "objectMetadata": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/objectID"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "modificationDateTime": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTime",
+        "modificationDateTime",
+        "objectType"
+      ],
+      "description": "metadata common to all addressable objects. Values provided by VTN on object creation."
+    },
+    "interval": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "A client generated number assigned an interval object. Not a sequence number."
+        },
+        "intervalPeriod": {
+          "$ref": "#/definitions/intervalPeriod"
+        },
+        "payloads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/valuesMap"
+          },
+          "description": "A list of valuesMap objects."
+        }
+      },
+      "required": [
+        "id",
+        "payloads"
+      ],
+      "description": "An object defining a temporal window and a list of valuesMaps.\nif intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod."
+    },
+    "intervalPeriod": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "#/definitions/dateTime"
+        },
+        "duration": {
+          "$ref": "#/definitions/duration"
+        },
+        "randomizeStart": {
+          "$ref": "#/definitions/duration"
+        }
+      },
+      "required": [
+        "start"
+      ],
+      "description": "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization."
+    },
+    "valuesMap": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Enumerated or private string signifying the nature of values.\nE.G. \"PRICE\" indicates value is to be interpreted as a currency."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/definitions/point"
+              }
+            ]
+          },
+          "description": "A list of data points. Most often a singular value such as a price."
+        }
+      },
+      "required": [
+        "type",
+        "values"
+      ],
+      "description": "Represents one or more values associated with a type.\nE.g. a type of PRICE contains a single float value."
+    },
+    "point": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "A value on an x axis."
+        },
+        "y": {
+          "type": "number",
+          "description": "A value on a y axis."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "description": "A pair of floats typically used as a point on a 2 dimensional grid."
+    },
+    "eventPayloadDescriptor": {
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "const": "EVENT_PAYLOAD_DESCRIPTOR",
+          "description": "Used as discriminator."
+        },
+        "payloadType": {
+          "type": "string",
+          "description": "Enumerated or private string signifying the nature of values."
+        },
+        "units": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Units of measure."
+            },
+            {
+              "type": "null",
+              "description": "Units of measure."
+            }
+          ]
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Currency of price payload."
+            },
+            {
+              "type": "null",
+              "description": "Currency of price payload."
+            }
+          ]
+        }
+      },
+      "required": [
+        "payloadType"
+      ],
+      "description": "Contextual information used to interpret event valuesMap values.\nE.g. a PRICE payload simply contains a price value, an\nassociated descriptor provides necessary context such as units and currency."
+    },
+    "reportPayloadDescriptor": {
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "const": "REPORT_PAYLOAD_DESCRIPTOR",
+          "description": "Used as discriminator."
+        },
+        "payloadType": {
+          "type": "string",
+          "description": "Enumerated or private string signifying the nature of values."
+        },
+        "readingType": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Enumerated or private string signifying the type of reading."
+            },
+            {
+              "type": "null",
+              "description": "Enumerated or private string signifying the type of reading."
+            }
+          ]
+        },
+        "units": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Units of measure."
+            },
+            {
+              "type": "null",
+              "description": "Units of measure."
+            }
+          ]
+        },
+        "accuracy": {
+          "anyOf": [
+            {
+              "type": "number",
+              "description": "A quantification of the accuracy of a set of payload values."
+            },
+            {
+              "type": "null",
+              "description": "A quantification of the accuracy of a set of payload values."
+            }
+          ]
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "description": "A quantification of the confidence in a set of payload values."
+            },
+            {
+              "type": "null",
+              "description": "A quantification of the confidence in a set of payload values."
+            }
+          ]
+        }
+      },
+      "required": [
+        "payloadType"
+      ],
+      "description": "Contextual information used to interpret report payload values.\nE.g. a USAGE payload simply contains a usage value, an\nassociated descriptor provides necessary context such as units and data quality."
+    },
+    "reportDescriptor": {
+      "type": "object",
+      "properties": {
+        "payloadType": {
+          "type": "string",
+          "description": "Enumerated or private string signifying the nature of values."
+        },
+        "readingType": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Enumerated or private string signifying the type of reading."
+            },
+            {
+              "type": "null",
+              "description": "Enumerated or private string signifying the type of reading."
+            }
+          ]
+        },
+        "units": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Units of measure."
+            },
+            {
+              "type": "null",
+              "description": "Units of measure."
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects."
+            }
+          ]
+        },
+        "aggregate": {
+          "type": "boolean",
+          "description": "True if report should aggregate results from all targeted resources.\nFalse if report includes results for each resource."
+        },
+        "startInterval": {
+          "type": "integer",
+          "description": "The interval on which to generate a report.\n-1 indicates generate report at end of last interval.",
+          "default": "-1"
+        },
+        "numIntervals": {
+          "type": "integer",
+          "description": "The number of intervals to include in a report.\n-1 indicates that all intervals are to be included.",
+          "default": "-1"
+        },
+        "historical": {
+          "type": "boolean",
+          "description": "True indicates report on intervals preceding startInterval.\nFalse indicates report on intervals following startInterval (e.g. forecast).",
+          "default": "true"
+        },
+        "frequency": {
+          "type": "integer",
+          "description": "Number of intervals that elapse between reports.\n-1 indicates same as numIntervals.",
+          "default": "-1"
+        },
+        "repeat": {
+          "type": "integer",
+          "description": "Number of times to repeat report.\n1 indicates generate one report.\n-1 indicates repeat indefinitely.",
+          "default": "1"
+        }
+      },
+      "required": [
+        "payloadType"
+      ],
+      "description": "An object that may be used to request a report from a VEN."
+    },
+    "objectID": {
+      "type": "string",
+      "description": "URL safe VTN assigned object ID."
+    },
+    "notification": {
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "$ref": "#/definitions/objectTypes"
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "CREATE",
+            "READ",
+            "UPDATE",
+            "DELETE"
+          ],
+          "description": "the operation on on object that triggered the notification."
+        },
+        "object": {
+          "allOf": [
+            {
+              "type": "object",
+              "description": "the object that is the subject of the notification."
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/program"
+                },
+                {
+                  "$ref": "#/definitions/report"
+                },
+                {
+                  "$ref": "#/definitions/event"
+                },
+                {
+                  "$ref": "#/definitions/subscription"
+                },
+                {
+                  "$ref": "#/definitions/ven"
+                },
+                {
+                  "$ref": "#/definitions/resource"
+                }
+              ]
+            }
+          ]
+        },
+        "targets": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/valuesMap"
+              },
+              "description": "A list of valuesMap objects."
+            },
+            {
+              "type": "null",
+              "description": "A list of valuesMap objects."
+            }
+          ]
+        }
+      },
+      "required": [
+        "objectType",
+        "operation",
+        "object"
+      ],
+      "description": "VTN generated object included in request to subscription callbackUrl."
+    },
+    "objectTypes": {
+      "type": "string",
+      "enum": [
+        "PROGRAM",
+        "EVENT",
+        "REPORT",
+        "SUBSCRIPTION",
+        "VEN",
+        "RESOURCE"
+      ],
+      "description": "Types of objects addressable through API."
+    },
+    "dateTime": {
+      "type": "string",
+      "description": "datetime in ISO 8601 format"
+    },
+    "duration": {
+      "type": "string",
+      "description": "duration in ISO 8601 format",
+      "default": "PT0S"
+    },
+    "clientCredentialRequest": {
+      "type": "object",
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "const": "client_credentials",
+          "description": "OAuth2 grant type, must be 'client_credentials'"
+        },
+        "client_id": {
+          "type": "string",
+          "description": "client ID to exchange for bearer token."
+        },
+        "client_secret": {
+          "type": "string",
+          "description": "client secret to exchange for bearer token."
+        },
+        "scope": {
+          "type": "string",
+          "description": "application defined scope."
+        }
+      },
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret"
+      ],
+      "description": "Body of POST request to /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749"
+    },
+    "clientCredentialResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "description": "access token provided by Authorization service"
+        },
+        "token_type": {
+          "type": "string",
+          "const": "Bearer",
+          "description": "token type, must be Bearer."
+        },
+        "expires_in": {
+          "type": "integer",
+          "description": "expiration period in seconds."
+        },
+        "refresh_token": {
+          "type": "string",
+          "description": "refresh token provided by Authorization service"
+        },
+        "scope": {
+          "type": "string",
+          "description": "application defined scope."
+        }
+      },
+      "required": [
+        "access_token",
+        "token_type"
+      ],
+      "description": "Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749"
+    },
+    "authError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "enum": [
+            "invalid_request",
+            "invalid_client",
+            "invalid_grant",
+            "invalid_scope",
+            "unauthorized_client",
+            "unsupported_grant_type"
+          ],
+          "description": "As described in rfc6749 | invalid_request – The request is missing a parameter so the server can’t proceed with the request. This may also be returned if the request includes an unsupported parameter or repeats a parameter. invalid_client – Client authentication failed, such as if the request contains an invalid client ID or secret. Send an HTTP 401 response in this case. invalid_grant – The authorization code (or user’s password for the password grant type) is invalid or expired. This is also the error you would return if the redirect URL given in the authorization grant does not match the URL provided in this access token request. invalid_scope – For access token requests that include a scope (password or client_credentials grants), this error indicates an invalid scope value in the request. unauthorized_client – This client is not authorized to use the requested grant type. For example, if you restrict which applications can use the Implicit grant, you would return this error for the other apps. unsupported_grant_type – If a grant type is requested that the authorization server doesn’t recognize, use this code. Note that unknown grant types also use this specific error code rather than using the invalid_request above."
+        },
+        "error_description": {
+          "type": "string",
+          "description": "Should be a sentence or two at most describing the circumstance of the error"
+        },
+        "error_uri": {
+          "type": "string",
+          "description": "Optional reference to more detailed error description"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "description": "error response on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749"
+    },
+    "problem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "An absolute URI that identifies the problem type.\nWhen dereferenced, it SHOULD provide human-readable documentation for the problem type\n(e.g., using HTML).",
+          "default": "about:blank"
+        },
+        "title": {
+          "type": "string",
+          "description": "A short, summary of the problem type. Written in english and readable\nfor engineers (usually not suited for non technical stakeholders and\nnot localized); example: Service Unavailable."
+        },
+        "status": {
+          "type": "integer",
+          "description": "The HTTP status code generated by the origin server for this occurrence\nof the problem."
+        },
+        "detail": {
+          "type": "string",
+          "description": "A human readable explanation specific to this occurrence of the\nproblem."
+        },
+        "instance": {
+          "type": "string",
+          "description": "An absolute URI that identifies the specific occurrence of the problem.\nIt may or may not yield further information if dereferenced."
+        }
+      },
+      "description": "reusable error response. From https://opensource.zalando.com/problem/schema.yaml."
+    }
+  },
+  "$id": "oadr3.1.json",
+  "$comment": "Generated from oadr3.1.yaml by core-types-json-schema (https://github.com/grantila/core-types-json-schema) on behalf of typeconv (https://github.com/grantila/typeconv)"
+}

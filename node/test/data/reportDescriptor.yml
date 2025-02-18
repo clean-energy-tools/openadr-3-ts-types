@@ -1,0 +1,193 @@
+
+reportDescriptors:
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      # readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      # units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      # targets: 
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      # aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      # startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      # numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      # historical: false
+      frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      # frequency: -1
+      repeat: 1
+
+    - payloadType: USAGE
+      readingType: DIRECT_READ
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      # repeat: 1
+
+    - payloadType: USAGE
+      # readingType: DIRECT_READ
+      # units: KWH
+      # targets: 
+      # aggregate: false
+      # startInterval: -1
+      # numIntervals: -1
+      # historical: false
+      # frequency: -1
+      # repeat: 1
+      
+BADreportDescriptors:
+
+    - payloadType: ''
+      readingType: Short payload type
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+      
+    - payloadType: '00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333 - Payload type over 128 characters'
+      readingType: Long payload type
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+      
+    - # payloadType: 'Missing payuload type'
+      readingType: Missing payload type
+      units: KWH
+      targets:
+        - type: GROUP_NAME
+          values: [ VEN99 ]
+      aggregate: false
+      startInterval: -1
+      numIntervals: -1
+      historical: false
+      frequency: -1
+      repeat: 1
+      
+    - payloadType: USAGE
+      readingType: 999
+      units: 999
+      targets: bad targets
+      aggregate: 'false'
+      startInterval: '-1'
+      numIntervals: '-1'
+      historical: 'false'
+      frequency: '-1'
+      repeat: '1'
+      

@@ -1,0 +1,88 @@
+
+resources:
+
+  - resourceName: evse-green-1
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'EVSE 1 - CP 4002' ]
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 32 ]
+  - resourceName: evse-green-2-extra-data
+    extraData: something else
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'EVSE 2 - CP 4002' ]
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 208 ]
+  - resourceName: evse-green-3-missing
+    # Missing should give null
+    # Except, in this case attributes and targets do not
+    # have a default value
+    # attributes:
+    #   - type: DESCRIPTION
+    #     values: [ 'EVSE 3 - CP 4002' ]
+    #   - type: NOMINAL_VOLTAGE
+    #     values: [ 208 ]
+    #   - type: MAX_AMPS
+    #     values: [ 208 ]
+
+
+  - resourceName: evse-added-green-1
+    extraData: Something else
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'ADDED EVSE 1 - CP 4002' ]
+        extraAttribute: something else
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 32 ]
+  - resourceName: evse-added-green-2
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'ADDED EVSE 2 - CP 4002' ]
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 208 ]
+  - resourceName: evse-added-green-3
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'ADDED EVSE 3 - CP 4002' ]
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 208 ]
+
+
+BADresources:
+
+  - id: 99
+    resourceName: Resource with bad values
+    # venID: 99
+    attributes: bad attributes
+    targets: bad targets
+
+  - resourceName: ''
+    ABOUT: Resource name is zero length
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'EVSE 1 - CP 4002' ]
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 32 ]
+        
+  - resourceName: '00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333 -- resourceName longer than 128 characters'
+    ABOUT: Resource name is extra long
+    attributes:
+      - type: DESCRIPTION
+        values: [ 'EVSE 1 - CP 4002' ]
+      - type: NOMINAL_VOLTAGE
+        values: [ 208 ]
+      - type: MAX_AMPS
+        values: [ 32 ]

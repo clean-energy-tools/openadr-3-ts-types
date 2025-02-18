@@ -1,0 +1,33 @@
+
+problems:
+  - type: http://some.where.com
+    title: title 1
+    status: 200
+    detail: right here
+    instance: 'http://some.where.com'
+
+BADProblems:
+  - type: not-a-uri
+    title: title 1
+    status: '200'
+    detail: right here
+    instance: 'http://some.where.com'
+    
+  - type: http://some.where.com
+    title: title 1
+    status: '200'
+    detail: right here
+    instance: not-a-uri
+
+
+  - type: http://some.where
+    title: status too small
+    status: 00
+    detail: right here
+    instance: 'http://some.where.com'
+
+  - type: http://some.where
+    title: status too big
+    status: 1000
+    detail: right here
+    instance: 'http://some.where.com'

@@ -1,7 +1,7 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
     clientName: z.ZodString;
-    programID: z.ZodString;
+    programID: z.ZodOptional<z.ZodString>;
     objectOperations: z.ZodArray<z.ZodObject<{
         objects: z.ZodArray<z.ZodEnum<["PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE"]>, "many">;
         operations: z.ZodArray<z.ZodEnum<["READ", "CREATE", "UPDATE", "DELETE"]>, "many">;
@@ -44,7 +44,6 @@ declare const _default: z.ZodObject<{
         })[];
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
-    programID: string;
     targets: {
         type: string;
         values: (string | number | boolean | {
@@ -59,8 +58,8 @@ declare const _default: z.ZodObject<{
         callbackUrl: string;
         bearerToken: string | null;
     }[];
+    programID?: string | undefined;
 }, {
-    programID: string;
     clientName: string;
     objectOperations: {
         objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
@@ -68,6 +67,7 @@ declare const _default: z.ZodObject<{
         callbackUrl: string;
         bearerToken?: string | null | undefined;
     }[];
+    programID?: string | undefined;
     targets?: {
         type: string;
         values: (string | number | boolean | {

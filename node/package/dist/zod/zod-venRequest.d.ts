@@ -57,15 +57,15 @@ declare const _default: z.ZodObject<{
         modificationDateTime: z.ZodString;
         objectType: z.ZodEnum<["PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE"]>;
     }, "strip", z.ZodTypeAny, {
-        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
         id: string;
         createdDateTime: string;
         modificationDateTime: string;
+        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     }, {
-        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
         id: string;
         createdDateTime: string;
         modificationDateTime: string;
+        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     }>, z.ZodObject<{
         resourceName: z.ZodString;
         venID: z.ZodOptional<z.ZodString>;
@@ -145,7 +145,6 @@ declare const _default: z.ZodObject<{
                 y: number;
             })[];
         }[] | null | undefined;
-        venID?: string | undefined;
         attributes?: {
             type: string;
             values: (string | number | boolean | {
@@ -153,6 +152,7 @@ declare const _default: z.ZodObject<{
                 y: number;
             })[];
         }[] | null | undefined;
+        venID?: string | undefined;
     }>>>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     targets: {
@@ -163,10 +163,10 @@ declare const _default: z.ZodObject<{
         })[];
     }[] | null;
     resources: (Record<string, any> & {
-        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
         id: string;
         createdDateTime: string;
         modificationDateTime: string;
+        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     } & {
         targets: {
             type: string;
@@ -185,6 +185,7 @@ declare const _default: z.ZodObject<{
         }[] | null;
         venID?: string | undefined;
     })[] | null;
+    venName: string;
     attributes: {
         type: string;
         values: (string | number | boolean | {
@@ -192,7 +193,6 @@ declare const _default: z.ZodObject<{
             y: number;
         })[];
     }[] | null;
-    venName: string;
 }, {
     venName: string;
     targets?: {
@@ -203,10 +203,10 @@ declare const _default: z.ZodObject<{
         })[];
     }[] | null | undefined;
     resources?: (Record<string, any> & {
-        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
         id: string;
         createdDateTime: string;
         modificationDateTime: string;
+        objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     } & {
         resourceName: string;
         targets?: {
@@ -216,7 +216,6 @@ declare const _default: z.ZodObject<{
                 y: number;
             })[];
         }[] | null | undefined;
-        venID?: string | undefined;
         attributes?: {
             type: string;
             values: (string | number | boolean | {
@@ -224,6 +223,7 @@ declare const _default: z.ZodObject<{
                 y: number;
             })[];
         }[] | null | undefined;
+        venID?: string | undefined;
     })[] | null | undefined;
     attributes?: {
         type: string;

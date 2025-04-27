@@ -1,0 +1,3 @@
+import { z } from "zod";
+
+export default z.object({ "topics": z.object({ "CREATE": z.string().describe("'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n").optional(), "UPDATE": z.string().describe("Topic path for UPDATE operations"), "DELETE": z.string().describe("Topic path for DELETE operations"), "ALL": z.string().describe("Topic path for ALL operations, if supported by VTN").optional() }).describe("MQTT notifier topic names for notifications of subscribable-object operations") });

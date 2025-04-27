@@ -74,7 +74,9 @@ export type ProgramRequest = {
          * A human or machine readable program description
          *
          * @format uri
-         * @example www.myCorporation.com/myProgramDescription
+         * @minLength 2
+         * @maxLength 8000
+         * @example https://www.myCorporation.com/myProgramDescription
          */
         URL: string;
       }[]
@@ -119,14 +121,7 @@ export type Report = ObjectMetadata & ReportRequest;
  */
 export type ReportRequest = {
   eventID: ObjectID;
-  /**
-   * User generated identifier; may be VEN ID provisioned out-of-band.
-   *
-   * @minLength 1
-   * @maxLength 128
-   * @example VEN-999
-   */
-  clientName: string;
+  clientName: ClientName;
   /**
    * User defined string for use in debugging or User Interface.
    *
@@ -144,14 +139,7 @@ export type ReportRequest = {
    * A list of objects containing report data for a set of resources.
    */
   resources: {
-    /**
-     * User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
-     *
-     * @minLength 1
-     * @maxLength 128
-     * @example RESOURCE-999
-     */
-    resourceName: string;
+    resourceName: ResourceName;
     intervalPeriod?: IntervalPeriod;
     /**
      * A list of interval objects.
@@ -179,6 +167,7 @@ export type EventRequest = {
    * @default null
    */
   eventName?: string | null;
+  duration?: Duration;
   /**
    * Relative priority of event. A lower number is a higher priority.
    *
@@ -209,7 +198,7 @@ export type EventRequest = {
   /**
    * A list of interval objects.
    */
-  intervals: Interval[];
+  intervals?: Interval[];
 };
 
 /**
@@ -225,15 +214,8 @@ export type Subscription = ObjectMetadata & SubscriptionRequest;
  * updated, or deleted.
  */
 export type SubscriptionRequest = {
-  /**
-   * User generated identifier, may be VEN identifier provisioned out-of-band.
-   *
-   * @minLength 1
-   * @maxLength 128
-   * @example VEN-999
-   */
-  clientName: string;
-  programID: ObjectID;
+  clientName: ClientName;
+  programID?: ObjectID;
   /**
    * list of objects and operations to subscribe to.
    */
@@ -250,6 +232,8 @@ export type SubscriptionRequest = {
      * User provided webhook URL.
      *
      * @format uri
+     * @minLength 2
+     * @maxLength 8000
      * @example https://myserver.com/send/callback/here
      */
     callbackUrl: string;
@@ -280,15 +264,7 @@ export type Ven = ObjectMetadata & VenRequest;
  * Ven represents a client with the ven role.
  */
 export type VenRequest = {
-  /**
-   * User generated identifier, may be VEN identifier provisioned out-of-band.
-   * venName is expected to be unique within the scope of a VTN
-   *
-   * @minLength 1
-   * @maxLength 128
-   * @example VEN-999
-   */
-  venName: string;
+  venName: VenName;
   /**
    * A list of valuesMap objects describing attributes.
    *
@@ -318,15 +294,7 @@ export type Resource = ObjectMetadata & ResourceRequest;
  * A resource is an energy device or system subject to control by a VEN.
  */
 export type ResourceRequest = {
-  /**
-   * User generated identifier, resource may be configured with identifier out-of-band.
-   * resourceName is expected to be unique within the scope of the associated VEN.
-   *
-   * @minLength 1
-   * @maxLength 128
-   * @example RESOURCE-999
-   */
-  resourceName: string;
+  resourceName: ResourceName;
   venID?: ObjectID;
   /**
    * A list of valuesMap objects describing attributes.
@@ -373,11 +341,12 @@ export type Interval = {
 
 /**
  * Defines temporal aspects of intervals.
- * A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
- * A randomizeStart of default null indicates no randomization.
+ * A start of "0000-00-00" or "0000-00-00T00:00:00" may indicate 'now'. See User Guide.
+ * A duration of "P9999Y" may indicate infinity. See User Guide.
+ * A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
  */
 export type IntervalPeriod = {
-  start: DateTime;
+  start?: DateTime;
   duration?: Duration;
   randomizeStart?: Duration;
 };
@@ -442,13 +411,7 @@ export type EventPayloadDescriptor = {
    * @example PRICE
    */
   payloadType: string;
-  /**
-   * Units of measure.
-   *
-   * @example KWH
-   * @default null
-   */
-  units?: string | null;
+  units?: Units;
   /**
    * Currency of price payload.
    *
@@ -476,20 +439,8 @@ export type ReportPayloadDescriptor = {
    * @example USAGE
    */
   payloadType: string;
-  /**
-   * Enumerated or private string signifying the type of reading.
-   *
-   * @example DIRECT_READ
-   * @default null
-   */
-  readingType?: string | null;
-  /**
-   * Units of measure.
-   *
-   * @example KWH
-   * @default null
-   */
-  units?: string | null;
+  readingType?: ReadingType;
+  units?: Units;
   /**
    * A quantification of the accuracy of a set of payload values.
    *
@@ -522,20 +473,8 @@ export type ReportDescriptor = {
    * @example USAGE
    */
   payloadType: string;
-  /**
-   * Enumerated or private string signifying the type of reading.
-   *
-   * @example DIRECT_READ
-   * @default null
-   */
-  readingType?: string | null;
-  /**
-   * Units of measure.
-   *
-   * @example KWH
-   * @default null
-   */
-  units?: string | null;
+  readingType?: ReadingType;
+  units?: Units;
   /**
    * A list of valuesMap objects.
    *
@@ -595,6 +534,13 @@ export type ReportDescriptor = {
    * @default 1
    */
   repeat?: number;
+  /**
+   * Indicates VEN report interval options. See User Guide.
+   *
+   * @example INTERVALS
+   * @default INTERVALS
+   */
+  reportIntervals?: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS";
 };
 
 /**
@@ -608,6 +554,68 @@ export type ReportDescriptor = {
 export type ObjectID = string;
 
 /**
+ * User generated identifier, may be VEN identifier provisioned out-of-band.
+ * venName is expected to be unique within the scope of a VTN
+ *
+ * @minLength 1
+ * @maxLength 128
+ * @example VEN-999
+ */
+export type VenName = string;
+
+/**
+ * User generated identifier, may be VEN identifier provisioned out-of-band.
+ *
+ * @minLength 1
+ * @maxLength 128
+ * @example VEN-999
+ */
+export type ClientName = string;
+
+/**
+ * @example GROUP
+ * @minLength 1
+ * @maxLength 128
+ */
+export type TargetType = string;
+
+/**
+ * @example group-1
+ * @minLength 1
+ * @maxLength 128
+ */
+export type TargetValue = string;
+
+/**
+ * User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
+ *
+ * @minLength 1
+ * @maxLength 128
+ * @example RESOURCE-999
+ */
+export type ResourceName = string;
+
+/**
+ * Units of measure.
+ *
+ * @example KWH
+ * @default null
+ * @minLength 1
+ * @maxLength 128
+ */
+export type Units = string | null;
+
+/**
+ * Enumerated or private string signifying the type of reading.
+ *
+ * @example DIRECT_READ
+ * @minLength 1
+ * @maxLength 128
+ * @default null
+ */
+export type ReadingType = string | null;
+
+/**
  * VTN generated object included in request to subscription callbackUrl.
  */
 export type Notification = {
@@ -615,7 +623,7 @@ export type Notification = {
   /**
    * the operation on on object that triggered the notification.
    *
-   * @example POST
+   * @example UPDATE
    */
   operation: "CREATE" | "READ" | "UPDATE" | "DELETE";
   /**
@@ -646,7 +654,7 @@ export type ObjectTypes =
   | "RESOURCE";
 
 /**
- * datetime in ISO 8601 format
+ * datetime in RFC 3339 format
  *
  * @format date-time
  * @example "2023-06-15T09:30:00.000Z"
@@ -766,9 +774,22 @@ export type AuthError = {
    * Optional reference to more detailed error description
    *
    * @format uri
+   * @minLength 2
+   * @maxLength 8000
    * @example See the full API docs at https://authorization-server.com/docs/access_toke
    */
   error_uri?: string;
+};
+
+export type AuthServerInfo = {
+  /**
+   * URL of the token endpoint.
+   *
+   * @format uri
+   * @minLength 2
+   * @maxLength 8000
+   */
+  tokenURL: string;
 };
 
 /**
@@ -781,6 +802,8 @@ export type Problem = {
    * (e.g., using HTML).
    *
    * @format uri
+   * @minLength 2
+   * @maxLength 8000
    * @default about:blank
    * @example https://zalando.github.io/problem/constraint-violation
    */
@@ -813,7 +836,123 @@ export type Problem = {
    * An absolute URI that identifies the specific occurrence of the problem.
    * It may or may not yield further information if dereferenced.
    *
+   * @minLength 3
+   * @maxLength 8000
    * @format uri
    */
   instance?: string;
+};
+
+/**
+ * Provides details of each notifier binding supported
+ */
+export type NotifiersResponse = {
+  /**
+   * Currently MUST be true
+   *
+   * @example true
+   */
+  WEBHOOK: boolean;
+  MQTT?: MqttNotifierBindingObject;
+};
+
+/**
+ * Details of MQTT binding for messaging protocol support
+ */
+export type MqttNotifierBindingObject = {
+  URIS: string[];
+  /**
+   * Currently always JSON, perhaps other formats supported in future
+   */
+  serialization: "JSON";
+  /**
+   * Authentication method supported for connection to MQTT broker
+   */
+  authentication:
+    | MqttNotifierAuthenticationAnonymous
+    | MqttNotifierAuthenticationOauth2BearerToken
+    | MqttNotifierAuthenticationCertificate;
+};
+
+/**
+ * MQTT broker anonymous authentication details
+ */
+export type MqttNotifierAuthenticationAnonymous = {
+  /**
+   * Specifies anonymous authentication
+   */
+  method: "ANONYMOUS";
+};
+
+/**
+ * MQTT broker OAuth2 Bearer Token authentication details
+ */
+export type MqttNotifierAuthenticationOauth2BearerToken = {
+  /**
+   * Specifies OAuth2 bearer token authentication
+   */
+  method: "OAUTH2_BEARER_TOKEN";
+  /**
+   * Either the distinguished string "{clientID}", or any other literal string
+   */
+  username: string;
+};
+
+/**
+ * MQTT broker mTLS client certificate authentication details
+ */
+export type MqttNotifierAuthenticationCertificate = {
+  /**
+   * Specifies certificate authentication
+   */
+  method: "CERTIFICATE";
+  /**
+   * String containing the Certificate Authority certificate
+   */
+  caCert: string;
+  /**
+   * String containing the Client certificate
+   */
+  clientCert: string;
+  /**
+   * String containing the client certificate private key
+   */
+  clientKey: string;
+};
+
+/**
+ * MQTT notifier topic names for notifications of subscribable-object operations
+ */
+export type NotifierOperationsTopics = {
+  /**
+   * 'Topic path for CREATE operations,
+   *  not provided for notifications for a specific object ID,
+   *  e.g. until programID foo is created, clients unable to
+   *  request notifications of its creation'
+   *
+   * @example {objectType}s/create
+   */
+  CREATE?: string;
+  /**
+   * Topic path for UPDATE operations
+   *
+   * @example {objectType}s/update
+   */
+  UPDATE: string;
+  /**
+   * Topic path for DELETE operations
+   *
+   * @example {objectType}s/delete
+   */
+  DELETE: string;
+  /**
+   * Topic path for ALL operations, if supported by VTN
+   *
+   * @example {objectType}s/+
+   */
+  ALL?: string;
+};
+
+export type NotifierTopicsResponse = {
+  topics: NotifierOperationsTopics;
 };

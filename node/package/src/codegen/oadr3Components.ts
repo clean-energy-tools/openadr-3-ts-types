@@ -6,17 +6,17 @@
 // import type * as Fetcher from "./oadr3Fetcher";
 // import { oadr3Fetch } from "./oadr3Fetcher";
 import type * as Schemas from "./oadr3Schemas.js";
-// import type * as Responses from "./oadr3Responses";
+// import type * as Responses from "./oadr3Responses.js";
 
 export type SearchAllProgramsQueryParams = {
   /**
    * Indicates targeting type, e.g. GROUP
    */
-  targetType?: string;
+  targetType?: Schemas.TargetType;
   /**
    * List of target values, e.g. group names
    */
-  targetValues?: string[];
+  targetValues?: Schemas.TargetValue[];
   /**
    * number of records to skip for pagination.
    *
@@ -221,12 +221,12 @@ export type UpdateProgramVariables = {
 //     UpdateProgramPathParams
 //   >({ url: "/programs/{programID}", method: "put", ...variables, signal });
 
-// export type DeleteProgramPathParams = {
-//   /**
-//    * Object ID of the program object.
-//    */
-//   programID: Schemas.ObjectID;
-// };
+export type DeleteProgramPathParams = {
+  /**
+   * Object ID of the program object.
+   */
+  programID: Schemas.ObjectID;
+};
 
 // export type DeleteProgramError = Fetcher.ErrorWrapper<
 //   | {
@@ -251,9 +251,9 @@ export type UpdateProgramVariables = {
 //     }
 // >;
 
-// export type DeleteProgramVariables = {
-//   pathParams: DeleteProgramPathParams;
-// };
+export type DeleteProgramVariables = {
+  pathParams: DeleteProgramPathParams;
+};
 
 /**
  * Delete an existing program with the programID in path.
@@ -283,7 +283,7 @@ export type SearchAllReportsQueryParams = {
   /**
    * filter results to reports with clientName.
    */
-  clientName?: string;
+  clientName?: Schemas.ClientName;
   /**
    * number of records to skip for pagination.
    *
@@ -550,11 +550,11 @@ export type SearchAllEventsQueryParams = {
   /**
    * Indicates targeting type, e.g. GROUP
    */
-  targetType?: string;
+  targetType?: Schemas.TargetType;
   /**
    * List of target values, e.g. group names
    */
-  targetValues?: string[];
+  targetValues?: Schemas.TargetValue[];
   /**
    * number of records to skip for pagination.
    *
@@ -570,6 +570,10 @@ export type SearchAllEventsQueryParams = {
    * @minimum 0
    */
   limit?: number;
+  /**
+   * ignore events that have transpired.
+   */
+  active?: boolean;
 };
 
 // export type SearchAllEventsError = Fetcher.ErrorWrapper<
@@ -817,15 +821,15 @@ export type SearchSubscriptionsQueryParams = {
   /**
    * filter results to subscriptions with clientName.
    */
-  clientName?: string;
+  clientName?: Schemas.ClientName;
   /**
    * Indicates targeting type, e.g. GROUP
    */
-  targetType?: string;
+  targetType?: Schemas.TargetType;
   /**
    * List of target values, e.g. group names
    */
-  targetValues?: string[];
+  targetValues?: Schemas.TargetValue[];
   /**
    * list of objects to subscribe to.
    */
@@ -1109,15 +1113,15 @@ export type SearchVensQueryParams = {
   /**
    * Indicates ven objects w venName
    */
-  venName?: string;
+  venName?: Schemas.VenName;
   /**
    * Indicates targeting type, e.g. GROUP
    */
-  targetType?: string;
+  targetType?: Schemas.TargetType;
   /**
    * List of target values, e.g. group names
    */
-  targetValues?: string[];
+  targetValues?: Schemas.TargetValue[];
   /**
    * number of records to skip for pagination.
    *
@@ -1382,15 +1386,15 @@ export type SearchVenResourcesQueryParams = {
   /**
    * Indicates resource objects with resourceName
    */
-  resourceName?: string;
+  resourceName?: Schemas.ResourceName;
   /**
    * Indicates targeting type, e.g. GROUP
    */
-  targetType?: string;
+  targetType?: Schemas.TargetType;
   /**
    * List of target values, e.g. group names
    */
-  targetValues?: string[];
+  targetValues?: Schemas.TargetValue[];
   /**
    * number of records to skip for pagination.
    *
@@ -1694,6 +1698,24 @@ export type DeleteVenResourceVariables = {
 //     signal,
 //   });
 
+// export type GetAuthServerInfoError = Fetcher.ErrorWrapper<{
+//   status: 500;
+//   payload: Responses.InternalServerError;
+// }>;
+
+/**
+ * Return the URL of the token endpoint.
+ */
+// export const getAuthServerInfo = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Schemas.AuthServerInfo,
+//     GetAuthServerInfoError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/auth/server", method: "get", signal });
+
 // export type FetchTokenError = Fetcher.ErrorWrapper<
 //   | {
 //       status: 400;
@@ -1707,11 +1729,15 @@ export type DeleteVenResourceVariables = {
 //       status: 500;
 //       payload: Responses.InternalServerError;
 //     }
+//   | {
+//       status: 501;
+//       payload: Responses.NotImplemented;
+//     }
 // >;
 
-/**
- * Return an access token based on clientID and clientSecret.
- */
+// /**
+//  * Return an access token based on clientID and clientSecret.
+//  */
 // export const fetchToken = (signal?: AbortSignal) =>
 //   oadr3Fetch<
 //     Schemas.ClientCredentialResponse,
@@ -1721,6 +1747,442 @@ export type DeleteVenResourceVariables = {
 //     {},
 //     {}
 //   >({ url: "/auth/token", method: "post", signal });
+
+// export type ListAllNotifiersError = Fetcher.ErrorWrapper<undefined>;
+
+// /**
+//  * List all notifier bindings supported by the server
+//  */
+// export const listAllNotifiers = (signal?: AbortSignal) =>
+//   oadr3Fetch<void, ListAllNotifiersError, undefined, {}, {}, {}>({
+//     url: "/notifiers",
+//     method: "get",
+//     signal,
+//   });
+
+// export type ListAllMqttNotifierTopicsProgramsError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+/**
+ * List all MQTT notifier topic names for operations on programs
+ */
+// export const listAllMqttNotifierTopicsPrograms = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsProgramsError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/notifiers/mqtt/topics/programs", method: "get", signal });
+
+export type ListAllMqttNotifierTopicsProgramPathParams = {
+  /**
+   * objectID of the program object
+   */
+  programID: Schemas.ObjectID;
+};
+
+// export type ListAllMqttNotifierTopicsProgramError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+export type ListAllMqttNotifierTopicsProgramVariables = {
+  pathParams: ListAllMqttNotifierTopicsProgramPathParams;
+};
+
+/**
+ * List all MQTT binding topic names for operations on a program
+ */
+// export const listAllMqttNotifierTopicsProgram = (
+//   variables: ListAllMqttNotifierTopicsProgramVariables,
+//   signal?: AbortSignal,
+// ) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsProgramError,
+//     undefined,
+//     {},
+//     {},
+//     ListAllMqttNotifierTopicsProgramPathParams
+//   >({
+//     url: "/notifiers/mqtt/topics/programs/{programID}",
+//     method: "get",
+//     ...variables,
+//     signal,
+//   });
+
+// export type ListAllMqttNotifierTopicsEventsError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+/**
+ * List all MQTT binding topic names for operations on all events
+ */
+// export const listAllMqttNotifierTopicsEvents = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsEventsError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/notifiers/mqtt/topics/events", method: "get", signal });
+
+export type ListAllMqttNotifierTopicsProgramEventsPathParams = {
+  /**
+   * Object ID of the program object
+   */
+  programID: Schemas.ObjectID;
+};
+
+// export type ListAllMqttNotifierTopicsProgramEventsError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+export type ListAllMqttNotifierTopicsProgramEventsVariables = {
+  pathParams: ListAllMqttNotifierTopicsProgramEventsPathParams;
+};
+
+/**
+ * List all MQTT binding topic names for operations on events for a program
+ */
+// export const listAllMqttNotifierTopicsProgramEvents = (
+//   variables: ListAllMqttNotifierTopicsProgramEventsVariables,
+//   signal?: AbortSignal,
+// ) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsProgramEventsError,
+//     undefined,
+//     {},
+//     {},
+//     ListAllMqttNotifierTopicsProgramEventsPathParams
+//   >({
+//     url: "/notifiers/mqtt/topics/programs/{programID}/events",
+//     method: "get",
+//     ...variables,
+//     signal,
+//   });
+
+// export type ListAllMqttNotifierTopicsReportsError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+// /**
+//  * List all MQTT binding topic names for operations on all reports
+//  */
+// export const listAllMqttNotifierTopicsReports = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsReportsError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/notifiers/mqtt/topics/reports", method: "get", signal });
+
+// export type ListAllMqttNotifierTopicsSubscriptionsError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+// /**
+//  * List all MQTT binding topic names for operations on all subscriptions
+//  */
+// export const listAllMqttNotifierTopicsSubscriptions = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsSubscriptionsError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/notifiers/mqtt/topics/subscriptions", method: "get", signal });
+
+// export type ListAllMqttNotifierTopicsVensError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+// /**
+//  * List all MQTT binding topic names for operations on vens
+//  */
+// export const listAllMqttNotifierTopicsVens = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsVensError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/notifiers/mqtt/topics/vens", method: "get", signal });
+
+export type ListAllMqttNotifierTopicsVenPathParams = {
+  /**
+   * venID of the vens object
+   */
+  venID: Schemas.ObjectID;
+};
+
+// export type ListAllMqttNotifierTopicsVenError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+export type ListAllMqttNotifierTopicsVenVariables = {
+  pathParams: ListAllMqttNotifierTopicsVenPathParams;
+};
+
+/**
+ * List all MQTT binding topic names for operations on a ven
+ */
+// export const listAllMqttNotifierTopicsVen = (
+//   variables: ListAllMqttNotifierTopicsVenVariables,
+//   signal?: AbortSignal,
+// ) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsVenError,
+//     undefined,
+//     {},
+//     {},
+//     ListAllMqttNotifierTopicsVenPathParams
+//   >({
+//     url: "/notifiers/mqtt/topics/vens/{venID}",
+//     method: "get",
+//     ...variables,
+//     signal,
+//   });
+
+// export type ListAllMqttNotifierTopicsResourcesError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+// /**
+//  * List all MQTT binding topic names for operations on resources
+//  */
+// export const listAllMqttNotifierTopicsResources = (signal?: AbortSignal) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsResourcesError,
+//     undefined,
+//     {},
+//     {},
+//     {}
+//   >({ url: "/notifiers/mqtt/topics/resources", method: "get", signal });
+
+export type ListAllMqttNotifierTopicsVenResourcesPathParams = {
+  /**
+   * object ID of the ven object
+   */
+  venID: Schemas.ObjectID;
+};
+
+// export type ListAllMqttNotifierTopicsVenResourcesError = Fetcher.ErrorWrapper<
+//   | {
+//       status: 400;
+//       payload: Responses.BadRequest;
+//     }
+//   | {
+//       status: 401;
+//       payload: Responses.Unauthorized;
+//     }
+//   | {
+//       status: 403;
+//       payload: Responses.Forbidden;
+//     }
+//   | {
+//       status: 404;
+//       payload: Responses.NotFound;
+//     }
+//   | {
+//       status: 500;
+//       payload: Responses.InternalServerError;
+//     }
+// >;
+
+export type ListAllMqttNotifierTopicsVenResourcesVariables = {
+  pathParams: ListAllMqttNotifierTopicsVenResourcesPathParams;
+};
+
+/**
+ * List all MQTT binding topic names for operations on resources for a ven
+ */
+// export const listAllMqttNotifierTopicsVenResources = (
+//   variables: ListAllMqttNotifierTopicsVenResourcesVariables,
+//   signal?: AbortSignal,
+// ) =>
+//   oadr3Fetch<
+//     Responses.NotifiersTopicsResponse,
+//     ListAllMqttNotifierTopicsVenResourcesError,
+//     undefined,
+//     {},
+//     {},
+//     ListAllMqttNotifierTopicsVenResourcesPathParams
+//   >({
+//     url: "/notifiers/mqtt/topics/vens/{venID}/resources",
+//     method: "get",
+//     ...variables,
+//     signal,
+//   });
 
 // export const operationsByTag = {
 //   programs: {
@@ -1763,5 +2225,18 @@ export type DeleteVenResourceVariables = {
 //     updateVenResource,
 //     deleteVenResource,
 //   },
-//   auth: { fetchToken },
+//   auth: { getAuthServerInfo, fetchToken },
+//   notifiers: { listAllNotifiers },
+//   mQTTNotifier: {
+//     listAllMqttNotifierTopicsPrograms,
+//     listAllMqttNotifierTopicsProgram,
+//     listAllMqttNotifierTopicsEvents,
+//     listAllMqttNotifierTopicsProgramEvents,
+//     listAllMqttNotifierTopicsReports,
+//     listAllMqttNotifierTopicsSubscriptions,
+//     listAllMqttNotifierTopicsVens,
+//     listAllMqttNotifierTopicsVen,
+//     listAllMqttNotifierTopicsResources,
+//     listAllMqttNotifierTopicsVenResources,
+//   },
 // };

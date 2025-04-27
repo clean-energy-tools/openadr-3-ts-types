@@ -16,7 +16,7 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
     objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
 }>, z.ZodObject<{
     clientName: z.ZodString;
-    programID: z.ZodString;
+    programID: z.ZodOptional<z.ZodString>;
     objectOperations: z.ZodArray<z.ZodObject<{
         objects: z.ZodArray<z.ZodEnum<["PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE"]>, "many">;
         operations: z.ZodArray<z.ZodEnum<["READ", "CREATE", "UPDATE", "DELETE"]>, "many">;
@@ -24,12 +24,12 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         bearerToken: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     }, "strip", z.ZodTypeAny, {
         objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("CREATE" | "READ" | "UPDATE" | "DELETE")[];
+        operations: ("READ" | "CREATE" | "UPDATE" | "DELETE")[];
         callbackUrl: string;
         bearerToken: string | null;
     }, {
         objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("CREATE" | "READ" | "UPDATE" | "DELETE")[];
+        operations: ("READ" | "CREATE" | "UPDATE" | "DELETE")[];
         callbackUrl: string;
         bearerToken?: string | null | undefined;
     }>, "many">;
@@ -46,49 +46,49 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
             y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
-    programID: string;
     targets: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null;
     clientName: string;
     objectOperations: {
         objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("CREATE" | "READ" | "UPDATE" | "DELETE")[];
+        operations: ("READ" | "CREATE" | "UPDATE" | "DELETE")[];
         callbackUrl: string;
         bearerToken: string | null;
     }[];
+    programID?: string | undefined;
 }, {
-    programID: string;
     clientName: string;
     objectOperations: {
         objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("CREATE" | "READ" | "UPDATE" | "DELETE")[];
+        operations: ("READ" | "CREATE" | "UPDATE" | "DELETE")[];
         callbackUrl: string;
         bearerToken?: string | null | undefined;
     }[];
+    programID?: string | undefined;
     targets?: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null | undefined;
 }>>>;
 export default _default;

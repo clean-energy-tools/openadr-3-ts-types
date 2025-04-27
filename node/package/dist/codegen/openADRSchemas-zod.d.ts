@@ -455,12 +455,12 @@ export declare const programSchema: z.ZodObject<{
     programType?: string | null | undefined;
     country?: string | null | undefined;
     principalSubdivision?: string | null | undefined;
-    timeZoneOffset?: string | undefined;
     programDescriptions?: {
         URL: string;
     }[] | null | undefined;
     bindingEvents?: boolean | undefined;
     localPrice?: boolean | undefined;
+    timeZoneOffset?: string | undefined;
 }>;
 export declare const intervalSchema: z.ZodObject<{
     id: z.ZodNumber;
@@ -864,13 +864,13 @@ export declare const subscriptionSchema: z.ZodObject<{
         callbackUrl: z.ZodString;
         bearerToken: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
     }, "strip", z.ZodTypeAny, {
-        objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+        objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+        operations: ("DELETE" | "GET" | "POST" | "PUT")[];
         callbackUrl: string;
         bearerToken: string | null;
     }, {
-        objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+        objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+        operations: ("DELETE" | "GET" | "POST" | "PUT")[];
         callbackUrl: string;
         bearerToken?: string | null | undefined;
     }>, "many">;
@@ -910,8 +910,8 @@ export declare const subscriptionSchema: z.ZodObject<{
     }[] | null;
     clientName: string;
     objectOperations: {
-        objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+        objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+        operations: ("DELETE" | "GET" | "POST" | "PUT")[];
         callbackUrl: string;
         bearerToken: string | null;
     }[];
@@ -923,8 +923,8 @@ export declare const subscriptionSchema: z.ZodObject<{
     programID: string;
     clientName: string;
     objectOperations: {
-        objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-        operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+        objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+        operations: ("DELETE" | "GET" | "POST" | "PUT")[];
         callbackUrl: string;
         bearerToken?: string | null | undefined;
     }[];
@@ -1627,12 +1627,12 @@ export declare const notificationSchema: z.ZodObject<{
         programType?: string | null | undefined;
         country?: string | null | undefined;
         principalSubdivision?: string | null | undefined;
-        timeZoneOffset?: string | undefined;
         programDescriptions?: {
             URL: string;
         }[] | null | undefined;
         bindingEvents?: boolean | undefined;
         localPrice?: boolean | undefined;
+        timeZoneOffset?: string | undefined;
     }>, z.ZodObject<{
         id: z.ZodOptional<z.ZodString>;
         createdDateTime: z.ZodOptional<z.ZodDefault<z.ZodString>>;
@@ -2205,13 +2205,13 @@ export declare const notificationSchema: z.ZodObject<{
             callbackUrl: z.ZodString;
             bearerToken: z.ZodDefault<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
         }, "strip", z.ZodTypeAny, {
-            objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-            operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+            objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+            operations: ("DELETE" | "GET" | "POST" | "PUT")[];
             callbackUrl: string;
             bearerToken: string | null;
         }, {
-            objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-            operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+            objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+            operations: ("DELETE" | "GET" | "POST" | "PUT")[];
             callbackUrl: string;
             bearerToken?: string | null | undefined;
         }>, "many">;
@@ -2251,8 +2251,8 @@ export declare const notificationSchema: z.ZodObject<{
         }[] | null;
         clientName: string;
         objectOperations: {
-            objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-            operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+            objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+            operations: ("DELETE" | "GET" | "POST" | "PUT")[];
             callbackUrl: string;
             bearerToken: string | null;
         }[];
@@ -2264,8 +2264,8 @@ export declare const notificationSchema: z.ZodObject<{
         programID: string;
         clientName: string;
         objectOperations: {
-            objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-            operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+            objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+            operations: ("DELETE" | "GET" | "POST" | "PUT")[];
             callbackUrl: string;
             bearerToken?: string | null | undefined;
         }[];
@@ -2755,8 +2755,8 @@ export declare const notificationSchema: z.ZodObject<{
         }[] | null;
         clientName: string;
         objectOperations: {
-            objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-            operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+            objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+            operations: ("DELETE" | "GET" | "POST" | "PUT")[];
             callbackUrl: string;
             bearerToken: string | null;
         }[];
@@ -2847,7 +2847,7 @@ export declare const notificationSchema: z.ZodObject<{
         modificationDateTime?: string | undefined;
         objectType?: "REPORT" | undefined;
     };
-    objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
+    objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     targets: {
         type: string;
         values: (string | number | boolean | {
@@ -2855,7 +2855,7 @@ export declare const notificationSchema: z.ZodObject<{
             y: number | null;
         })[];
     }[] | null;
-    operation: "GET" | "POST" | "PUT" | "DELETE";
+    operation: "DELETE" | "GET" | "POST" | "PUT";
 }, {
     object: {
         resourceName: string;
@@ -2915,12 +2915,12 @@ export declare const notificationSchema: z.ZodObject<{
         programType?: string | null | undefined;
         country?: string | null | undefined;
         principalSubdivision?: string | null | undefined;
-        timeZoneOffset?: string | undefined;
         programDescriptions?: {
             URL: string;
         }[] | null | undefined;
         bindingEvents?: boolean | undefined;
         localPrice?: boolean | undefined;
+        timeZoneOffset?: string | undefined;
     } | {
         programID: string;
         intervals: {
@@ -2984,8 +2984,8 @@ export declare const notificationSchema: z.ZodObject<{
         programID: string;
         clientName: string;
         objectOperations: {
-            objects: ("PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
-            operations: ("GET" | "POST" | "PUT" | "DELETE")[];
+            objects: ("PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE")[];
+            operations: ("DELETE" | "GET" | "POST" | "PUT")[];
             callbackUrl: string;
             bearerToken?: string | null | undefined;
         }[];
@@ -3083,8 +3083,8 @@ export declare const notificationSchema: z.ZodObject<{
         }[] | null | undefined;
         reportName?: string | null | undefined;
     };
-    objectType: "PROGRAM" | "REPORT" | "EVENT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
-    operation: "GET" | "POST" | "PUT" | "DELETE";
+    objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
+    operation: "DELETE" | "GET" | "POST" | "PUT";
     targets?: {
         type: string;
         values: (string | number | boolean | {

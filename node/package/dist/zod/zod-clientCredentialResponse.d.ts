@@ -8,15 +8,15 @@ declare const _default: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     access_token: string;
     token_type: "Bearer";
+    scope?: string | undefined;
     expires_in?: number | undefined;
     refresh_token?: string | undefined;
-    scope?: string | undefined;
 }, {
     access_token: string;
     token_type: "Bearer";
+    scope?: string | undefined;
     expires_in?: number | undefined;
     refresh_token?: string | undefined;
-    scope?: string | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-clientCredentialResponse.d.ts.map

@@ -78,7 +78,6 @@ declare const _default: z.ZodObject<{
             y: number;
         })[];
     }[] | null | undefined;
-    venID?: string | undefined;
     attributes?: {
         type: string;
         values: (string | number | boolean | {
@@ -86,6 +85,7 @@ declare const _default: z.ZodObject<{
             y: number;
         })[];
     }[] | null | undefined;
+    venID?: string | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-resourceRequest.d.ts.map

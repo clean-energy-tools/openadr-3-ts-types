@@ -5,10 +5,10 @@ export const schemas = {
     searchAllPrograms: {
       path: Joi.object({}),
       query: Joi.object({
-        targetType: Joi.string().allow("").optional().min(0),
+        targetType: Joi.string().optional().max(128).min(1),
         targetValues: Joi.array()
           .optional()
-          .items(Joi.string().allow("").min(0)),
+          .items(Joi.string().max(128).min(1)),
         skip: Joi.number().optional().integer().min(0),
         limit: Joi.number().optional().integer().max(50).min(0),
       }),
@@ -30,7 +30,13 @@ export const schemas = {
           .pattern(/^[a-zA-Z0-9_-]*$/, {})
           .max(128)
           .min(1),
-        clientName: Joi.string().allow("").optional().min(0),
+        clientName: Joi.string()
+          .description(
+            "User generated identifier, may be VEN identifier provisioned out-of-band."
+          )
+          .optional()
+          .max(128)
+          .min(1),
         skip: Joi.number().optional().integer().min(0),
         limit: Joi.number().optional().integer().max(50).min(0),
       }),
@@ -46,12 +52,13 @@ export const schemas = {
           .pattern(/^[a-zA-Z0-9_-]*$/, {})
           .max(128)
           .min(1),
-        targetType: Joi.string().allow("").optional().min(0),
+        targetType: Joi.string().optional().max(128).min(1),
         targetValues: Joi.array()
           .optional()
-          .items(Joi.string().allow("").min(0)),
+          .items(Joi.string().max(128).min(1)),
         skip: Joi.number().optional().integer().min(0),
         limit: Joi.number().optional().integer().max(50).min(0),
+        active: Joi.boolean().optional(),
       }),
       header: Joi.object({}),
       cookie: Joi.object({}),
@@ -65,11 +72,17 @@ export const schemas = {
           .pattern(/^[a-zA-Z0-9_-]*$/, {})
           .max(128)
           .min(1),
-        clientName: Joi.string().allow("").optional().min(0),
-        targetType: Joi.string().allow("").optional().min(0),
+        clientName: Joi.string()
+          .description(
+            "User generated identifier, may be VEN identifier provisioned out-of-band."
+          )
+          .optional()
+          .max(128)
+          .min(1),
+        targetType: Joi.string().optional().max(128).min(1),
         targetValues: Joi.array()
           .optional()
-          .items(Joi.string().allow("").min(0)),
+          .items(Joi.string().max(128).min(1)),
         objects: Joi.array()
           .optional()
           .items(
@@ -94,11 +107,17 @@ export const schemas = {
     searchVens: {
       path: Joi.object({}),
       query: Joi.object({
-        venName: Joi.string().allow("").optional().min(0),
-        targetType: Joi.string().allow("").optional().min(0),
+        venName: Joi.string()
+          .description(
+            "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unique within the scope of a VTN\n"
+          )
+          .optional()
+          .max(128)
+          .min(1),
+        targetType: Joi.string().optional().max(128).min(1),
         targetValues: Joi.array()
           .optional()
-          .items(Joi.string().allow("").min(0)),
+          .items(Joi.string().max(128).min(1)),
         skip: Joi.number().optional().integer().min(0),
         limit: Joi.number().optional().integer().max(50).min(0),
       }),
@@ -108,11 +127,17 @@ export const schemas = {
     searchVenResources: {
       path: Joi.object({}),
       query: Joi.object({
-        resourceName: Joi.string().allow("").optional().min(0),
-        targetType: Joi.string().allow("").optional().min(0),
+        resourceName: Joi.string()
+          .description(
+            "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
+          )
+          .optional()
+          .max(128)
+          .min(1),
+        targetType: Joi.string().optional().max(128).min(1),
         targetValues: Joi.array()
           .optional()
-          .items(Joi.string().allow("").min(0)),
+          .items(Joi.string().max(128).min(1)),
         skip: Joi.number().optional().integer().min(0),
         limit: Joi.number().optional().integer().max(50).min(0),
       }),
@@ -138,10 +163,10 @@ export const schemas = {
                 .max(128)
                 .min(1),
               createdDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               modificationDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               objectType: Joi.string()
                 .allow(
@@ -201,9 +226,7 @@ export const schemas = {
                 .description("Coding per ISO 3166-2. E.g. state in US.")
                 .min(0),
               intervalPeriod: Joi.object({
-                start: Joi.date()
-                  .description("datetime in ISO 8601 format")
-                  .required(),
+                start: Joi.date().description("datetime in RFC 3339 format"),
                 duration: Joi.string()
                   .default("PT0S")
                   .description("duration in ISO 8601 format")
@@ -223,7 +246,7 @@ export const schemas = {
                   .min(0),
               })
                 .description(
-                  "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                  'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                 )
                 .unknown(),
               programDescriptions: Joi.array()
@@ -271,10 +294,11 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         units: Joi.string()
-                          .allow("", null)
+                          .allow(null)
                           .default(null)
                           .description("Units of measure.")
-                          .min(0),
+                          .max(128)
+                          .min(1),
                         currency: Joi.string()
                           .allow("", null)
                           .default(null)
@@ -298,17 +322,19 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         readingType: Joi.string()
-                          .allow("", null)
+                          .allow(null)
                           .default(null)
                           .description(
                             "Enumerated or private string signifying the type of reading."
                           )
-                          .min(0),
+                          .max(128)
+                          .min(1),
                         units: Joi.string()
-                          .allow("", null)
+                          .allow(null)
                           .default(null)
                           .description("Units of measure.")
-                          .min(0),
+                          .max(128)
+                          .min(1),
                         accuracy: Joi.number()
                           .allow(null)
                           .default(null)
@@ -419,7 +445,7 @@ export const schemas = {
         .description("Coding per ISO 3166-2. E.g. state in US.")
         .min(0),
       intervalPeriod: Joi.object({
-        start: Joi.date().description("datetime in ISO 8601 format").required(),
+        start: Joi.date().description("datetime in RFC 3339 format"),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -440,7 +466,7 @@ export const schemas = {
           .min(0),
       })
         .description(
-          "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+          'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
         )
         .unknown(),
       programDescriptions: Joi.array()
@@ -484,10 +510,11 @@ export const schemas = {
                   .max(128)
                   .min(1),
                 units: Joi.string()
-                  .allow("", null)
+                  .allow(null)
                   .default(null)
                   .description("Units of measure.")
-                  .min(0),
+                  .max(128)
+                  .min(1),
                 currency: Joi.string()
                   .allow("", null)
                   .default(null)
@@ -511,17 +538,19 @@ export const schemas = {
                   .max(128)
                   .min(1),
                 readingType: Joi.string()
-                  .allow("", null)
+                  .allow(null)
                   .default(null)
                   .description(
                     "Enumerated or private string signifying the type of reading."
                   )
-                  .min(0),
+                  .max(128)
+                  .min(1),
                 units: Joi.string()
-                  .allow("", null)
+                  .allow(null)
                   .default(null)
                   .description("Units of measure.")
-                  .min(0),
+                  .max(128)
+                  .min(1),
                 accuracy: Joi.number()
                   .allow(null)
                   .default(null)
@@ -610,10 +639,10 @@ export const schemas = {
                 .max(128)
                 .min(1),
               createdDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               modificationDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               objectType: Joi.string()
                 .allow(
@@ -641,7 +670,7 @@ export const schemas = {
                 .min(1),
               clientName: Joi.string()
                 .description(
-                  "User generated identifier; may be VEN ID provisioned out-of-band."
+                  "User generated identifier, may be VEN identifier provisioned out-of-band."
                 )
                 .required()
                 .max(128)
@@ -671,17 +700,19 @@ export const schemas = {
                       .max(128)
                       .min(1),
                     readingType: Joi.string()
-                      .allow("", null)
+                      .allow(null)
                       .default(null)
                       .description(
                         "Enumerated or private string signifying the type of reading."
                       )
-                      .min(0),
+                      .max(128)
+                      .min(1),
                     units: Joi.string()
-                      .allow("", null)
+                      .allow(null)
                       .default(null)
                       .description("Units of measure.")
-                      .min(0),
+                      .max(128)
+                      .min(1),
                     accuracy: Joi.number()
                       .allow(null)
                       .default(null)
@@ -718,9 +749,9 @@ export const schemas = {
                       .max(128)
                       .min(1),
                     intervalPeriod: Joi.object({
-                      start: Joi.date()
-                        .description("datetime in ISO 8601 format")
-                        .required(),
+                      start: Joi.date().description(
+                        "datetime in RFC 3339 format"
+                      ),
                       duration: Joi.string()
                         .allow("")
                         .default("PT0S")
@@ -741,7 +772,7 @@ export const schemas = {
                         .min(0),
                     })
                       .description(
-                        "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                        'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                       )
                       .unknown(),
                     intervals: Joi.array()
@@ -756,9 +787,9 @@ export const schemas = {
                             .required()
                             .integer(),
                           intervalPeriod: Joi.object({
-                            start: Joi.date()
-                              .description("datetime in ISO 8601 format")
-                              .required(),
+                            start: Joi.date().description(
+                              "datetime in RFC 3339 format"
+                            ),
                             duration: Joi.string()
                               .allow("")
                               .default("PT0S")
@@ -779,7 +810,7 @@ export const schemas = {
                               .min(0),
                           })
                             .description(
-                              "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                              'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                             )
                             .unknown(),
                           payloads: Joi.array()
@@ -853,7 +884,7 @@ export const schemas = {
         .min(1),
       clientName: Joi.string()
         .description(
-          "User generated identifier; may be VEN ID provisioned out-of-band."
+          "User generated identifier, may be VEN identifier provisioned out-of-band."
         )
         .required()
         .max(128)
@@ -883,17 +914,19 @@ export const schemas = {
               .max(128)
               .min(1),
             readingType: Joi.string()
-              .allow("", null)
+              .allow(null)
               .default(null)
               .description(
                 "Enumerated or private string signifying the type of reading."
               )
-              .min(0),
+              .max(128)
+              .min(1),
             units: Joi.string()
-              .allow("", null)
+              .allow(null)
               .default(null)
               .description("Units of measure.")
-              .min(0),
+              .max(128)
+              .min(1),
             accuracy: Joi.number()
               .allow(null)
               .default(null)
@@ -930,9 +963,7 @@ export const schemas = {
               .max(128)
               .min(1),
             intervalPeriod: Joi.object({
-              start: Joi.date()
-                .description("datetime in ISO 8601 format")
-                .required(),
+              start: Joi.date().description("datetime in RFC 3339 format"),
               duration: Joi.string()
                 .allow("")
                 .default("PT0S")
@@ -953,7 +984,7 @@ export const schemas = {
                 .min(0),
             })
               .description(
-                "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
               )
               .unknown(),
             intervals: Joi.array()
@@ -968,9 +999,9 @@ export const schemas = {
                     .required()
                     .integer(),
                   intervalPeriod: Joi.object({
-                    start: Joi.date()
-                      .description("datetime in ISO 8601 format")
-                      .required(),
+                    start: Joi.date().description(
+                      "datetime in RFC 3339 format"
+                    ),
                     duration: Joi.string()
                       .allow("")
                       .default("PT0S")
@@ -991,7 +1022,7 @@ export const schemas = {
                       .min(0),
                   })
                     .description(
-                      "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                      'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                     )
                     .unknown(),
                   payloads: Joi.array()
@@ -1069,10 +1100,10 @@ export const schemas = {
                 .max(128)
                 .min(1),
               createdDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               modificationDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               objectType: Joi.string()
                 .allow(
@@ -1103,6 +1134,15 @@ export const schemas = {
                 .default(null)
                 .description(
                   "User defined string for use in debugging or User Interface."
+                )
+                .min(0),
+              duration: Joi.string()
+                .allow("")
+                .default("PT0S")
+                .description("duration in ISO 8601 format")
+                .pattern(
+                  /^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$/,
+                  {}
                 )
                 .min(0),
               priority: Joi.number()
@@ -1175,17 +1215,19 @@ export const schemas = {
                       .max(128)
                       .min(1),
                     readingType: Joi.string()
-                      .allow("", null)
+                      .allow(null)
                       .default(null)
                       .description(
                         "Enumerated or private string signifying the type of reading."
                       )
-                      .min(0),
+                      .max(128)
+                      .min(1),
                     units: Joi.string()
-                      .allow("", null)
+                      .allow(null)
                       .default(null)
                       .description("Units of measure.")
-                      .min(0),
+                      .max(128)
+                      .min(1),
                     targets: Joi.array()
                       .allow(null)
                       .default(null)
@@ -1266,6 +1308,13 @@ export const schemas = {
                         "Number of times to repeat report.\n1 indicates generate one report.\n-1 indicates repeat indefinitely.\n"
                       )
                       .integer(),
+                    reportIntervals: Joi.string()
+                      .allow("INTERVALS", "SUB_INTERVALS", "OPEN_INTERVALS")
+                      .default("INTERVALS")
+                      .description(
+                        "Indicates VEN report interval options. See User Guide."
+                      )
+                      .only(),
                   })
                     .description(
                       "An object that may be used to request a report from a VEN.\n"
@@ -1290,10 +1339,11 @@ export const schemas = {
                       .max(128)
                       .min(1),
                     units: Joi.string()
-                      .allow("", null)
+                      .allow(null)
                       .default(null)
                       .description("Units of measure.")
-                      .min(0),
+                      .max(128)
+                      .min(1),
                     currency: Joi.string()
                       .allow("", null)
                       .default(null)
@@ -1306,9 +1356,7 @@ export const schemas = {
                     .unknown()
                 ),
               intervalPeriod: Joi.object({
-                start: Joi.date()
-                  .description("datetime in ISO 8601 format")
-                  .required(),
+                start: Joi.date().description("datetime in RFC 3339 format"),
                 duration: Joi.string()
                   .allow("")
                   .default("PT0S")
@@ -1329,12 +1377,11 @@ export const schemas = {
                   .min(0),
               })
                 .description(
-                  "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                  'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                 )
                 .unknown(),
               intervals: Joi.array()
                 .description("A list of interval objects.")
-                .required()
                 .items(
                   Joi.object({
                     id: Joi.number()
@@ -1344,9 +1391,9 @@ export const schemas = {
                       .required()
                       .integer(),
                     intervalPeriod: Joi.object({
-                      start: Joi.date()
-                        .description("datetime in ISO 8601 format")
-                        .required(),
+                      start: Joi.date().description(
+                        "datetime in RFC 3339 format"
+                      ),
                       duration: Joi.string()
                         .allow("")
                         .default("PT0S")
@@ -1367,7 +1414,7 @@ export const schemas = {
                         .min(0),
                     })
                       .description(
-                        "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                        'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                       )
                       .unknown(),
                     payloads: Joi.array()
@@ -1442,6 +1489,15 @@ export const schemas = {
           "User defined string for use in debugging or User Interface."
         )
         .min(0),
+      duration: Joi.string()
+        .allow("")
+        .default("PT0S")
+        .description("duration in ISO 8601 format")
+        .pattern(
+          /^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$/,
+          {}
+        )
+        .min(0),
       priority: Joi.number()
         .allow(null)
         .default(null)
@@ -1512,17 +1568,19 @@ export const schemas = {
               .max(128)
               .min(1),
             readingType: Joi.string()
-              .allow("", null)
+              .allow(null)
               .default(null)
               .description(
                 "Enumerated or private string signifying the type of reading."
               )
-              .min(0),
+              .max(128)
+              .min(1),
             units: Joi.string()
-              .allow("", null)
+              .allow(null)
               .default(null)
               .description("Units of measure.")
-              .min(0),
+              .max(128)
+              .min(1),
             targets: Joi.array()
               .allow(null)
               .default(null)
@@ -1603,6 +1661,13 @@ export const schemas = {
                 "Number of times to repeat report.\n1 indicates generate one report.\n-1 indicates repeat indefinitely.\n"
               )
               .integer(),
+            reportIntervals: Joi.string()
+              .allow("INTERVALS", "SUB_INTERVALS", "OPEN_INTERVALS")
+              .default("INTERVALS")
+              .description(
+                "Indicates VEN report interval options. See User Guide."
+              )
+              .only(),
           })
             .description(
               "An object that may be used to request a report from a VEN.\n"
@@ -1627,10 +1692,11 @@ export const schemas = {
               .max(128)
               .min(1),
             units: Joi.string()
-              .allow("", null)
+              .allow(null)
               .default(null)
               .description("Units of measure.")
-              .min(0),
+              .max(128)
+              .min(1),
             currency: Joi.string()
               .allow("", null)
               .default(null)
@@ -1643,7 +1709,7 @@ export const schemas = {
             .unknown()
         ),
       intervalPeriod: Joi.object({
-        start: Joi.date().description("datetime in ISO 8601 format").required(),
+        start: Joi.date().description("datetime in RFC 3339 format"),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -1664,12 +1730,11 @@ export const schemas = {
           .min(0),
       })
         .description(
-          "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+          'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
         )
         .unknown(),
       intervals: Joi.array()
         .description("A list of interval objects.")
-        .required()
         .items(
           Joi.object({
             id: Joi.number()
@@ -1679,9 +1744,7 @@ export const schemas = {
               .required()
               .integer(),
             intervalPeriod: Joi.object({
-              start: Joi.date()
-                .description("datetime in ISO 8601 format")
-                .required(),
+              start: Joi.date().description("datetime in RFC 3339 format"),
               duration: Joi.string()
                 .allow("")
                 .default("PT0S")
@@ -1702,7 +1765,7 @@ export const schemas = {
                 .min(0),
             })
               .description(
-                "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
               )
               .unknown(),
             payloads: Joi.array()
@@ -1778,10 +1841,10 @@ export const schemas = {
                 .max(128)
                 .min(1),
               createdDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               modificationDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               objectType: Joi.string()
                 .allow(
@@ -1810,7 +1873,6 @@ export const schemas = {
                 .min(1),
               programID: Joi.string()
                 .description("URL safe VTN assigned object ID.")
-                .required()
                 .pattern(/^[a-zA-Z0-9_-]*$/, {})
                 .max(128)
                 .min(1),
@@ -1926,7 +1988,6 @@ export const schemas = {
         .min(1),
       programID: Joi.string()
         .description("URL safe VTN assigned object ID.")
-        .required()
         .pattern(/^[a-zA-Z0-9_-]*$/, {})
         .max(128)
         .min(1),
@@ -2045,10 +2106,10 @@ export const schemas = {
                 .max(128)
                 .min(1),
               createdDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               modificationDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               objectType: Joi.string()
                 .allow(
@@ -2197,10 +2258,10 @@ export const schemas = {
                               .max(128)
                               .min(1),
                             createdDateTime: Joi.date()
-                              .description("datetime in ISO 8601 format")
+                              .description("datetime in RFC 3339 format")
                               .required(),
                             modificationDateTime: Joi.date()
-                              .description("datetime in ISO 8601 format")
+                              .description("datetime in RFC 3339 format")
                               .required(),
                             objectType: Joi.string()
                               .allow(
@@ -2224,7 +2285,7 @@ export const schemas = {
                           Joi.object({
                             resourceName: Joi.string()
                               .description(
-                                "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN.\n"
+                                "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
                               )
                               .required()
                               .max(128)
@@ -2475,10 +2536,10 @@ export const schemas = {
                       .max(128)
                       .min(1),
                     createdDateTime: Joi.date()
-                      .description("datetime in ISO 8601 format")
+                      .description("datetime in RFC 3339 format")
                       .required(),
                     modificationDateTime: Joi.date()
-                      .description("datetime in ISO 8601 format")
+                      .description("datetime in RFC 3339 format")
                       .required(),
                     objectType: Joi.string()
                       .allow(
@@ -2500,7 +2561,7 @@ export const schemas = {
                   Joi.object({
                     resourceName: Joi.string()
                       .description(
-                        "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN.\n"
+                        "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
                       )
                       .required()
                       .max(128)
@@ -2634,10 +2695,10 @@ export const schemas = {
                 .max(128)
                 .min(1),
               createdDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               modificationDateTime: Joi.date()
-                .description("datetime in ISO 8601 format")
+                .description("datetime in RFC 3339 format")
                 .required(),
               objectType: Joi.string()
                 .allow(
@@ -2659,7 +2720,7 @@ export const schemas = {
             Joi.object({
               resourceName: Joi.string()
                 .description(
-                  "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN.\n"
+                  "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
                 )
                 .required()
                 .max(128)
@@ -2775,7 +2836,7 @@ export const schemas = {
     resourceRequest: Joi.object({
       resourceName: Joi.string()
         .description(
-          "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN.\n"
+          "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
         )
         .required()
         .max(128)
@@ -2890,10 +2951,10 @@ export const schemas = {
         .max(128)
         .min(1),
       createdDateTime: Joi.date()
-        .description("datetime in ISO 8601 format")
+        .description("datetime in RFC 3339 format")
         .required(),
       modificationDateTime: Joi.date()
-        .description("datetime in ISO 8601 format")
+        .description("datetime in RFC 3339 format")
         .required(),
       objectType: Joi.string()
         .allow("PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE")
@@ -2913,7 +2974,7 @@ export const schemas = {
         .required()
         .integer(),
       intervalPeriod: Joi.object({
-        start: Joi.date().description("datetime in ISO 8601 format").required(),
+        start: Joi.date().description("datetime in RFC 3339 format"),
         duration: Joi.string()
           .allow("")
           .default("PT0S")
@@ -2934,7 +2995,7 @@ export const schemas = {
           .min(0),
       })
         .description(
-          "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+          'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
         )
         .unknown(),
       payloads: Joi.array()
@@ -2988,7 +3049,7 @@ export const schemas = {
       )
       .unknown(),
     intervalPeriod: Joi.object({
-      start: Joi.date().description("datetime in ISO 8601 format").required(),
+      start: Joi.date().description("datetime in RFC 3339 format"),
       duration: Joi.string()
         .allow("")
         .default("PT0S")
@@ -3009,7 +3070,7 @@ export const schemas = {
         .min(0),
     })
       .description(
-        "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+        'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
       )
       .unknown(),
     valuesMap: Joi.object({
@@ -3069,10 +3130,11 @@ export const schemas = {
         .max(128)
         .min(1),
       units: Joi.string()
-        .allow("", null)
+        .allow(null)
         .default(null)
         .description("Units of measure.")
-        .min(0),
+        .max(128)
+        .min(1),
       currency: Joi.string()
         .allow("", null)
         .default(null)
@@ -3096,17 +3158,19 @@ export const schemas = {
         .max(128)
         .min(1),
       readingType: Joi.string()
-        .allow("", null)
+        .allow(null)
         .default(null)
         .description(
           "Enumerated or private string signifying the type of reading."
         )
-        .min(0),
+        .max(128)
+        .min(1),
       units: Joi.string()
-        .allow("", null)
+        .allow(null)
         .default(null)
         .description("Units of measure.")
-        .min(0),
+        .max(128)
+        .min(1),
       accuracy: Joi.number()
         .allow(null)
         .default(null)
@@ -3136,17 +3200,19 @@ export const schemas = {
         .max(128)
         .min(1),
       readingType: Joi.string()
-        .allow("", null)
+        .allow(null)
         .default(null)
         .description(
           "Enumerated or private string signifying the type of reading."
         )
-        .min(0),
+        .max(128)
+        .min(1),
       units: Joi.string()
-        .allow("", null)
+        .allow(null)
         .default(null)
         .description("Units of measure.")
-        .min(0),
+        .max(128)
+        .min(1),
       targets: Joi.array()
         .allow(null)
         .default(null)
@@ -3227,6 +3293,11 @@ export const schemas = {
           "Number of times to repeat report.\n1 indicates generate one report.\n-1 indicates repeat indefinitely.\n"
         )
         .integer(),
+      reportIntervals: Joi.string()
+        .allow("INTERVALS", "SUB_INTERVALS", "OPEN_INTERVALS")
+        .default("INTERVALS")
+        .description("Indicates VEN report interval options. See User Guide.")
+        .only(),
     })
       .description(
         "An object that may be used to request a report from a VEN.\n"
@@ -3235,6 +3306,40 @@ export const schemas = {
     objectID: Joi.string()
       .description("URL safe VTN assigned object ID.")
       .pattern(/^[a-zA-Z0-9_-]*$/, {})
+      .max(128)
+      .min(1),
+    venName: Joi.string()
+      .description(
+        "User generated identifier, may be VEN identifier provisioned out-of-band.\nvenName is expected to be unique within the scope of a VTN\n"
+      )
+      .max(128)
+      .min(1),
+    clientName: Joi.string()
+      .description(
+        "User generated identifier, may be VEN identifier provisioned out-of-band."
+      )
+      .max(128)
+      .min(1),
+    targetType: Joi.string().max(128).min(1),
+    targetValue: Joi.string().max(128).min(1),
+    resourceName: Joi.string()
+      .description(
+        "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
+      )
+      .max(128)
+      .min(1),
+    units: Joi.string()
+      .allow(null)
+      .default(null)
+      .description("Units of measure.")
+      .max(128)
+      .min(1),
+    readingType: Joi.string()
+      .allow(null)
+      .default(null)
+      .description(
+        "Enumerated or private string signifying the type of reading."
+      )
       .max(128)
       .min(1),
     notification: Joi.object({
@@ -3276,10 +3381,10 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         createdDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         modificationDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         objectType: Joi.string()
                           .allow(
@@ -3347,9 +3452,9 @@ export const schemas = {
                           )
                           .min(0),
                         intervalPeriod: Joi.object({
-                          start: Joi.date()
-                            .description("datetime in ISO 8601 format")
-                            .required(),
+                          start: Joi.date().description(
+                            "datetime in RFC 3339 format"
+                          ),
                           duration: Joi.string()
                             .allow("")
                             .default("PT0S")
@@ -3370,7 +3475,7 @@ export const schemas = {
                             .min(0),
                         })
                           .description(
-                            "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                            'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                           )
                           .unknown(),
                         programDescriptions: Joi.array()
@@ -3420,10 +3525,11 @@ export const schemas = {
                                     .max(128)
                                     .min(1),
                                   units: Joi.string()
-                                    .allow("", null)
+                                    .allow(null)
                                     .default(null)
                                     .description("Units of measure.")
-                                    .min(0),
+                                    .max(128)
+                                    .min(1),
                                   currency: Joi.string()
                                     .allow("", null)
                                     .default(null)
@@ -3447,17 +3553,19 @@ export const schemas = {
                                     .max(128)
                                     .min(1),
                                   readingType: Joi.string()
-                                    .allow("", null)
+                                    .allow(null)
                                     .default(null)
                                     .description(
                                       "Enumerated or private string signifying the type of reading."
                                     )
-                                    .min(0),
+                                    .max(128)
+                                    .min(1),
                                   units: Joi.string()
-                                    .allow("", null)
+                                    .allow(null)
                                     .default(null)
                                     .description("Units of measure.")
-                                    .min(0),
+                                    .max(128)
+                                    .min(1),
                                   accuracy: Joi.number()
                                     .allow(null)
                                     .default(null)
@@ -3548,10 +3656,10 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         createdDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         modificationDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         objectType: Joi.string()
                           .allow(
@@ -3581,7 +3689,7 @@ export const schemas = {
                           .min(1),
                         clientName: Joi.string()
                           .description(
-                            "User generated identifier; may be VEN ID provisioned out-of-band."
+                            "User generated identifier, may be VEN identifier provisioned out-of-band."
                           )
                           .required()
                           .max(128)
@@ -3611,17 +3719,19 @@ export const schemas = {
                                 .max(128)
                                 .min(1),
                               readingType: Joi.string()
-                                .allow("", null)
+                                .allow(null)
                                 .default(null)
                                 .description(
                                   "Enumerated or private string signifying the type of reading."
                                 )
-                                .min(0),
+                                .max(128)
+                                .min(1),
                               units: Joi.string()
-                                .allow("", null)
+                                .allow(null)
                                 .default(null)
                                 .description("Units of measure.")
-                                .min(0),
+                                .max(128)
+                                .min(1),
                               accuracy: Joi.number()
                                 .allow(null)
                                 .default(null)
@@ -3658,9 +3768,9 @@ export const schemas = {
                                 .max(128)
                                 .min(1),
                               intervalPeriod: Joi.object({
-                                start: Joi.date()
-                                  .description("datetime in ISO 8601 format")
-                                  .required(),
+                                start: Joi.date().description(
+                                  "datetime in RFC 3339 format"
+                                ),
                                 duration: Joi.string()
                                   .allow("")
                                   .default("PT0S")
@@ -3681,7 +3791,7 @@ export const schemas = {
                                   .min(0),
                               })
                                 .description(
-                                  "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                                  'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                                 )
                                 .unknown(),
                               intervals: Joi.array()
@@ -3696,11 +3806,9 @@ export const schemas = {
                                       .required()
                                       .integer(),
                                     intervalPeriod: Joi.object({
-                                      start: Joi.date()
-                                        .description(
-                                          "datetime in ISO 8601 format"
-                                        )
-                                        .required(),
+                                      start: Joi.date().description(
+                                        "datetime in RFC 3339 format"
+                                      ),
                                       duration: Joi.string()
                                         .allow("")
                                         .default("PT0S")
@@ -3725,7 +3833,7 @@ export const schemas = {
                                         .min(0),
                                     })
                                       .description(
-                                        "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                                        'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                                       )
                                       .unknown(),
                                     payloads: Joi.array()
@@ -3813,10 +3921,10 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         createdDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         modificationDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         objectType: Joi.string()
                           .allow(
@@ -3849,6 +3957,15 @@ export const schemas = {
                           .default(null)
                           .description(
                             "User defined string for use in debugging or User Interface."
+                          )
+                          .min(0),
+                        duration: Joi.string()
+                          .allow("")
+                          .default("PT0S")
+                          .description("duration in ISO 8601 format")
+                          .pattern(
+                            /^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$/,
+                            {}
                           )
                           .min(0),
                         priority: Joi.number()
@@ -3921,17 +4038,19 @@ export const schemas = {
                                 .max(128)
                                 .min(1),
                               readingType: Joi.string()
-                                .allow("", null)
+                                .allow(null)
                                 .default(null)
                                 .description(
                                   "Enumerated or private string signifying the type of reading."
                                 )
-                                .min(0),
+                                .max(128)
+                                .min(1),
                               units: Joi.string()
-                                .allow("", null)
+                                .allow(null)
                                 .default(null)
                                 .description("Units of measure.")
-                                .min(0),
+                                .max(128)
+                                .min(1),
                               targets: Joi.array()
                                 .allow(null)
                                 .default(null)
@@ -4016,6 +4135,17 @@ export const schemas = {
                                   "Number of times to repeat report.\n1 indicates generate one report.\n-1 indicates repeat indefinitely.\n"
                                 )
                                 .integer(),
+                              reportIntervals: Joi.string()
+                                .allow(
+                                  "INTERVALS",
+                                  "SUB_INTERVALS",
+                                  "OPEN_INTERVALS"
+                                )
+                                .default("INTERVALS")
+                                .description(
+                                  "Indicates VEN report interval options. See User Guide."
+                                )
+                                .only(),
                             })
                               .description(
                                 "An object that may be used to request a report from a VEN.\n"
@@ -4040,10 +4170,11 @@ export const schemas = {
                                 .max(128)
                                 .min(1),
                               units: Joi.string()
-                                .allow("", null)
+                                .allow(null)
                                 .default(null)
                                 .description("Units of measure.")
-                                .min(0),
+                                .max(128)
+                                .min(1),
                               currency: Joi.string()
                                 .allow("", null)
                                 .default(null)
@@ -4056,9 +4187,9 @@ export const schemas = {
                               .unknown()
                           ),
                         intervalPeriod: Joi.object({
-                          start: Joi.date()
-                            .description("datetime in ISO 8601 format")
-                            .required(),
+                          start: Joi.date().description(
+                            "datetime in RFC 3339 format"
+                          ),
                           duration: Joi.string()
                             .allow("")
                             .default("PT0S")
@@ -4079,12 +4210,11 @@ export const schemas = {
                             .min(0),
                         })
                           .description(
-                            "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                            'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                           )
                           .unknown(),
                         intervals: Joi.array()
                           .description("A list of interval objects.")
-                          .required()
                           .items(
                             Joi.object({
                               id: Joi.number()
@@ -4094,9 +4224,9 @@ export const schemas = {
                                 .required()
                                 .integer(),
                               intervalPeriod: Joi.object({
-                                start: Joi.date()
-                                  .description("datetime in ISO 8601 format")
-                                  .required(),
+                                start: Joi.date().description(
+                                  "datetime in RFC 3339 format"
+                                ),
                                 duration: Joi.string()
                                   .allow("")
                                   .default("PT0S")
@@ -4117,7 +4247,7 @@ export const schemas = {
                                   .min(0),
                               })
                                 .description(
-                                  "Defines temporal aspects of intervals.\nA duration of default PT0S indicates instantaneous or infinity, depending on payloadType.\nA randomizeStart of default null indicates no randomization.\n"
+                                  'Defines temporal aspects of intervals.\nA start of "0000-00-00" or "0000-00-00T00:00:00" may indicate \'now\'. See User Guide.\nA duration of "P9999Y" may indicate infinity. See User Guide.\nA randomizeStart indicates absolute range of client applied offset to start. See User Guide.\n'
                                 )
                                 .unknown(),
                               payloads: Joi.array()
@@ -4201,10 +4331,10 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         createdDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         modificationDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         objectType: Joi.string()
                           .allow(
@@ -4235,7 +4365,6 @@ export const schemas = {
                           .min(1),
                         programID: Joi.string()
                           .description("URL safe VTN assigned object ID.")
-                          .required()
                           .pattern(/^[a-zA-Z0-9_-]*$/, {})
                           .max(128)
                           .min(1),
@@ -4366,10 +4495,10 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         createdDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         modificationDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         objectType: Joi.string()
                           .allow(
@@ -4523,12 +4652,12 @@ export const schemas = {
                                         .min(1),
                                       createdDateTime: Joi.date()
                                         .description(
-                                          "datetime in ISO 8601 format"
+                                          "datetime in RFC 3339 format"
                                         )
                                         .required(),
                                       modificationDateTime: Joi.date()
                                         .description(
-                                          "datetime in ISO 8601 format"
+                                          "datetime in RFC 3339 format"
                                         )
                                         .required(),
                                       objectType: Joi.string()
@@ -4553,7 +4682,7 @@ export const schemas = {
                                     Joi.object({
                                       resourceName: Joi.string()
                                         .description(
-                                          "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN.\n"
+                                          "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
                                         )
                                         .required()
                                         .max(128)
@@ -4705,10 +4834,10 @@ export const schemas = {
                           .max(128)
                           .min(1),
                         createdDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         modificationDateTime: Joi.date()
-                          .description("datetime in ISO 8601 format")
+                          .description("datetime in RFC 3339 format")
                           .required(),
                         objectType: Joi.string()
                           .allow(
@@ -4732,7 +4861,7 @@ export const schemas = {
                       Joi.object({
                         resourceName: Joi.string()
                           .description(
-                            "User generated identifier, resource may be configured with identifier out-of-band.\nresourceName is expected to be unique within the scope of the associated VEN.\n"
+                            "User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data"
                           )
                           .required()
                           .max(128)
@@ -4903,7 +5032,7 @@ export const schemas = {
       .allow("PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE")
       .description("Types of objects addressable through API.")
       .only(),
-    dateTime: Joi.date().description("datetime in ISO 8601 format"),
+    dateTime: Joi.date().description("datetime in RFC 3339 format"),
     duration: Joi.string()
       .allow("")
       .default("PT0S")
@@ -4996,6 +5125,12 @@ export const schemas = {
         "error response on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749"
       )
       .unknown(),
+    authServerInfo: Joi.object({
+      tokenURL: Joi.string()
+        .description("URL of the token endpoint.")
+        .required()
+        .uri({}),
+    }).unknown(),
     problem: Joi.object({
       type: Joi.string()
         .default("about:blank")
@@ -5032,5 +5167,272 @@ export const schemas = {
         "reusable error response. From https://opensource.zalando.com/problem/schema.yaml.\n"
       )
       .unknown(),
+    notifiersResponse: Joi.object({
+      WEBHOOK: Joi.boolean().description("Currently MUST be true").required(),
+      MQTT: Joi.object({
+        URIS: Joi.array()
+          .required()
+          .items(
+            Joi.string()
+              .description("URIs for connection to MQTT broker")
+              .uri({})
+          ),
+        serialization: Joi.string()
+          .allow("JSON")
+          .description(
+            "Currently always JSON, perhaps other formats supported in future"
+          )
+          .only()
+          .required(),
+        authentication: Joi.alternatives()
+          .match("one")
+          .try(
+            Joi.object({
+              method: Joi.string()
+                .allow("ANONYMOUS")
+                .description("Specifies anonymous authentication")
+                .only()
+                .required(),
+            })
+              .description("MQTT broker anonymous authentication details")
+              .unknown(),
+            Joi.object({
+              method: Joi.string()
+                .allow("OAUTH2_BEARER_TOKEN")
+                .description("Specifies OAuth2 bearer token authentication")
+                .only()
+                .required(),
+              username: Joi.string()
+                .allow("")
+                .description(
+                  'Either the distinguished string "{clientID}", or any other literal string'
+                )
+                .required()
+                .min(0),
+            })
+              .description(
+                "MQTT broker OAuth2 Bearer Token authentication details"
+              )
+              .unknown(),
+            Joi.object({
+              method: Joi.string()
+                .allow("CERTIFICATE")
+                .description("Specifies certificate authentication")
+                .only()
+                .required(),
+              caCert: Joi.string()
+                .allow("")
+                .description(
+                  "String containing the Certificate Authority certificate"
+                )
+                .required()
+                .min(0),
+              clientCert: Joi.string()
+                .allow("")
+                .description("String containing the Client certificate")
+                .required()
+                .min(0),
+              clientKey: Joi.string()
+                .allow("")
+                .description(
+                  "String containing the client certificate private key"
+                )
+                .required()
+                .min(0),
+            })
+              .description(
+                "MQTT broker mTLS client certificate authentication details"
+              )
+              .unknown()
+          )
+          .required(),
+      })
+        .description("Details of MQTT binding for messaging protocol support")
+        .unknown(),
+    })
+      .description("Provides details of each notifier binding supported")
+      .unknown(),
+    mqttNotifierBindingObject: Joi.object({
+      URIS: Joi.array()
+        .required()
+        .items(
+          Joi.string().description("URIs for connection to MQTT broker").uri({})
+        ),
+      serialization: Joi.string()
+        .allow("JSON")
+        .description(
+          "Currently always JSON, perhaps other formats supported in future"
+        )
+        .only()
+        .required(),
+      authentication: Joi.alternatives()
+        .match("one")
+        .try(
+          Joi.object({
+            method: Joi.string()
+              .allow("ANONYMOUS")
+              .description("Specifies anonymous authentication")
+              .only()
+              .required(),
+          })
+            .description("MQTT broker anonymous authentication details")
+            .unknown(),
+          Joi.object({
+            method: Joi.string()
+              .allow("OAUTH2_BEARER_TOKEN")
+              .description("Specifies OAuth2 bearer token authentication")
+              .only()
+              .required(),
+            username: Joi.string()
+              .allow("")
+              .description(
+                'Either the distinguished string "{clientID}", or any other literal string'
+              )
+              .required()
+              .min(0),
+          })
+            .description(
+              "MQTT broker OAuth2 Bearer Token authentication details"
+            )
+            .unknown(),
+          Joi.object({
+            method: Joi.string()
+              .allow("CERTIFICATE")
+              .description("Specifies certificate authentication")
+              .only()
+              .required(),
+            caCert: Joi.string()
+              .allow("")
+              .description(
+                "String containing the Certificate Authority certificate"
+              )
+              .required()
+              .min(0),
+            clientCert: Joi.string()
+              .allow("")
+              .description("String containing the Client certificate")
+              .required()
+              .min(0),
+            clientKey: Joi.string()
+              .allow("")
+              .description(
+                "String containing the client certificate private key"
+              )
+              .required()
+              .min(0),
+          })
+            .description(
+              "MQTT broker mTLS client certificate authentication details"
+            )
+            .unknown()
+        )
+        .required(),
+    })
+      .description("Details of MQTT binding for messaging protocol support")
+      .unknown(),
+    mqttNotifierAuthenticationAnonymous: Joi.object({
+      method: Joi.string()
+        .allow("ANONYMOUS")
+        .description("Specifies anonymous authentication")
+        .only()
+        .required(),
+    })
+      .description("MQTT broker anonymous authentication details")
+      .unknown(),
+    mqttNotifierAuthenticationOauth2BearerToken: Joi.object({
+      method: Joi.string()
+        .allow("OAUTH2_BEARER_TOKEN")
+        .description("Specifies OAuth2 bearer token authentication")
+        .only()
+        .required(),
+      username: Joi.string()
+        .allow("")
+        .description(
+          'Either the distinguished string "{clientID}", or any other literal string'
+        )
+        .required()
+        .min(0),
+    })
+      .description("MQTT broker OAuth2 Bearer Token authentication details")
+      .unknown(),
+    mqttNotifierAuthenticationCertificate: Joi.object({
+      method: Joi.string()
+        .allow("CERTIFICATE")
+        .description("Specifies certificate authentication")
+        .only()
+        .required(),
+      caCert: Joi.string()
+        .allow("")
+        .description("String containing the Certificate Authority certificate")
+        .required()
+        .min(0),
+      clientCert: Joi.string()
+        .allow("")
+        .description("String containing the Client certificate")
+        .required()
+        .min(0),
+      clientKey: Joi.string()
+        .allow("")
+        .description("String containing the client certificate private key")
+        .required()
+        .min(0),
+    })
+      .description("MQTT broker mTLS client certificate authentication details")
+      .unknown(),
+    notifierOperationsTopics: Joi.object({
+      CREATE: Joi.string()
+        .allow("")
+        .description(
+          "'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n"
+        )
+        .min(0),
+      UPDATE: Joi.string()
+        .allow("")
+        .description("Topic path for UPDATE operations")
+        .required()
+        .min(0),
+      DELETE: Joi.string()
+        .allow("")
+        .description("Topic path for DELETE operations")
+        .required()
+        .min(0),
+      ALL: Joi.string()
+        .allow("")
+        .description("Topic path for ALL operations, if supported by VTN")
+        .min(0),
+    })
+      .description(
+        "MQTT notifier topic names for notifications of subscribable-object operations"
+      )
+      .unknown(),
+    notifierTopicsResponse: Joi.object({
+      topics: Joi.object({
+        CREATE: Joi.string()
+          .allow("")
+          .description(
+            "'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n"
+          )
+          .min(0),
+        UPDATE: Joi.string()
+          .allow("")
+          .description("Topic path for UPDATE operations")
+          .required()
+          .min(0),
+        DELETE: Joi.string()
+          .allow("")
+          .description("Topic path for DELETE operations")
+          .required()
+          .min(0),
+        ALL: Joi.string()
+          .allow("")
+          .description("Topic path for ALL operations, if supported by VTN")
+          .min(0),
+      })
+        .description(
+          "MQTT notifier topic names for notifications of subscribable-object operations"
+        )
+        .required()
+        .unknown(),
+    }).unknown(),
   },
 };

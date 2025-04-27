@@ -24,13 +24,26 @@ export {
     ReportPayloadDescriptor,
     ReportDescriptor,
     ObjectID,
+    VenName, ClientName,
+    TargetType, TargetValue,
+    ResourceName,
+    Units,
+    ReadingType,
     Notification,
     ObjectTypes,
     DateTime, Duration,
     ClientCredentialRequest,
     ClientCredentialResponse,
     AuthError,
-    Problem
+    AuthServerInfo,
+    Problem,
+    NotifiersResponse,
+    MqttNotifierBindingObject,
+    MqttNotifierAuthenticationAnonymous,
+    MqttNotifierAuthenticationOauth2BearerToken,
+    MqttNotifierAuthenticationCertificate,
+    NotifierOperationsTopics,
+    NotifierTopicsResponse
 } from './codegen/oadr3Schemas.js';
 
 // Import from the same files for use in this module.
@@ -43,8 +56,10 @@ import * as OADR3 from './codegen/oadr3Schemas.js';
 // These export the schema object as zodSchemaTypeName
 
 export { default as zodSchemaAuthError } from './zod/zod-authError.js';
+export { default as zodSchemaAuthServerInfo } from './zod/zod-authServerInfo.js';
 export { default as zodSchemaClientCredentialRequest } from './zod/zod-clientCredentialRequest.js';
 export { default as zodSchemaClientCredentialResponse } from './zod/zod-clientCredentialResponse.js';
+export { default as zodSchemaClientName } from './zod/zod-clientName.js';
 export { default as zodSchemaDateTime } from './zod/zod-dateTime.js';
 export { default as zodSchemaDuration } from './zod/zod-duration.js';
 export { default as zodSchemaEvent } from './zod/zod-event.js';
@@ -52,29 +67,45 @@ export { default as zodSchemaEventPayloadDescriptor } from './zod/zod-eventPaylo
 export { default as zodSchemaEventRequest } from './zod/zod-eventRequest.js';
 export { default as zodSchemaInterval } from './zod/zod-interval.js';
 export { default as zodSchemaIntervalPeriod } from './zod/zod-intervalPeriod.js';
+export { default as zodSchemaMqttNotifierAuthenticationAnonymous } from './zod/zod-mqttNotifierAuthenticationAnonymous.js';
+export { default as zodSchemaMqttNotifierAuthenticationCertificate } from './zod/zod-mqttNotifierAuthenticationCertificate.js';
+export { default as zodSchemaMqttNotifierAuthenticationOauth2BearerToken } from './zod/zod-mqttNotifierAuthenticationOauth2BearerToken.js';
+export { default as zodSchemaMqttNotifierBindingObject } from './zod/zod-mqttNotifierBindingObject.js';
 export { default as zodSchemaNotification } from './zod/zod-notification.js';
+export { default as zodSchemaNotifierOperationsTopics } from './zod/zod-notifierOperationsTopics.js';
+export { default as zodSchemaNotifiersResponse } from './zod/zod-notifiersResponse.js';
+export { default as zodSchemaNotifierTopicsResponse } from './zod/zod-notifierTopicsResponse.js';
 export { default as zodSchemaObjectID } from './zod/zod-objectID.js';
+export { default as zodSchemaObjectMetadata } from './zod/zod-objectMetadata.js';
 export { default as zodSchemaObjectTypes } from './zod/zod-objectTypes.js';
 export { default as zodSchemaPoint } from './zod/zod-point.js';
 export { default as zodSchemaProblem } from './zod/zod-problem.js';
 export { default as zodSchemaProgram } from './zod/zod-program.js';
 export { default as zodSchemaProgramRequest } from './zod/zod-programRequest.js';
+export { default as zodSchemaReadingType } from './zod/zod-readingType.js';
 export { default as zodSchemaReport } from './zod/zod-report.js';
 export { default as zodSchemaReportDescriptor } from './zod/zod-reportDescriptor.js';
 export { default as zodSchemaReportPayloadDescriptor } from './zod/zod-reportPayloadDescriptor.js';
 export { default as zodSchemaResource } from './zod/zod-resource.js';
+export { default as zodSchemaResourceName } from './zod/zod-resourceName.js';
 export { default as zodSchemaResourceRequest } from './zod/zod-resourceRequest.js';
 export { default as zodSchemaSubscription } from './zod/zod-subscription.js';
 export { default as zodSchemaSubscriptionRequest } from './zod/zod-subscriptionRequest.js';
+export { default as zodSchemaTargetType } from './zod/zod-targetType.js';
+export { default as zodSchemaTargetValue } from './zod/zod-targetValue.js';
+export { default as zodSchemaUnits } from './zod/zod-units.js';
 export { default as zodSchemaValuesMap } from './zod/zod-valuesMap.js';
 export { default as zodSchemaVen } from './zod/zod-ven.js';
+export { default as zodSchemaVenName } from './zod/zod-venName.js';
 export { default as zodSchemaVenRequest } from './zod/zod-venRequest.js';
 
 // These import the same schemas from which to construct validator functions
 
 import { default as schemaAuthError } from './zod/zod-authError.js';
+import { default as schemaAuthServerInfo } from './zod/zod-authServerInfo.js';
 import { default as schemaClientCredentialRequest } from './zod/zod-clientCredentialRequest.js';
 import { default as schemaClientCredentialResponse } from './zod/zod-clientCredentialResponse.js';
+import { default as schemaClientName } from './zod/zod-clientName.js';
 import { default as schemaDateTime } from './zod/zod-dateTime.js';
 import { default as schemaDuration } from './zod/zod-duration.js';
 import { default as schemaEvent } from './zod/zod-event.js';
@@ -82,27 +113,44 @@ import { default as schemaEventPayloadDescriptor } from './zod/zod-eventPayloadD
 import { default as schemaEventRequest } from './zod/zod-eventRequest.js';
 import { default as schemaInterval } from './zod/zod-interval.js';
 import { default as schemaIntervalPeriod } from './zod/zod-intervalPeriod.js';
+import { default as schemaMqttNotifierAuthenticationAnonymous } from './zod/zod-mqttNotifierAuthenticationAnonymous.js';
+import { default as schemaMqttNotifierAuthenticationCertificate } from './zod/zod-mqttNotifierAuthenticationCertificate.js';
+import { default as schemaMqttNotifierAuthenticationOauth2BearerToken } from './zod/zod-mqttNotifierAuthenticationOauth2BearerToken.js';
+import { default as schemaMqttNotifierBindingObject } from './zod/zod-mqttNotifierBindingObject.js';
 import { default as schemaNotification } from './zod/zod-notification.js';
+import { default as schemaNotifierOperationsTopics } from './zod/zod-notifierOperationsTopics.js';
+import { default as schemaNotifiersResponse } from './zod/zod-notifiersResponse.js';
+import { default as schemaNotifierTopicsResponse } from './zod/zod-notifierTopicsResponse.js';
 import { default as schemaObjectID } from './zod/zod-objectID.js';
+import { default as schemaObjectMetadata } from './zod/zod-objectMetadata.js';
 import { default as schemaObjectTypes } from './zod/zod-objectTypes.js';
 import { default as schemaPoint } from './zod/zod-point.js';
 import { default as schemaProblem } from './zod/zod-problem.js';
 import { default as schemaProgram } from './zod/zod-program.js';
 import { default as schemaProgramRequest } from './zod/zod-programRequest.js';
+import { default as schemaReadingType } from './zod/zod-readingType.js';
 import { default as schemaReport } from './zod/zod-report.js';
 import { default as schemaReportDescriptor } from './zod/zod-reportDescriptor.js';
 import { default as schemaReportPayloadDescriptor } from './zod/zod-reportPayloadDescriptor.js';
 import { default as schemaResource } from './zod/zod-resource.js';
+import { default as schemaResourceName } from './zod/zod-resourceName.js';
 import { default as schemaResourceRequest } from './zod/zod-resourceRequest.js';
 import { default as schemaSubscription } from './zod/zod-subscription.js';
 import { default as schemaSubscriptionRequest } from './zod/zod-subscriptionRequest.js';
+import { default as schemaTargetType } from './zod/zod-targetType.js';
+import { default as schemaTargetValue } from './zod/zod-targetValue.js';
+import { default as schemaUnits } from './zod/zod-units.js';
 import { default as schemaValuesMap } from './zod/zod-valuesMap.js';
 import { default as schemaVen } from './zod/zod-ven.js';
+import { default as schemaVenName } from './zod/zod-venName.js';
 import { default as schemaVenRequest } from './zod/zod-venRequest.js';
 
 type zodTypes = Zod.AnyZodObject
     | Zod.ZodString
     | Zod.ZodDefault<Zod.ZodString>
+    | Zod.ZodDefault<
+        Zod.ZodNullable<Zod.ZodString>
+    >
     | Zod.ZodIntersection<
                 Zod.ZodRecord<Zod.ZodString, Zod.ZodTypeAny>,
                 Zod.ZodIntersection<Zod.ZodTypeAny, Zod.ZodTypeAny>
@@ -132,12 +180,20 @@ export function zodValidateAuthError(data: any) {
     return zodValidator<OADR3.AuthError>(schemaAuthError, data);
 }
 
+export function zodValidateAuthServerInfo(data: any) {
+    return zodValidator<OADR3.AuthServerInfo>(schemaAuthServerInfo, data);
+}
+
 export function zodValidateClientCredentialRequest(data: any) {
     return zodValidator<OADR3.ClientCredentialRequest>(schemaClientCredentialRequest, data);
 }
 
 export function zodValidateClientCredentialResponse(data: any) {
     return zodValidator<OADR3.ClientCredentialResponse>(schemaClientCredentialResponse, data);
+}
+
+export function zodValidateClientName(data: any) {
+    return zodValidator<OADR3.ClientName>(schemaClientName, data);
 }
 
 export function zodValidateDateTime(data: any) {
@@ -168,12 +224,44 @@ export function zodValidateIntervalPeriod(data: any) {
     return zodValidator<OADR3.IntervalPeriod>(schemaIntervalPeriod, data);
 }
 
+export function zodValidateMqttNotifierAuthenticationAnonymous(data: any) {
+    return zodValidator<OADR3.MqttNotifierAuthenticationAnonymous>(schemaMqttNotifierAuthenticationAnonymous, data);
+}
+
+export function zodValidateMqttNotifierAuthenticationCertificate(data: any) {
+    return zodValidator<OADR3.MqttNotifierAuthenticationCertificate>(schemaMqttNotifierAuthenticationCertificate, data);
+}
+
+export function zodValidateMqttNotifierAuthenticationOauth2BearerToken(data: any) {
+    return zodValidator<OADR3.MqttNotifierAuthenticationOauth2BearerToken>(schemaMqttNotifierAuthenticationOauth2BearerToken, data);
+}
+
+export function zodValidateMqttNotifierBindingObject(data: any) {
+    return zodValidator<OADR3.MqttNotifierBindingObject>(schemaMqttNotifierBindingObject, data);
+}
+
 export function zodValidateNotification(data: any) {
     return zodValidator<OADR3.Notification>(schemaNotification, data);
 }
 
+export function zodValidateNotifierOperationsTopics(data: any) {
+    return zodValidator<OADR3.NotifierOperationsTopics>(schemaNotifierOperationsTopics, data);
+}
+
+export function zodValidateNotifiersResponse(data: any) {
+    return zodValidator<OADR3.NotifiersResponse>(schemaNotifiersResponse, data);
+}
+
+export function zodValidateNotifierTopicsResponse(data: any) {
+    return zodValidator<OADR3.NotifierTopicsResponse>(schemaNotifierTopicsResponse, data);
+}
+
 export function zodValidateObjectID(data: any) {
     return zodValidator<OADR3.ObjectID>(schemaObjectID, data);
+}
+
+export function zodValidateObjectMetadata(data: any) {
+    return zodValidator<OADR3.ObjectMetadata>(schemaObjectMetadata, data);
 }
 
 export function zodValidateObjectTypes(data: any) {
@@ -200,6 +288,10 @@ export function zodValidateReport(data: any) {
     return zodValidator<OADR3.Report>(schemaReport, data);
 }
 
+export function zodValidateReadingType(data: any) {
+    return zodValidator<OADR3.ReadingType>(schemaReadingType, data);
+}
+
 export function zodValidateReportDescriptor(data: any) {
     return zodValidator<OADR3.ReportDescriptor>(schemaReportDescriptor, data);
 }
@@ -210,6 +302,10 @@ export function zodValidateReportPayloadDescriptor(data: any) {
 
 export function zodValidateResource(data: any) {
     return zodValidator<OADR3.Resource>(schemaResource, data);
+}
+
+export function zodValidateResourceName(data: any) {
+    return zodValidator<OADR3.ResourceName>(schemaResourceName, data);
 }
 
 export function zodValidateResourceRequest(data: any) {
@@ -224,12 +320,28 @@ export function zodValidateSubscriptionRequest(data: any) {
     return zodValidator<OADR3.SubscriptionRequest>(schemaSubscriptionRequest, data);
 }
 
+export function zodValidateTargetType(data: any) {
+    return zodValidator<OADR3.TargetType>(schemaTargetType, data);
+}
+
+export function zodValidateTargetValue(data: any) {
+    return zodValidator<OADR3.TargetValue>(schemaTargetValue, data);
+}
+
+export function zodValidateUnits(data: any) {
+    return zodValidator<OADR3.Units>(schemaUnits, data);
+}
+
 export function zodValidateValuesMap(data: any) {
     return zodValidator<OADR3.ValuesMap>(schemaValuesMap, data);
 }
 
 export function zodValidateVen(data: any) {
     return zodValidator<OADR3.Ven>(schemaVen, data);
+}
+
+export function zodValidateVenName(data: any) {
+    return zodValidator<OADR3.VenName>(schemaVenName, data);
 }
 
 export function zodValidateVenRequest(data: any) {
@@ -255,6 +367,11 @@ export function joiValidateauthError(prog: any): Joi.ValidationResult<OADR3.Auth
     return joiAuthError.validate(prog, { allowUnknown: true });
 }
 
+export const joiAuthServerInfo = schemas.components.authServerInfo;
+export function joiValidateauthServerInfo(prog: any): Joi.ValidationResult<OADR3.AuthServerInfo> {
+    return joiAuthServerInfo.validate(prog, { allowUnknown: true });
+}
+
 export const joiClientCredentialRequest = schemas.components.clientCredentialRequest;
 export function joiValidateClientCredentialRequest(prog: any): Joi.ValidationResult<OADR3.ClientCredentialRequest> {
     return joiClientCredentialRequest.validate(prog, { allowUnknown: true });
@@ -263,6 +380,11 @@ export function joiValidateClientCredentialRequest(prog: any): Joi.ValidationRes
 export const joiClientCredentialResponse = schemas.components.clientCredentialResponse;
 export function joiValidateClientCredentialResponse(prog: any): Joi.ValidationResult<OADR3.ClientCredentialResponse> {
     return joiClientCredentialResponse.validate(prog, { allowUnknown: true });
+}
+
+export const joiClientName = schemas.components.clientName;
+export function joiValidateName(prog: any): Joi.ValidationResult<OADR3.ClientName> {
+    return joiClientName.validate(prog, { allowUnknown: true });
 }
 
 export const joiDateTime = schemas.components.dateTime; //.prefs({ convert: false });
@@ -308,9 +430,44 @@ export function joiValidateIntervalPeriod(prog: any): Joi.ValidationResult<OADR3
     return joiIntervalPeriod.validate(prog, { allowUnknown: true });
 }
 
+export const joiMqttNotifierAuthenticationAnonymous = schemas.components.mqttNotifierAuthenticationAnonymous;
+export function joiValidateMqttNotifierAuthenticationAnonymous(prog: any): Joi.ValidationResult<OADR3.MqttNotifierAuthenticationAnonymous> {
+    return joiMqttNotifierAuthenticationAnonymous.validate(prog, { allowUnknown: true });
+}
+
+export const joiMqttNotifierAuthenticationCertificate = schemas.components.mqttNotifierAuthenticationCertificate;
+export function joiValidateMqttNotifierAuthenticationCertificate(prog: any): Joi.ValidationResult<OADR3.MqttNotifierAuthenticationCertificate> {
+    return joiMqttNotifierAuthenticationCertificate.validate(prog, { allowUnknown: true });
+}
+
+export const joiMqttNotifierAuthenticationOauth2BearerToken = schemas.components.mqttNotifierAuthenticationOauth2BearerToken;
+export function joiValidateMqttNotifierAuthenticationOauth2BearerToken(prog: any): Joi.ValidationResult<OADR3.MqttNotifierAuthenticationOauth2BearerToken> {
+    return joiMqttNotifierAuthenticationOauth2BearerToken.validate(prog, { allowUnknown: true });
+}
+
+export const joiMqttNotifierBindingObject = schemas.components.mqttNotifierBindingObject;
+export function joiValidateMqttNotifierBindingObject(prog: any): Joi.ValidationResult<OADR3.MqttNotifierBindingObject> {
+    return joiMqttNotifierBindingObject.validate(prog, { allowUnknown: true });
+}
+
 export const joiNotification = schemas.components.notification;
 export function joiValidateNotification(prog: any): Joi.ValidationResult<OADR3.Notification> {
     return joiNotification.validate(prog, { allowUnknown: true });
+}
+
+export const joiNotifierOperationsTopics = schemas.components.notifierOperationsTopics;
+export function joiValidateNotifierOperationsTopics(prog: any): Joi.ValidationResult<OADR3.NotifierOperationsTopics> {
+    return joiNotifierOperationsTopics.validate(prog, { allowUnknown: true });
+}
+
+export const joiNotifiersResponse = schemas.components.notifiersResponse;
+export function joiValidateNotifiersResponse(prog: any): Joi.ValidationResult<OADR3.NotifiersResponse> {
+    return joiNotifiersResponse.validate(prog, { allowUnknown: true });
+}
+
+export const joiNotifierTopicsResponse = schemas.components.notifierTopicsResponse;
+export function joiValidateNotifierTopicsResponse(prog: any): Joi.ValidationResult<OADR3.NotifierTopicsResponse> {
+    return joiNotifierTopicsResponse.validate(prog, { allowUnknown: true });
 }
 
 export const joiObjectID = schemas.components.objectID;
@@ -353,6 +510,11 @@ export function joiValidateSearchAllPrograms(prog: any): Joi.ValidationResult<an
     return joiSearchAllPrograms.validate(prog, { allowUnknown: true });
 }
 
+export const joiReadingType = schemas.components.readingType;
+export function joiValidateReadingType(report: any): Joi.ValidationResult<OADR3.ReadingType> {
+    return joiReadingType.validate(report, { allowUnknown: true , debug: true });
+}
+
 export const joiReport = schemas.components.report;
 export function joiValidateReport(report: any): Joi.ValidationResult<OADR3.Report> {
     return joiReport.validate(report, { allowUnknown: true , debug: true });
@@ -383,6 +545,11 @@ export function joiValidateResource(report: any): Joi.ValidationResult<OADR3.Res
     return joiResource.validate(report, { allowUnknown: true });
 }
 
+export const joiResourceName = schemas.components.resourceName;
+export function joiValidateResourceName(report: any): Joi.ValidationResult<OADR3.ResourceName> {
+    return joiResourceName.validate(report, { allowUnknown: true });
+}
+
 export const joiResourceRequest = schemas.components.resourceRequest;
 export function joiValidateResourceRequest(report: any): Joi.ValidationResult<OADR3.ResourceRequest> {
     return joiResourceRequest.validate(report, { allowUnknown: true });
@@ -408,6 +575,21 @@ export function joiValidateSearchSubscriptions(prog: any): Joi.ValidationResult<
     return joiSearchSubscriptions.validate(prog, { allowUnknown: true });
 }
 
+export const joiTargetType = schemas.components.targetType;
+export function joiValidateTargetType(report: any): Joi.ValidationResult<OADR3.TargetType> {
+    return joiTargetType.validate(report, { allowUnknown: true });
+}
+
+export const joiTargetValue = schemas.components.targetValue;
+export function joiValidateTargetValue(report: any): Joi.ValidationResult<OADR3.TargetValue> {
+    return joiTargetValue.validate(report, { allowUnknown: true });
+}
+
+export const joiUnits = schemas.components.units;
+export function joiValidateUnits(report: any): Joi.ValidationResult<OADR3.Units> {
+    return joiUnits.validate(report, { allowUnknown: true });
+}
+
 export const joiValuesMap = schemas.components.valuesMap;
 export function joiValidateValuesMap(report: any): Joi.ValidationResult<OADR3.ValuesMap> {
     return joiValuesMap.validate(report, { allowUnknown: true });
@@ -416,6 +598,11 @@ export function joiValidateValuesMap(report: any): Joi.ValidationResult<OADR3.Va
 export const joiVen = schemas.components.ven;
 export function joiValidateVen(report: any): Joi.ValidationResult<OADR3.Ven> {
     return joiVen.validate(report, { allowUnknown: true });
+}
+
+export const joiVenName = schemas.components.venName;
+export function joiValidateVenName(report: any): Joi.ValidationResult<OADR3.VenName> {
+    return joiVenName.validate(report, { allowUnknown: true });
 }
 
 export const joiVenRequest = schemas.components.venRequest;

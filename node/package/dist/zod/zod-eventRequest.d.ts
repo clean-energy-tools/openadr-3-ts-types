@@ -2,6 +2,7 @@ import { z } from "zod";
 declare const _default: z.ZodObject<{
     programID: z.ZodString;
     eventName: z.ZodDefault<z.ZodNullable<z.ZodString>>;
+    duration: z.ZodDefault<z.ZodString>;
     priority: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
     targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
@@ -63,7 +64,9 @@ declare const _default: z.ZodObject<{
         historical: z.ZodDefault<z.ZodBoolean>;
         frequency: z.ZodDefault<z.ZodNumber>;
         repeat: z.ZodDefault<z.ZodNumber>;
+        reportIntervals: z.ZodDefault<z.ZodEnum<["INTERVALS", "SUB_INTERVALS", "OPEN_INTERVALS"]>>;
     }, "strip", z.ZodTypeAny, {
+        repeat: number;
         targets: {
             type: string;
             values: (string | number | boolean | {
@@ -79,9 +82,10 @@ declare const _default: z.ZodObject<{
         numIntervals: number;
         historical: boolean;
         frequency: number;
-        repeat: number;
+        reportIntervals: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS";
     }, {
         payloadType: string;
+        repeat?: number | undefined;
         targets?: {
             type: string;
             values: (string | number | boolean | {
@@ -96,7 +100,7 @@ declare const _default: z.ZodObject<{
         numIntervals?: number | undefined;
         historical?: boolean | undefined;
         frequency?: number | undefined;
-        repeat?: number | undefined;
+        reportIntervals?: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS" | undefined;
     }>, "many">>>;
     payloadDescriptors: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         objectType: z.ZodOptional<z.ZodLiteral<"EVENT_PAYLOAD_DESCRIPTOR">>;
@@ -110,36 +114,36 @@ declare const _default: z.ZodObject<{
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
-        units?: string | null | undefined;
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
+        units?: string | null | undefined;
         currency?: string | null | undefined;
     }>, "many">>>;
     intervalPeriod: z.ZodOptional<z.ZodObject<{
-        start: z.ZodString;
+        start: z.ZodOptional<z.ZodString>;
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     }, {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     }>>;
-    intervals: z.ZodArray<z.ZodObject<{
+    intervals: z.ZodOptional<z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         intervalPeriod: z.ZodOptional<z.ZodObject<{
-            start: z.ZodString;
+            start: z.ZodOptional<z.ZodString>;
             duration: z.ZodDefault<z.ZodString>;
             randomizeStart: z.ZodDefault<z.ZodString>;
         }, "strip", z.ZodTypeAny, {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         }, {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         }>>;
         payloads: z.ZodArray<z.ZodObject<{
@@ -177,9 +181,9 @@ declare const _default: z.ZodObject<{
             })[];
         }[];
         intervalPeriod?: {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         } | undefined;
     }, {
         id: number;
@@ -191,12 +195,13 @@ declare const _default: z.ZodObject<{
             })[];
         }[];
         intervalPeriod?: {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         } | undefined;
-    }>, "many">;
+    }>, "many">>;
 }, "strip", z.ZodTypeAny, {
+    duration: string;
     programID: string;
     eventName: string | null;
     priority: number | null;
@@ -208,6 +213,7 @@ declare const _default: z.ZodObject<{
         })[];
     }[] | null;
     reportDescriptors: {
+        repeat: number;
         targets: {
             type: string;
             values: (string | number | boolean | {
@@ -223,7 +229,7 @@ declare const _default: z.ZodObject<{
         numIntervals: number;
         historical: boolean;
         frequency: number;
-        repeat: number;
+        reportIntervals: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS";
     }[] | null;
     payloadDescriptors: {
         payloadType: string;
@@ -231,29 +237,12 @@ declare const _default: z.ZodObject<{
         currency: string | null;
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }[] | null;
-    intervals: {
-        id: number;
-        payloads: {
-            type: string;
-            values: (string | number | boolean | {
-                x: number;
-                y: number;
-            })[];
-        }[];
-        intervalPeriod?: {
-            start: string;
-            duration: string;
-            randomizeStart: string;
-        } | undefined;
-    }[];
     intervalPeriod?: {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     } | undefined;
-}, {
-    programID: string;
-    intervals: {
+    intervals?: {
         id: number;
         payloads: {
             type: string;
@@ -263,11 +252,14 @@ declare const _default: z.ZodObject<{
             })[];
         }[];
         intervalPeriod?: {
-            start: string;
-            duration?: string | undefined;
-            randomizeStart?: string | undefined;
+            duration: string;
+            randomizeStart: string;
+            start?: string | undefined;
         } | undefined;
-    }[];
+    }[] | undefined;
+}, {
+    programID: string;
+    duration?: string | undefined;
     eventName?: string | null | undefined;
     priority?: number | null | undefined;
     targets?: {
@@ -279,6 +271,7 @@ declare const _default: z.ZodObject<{
     }[] | null | undefined;
     reportDescriptors?: {
         payloadType: string;
+        repeat?: number | undefined;
         targets?: {
             type: string;
             values: (string | number | boolean | {
@@ -293,19 +286,34 @@ declare const _default: z.ZodObject<{
         numIntervals?: number | undefined;
         historical?: boolean | undefined;
         frequency?: number | undefined;
-        repeat?: number | undefined;
+        reportIntervals?: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS" | undefined;
     }[] | null | undefined;
     payloadDescriptors?: {
         payloadType: string;
-        units?: string | null | undefined;
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
+        units?: string | null | undefined;
         currency?: string | null | undefined;
     }[] | null | undefined;
     intervalPeriod?: {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     } | undefined;
+    intervals?: {
+        id: number;
+        payloads: {
+            type: string;
+            values: (string | number | boolean | {
+                x: number;
+                y: number;
+            })[];
+        }[];
+        intervalPeriod?: {
+            duration?: string | undefined;
+            start?: string | undefined;
+            randomizeStart?: string | undefined;
+        } | undefined;
+    }[] | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-eventRequest.d.ts.map

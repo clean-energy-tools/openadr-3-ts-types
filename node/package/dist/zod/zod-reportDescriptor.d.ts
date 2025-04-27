@@ -34,6 +34,7 @@ declare const _default: z.ZodObject<{
     historical: z.ZodDefault<z.ZodBoolean>;
     frequency: z.ZodDefault<z.ZodNumber>;
     repeat: z.ZodDefault<z.ZodNumber>;
+    reportIntervals: z.ZodDefault<z.ZodEnum<["INTERVALS", "SUB_INTERVALS", "OPEN_INTERVALS"]>>;
 }, "strip", z.ZodTypeAny, {
     repeat: number;
     targets: {
@@ -51,6 +52,7 @@ declare const _default: z.ZodObject<{
     numIntervals: number;
     historical: boolean;
     frequency: number;
+    reportIntervals: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS";
 }, {
     payloadType: string;
     repeat?: number | undefined;
@@ -68,6 +70,7 @@ declare const _default: z.ZodObject<{
     numIntervals?: number | undefined;
     historical?: boolean | undefined;
     frequency?: number | undefined;
+    reportIntervals?: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS" | undefined;
 }>;
 export default _default;
 //# sourceMappingURL=zod-reportDescriptor.d.ts.map

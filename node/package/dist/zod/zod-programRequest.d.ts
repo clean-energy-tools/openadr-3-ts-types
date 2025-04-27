@@ -8,16 +8,16 @@ declare const _default: z.ZodObject<{
     country: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     principalSubdivision: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     intervalPeriod: z.ZodOptional<z.ZodObject<{
-        start: z.ZodString;
+        start: z.ZodOptional<z.ZodString>;
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     }, {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     }>>;
     programDescriptions: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodAny, "many">>>;
@@ -35,8 +35,8 @@ declare const _default: z.ZodObject<{
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
-        units?: string | null | undefined;
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
+        units?: string | null | undefined;
         currency?: string | null | undefined;
     }>, z.ZodObject<{
         objectType: z.ZodOptional<z.ZodLiteral<"REPORT_PAYLOAD_DESCRIPTOR">>;
@@ -54,9 +54,9 @@ declare const _default: z.ZodObject<{
         objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
     }, {
         payloadType: string;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
-        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         accuracy?: number | null | undefined;
         confidence?: number | null | undefined;
     }>]>, "many">>>;
@@ -117,9 +117,9 @@ declare const _default: z.ZodObject<{
     bindingEvents: boolean | null;
     localPrice: boolean | null;
     intervalPeriod?: {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     } | undefined;
 }, {
     programName: string;
@@ -132,20 +132,20 @@ declare const _default: z.ZodObject<{
     }[] | null | undefined;
     payloadDescriptors?: ({
         payloadType: string;
-        units?: string | null | undefined;
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
+        units?: string | null | undefined;
         currency?: string | null | undefined;
     } | {
         payloadType: string;
+        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
-        objectType?: "REPORT_PAYLOAD_DESCRIPTOR" | undefined;
         accuracy?: number | null | undefined;
         confidence?: number | null | undefined;
     })[] | null | undefined;
     intervalPeriod?: {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     } | undefined;
     programLongName?: string | null | undefined;

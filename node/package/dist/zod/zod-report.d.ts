@@ -43,31 +43,31 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
     resources: z.ZodArray<z.ZodObject<{
         resourceName: z.ZodString;
         intervalPeriod: z.ZodOptional<z.ZodObject<{
-            start: z.ZodString;
+            start: z.ZodOptional<z.ZodString>;
             duration: z.ZodDefault<z.ZodString>;
             randomizeStart: z.ZodDefault<z.ZodString>;
         }, "strip", z.ZodTypeAny, {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         }, {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         }>>;
         intervals: z.ZodArray<z.ZodObject<{
             id: z.ZodNumber;
             intervalPeriod: z.ZodOptional<z.ZodObject<{
-                start: z.ZodString;
+                start: z.ZodOptional<z.ZodString>;
                 duration: z.ZodDefault<z.ZodString>;
                 randomizeStart: z.ZodDefault<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                start: string;
                 duration: string;
                 randomizeStart: string;
+                start?: string | undefined;
             }, {
-                start: string;
                 duration?: string | undefined;
+                start?: string | undefined;
                 randomizeStart?: string | undefined;
             }>>;
             payloads: z.ZodArray<z.ZodObject<{
@@ -83,44 +83,44 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
                     y: number;
                 }>]>, "many">;
             }, "strip", z.ZodTypeAny, {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }, {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }>, "many">;
         }, "strip", z.ZodTypeAny, {
             id: number;
             payloads: {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }[];
             intervalPeriod?: {
-                start: string;
                 duration: string;
                 randomizeStart: string;
+                start?: string | undefined;
             } | undefined;
         }, {
             id: number;
             payloads: {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }[];
             intervalPeriod?: {
-                start: string;
                 duration?: string | undefined;
+                start?: string | undefined;
                 randomizeStart?: string | undefined;
             } | undefined;
         }>, "many">;
@@ -128,44 +128,44 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         intervals: {
             id: number;
             payloads: {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }[];
             intervalPeriod?: {
-                start: string;
                 duration: string;
                 randomizeStart: string;
+                start?: string | undefined;
             } | undefined;
         }[];
         resourceName: string;
         intervalPeriod?: {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         } | undefined;
     }, {
         intervals: {
             id: number;
             payloads: {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }[];
             intervalPeriod?: {
-                start: string;
                 duration?: string | undefined;
+                start?: string | undefined;
                 randomizeStart?: string | undefined;
             } | undefined;
         }[];
         resourceName: string;
         intervalPeriod?: {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         } | undefined;
     }>, "many">;
@@ -185,23 +185,23 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         intervals: {
             id: number;
             payloads: {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }[];
             intervalPeriod?: {
-                start: string;
                 duration: string;
                 randomizeStart: string;
+                start?: string | undefined;
             } | undefined;
         }[];
         resourceName: string;
         intervalPeriod?: {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         } | undefined;
     }[];
 }, {
@@ -211,22 +211,22 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         intervals: {
             id: number;
             payloads: {
+                type: string;
                 values: (string | number | boolean | {
                     x: number;
                     y: number;
                 })[];
-                type: string;
             }[];
             intervalPeriod?: {
-                start: string;
                 duration?: string | undefined;
+                start?: string | undefined;
                 randomizeStart?: string | undefined;
             } | undefined;
         }[];
         resourceName: string;
         intervalPeriod?: {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         } | undefined;
     }[];

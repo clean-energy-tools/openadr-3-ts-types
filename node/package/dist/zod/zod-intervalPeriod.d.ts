@@ -1,15 +1,15 @@
 import { z } from "zod";
 declare const _default: z.ZodObject<{
-    start: z.ZodString;
+    start: z.ZodOptional<z.ZodString>;
     duration: z.ZodDefault<z.ZodString>;
     randomizeStart: z.ZodDefault<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
-    start: string;
     duration: string;
     randomizeStart: string;
+    start?: string | undefined;
 }, {
-    start: string;
     duration?: string | undefined;
+    start?: string | undefined;
     randomizeStart?: string | undefined;
 }>;
 export default _default;

@@ -23,16 +23,16 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
     country: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     principalSubdivision: z.ZodDefault<z.ZodNullable<z.ZodString>>;
     intervalPeriod: z.ZodOptional<z.ZodObject<{
-        start: z.ZodString;
+        start: z.ZodOptional<z.ZodString>;
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     }, {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     }>>;
     programDescriptions: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodAny, "many">>>;
@@ -88,25 +88,25 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
             y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     targets: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null;
     payloadDescriptors: ({
         payloadType: string;
@@ -132,18 +132,18 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
     bindingEvents: boolean | null;
     localPrice: boolean | null;
     intervalPeriod?: {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     } | undefined;
 }, {
     programName: string;
     targets?: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null | undefined;
     payloadDescriptors?: ({
         payloadType: string;
@@ -159,8 +159,8 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         confidence?: number | null | undefined;
     })[] | null | undefined;
     intervalPeriod?: {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     } | undefined;
     programLongName?: string | null | undefined;

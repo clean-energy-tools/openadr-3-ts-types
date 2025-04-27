@@ -5,15 +5,15 @@ declare const _default: z.ZodObject<{
     modificationDateTime: z.ZodString;
     objectType: z.ZodEnum<["PROGRAM", "EVENT", "REPORT", "SUBSCRIPTION", "VEN", "RESOURCE"]>;
 }, "strip", z.ZodTypeAny, {
-    objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     id: string;
     createdDateTime: string;
     modificationDateTime: string;
+    objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
 }, {
-    objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     id: string;
     createdDateTime: string;
     modificationDateTime: string;
+    objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
 }>;
 export default _default;
 //# sourceMappingURL=zod-objectMetadata.d.ts.map

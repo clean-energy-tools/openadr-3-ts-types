@@ -60,6 +60,13 @@ export declare const schemas: {
         reportPayloadDescriptor: Joi.ObjectSchema<any>;
         reportDescriptor: Joi.ObjectSchema<any>;
         objectID: Joi.StringSchema<string>;
+        venName: Joi.StringSchema<string>;
+        clientName: Joi.StringSchema<string>;
+        targetType: Joi.StringSchema<string>;
+        targetValue: Joi.StringSchema<string>;
+        resourceName: Joi.StringSchema<string>;
+        units: Joi.StringSchema<string>;
+        readingType: Joi.StringSchema<string>;
         notification: Joi.ObjectSchema<any>;
         objectTypes: Joi.StringSchema<string>;
         dateTime: Joi.DateSchema<Date>;
@@ -67,7 +74,15 @@ export declare const schemas: {
         clientCredentialRequest: Joi.ObjectSchema<any>;
         clientCredentialResponse: Joi.ObjectSchema<any>;
         authError: Joi.ObjectSchema<any>;
+        authServerInfo: Joi.ObjectSchema<any>;
         problem: Joi.ObjectSchema<any>;
+        notifiersResponse: Joi.ObjectSchema<any>;
+        mqttNotifierBindingObject: Joi.ObjectSchema<any>;
+        mqttNotifierAuthenticationAnonymous: Joi.ObjectSchema<any>;
+        mqttNotifierAuthenticationOauth2BearerToken: Joi.ObjectSchema<any>;
+        mqttNotifierAuthenticationCertificate: Joi.ObjectSchema<any>;
+        notifierOperationsTopics: Joi.ObjectSchema<any>;
+        notifierTopicsResponse: Joi.ObjectSchema<any>;
     };
 };
 //# sourceMappingURL=oadr3.d.ts.map

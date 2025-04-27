@@ -16,39 +16,39 @@ declare const _default: z.ZodObject<{
             y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }>, "many">>>;
 }, "strip", z.ZodTypeAny, {
     objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
     targets: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null;
-    operation: "CREATE" | "READ" | "UPDATE" | "DELETE";
+    operation: "READ" | "CREATE" | "UPDATE" | "DELETE";
     object?: any;
 }, {
     objectType: "PROGRAM" | "EVENT" | "REPORT" | "SUBSCRIPTION" | "VEN" | "RESOURCE";
-    operation: "CREATE" | "READ" | "UPDATE" | "DELETE";
+    operation: "READ" | "CREATE" | "UPDATE" | "DELETE";
     object?: any;
     targets?: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null | undefined;
 }>;
 export default _default;

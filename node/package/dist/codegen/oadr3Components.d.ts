@@ -8,11 +8,11 @@ export type SearchAllProgramsQueryParams = {
     /**
      * Indicates targeting type, e.g. GROUP
      */
-    targetType?: string;
+    targetType?: Schemas.TargetType;
     /**
      * List of target values, e.g. group names
      */
-    targetValues?: string[];
+    targetValues?: Schemas.TargetValue[];
     /**
      * number of records to skip for pagination.
      *
@@ -69,6 +69,15 @@ export type UpdateProgramVariables = {
 /**
  * Update an existing program with the programID in path.
  */
+export type DeleteProgramPathParams = {
+    /**
+     * Object ID of the program object.
+     */
+    programID: Schemas.ObjectID;
+};
+export type DeleteProgramVariables = {
+    pathParams: DeleteProgramPathParams;
+};
 /**
  * Delete an existing program with the programID in path.
  */
@@ -84,7 +93,7 @@ export type SearchAllReportsQueryParams = {
     /**
      * filter results to reports with clientName.
      */
-    clientName?: string;
+    clientName?: Schemas.ClientName;
     /**
      * number of records to skip for pagination.
      *
@@ -161,11 +170,11 @@ export type SearchAllEventsQueryParams = {
     /**
      * Indicates targeting type, e.g. GROUP
      */
-    targetType?: string;
+    targetType?: Schemas.TargetType;
     /**
      * List of target values, e.g. group names
      */
-    targetValues?: string[];
+    targetValues?: Schemas.TargetValue[];
     /**
      * number of records to skip for pagination.
      *
@@ -181,6 +190,10 @@ export type SearchAllEventsQueryParams = {
      * @minimum 0
      */
     limit?: number;
+    /**
+     * ignore events that have transpired.
+     */
+    active?: boolean;
 };
 export type SearchAllEventsResponse = Schemas.Event[];
 export type SearchAllEventsVariables = {
@@ -243,15 +256,15 @@ export type SearchSubscriptionsQueryParams = {
     /**
      * filter results to subscriptions with clientName.
      */
-    clientName?: string;
+    clientName?: Schemas.ClientName;
     /**
      * Indicates targeting type, e.g. GROUP
      */
-    targetType?: string;
+    targetType?: Schemas.TargetType;
     /**
      * List of target values, e.g. group names
      */
-    targetValues?: string[];
+    targetValues?: Schemas.TargetValue[];
     /**
      * list of objects to subscribe to.
      */
@@ -330,15 +343,15 @@ export type SearchVensQueryParams = {
     /**
      * Indicates ven objects w venName
      */
-    venName?: string;
+    venName?: Schemas.VenName;
     /**
      * Indicates targeting type, e.g. GROUP
      */
-    targetType?: string;
+    targetType?: Schemas.TargetType;
     /**
      * List of target values, e.g. group names
      */
-    targetValues?: string[];
+    targetValues?: Schemas.TargetValue[];
     /**
      * number of records to skip for pagination.
      *
@@ -418,15 +431,15 @@ export type SearchVenResourcesQueryParams = {
     /**
      * Indicates resource objects with resourceName
      */
-    resourceName?: string;
+    resourceName?: Schemas.ResourceName;
     /**
      * Indicates targeting type, e.g. GROUP
      */
-    targetType?: string;
+    targetType?: Schemas.TargetType;
     /**
      * List of target values, e.g. group names
      */
-    targetValues?: string[];
+    targetValues?: Schemas.TargetValue[];
     /**
      * number of records to skip for pagination.
      *
@@ -517,6 +530,60 @@ export type DeleteVenResourceVariables = {
  * Delete the ven resource specified by venID and resourceID specified in path.
  */
 /**
- * Return an access token based on clientID and clientSecret.
+ * Return the URL of the token endpoint.
+ */
+/**
+ * List all MQTT notifier topic names for operations on programs
+ */
+export type ListAllMqttNotifierTopicsProgramPathParams = {
+    /**
+     * objectID of the program object
+     */
+    programID: Schemas.ObjectID;
+};
+export type ListAllMqttNotifierTopicsProgramVariables = {
+    pathParams: ListAllMqttNotifierTopicsProgramPathParams;
+};
+/**
+ * List all MQTT binding topic names for operations on a program
+ */
+/**
+ * List all MQTT binding topic names for operations on all events
+ */
+export type ListAllMqttNotifierTopicsProgramEventsPathParams = {
+    /**
+     * Object ID of the program object
+     */
+    programID: Schemas.ObjectID;
+};
+export type ListAllMqttNotifierTopicsProgramEventsVariables = {
+    pathParams: ListAllMqttNotifierTopicsProgramEventsPathParams;
+};
+/**
+ * List all MQTT binding topic names for operations on events for a program
+ */
+export type ListAllMqttNotifierTopicsVenPathParams = {
+    /**
+     * venID of the vens object
+     */
+    venID: Schemas.ObjectID;
+};
+export type ListAllMqttNotifierTopicsVenVariables = {
+    pathParams: ListAllMqttNotifierTopicsVenPathParams;
+};
+/**
+ * List all MQTT binding topic names for operations on a ven
+ */
+export type ListAllMqttNotifierTopicsVenResourcesPathParams = {
+    /**
+     * object ID of the ven object
+     */
+    venID: Schemas.ObjectID;
+};
+export type ListAllMqttNotifierTopicsVenResourcesVariables = {
+    pathParams: ListAllMqttNotifierTopicsVenResourcesPathParams;
+};
+/**
+ * List all MQTT binding topic names for operations on resources for a ven
  */
 //# sourceMappingURL=oadr3Components.d.ts.map

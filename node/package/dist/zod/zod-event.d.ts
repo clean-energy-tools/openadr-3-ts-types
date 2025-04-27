@@ -17,6 +17,7 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
 }>, z.ZodObject<{
     programID: z.ZodString;
     eventName: z.ZodDefault<z.ZodNullable<z.ZodString>>;
+    duration: z.ZodDefault<z.ZodString>;
     priority: z.ZodDefault<z.ZodNullable<z.ZodNumber>>;
     targets: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         type: z.ZodString;
@@ -31,17 +32,17 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
             y: number;
         }>]>, "many">;
     }, "strip", z.ZodTypeAny, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }, {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }>, "many">>>;
     reportDescriptors: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         payloadType: z.ZodString;
@@ -60,17 +61,17 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
                 y: number;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }, {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }>, "many">>>;
         aggregate: z.ZodDefault<z.ZodBoolean>;
         startInterval: z.ZodDefault<z.ZodNumber>;
@@ -78,14 +79,15 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         historical: z.ZodDefault<z.ZodBoolean>;
         frequency: z.ZodDefault<z.ZodNumber>;
         repeat: z.ZodDefault<z.ZodNumber>;
+        reportIntervals: z.ZodDefault<z.ZodEnum<["INTERVALS", "SUB_INTERVALS", "OPEN_INTERVALS"]>>;
     }, "strip", z.ZodTypeAny, {
         repeat: number;
         targets: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[] | null;
         payloadType: string;
         readingType: string | null;
@@ -95,15 +97,16 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         numIntervals: number;
         historical: boolean;
         frequency: number;
+        reportIntervals: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS";
     }, {
         payloadType: string;
         repeat?: number | undefined;
         targets?: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[] | null | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
@@ -112,6 +115,7 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         numIntervals?: number | undefined;
         historical?: boolean | undefined;
         frequency?: number | undefined;
+        reportIntervals?: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS" | undefined;
     }>, "many">>>;
     payloadDescriptors: z.ZodDefault<z.ZodNullable<z.ZodArray<z.ZodObject<{
         objectType: z.ZodOptional<z.ZodLiteral<"EVENT_PAYLOAD_DESCRIPTOR">>;
@@ -130,31 +134,31 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         currency?: string | null | undefined;
     }>, "many">>>;
     intervalPeriod: z.ZodOptional<z.ZodObject<{
-        start: z.ZodString;
+        start: z.ZodOptional<z.ZodString>;
         duration: z.ZodDefault<z.ZodString>;
         randomizeStart: z.ZodDefault<z.ZodString>;
     }, "strip", z.ZodTypeAny, {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     }, {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     }>>;
-    intervals: z.ZodArray<z.ZodObject<{
+    intervals: z.ZodOptional<z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         intervalPeriod: z.ZodOptional<z.ZodObject<{
-            start: z.ZodString;
+            start: z.ZodOptional<z.ZodString>;
             duration: z.ZodDefault<z.ZodString>;
             randomizeStart: z.ZodDefault<z.ZodString>;
         }, "strip", z.ZodTypeAny, {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         }, {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         }>>;
         payloads: z.ZodArray<z.ZodObject<{
@@ -170,66 +174,67 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
                 y: number;
             }>]>, "many">;
         }, "strip", z.ZodTypeAny, {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }, {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }>, "many">;
     }, "strip", z.ZodTypeAny, {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
-            start: string;
             duration: string;
             randomizeStart: string;
+            start?: string | undefined;
         } | undefined;
     }, {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
-            start: string;
             duration?: string | undefined;
+            start?: string | undefined;
             randomizeStart?: string | undefined;
         } | undefined;
-    }>, "many">;
+    }>, "many">>;
 }, "strip", z.ZodTypeAny, {
+    duration: string;
     programID: string;
     eventName: string | null;
     priority: number | null;
     targets: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null;
     reportDescriptors: {
         repeat: number;
         targets: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[] | null;
         payloadType: string;
         readingType: string | null;
@@ -239,6 +244,7 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         numIntervals: number;
         historical: boolean;
         frequency: number;
+        reportIntervals: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS";
     }[] | null;
     payloadDescriptors: {
         payloadType: string;
@@ -246,61 +252,47 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         currency: string | null;
         objectType?: "EVENT_PAYLOAD_DESCRIPTOR" | undefined;
     }[] | null;
-    intervals: {
-        id: number;
-        payloads: {
-            values: (string | number | boolean | {
-                x: number;
-                y: number;
-            })[];
-            type: string;
-        }[];
-        intervalPeriod?: {
-            start: string;
-            duration: string;
-            randomizeStart: string;
-        } | undefined;
-    }[];
     intervalPeriod?: {
-        start: string;
         duration: string;
         randomizeStart: string;
+        start?: string | undefined;
     } | undefined;
-}, {
-    programID: string;
-    intervals: {
+    intervals?: {
         id: number;
         payloads: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[];
         intervalPeriod?: {
-            start: string;
-            duration?: string | undefined;
-            randomizeStart?: string | undefined;
+            duration: string;
+            randomizeStart: string;
+            start?: string | undefined;
         } | undefined;
-    }[];
+    }[] | undefined;
+}, {
+    programID: string;
+    duration?: string | undefined;
     eventName?: string | null | undefined;
     priority?: number | null | undefined;
     targets?: {
+        type: string;
         values: (string | number | boolean | {
             x: number;
             y: number;
         })[];
-        type: string;
     }[] | null | undefined;
     reportDescriptors?: {
         payloadType: string;
         repeat?: number | undefined;
         targets?: {
+            type: string;
             values: (string | number | boolean | {
                 x: number;
                 y: number;
             })[];
-            type: string;
         }[] | null | undefined;
         readingType?: string | null | undefined;
         units?: string | null | undefined;
@@ -309,6 +301,7 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         numIntervals?: number | undefined;
         historical?: boolean | undefined;
         frequency?: number | undefined;
+        reportIntervals?: "INTERVALS" | "SUB_INTERVALS" | "OPEN_INTERVALS" | undefined;
     }[] | null | undefined;
     payloadDescriptors?: {
         payloadType: string;
@@ -317,10 +310,25 @@ declare const _default: z.ZodIntersection<z.ZodRecord<z.ZodString, z.ZodAny>, z.
         currency?: string | null | undefined;
     }[] | null | undefined;
     intervalPeriod?: {
-        start: string;
         duration?: string | undefined;
+        start?: string | undefined;
         randomizeStart?: string | undefined;
     } | undefined;
+    intervals?: {
+        id: number;
+        payloads: {
+            type: string;
+            values: (string | number | boolean | {
+                x: number;
+                y: number;
+            })[];
+        }[];
+        intervalPeriod?: {
+            duration?: string | undefined;
+            start?: string | undefined;
+            randomizeStart?: string | undefined;
+        } | undefined;
+    }[] | undefined;
 }>>>;
 export default _default;
 //# sourceMappingURL=zod-event.d.ts.map

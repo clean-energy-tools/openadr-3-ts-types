@@ -1,24 +1,28 @@
-# OpenADR 3.1.0 TypeScript Types
+# @clean-energy-tools/openadr-3-ts-types -- OpenADR 3.1.0 TypeScript Types
 
-Modern TypeScript type definitions for OpenADR 3.1.0 with preserved JSDoc validation constraints.
+Modern TypeScript type definitions for OpenADR 3.1.0
 
-## ✨ Features
+## Features
 
 - **Complete OpenADR 3.1.0 Coverage**: All types from the OpenADR 3.1.0 specification
 - **Schema Types**: All OpenADR data types (Program, Event, VEN, etc.)
 - **API Endpoint Types**: Request parameters, path parameters, and response types for all REST endpoints
-- **AJV Validation Functions**: 47 schema-driven validators with automatic constraint enforcement
-- **JSDoc Validation Constraints**: Preserves critical validation information as JSDoc tags:
-  - `@pattern` for regex patterns (e.g., Duration, ObjectID)
-  - `@minimum`/`@maximum` for numeric constraints  
-  - `@minLength`/`@maxLength` for string constraints
+- **AJV Validation Functions**: Schema-driven data validation functions
 - **Modern ESM**: Native ES modules targeting Node.js 22+
 - **TypeScript 5.x**: Latest TypeScript with proper declaration files
 
-## 📦 Usage
+## Usage
+
+In your project directory, run:
+
+```shell
+$ npm install @clean-energy-tools/openadr-3-ts-types --save
+```
+
+In your code:
 
 ```typescript
-import * as OpenADR from 'openadr-3-ts-types';
+import * as OpenADR from '@clean-energy-tools/openadr-3-ts-types';
 
 // Schema Types with validation constraints
 const duration: OpenADR.Duration = "PT1H"; 
@@ -52,15 +56,13 @@ const eventResult = OpenADR.Validators.validateeventRequest(eventData);
 // Automatically validates: pattern, minLength, maxLength, min/max values!
 ```
 
-## ✅ **AJV Validation**
+## AJV Validation
 
-This package includes **47 automatically generated AJV validators** that enforce all OpenADR validation constraints without requiring manual wrapper functions.
+This package includes automatically generated AJV validation objects that can be used to enforce all OpenADR validation constraints without requiring manual wrapper functions.
 
 ### Key Advantages
 
 - **Schema-Driven**: Validators generated directly from OpenAPI schemas
-- **Zero Manual Work**: No need to write wrapper functions like with Zod/Joi
-- **Perfect Constraint Preservation**: All `@pattern`, `@minLength`, `@minimum`, etc. automatically enforced
 - **High Performance**: AJV is the fastest JSON Schema validator
 - **Detailed Errors**: Get precise validation error messages with paths
 
@@ -87,78 +89,12 @@ const eventResult = OpenADR.Validators.validateeventRequest({
 const dynamic = OpenADR.Validators.validateBySchemaName("Duration", data);
 ```
 
-## 🛠 Development
+## Development
 
 ### Prerequisites
 - Node.js 22+
 - npm 10+
 
-### Scripts
-
-```bash
-# Generate types from OpenADR specification
-npm run generate
-
-# Build TypeScript declarations and JavaScript
-npm run build
-
-# Clean generated files
-npm run clean
-
-# Run validation tests
-npm run test:types
-```
-
-### Build Process
-
-1. **Generate**: Uses `@openapi-codegen/typescript` to generate types from `openadr3.1.0.yaml`
-2. **Preserve Constraints**: JSDoc validation tags are automatically preserved from the OpenAPI spec
-3. **Compile**: TypeScript compiler generates `.d.ts` declarations and ESM `.js` files
-4. **Output**: Clean, modern TypeScript types with full validation metadata
-
-## 📋 JSDoc Validation Tags
-
-The generated types include essential validation constraints as JSDoc tags:
-
-### Pattern Constraints
-```typescript
-/**
- * @pattern ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
- */
-export type Duration = string;
-```
-
-### Numeric Constraints  
-```typescript
-/**
- * @minimum 0
- * @maximum 100
- */
-confidence?: number;
-```
-
-### String Length Constraints
-```typescript
-/**
- * @minLength 1
- * @maxLength 128
- */
-programName: string;
-```
-
-## 🎯 Advantages over Fern
-
-Unlike Fern, this approach preserves OpenADR's critical validation constraints:
-
-| Feature | This Package | Fern |
-|---------|-------------|------|
-| JSDoc Validation Tags | ✅ Full support | ❌ Not supported |
-| Regex Patterns | ✅ `@pattern` preserved | ❌ Lost |
-| Length Constraints | ✅ `@minLength/@maxLength` | ❌ Lost |
-| Numeric Ranges | ✅ `@minimum/@maximum` | ❌ Lost |
-| Modern ESM | ✅ Yes | ✅ Yes |
-| Node.js 22+ | ✅ Yes | ✅ Yes |
-
-## 📄 License
+## License
 
 MIT - See LICENSE file for details.

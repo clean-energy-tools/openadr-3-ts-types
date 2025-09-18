@@ -1,0 +1,41 @@
+{
+  "name": "openadr-3-ts-types",
+  "version": "3.1.0",
+  "description": "TypeScript types and data validation for OpenADR v3.1 with JSDoc validation constraints",
+  "main": "./package/dist/index.js",
+  "type": "module",
+  "types": "./package/dist/index.d.ts",
+  "scripts": {
+    "build": "npm run generate && tsc",
+    "generate": "cd builder && npx zx build-types.js",
+    "clean": "rm -rf package/dist package/src/generated",
+    "test": "node test/types-test.js",
+    "test:types": "tsc --noEmit test/types-test.ts"
+  },
+  "keywords": [
+    "OpenADR",
+    "Energy",
+    "Efficiency",
+    "TypeScript",
+    "JSDoc",
+    "Validation"
+  ],
+  "author": "David Herron <david@davidherron.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "^22 || >=22"
+  },
+  "devDependencies": {
+    "@apidevtools/swagger-parser": "^12.0.0",
+    "@openapi-codegen/cli": "^3.1.0",
+    "@openapi-codegen/typescript": "^11.0.1",
+    "@openapi-contrib/openapi-schema-to-json-schema": "^5.1.0",
+    "@types/node": "^24.5.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "fern-api": "^0.77.3",
+    "js-yaml": "^4.1.0",
+    "typescript": "^5.9.2",
+    "zx": "^8.8.1"
+  }
+}

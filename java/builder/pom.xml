@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.clean-energy-tools</groupId>
+    <artifactId>openadr-3-types-builder</artifactId>
+    <version>3.1.0</version>
+    <packaging>jar</packaging>
+
+    <name>OpenADR 3 Java Type Builder</name>
+    <description>Builder for generating OpenADR 3.1.0 Java types and validation from OpenAPI specification</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- Tool versions -->
+        <openapi-generator.version>7.2.0</openapi-generator.version>
+        <jackson.version>2.16.1</jackson.version>
+        <slf4j.version>2.0.9</slf4j.version>
+    </properties>
+
+    <dependencies>
+        <!-- OpenAPI Generator Core -->
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator</artifactId>
+            <version>${openapi-generator.version}</version>
+        </dependency>
+        
+        <!-- Jackson for JSON processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        
+        <!-- Commons CLI for command line parsing -->
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+            
+            <!-- Maven Exec Plugin for running the builder -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>org.openadr.builder.OpenADRTypeBuilder</mainClass>
+                </configuration>
+            </plugin>
+            
+            <!-- OpenAPI Generator Maven Plugin -->
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-java-models</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>../../openadr3.1.0.yaml</inputSpec>
+                            <generatorName>java</generatorName>
+                            <output>../package</output>
+                            <packageName>io.github.clean_energy_tools.openadr_3_types</packageName>
+                            <modelPackage>io.github.clean_energy_tools.openadr_3_types.model</modelPackage>
+                            <apiPackage>io.github.clean_energy_tools.openadr_3_types.api</apiPackage>
+                            <invokerPackage>io.github.clean_energy_tools.openadr_3_types.client</invokerPackage>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <java8>true</java8>
+                                <useJakartaEe>false</useJakartaEe>
+                                <serializationLibrary>jackson</serializationLibrary>
+                                <library>native</library>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <generateModelTests>false</generateModelTests>
+                                <generateApiTests>false</generateApiTests>
+                                <generateModelDocumentation>true</generateModelDocumentation>
+                                <generateApiDocumentation>true</generateApiDocumentation>
+                                <useBeanValidation>true</useBeanValidation>
+                                <performBeanValidation>true</performBeanValidation>
+                                <useOptional>true</useOptional>
+                                <generateBuilders>true</generateBuilders>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,9 @@
+[package]
+name = "openadr3-types-test"
+version = "3.1.0"
+edition = "2021"
+
+[dependencies]
+openadr3-types = { path = "../package" }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }

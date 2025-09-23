@@ -1,0 +1,28 @@
+[package]
+name = "openadr3-builder"
+version = "3.1.0"
+edition = "2021"
+description = "Build tools for generating OpenADR 3.1.0 Rust types"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1.0", features = ["full"] }
+clap = { version = "4.0", features = ["derive"] }
+openapitor = "0.2"
+quote = "1.0"
+proc-macro2 = "1.0"
+syn = { version = "2.0", features = ["full"] }
+handlebars = "4.5"
+regex = "1.10"
+convert_case = "0.6"
+
+[[bin]]
+name = "build-types"
+path = "src/build_types.rs"
+
+[[bin]]
+name = "demo-types"
+path = "src/demo_types.rs"

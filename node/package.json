@@ -1,5 +1,5 @@
 {
-  "name": "@clean-energy-tools/openadr-3-ts-types",
+  "name": "@clean-energy-tools/openadr-3-types",
   "version": "3.1.0",
   "description": "TypeScript types and data validation for OpenADR v3.1",
   "main": "./package/dist/index.js",

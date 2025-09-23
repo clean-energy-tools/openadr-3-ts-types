@@ -1,4 +1,4 @@
-# @clean-energy-tools/openadr-3-ts-types -- OpenADR 3.1.0 TypeScript Types
+# @clean-energy-tools/openadr-3-types -- OpenADR 3.1.0 TypeScript Types
 
 Modern TypeScript type definitions for OpenADR 3.1.0
 
@@ -16,13 +16,13 @@ Modern TypeScript type definitions for OpenADR 3.1.0
 In your project directory, run:
 
 ```shell
-$ npm install @clean-energy-tools/openadr-3-ts-types --save
+$ npm install @clean-energy-tools/openadr-3-types --save
 ```
 
 In your code:
 
 ```typescript
-import * as OpenADR from '@clean-energy-tools/openadr-3-ts-types';
+import * as OpenADR from '@clean-energy-tools/openadr-3-types';
 
 // Schema Types with validation constraints
 const duration: OpenADR.Duration = "PT1H"; 

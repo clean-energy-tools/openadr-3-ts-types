@@ -1,13 +1,6 @@
-
-
 # NotifierTopicsResponse
 
-
 ## Properties
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-|**topics** | [**NotifierOperationsTopics**](NotifierOperationsTopics.md) |  |  |
-
-
-
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**topics** | [**NotifierOperationsTopics**](NotifierOperationsTopics.md) |  | 

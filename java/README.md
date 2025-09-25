@@ -2,6 +2,8 @@
 
 Complete Java implementation of OpenADR 3.1.0 types and data validation functions, including comprehensive API endpoint parameter and response types.
 
+> **Note**: This implementation uses **Swagger Codegen 3.x** instead of OpenAPI Generator due to validation compatibility issues with the OpenADR 3.1.0 specification. See `../ai-stuff/java-openapi-vs-swagger-codegen-learnings.md` for details.
+
 ## Directory Structure
 
 ```
@@ -26,27 +28,42 @@ java/
 
 ## Quick Start
 
-1. **Setup the build environment**:
+### Option 1: Use Build Script (Recommended)
+
+```bash
+cd builder
+./generate-java.sh
+```
+
+This script automatically:
+- Downloads Swagger Codegen CLI (if needed)
+- Generates Java types from the OpenADR 3.1.0 specification
+- Reports generation statistics
+
+### Option 2: Manual Generation
+
+1. **Download Swagger Codegen CLI**:
    ```bash
    cd builder
-   mvn clean compile
+   curl -O https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.46/swagger-codegen-cli-3.0.46.jar
    ```
 
-2. **Generate demo types** (no external dependencies):
+2. **Generate Java types**:
    ```bash
-   mvn exec:java -Dexec.args="--demo"
+   java -jar swagger-codegen-cli-3.0.46.jar generate \
+     -i ../../openadr3.1.0.yaml \
+     -l java \
+     -o ../package \
+     --invoker-package io.github.clean_energy_tools.openadr_3_types.client \
+     --model-package io.github.clean_energy_tools.openadr_3_types.model \
+     --api-package io.github.clean_energy_tools.openadr_3_types.api
    ```
 
-3. **Generate types from OpenAPI specification**:
-   ```bash
-   mvn exec:java -Dexec.args="--types --validation"
-   ```
-
-4. **Test the generated types**:
+3. **Test the generated types**:
    ```bash
    cd ../test
    mvn test
-    ```
+   ```
 
 ## Maven Dependency
 
@@ -72,18 +89,19 @@ import io.github.clean_energy_tools.openadr_3_types.api.*;
 
 The Java implementation uses multiple approaches for comprehensive coverage:
 
-### Primary Tool: **OpenAPI Generator**
-- **Industry standard** for OpenAPI to Java generation
-- **Generates POJOs** with Jackson annotations and Bean Validation
+### Primary Tool: **Swagger Codegen 3.x**
+- **Original OpenAPI tool** with robust OpenAPI 3.0 support
+- **Generates POJOs** with Gson annotations (can be configured for Jackson)
 - **Creates client interfaces** for API consumption
 - **Supports both** components/schemas and paths sections
+- **Compatible** with OpenADR 3.1.0 specification (accepts `default: null` for arrays)
 
 ### Generated Features
 
 - `model/` - Core Java classes for all OpenADR data types (components/schemas)
 - `api/` - API endpoint parameter and response types (paths)
 - `validation/` - Validation functions with detailed error reporting
-- Jackson annotations for JSON serialization/deserialization
+- Gson annotations for JSON serialization/deserialization (configurable for Jackson)
 - Jakarta Bean Validation constraints for data validation
 
 ## Features
@@ -108,15 +126,19 @@ The Java implementation uses multiple approaches for comprehensive coverage:
 ### Building Types
 
 ```bash
-# Setup environment
+# Generate types using build script (recommended)
 cd builder
-mvn clean compile
+./generate-java.sh
 
-# Generate demo types (no external dependencies)
-mvn exec:java -Dexec.args="--demo"
-
-# Generate full types from OpenAPI (requires OpenAPI Generator setup)
-mvn clean generate-sources
+# Or manually with Swagger Codegen CLI
+cd builder
+java -jar swagger-codegen-cli-3.0.46.jar generate \
+  -i ../../openadr3.1.0.yaml \
+  -l java \
+  -o ../package \
+  --invoker-package io.github.clean_energy_tools.openadr_3_types.client \
+  --model-package io.github.clean_energy_tools.openadr_3_types.model \
+  --api-package io.github.clean_energy_tools.openadr_3_types.api
 
 # Compile and test
 cd ../package && mvn clean compile
@@ -189,17 +211,17 @@ The generated types maintain compatibility with the OpenADR 3.1.0 specification 
 ## Tools and Dependencies
 
 **Primary tools**:
-- `openapi-generator-maven-plugin` - OpenAPI to Java code generation
-- `jackson-databind` - JSON serialization/deserialization
-- `jakarta.validation-api` - Bean Validation specifications
-- `hibernate-validator` - Bean Validation implementation
+- `swagger-codegen-cli-3.0.46` - OpenAPI to Java code generation
+- `gson` - JSON serialization/deserialization (default)
+- `jackson-databind` - JSON serialization/deserialization (configurable)
+- `swagger-annotations` - API documentation annotations
 
 **Generated Features**:
-- **Schema types** from components/schemas with full Bean Validation
-- **API parameter types** from paths section with validation
-- **Response wrapper types** for all endpoints
-- **Client interfaces** for API consumption (optional)
-- **Validation utilities** with detailed error reporting
+- **Schema types** from components/schemas with Swagger annotations
+- **API interfaces** from paths section with parameter validation
+- **Response wrapper types** for all endpoints  
+- **Client implementations** for API consumption
+- **Model classes** with proper JSON serialization
 
 ## Testing
 
@@ -226,32 +248,28 @@ The Java implementation provides the same comprehensive type coverage as the oth
 
 ## Maven Integration
 
-For full OpenAPI generation, the project includes Maven plugin configuration:
+## Tool Choice: Swagger Codegen vs OpenAPI Generator
 
-```xml
-<plugin>
-    <groupId>org.openapitools</groupId>
-    <artifactId>openapi-generator-maven-plugin</artifactId>
-    <version>7.2.0</version>
-    <executions>
-        <execution>
-            <goals>
-                <goal>generate</goal>
-            </goals>
-            <configuration>
-                <inputSpec>../../openadr3.1.0.yaml</inputSpec>
-                <generatorName>java</generatorName>
-                <configOptions>
-                    <dateLibrary>java8</dateLibrary>
-                    <serializationLibrary>jackson</serializationLibrary>
-                    <useBeanValidation>true</useBeanValidation>
-                    <useOptional>true</useOptional>
-                    <generateBuilders>true</generateBuilders>
-                </configOptions>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
+This implementation uses **Swagger Codegen 3.x** instead of OpenAPI Generator due to:
+
+- **Better OpenAPI 3.0 compatibility** - Correctly handles `default: null` for arrays
+- **No specification modifications required** - Works with original OpenADR 3.1.0 spec
+- **Mature codebase** - The original OpenAPI tool with robust validation
+- **Enterprise reliability** - Used by many production systems
+
+See `../ai-stuff/java-openapi-vs-swagger-codegen-learnings.md` for detailed comparison and rationale.
+
+## Regenerating Code
+
+To regenerate Java types from the OpenAPI specification:
+
+```bash
+cd builder
+./generate-java.sh
 ```
 
-This enables `mvn generate-sources` to create complete Java types from the OpenAPI specification.
+The build script will:
+1. Download Swagger Codegen CLI (if not present)
+2. Clean the package directory
+3. Generate fresh Java code from `openadr3.1.0.yaml`
+4. Report generation statistics

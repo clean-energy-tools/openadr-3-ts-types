@@ -1,24 +1,14 @@
-
-
 # MqttNotifierBindingObject
 
-Details of MQTT binding for messaging protocol support
-
 ## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**URIS** | **List&lt;String&gt;** |  | 
+**serialization** | [**SerializationEnum**](#SerializationEnum) | Currently always JSON, perhaps other formats supported in future | 
+**authentication** | **OneOfmqttNotifierBindingObjectAuthentication** | Authentication method supported for connection to MQTT broker | 
 
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-|**URIS** | **List&lt;URI&gt;** |  |  |
-|**serialization** | [**SerializationEnum**](#SerializationEnum) | Currently always JSON, perhaps other formats supported in future |  |
-|**authentication** | [**MqttNotifierBindingObjectAuthentication**](MqttNotifierBindingObjectAuthentication.md) |  |  |
-
-
-
+<a name="SerializationEnum"></a>
 ## Enum: SerializationEnum
-
-| Name | Value |
-|---- | -----|
-| JSON | &quot;JSON&quot; |
-
-
-
+Name | Value
+---- | -----
+JSON | &quot;JSON&quot;

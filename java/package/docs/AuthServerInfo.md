@@ -1,13 +1,6 @@
-
-
 # AuthServerInfo
 
-
 ## Properties
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-|**tokenURL** | **URI** | URL of the token endpoint. |  |
-
-
-
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**tokenURL** | **String** | URL of the token endpoint. | 

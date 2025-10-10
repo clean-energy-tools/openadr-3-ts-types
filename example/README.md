@@ -1,1 +1,1 @@
-Sample code for `openadr-3-ts-types`
+Sample code for `openadr-3-types`
